@@ -1,0 +1,22 @@
+body {
+	background-color: #D6E6F2;
+}
+#login
+{
+	background-color: #F7FBFC;
+}
+
+#title-icon
+{
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 200px;
+	height: 200px;
+	display: inline-block;
+}
+
+#login .title {
+	font-family: 'Fira Sans', sans-serif;
+	color: #769FCD;
+	text-align: center;
+}
