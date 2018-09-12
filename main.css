@@ -18,8 +18,8 @@ body {
 {
 	width: 190px;
 	height: 190px;
-	margin-left: 300px;
-	margin-top: 0px;
+	position: absolute;
+	right: 0px;
 }
 
 #login .title {
