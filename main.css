@@ -16,11 +16,11 @@ body {
 }
 #dumbcat
 {
-	width: 190px;
-	height: 190px;
-	position: fixed;
-	right: 0px;
-	top: 10px
+	width: 5px;
+	height: 5px;
+	position: absolute;
+	right:500px;
+	top: 7px;
 }
 
 #login .title {
