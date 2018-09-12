@@ -19,8 +19,8 @@ body {
 	width: 5px;
 	height: 5px;
 	position: absolute;
-	right:210px;
-	top: 7px;
+	left: 800px;
+	top: 8px;
 }
 
 #login .title {
