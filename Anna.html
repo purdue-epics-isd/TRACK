@@ -7,20 +7,32 @@ body {
 ul {
 	text-align: center;
 }
+.button {
+  background-color: #2196F3;
+  border: 2px solid #4CAF50;
+  border-color: black;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 50px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
 </style>
 
 <body>
 
 <h1>Anna's Profile</h1>
 
-<ul>
-  <li><button type="button"><a href="goalOne.html" target="_self">Counting to 10</a></button></li>
-  <li><button type="button"><a href="newpage.html" target="_self">Goal Two</a></button></li>
-  <li><button type="button"><a href="newpage.html" target="_self">Goal Three</a></button></li>
-  <li><button type="button"><a href="newgoal.html" target="_self">Create New Goal</a></button></li>
-</ul>
+<div class="grid-container">
+  <a href="goalOne.html" class="button">Counting to 10</a><br><br>
+  <a href="newpage.html" class="button">Goal Two</a><br><br>
+  <a href="newpage.html" class="button">Goal Three</a><br><br><br>
+  <a href="newpage.html" class="button">Create New Goal</a><br><br><br><br>
+</div>
 
-<button type="button"><a href="index.html" target="_self">Start over</a></button>
+<a href="index.html" class="button">Start over</a>
 
 </body>
 </html>

@@ -28,3 +28,16 @@ body {
 	color: #769FCD;
 	text-align: center;
 }
+
+.button {
+	background-color: #2196F3;
+  	border: 2px solid #4CAF50;
+  	border-color: black;
+  	color: black;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 50px;
+  	transition-duration: 0.4s;
+  	cursor: pointer;
+}
