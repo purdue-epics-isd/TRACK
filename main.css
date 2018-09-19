@@ -28,3 +28,18 @@ body {
 	color: #769FCD;
 	text-align: center;
 }
+
+#submit-button
+{
+	display: inline-block;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-left: 22px;
+	padding-right: 22px;
+	background-color: #F99;
+	margin-top: 0%;
+	color: #FFF;
+	border-bottom: 3px solid #E25D4E;
+	cursor: pointer;
+}
+
