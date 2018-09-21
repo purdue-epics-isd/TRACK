@@ -9,6 +9,7 @@ background-color: #0e47a1;
 h1 {
 	text-align: center;
   color: white;
+  white-space: nowrap;
 }
 .grid-container {
   display: grid;
@@ -34,12 +35,39 @@ h1 {
     background-color: #008CBA;
     color: white;
 }
+.profile {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #0e47a1;
+  border-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 85%;
+  padding: 30px;
+}
+.profilepic {
+  max-width: 40px;
+  max-height: 40px;
+}
 
 </style>
 </head>
 <body>
 
-<h1>English Class</h1>
+<table style="width: 90%">
+    <th style="padding-left: 50%">
+      <h1>English Class</h1>
+    </th>
+    <th>
+      <button type="button" class="profile"><img src="img\profile_picture.png" class="profilepic"></button>
+    </th>
+  </tr>
+</table>
 
 <div class="grid-container">
   <a href="Anna.html" class="button">Anna</a></button>
