@@ -29,6 +29,7 @@ body {
 	text-align: center;
 }
 
+<<<<<<< HEAD
 #submit-button
 {
 	display: inline-block;
@@ -43,3 +44,17 @@ body {
 	cursor: pointer;
 }
 
+=======
+.button {
+	background-color: #2196F3;
+  	border: 2px solid #4CAF50;
+  	border-color: black;
+  	color: black;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 50px;
+  	transition-duration: 0.4s;
+  	cursor: pointer;
+}
+>>>>>>> 1ddac2abf4ad229c9c8c25983cc2acf7501dcdbf
