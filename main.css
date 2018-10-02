@@ -29,7 +29,6 @@ body {
 	text-align: center;
 }
 
-<<<<<<< HEAD
 #submit-button
 {
 	display: inline-block;
@@ -53,8 +52,8 @@ body {
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
+  	font-family: 'BebasNeue.otf', sans-serif;
   	font-size: 50px;
   	transition-duration: 0.4s;
   	cursor: pointer;
 }
->>>>>>> 1ddac2abf4ad229c9c8c25983cc2acf7501dcdbf
