@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html>
+<style>
+body {
+	background-color: #0e47a1;
+	color: white;
+	padding-left: 30%;
+}
+h1 {
+	padding-left:20%;
+}
+</style>
 <body>
-
 <h1>Create New Goal</h1>
-
-<form action="">
-Goal Title: <input type="text" name="title"><br>
-Goal Description: <input type="text" name="description"><br>
+<form action="actionpage.html">
+Goal Title: <input type="text" name="title"><br><br>
+Goal Description: <input type="text" name="description"><br><br>
 Start Date: <input type="text" name="startdate">
-End Date: <input type="text" name="enddate"><br>
-Location: <input type="radio" name="location" value="classroom"> Classroom
-<input type="radio" name="location" value="dorm"> Dorm
-<input type="radio" name="location" value="other"> Other<br>
-Method: <input type="checkbox" name="method" value="Checkbox"> Checkbox
-<input type="checkbox" name="method" value="Rubric"> Rubric
-<input type="checkbox" name="method" value="Counter"> Counter
-<input type="checkbox" name="method" value="Comments"> Comments<br>
-<input type="submit" name="Submit">
+End Date: <input type="text" name="enddate"><br><br>
+Location: <br>
+	<input type="radio" name="location" value="classroom"> Classroom<br>
+	<input type="radio" name="location" value="dorm"> Dorm<br>
+	<input type="radio" name="location" value="other"> Other<br>
+Method: <br>
+	<input type="checkbox" name="method" value="Checkbox"> Checkbox<br>
+	<input type="checkbox" name="method" value="Rubric"> Rubric<br>
+	<input type="checkbox" name="method" value="Counter"> Counter<br>
+	<input type="checkbox" name="method" value="Comments"> Comments<br>
+	<input type="submit" name="Submit">
 </form>
 
 
-<button type="button"><a href="index.html" target="_self">Start over</a></button>
+<button type="button"><a href="login.html">Start over</a></button>
 
 </body>
 </html>

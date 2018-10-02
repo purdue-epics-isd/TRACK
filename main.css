@@ -16,12 +16,29 @@ body {
 	display: inline-block;
 	padding: 1em 1em 1em 1em;
 }
+* {
+    box-sizing: border-box;
+}
+#login .column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clear floats after image containers */
+#login .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 #dumbcat
 {
 	flex-direction: row;
 	display: inline-block;
 	padding: 1em 1em 1em 1em;
 }
+
 
 .title {
 	font-family: 'Fira Sans', sans-serif;
@@ -80,7 +97,9 @@ body {
   	padding: 1em 1em 1em 1em;
   	transition-duration: 0.4s;
   	cursor: pointer;
+  	left: 50%;
 }
+
 .button:hover {
     background-color: #008CBA;
     color: white;
