@@ -5,26 +5,24 @@ body {
 {
 	background-color: #F7FBFC;
 }
+.headerImages {
+	display: flex;
+	width: 100%;
+}
 
-#title-icon
+#dog
 {
-	background-size: contain;
-	background-repeat: no-repeat;
-	width: 200px;
-	height: 200px;
+	flex-direction: row;
 	display: inline-block;
 }
 #dumbcat
 {
-	width: 5px;
-	height: 5px;
-	position: absolute;
-	left: 800px;
-	top: 8px;
+	flex-direction: row;
+	display: inline-block;
 }
 
-#login .title {
-	font-family: 'BebasNeue.otf', sans-serif;
+.title {
+	font-family: 'Fira Sans', sans-serif;
 	color: #769FCD;
 	text-align: center;
 }
@@ -43,17 +41,17 @@ body {
 	cursor: pointer;
 }
 
-=======
 .button {
 	background-color: #2196F3;
-  	border: 2px solid #4CAF50;
-  	border-color: black;
+	font-family: 'Fira Sans', sans-serif;
+  	/*border: 2px solid #4CAF50;*/
+  	/*border-color: black;*/
   	color: black;
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
-  	font-family: 'BebasNeue.otf', sans-serif;
-  	font-size: 50px;
+  	font-size: 20px;
+  	padding: 1em 1em 1em 1em;
   	transition-duration: 0.4s;
   	cursor: pointer;
 }
