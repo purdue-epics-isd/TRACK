@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="./main.css" />
+  <link rel="stylesheet" href="/Users/valeriecornelio/Desktop/main.css" />
 <!--body {
 background-color: #0e47a1;
 }
-
 h1 {
 	text-align: center;
   color: white;
@@ -54,13 +53,82 @@ h1 {
   max-width: 40px;
   max-height: 40px;
 }-->
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+<style>
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2196F3;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
 </head>
 <body>
 
 <table style="width: 90%">
     <th style="padding-left: 34%">
-      <h1>1st Period English Class</h1>
+      
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">1st Period English Class</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">2st Period Physics Class</a>
+    <a href="#about">2st Period Math Class</a>
+    <a href="#contact">3st Period Chemistry Class</a>
+  </div>
+</div>
     </th>
     <th>
       <button type="button" class="profile"><img src="img\profile_picture.png" class="profilepic" width = "75" height = "75"></button>
@@ -74,14 +142,16 @@ h1 {
   <a href="Anna.html" class="button">Claire</a></button>
   <a href="Anna.html" class="button">Grace</a></button>
   <a href="Anna.html" class="button">Steve</a></button>
-  <a href="Anna.html" class="button">Bob</a></button>
+  <a href="Anna.html" class="button">Valerie</a></button>
   <a href="Anna.html" class="button">Mark</a></button>
   <a href="Anna.html" class="button">Mary</a></button>
   <a href="Anna.html" class="button">Francis</a></button>
 </div>
 
 
-<button type="button"><a href="login.html" target="_self">Go back</a></button>
+<button type="button" class="dropbtn" ><a href="login.html" target="_self">Go back</a></button>
+<button type="button" class="dropbtn" ><a >Log Out</a></button>
+<button type="button" class="dropbtn" ><a >Add new student</a></button>
 
 </body>
 </html>
