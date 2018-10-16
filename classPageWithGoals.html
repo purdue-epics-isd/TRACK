@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+background-color: #0e47a1;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  white-space: nowrap;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #3e52b5;
+  padding: 10px;
+  border: 2px solid #0e47a1;
+  border-color: black;
+}
+.innergrid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #3e52b5;
+  padding: 10px;
+  border: 2px solid #0e47a1;
+  border-color: black;
+  text-align: center;
+}
+.button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #0e47a1;
+  border-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 50px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button:hover {
+    background-color: #008CBA;
+    color: white;
+}
+.profile {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #0e47a1;
+  border-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 85%;
+  padding: 30px;
+}
+.profilepic {
+  max-width: 40px;
+  max-height: 40px;
+}
+
+#studentTitle {
+  font-size: 30px;
+  color: white;
+}
+
+</style>
+</head>
+<body>
+
+<table style="width: 90%">
+    <th style="padding-left: 34%">
+      <h1>1st Period English Class</h1>
+    </th>
+    <th>
+      <button type="button" class="profile"><img src="img\profile_picture.png" class="profilepic"></button>
+    </th>
+  </tr>
+</table>
+
+<div class="grid-container">
+    <div class="innergrid">
+      <table>
+        <tr>
+          <th id="studentTitle"> Anna </th>
+        </tr>
+        <tr>
+          <td>
+          <a href="goalOne.html" class="button">Counting to 10</a><br><br>
+          <a href="goalOne.html" class="button">Reading Goal</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="innergrid">
+      <table>
+        <tr>
+          <th id="studentTitle"> Brick </th>
+        </tr>
+        <tr>
+          <td>
+          <a href="goalOne.html" class="button">Listening Skills</a><br><br>
+          <a href="goalOne.html" class="button">ABCs</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="innergrid">
+      <table>
+        <tr>
+          <th id="studentTitle"> Carrie </th>
+        </tr>
+        <tr>
+          <td>
+          <a href="goalOne.html" class="button">Times Tables</a><br><br>
+          <a href="goalOne.html" class="button">Eating entire lunch</a><br><br>
+          <a href="goalOne.html" class="button">Reading Accuracy</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="innergrid">
+      <table>
+        <tr>
+          <th id="studentTitle"> Darrien </th>
+        </tr>
+        <tr>
+          <td>
+          <a href="goalOne.html" class="button">Counting to 10</a><br><br>
+          <a href="goalOne.html" class="button">ABCs</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="innergrid">
+      <table>
+        <tr>
+          <th id="studentTitle"> Ellie </th>
+        </tr>
+        <tr>
+          <td>
+          <a href="goalOne.html" class="button">Counting to 10</a><br><br>
+          <a href="goalOne.html" class="button">ABCs</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="innergrid">
+      <table>
+        <tr>
+          <th id="studentTitle"> Frank </th>
+        </tr>
+        <tr>
+          <td>
+          <a href="goalOne.html" class="button">Counting to 10</a><br><br>
+          <a href="goalOne.html" class="button">ABCs</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+
+
+<button type="button"><a href="login.html" target="_self">Go back</a></button>
+
+</body>
+</html>
