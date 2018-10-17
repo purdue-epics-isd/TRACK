@@ -59,11 +59,9 @@ toggle between hiding and showing the dropdown content */
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
-
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
-
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
@@ -74,6 +72,7 @@ window.onclick = function(event) {
     }
   }
 }
+
 </script>
 <style>
 .dropbtn {
@@ -84,16 +83,13 @@ window.onclick = function(event) {
     border: none;
     cursor: pointer;
 }
-
 .dropbtn:hover, .dropbtn:focus {
     background-color: #2196F3;
 }
-
 .dropdown {
     position: relative;
     display: inline-block;
 }
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -103,20 +99,34 @@ window.onclick = function(event) {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-
 .dropdown a:hover {background-color: #ddd;}
-
 .show {display: block;}
 </style>
 </head>
 <body>
+
+
+<p id="demo"></p>
+
+<script>
+
+var temp = document.getElementById("demo");
+var list = "";
+var student = ["Sam", "Shwetha"];
+for(var i=0;i<student.length;i++)
+{
+  list += student[i] + "&emsp;" ;
+}
+
+temp.innerHTML = <a href="Anna.html" class="button">Anna</a></button>;
+</script>
+
 
 <table style="width: 90%">
     <th style="padding-left: 34%">
@@ -136,6 +146,8 @@ window.onclick = function(event) {
   </tr>
 </table>
 
+
+
 <div class="grid-container">
   <a href="Anna.html" class="button">Anna</a></button>
   <a href="Anna.html" class="button">Brian</a></button>
@@ -150,7 +162,7 @@ window.onclick = function(event) {
 
 
 <button type="button" class="dropbtn" ><a href="login.html" target="_self">Go back</a></button>
-<button type="button" class="dropbtn" ><a >Log Out</a></button>
+<button type="button" class="dropbtn" ><a href="logout.html" target="_self">Log Out</a></button>
 <button type="button" class="dropbtn" ><a href="newstudent.html">Add new student</a></button>
 
 </body>
