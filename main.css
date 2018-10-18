@@ -1,6 +1,89 @@
-body {
-	background-color: #D6E6F2;
+/*
+cssTemplate {
+	background-color:;
+
+	color:;
+	font-style:;
+	font-family:;
+	text-decoration:;
+	text-align:;
+
+	border:;
+	padding:;
+	position:;
+
+	transition-duration:;
+	cursor:;
 }
+*/
+
+body {
+	/*pretty light blue color*/
+	background-color: #D6E6F2;
+	/*text font and alignment*/
+	color: #769FCD;
+	font-family: 'Fira Sans', sans-serif;
+	text-align: center;
+}
+
+.submitButton {
+	background-color: #2196F3;
+
+	color:black;
+	font-style:normal;
+	font-family: 'Fira Sans', sans-serif;
+	text-decoration:none;
+
+	border:none;
+	padding: 10px 20px;
+
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.backButton {
+	background-color: #2196F3;
+
+	color:black;
+	font-style:normal;
+	font-family: 'Fira Sans', sans-serif;
+	text-decoration:none;
+
+	padding: 10px 20px;
+
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.goalButton {
+	background-color: #2196F3;
+
+	color: black;
+	font-style:normal;
+	font-family: 'Fira Sans', sans-serif;
+	font-size: 50px;
+	text-decoration:none;
+
+	padding-left: 5%;
+	padding-right: 5%;
+	/*border-color: black
+	padding-left: 5%;
+	padding-right: 5%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 50px;
+	*/
+
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.backButton:hover, .submitButton:hover, .goalButton:hover {
+	background-color: #008CBA;
+    color: white;
+}
+
 #login
 {
 	background-color: #F7FBFC;
