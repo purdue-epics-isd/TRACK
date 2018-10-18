@@ -1,6 +1,121 @@
-body {
-	background-color: #D6E6F2;
+/*
+cssTemplate {
+	background-color:;
+
+	color:;
+	font-style:;
+	font-family:;
+	text-decoration:;
+	text-align:;
+
+	border:;
+	padding:;
+	position:;
+
+	transition-duration:;
+	cursor:;
 }
+*/
+
+body {
+	/*pretty light blue color*/
+	background-color: #D6E6F2;
+	/*text font and alignment*/
+	color: #769FCD;
+	font-family: 'Fira Sans', sans-serif;
+	text-align: center;
+}
+
+body.goalCreation {
+	text-align: left;
+	padding-left: 25%;
+
+}
+
+h1 {
+	/*TODO*/	
+	font-family: 'Fira Sans', sans-serif;
+	color: #769FCD;
+	font-size: 80px;
+}
+
+h2 {
+	/*TODO*/
+}
+
+h3 {
+	/*TODO*/
+}
+
+p {
+	/*TODO*/
+}
+
+.button {
+	background-color: #2196F3;
+	font-family: 'Fira Sans', sans-serif;
+  	/*border: 2px solid #4CAF50;*/
+  	/*border-color: black;*/
+  	color: black;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 20px;
+  	padding: 1em 1em 1em 1em;
+  	transition-duration: 0.4s;
+  	cursor: pointer;
+}
+
+.submitButton {
+	background-color: #2196F3;
+
+	color:black;
+	font-style:normal;
+	font-family: 'Fira Sans', sans-serif;
+	text-decoration:none;
+
+	border:none;
+	padding: 10px 20px;
+
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.backButton {
+	background-color: #2196F3;
+
+	color:black;
+	font-style:normal;
+	font-family: 'Fira Sans', sans-serif;
+	text-decoration:none;
+
+	padding: 10px 20px;
+
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.goalButton {
+	background-color: #2196F3;
+
+	color: black;
+	font-style:normal;
+	font-family: 'Fira Sans', sans-serif;
+	font-size: 50px;
+	text-decoration:none;
+
+	padding-left: 5%;
+	padding-right: 5%;
+
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.backButton:hover, .submitButton:hover, .goalButton:hover {
+	background-color: #008CBA;
+    color: white;
+}
+
 #login
 {
 	background-color: #F7FBFC;
@@ -45,7 +160,7 @@ body {
 	color: #769FCD;
 	text-align: center;
 }
-
+/*
 #submit-button
 {
 	display: inline-block;
@@ -59,21 +174,8 @@ body {
 	border-bottom: 3px solid #E25D4E;
 	cursor: pointer;
 }
+*/
 
-.button {
-	background-color: #2196F3;
-	font-family: 'Fira Sans', sans-serif;
-  	/*border: 2px solid #4CAF50;*/
-  	/*border-color: black;*/
-  	color: black;
-  	text-align: center;
-  	text-decoration: none;
-  	display: inline-block;
-  	font-size: 20px;
-  	padding: 1em 1em 1em 1em;
-  	transition-duration: 0.4s;
-  	cursor: pointer;
-}
 /*********** Student List ***********/
 .grid-container {
   display: grid;
