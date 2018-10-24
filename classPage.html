@@ -1,98 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
   <link rel="stylesheet" href="./main.css" />
-<!--body {
-background-color: #0e47a1;
-}
-h1 {
-	text-align: center;
-  color: white;
-  white-space: nowrap;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: #3e52b5;
-  padding: 10px;
-  border: 2px solid #0e47a1;
-  border-color: black;
-}
-.button {
-  background-color: rgba(0, 0, 0, 0);
-  border: 2px solid #0e47a1;
-  border-color: black;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 50px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-.button:hover {
-    background-color: #008CBA;
-    color: white;
-}
-.profile {
-  background-color: rgba(0, 0, 0, 0);
-  border: 2px solid #0e47a1;
-  border-color: black;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 30px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 100%;
-  margin-left: 85%;
-  padding: 30px;
-}
-.profilepic {
-  max-width: 40px;
-  max-height: 40px;
-  hihihihi
-  yaty
-}-->
-<script>
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
 
-</script>
-<style>
-.dropbtn {
+  <style>
+  .dropbtn {
     background-color: #3498DB;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
-}
-.dropbtn:hover, .dropbtn:focus {
+  }
+  .dropbtn:hover, .dropbtn:focus {
     background-color: #2196F3;
-}
-.dropdown {
+  }
+  .dropdown {
     position: relative;
     display: inline-block;
-}
-.dropdown-content {
+  }
+  .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
@@ -100,75 +26,114 @@ window.onclick = function(event) {
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-}
-.dropdown-content a {
+  }
+  .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-}
-.dropdown a:hover {background-color: #ddd;}
-.show {display: block;}
-</style>
-</head>
-<body>
+  }
+  .dropdown a:hover {background-color: #ddd;}
+  .show {display: block;}
+  </style>
+  <body>
 
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
 
-<table style="width: 90%">
-    <th style="padding-left: 34%">
+    <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned">&#9776; </div>
 
-<div class="dropdown">
-<button onclick="myFunction()" class="dropbtn">1st Period English Class</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#home">2nd Period Physics Class</a>
-    <a href="#about">2nd Period Math Class</a>
-    <a href="#contact">3rd Period Chemistry Class</a>
-  </div>
-</div>
-    </th>
-    <th>
-      <button type="button" class="profile"><img src="img\profile_picture.png" class="profilepic" width = "75" height = "75"></button>
-    </th>
-  </tr>
-</table>
+    <table style="width: 90%">
+      <th style="padding-left: 34%">
 
-<div class="grid-container" id="demo"></div>
+        <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">1st Period English Class</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#home">2nd Period Physics Class</a>
+            <a href="#about">2nd Period Math Class</a>
+            <a href="#contact">3rd Period Chemistry Class</a>
+          </div>
+        </div>
+      </th>
+      <th>
+        <button type="button" class="profile"><img src="img\profile_picture.png" class="profilepic" width = "75" height = "75"></button>
+      </th>
+    </table>
 
-  <script>
-    // class grid buttons 
-    //var temp = document.getElementById("demo");
-    //var list = "";
-    var student = ["Anna", "Sam", "Shwetha", "Mark", "George", "Valerie"];
-    for (i = 0; i < student.length; i++) {
-      var element = document.createElement("a");
+    <div class="grid-container" id="demo"></div> <!-- This is where all of our student page links go-->
 
-      element.innerHTML = student[i];
-      element.className="button";
-      var link = student[i] + '.html';
-      element.href= link;
-      var btnDiv = document.getElementById("demo");
-      //document.getElementById("demo").style.color = black;
-      btnDiv.appendChild(element);
-      console.log(element);
-    }
-  </script>
-<!--
-<div class="grid-container">
-  <a href="Anna.html" class="button">Anna</a></button>
-  <a href="Anna.html" class="button">Brian</a></button>
-  <a href="Anna.html" class="button">Claire</a></button>
-  <a href="Anna.html" class="button">Grace</a></button>
-  <a href="Anna.html" class="button">Steve</a></button>
-  <a href="Anna.html" class="button">Valerie</a></button>
-  <a href="Anna.html" class="button">Mark</a></button>
-  <a href="Anna.html" class="button">Mary</a></button>
-  <a href="Anna.html" class="button">Francis</a></button>
-</div>
--->
+    <!--
+    <div class="grid-container">
+      <a href="Anna.html" class="button">Anna</a></button>
+      <a href="Anna.html" class="button">Brian</a></button>
+      <a href="Anna.html" class="button">Claire</a></button>
+      <a href="Anna.html" class="button">Grace</a></button>
+      <a href="Anna.html" class="button">Steve</a></button>
+      <a href="Anna.html" class="button">Valerie</a></button>
+      <a href="Anna.html" class="button">Mark</a></button>
+      <a href="Anna.html" class="button">Mary</a></button>
+      <a href="Anna.html" class="button">Francis</a></button>
+    </div>
+    -->
 
-<button type="button" class="dropbtn" ><a href="login.html" target="_self">Go back</a></button>
-<button type="button" class="dropbtn" ><a href="logout.html" target="_self">Log Out</a></button>
-<button type="button" class="dropbtn" ><a href="newstudent.html">Add new student</a></button>
+    <button type="button" class="dropbtn" ><a href="login.html" target="_self">Go back</a></button>
+    <button type="button" class="dropbtn" ><a href="logout.html" target="_self">Log Out</a></button>
+    <button type="button" class="dropbtn" ><a href="newstudent.html">Add new student</a></button>
 
-</body>
+  </body>
 </html>
+
+<script>
+  /* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+  
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
+</script>
+
+<script>
+  // class grid buttons 
+  //var temp = document.getElementById("demo");
+  //var list = "";
+  var student = ["Anna", "Sam", "Shwetha", "Mark", "George", "Valerie"];
+  for (i = 0; i < student.length; i++) {
+    var element = document.createElement("a");
+
+    element.innerHTML = student[i];
+    element.className="button";
+    var link = student[i] + '.html';
+    element.href= link;
+    var btnDiv = document.getElementById("demo");
+    //document.getElementById("demo").style.color = black;
+    btnDiv.appendChild(element);
+    console.log(element);
+  }
+</script>
