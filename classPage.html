@@ -112,22 +112,6 @@ window.onclick = function(event) {
 <body>
 
 
-<p id="demo"></p>
-
-<script>
-
-var temp = document.getElementById("demo");
-var list = "";
-var student = ["Sam", "Shwetha"];
-for(var i=0;i<student.length;i++)
-{
-  list += student[i] + "&emsp;" ;
-}
-
-temp.innerHTML = <a href="Anna.html" class="button">Anna</a></button>;
-</script>
-
-
 <table style="width: 90%">
     <th style="padding-left: 34%">
       
@@ -146,8 +130,27 @@ temp.innerHTML = <a href="Anna.html" class="button">Anna</a></button>;
   </tr>
 </table>
 
+<div class="grid-container" id="demo"></div>
 
+  <script>
+    // class grid buttons 
+    //var temp = document.getElementById("demo");
+    //var list = "";
+    var student = ["Anna", "Sam", "Shwetha", "Mark", "George", "Valerie"];
+    for (i = 0; i < student.length; i++) {
+      var element = document.createElement("a");
 
+      element.innerHTML = student[i];
+      element.className="button";
+      var link = student[i] + '.html';
+      element.href= link;
+      var btnDiv = document.getElementById("demo");
+      //document.getElementById("demo").style.color = black;
+      btnDiv.appendChild(element);
+      console.log(element);
+    }
+  </script>
+<!--
 <div class="grid-container">
   <a href="Anna.html" class="button">Anna</a></button>
   <a href="Anna.html" class="button">Brian</a></button>
@@ -159,7 +162,7 @@ temp.innerHTML = <a href="Anna.html" class="button">Anna</a></button>;
   <a href="Anna.html" class="button">Mary</a></button>
   <a href="Anna.html" class="button">Francis</a></button>
 </div>
-
+-->
 
 <button type="button" class="dropbtn" ><a href="login.html" target="_self">Go back</a></button>
 <button type="button" class="dropbtn" ><a href="logout.html" target="_self">Log Out</a></button>
