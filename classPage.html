@@ -37,14 +37,16 @@
   </style>
   <body>
 
+    <!--Navigation bar-->
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="classPage.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="#">Settings</a>
       <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
     </div>
 
+    <!--3 prong button that opens up navigation bar-->
     <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned">&#9776; </div>
 
     <table style="width: 90%">
@@ -93,6 +95,7 @@
     }
   }
   
+  //openNav() and closeNav() allow for the side navigation bar to open and close
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }
@@ -104,6 +107,7 @@
 </script>
 
 <script>
+  //This script creates the student buttons
   // class grid buttons 
   //var temp = document.getElementById("demo");
   //var list = "";

@@ -2,6 +2,18 @@
 <html>
   <link rel="stylesheet" href="./main.css">
   <body>
+        <!--Navigation bar-->
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="classPage.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="#">Settings</a>
+      <a href="#">About</a>
+    </div>
+
+    <!--3 prong button that opens up navigation bar-->
+    <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned">&#9776; </div>
+
     <h1>Anna's Profile</h1>
     <div style="display:block;width:50%;center;">
       <a href="goalOne.html" class=goalButton>Counting to 10</a><br><br>
@@ -22,3 +34,14 @@
     width="122.5" height="81"
   </body>
 </html>
+
+<script>
+//openNav() and closeNav() allow for the side navigation bar to open and close
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+</script>
