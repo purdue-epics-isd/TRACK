@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html>
+	<style>
+	.slidecontainer {
+    	width: 100%;
+	}
+	.slider {
+    	-webkit-appearance: none;
+	    width: 50%;
+    	height: 15px;
+	    border-radius: 5px;
+    	background: #d3d3d3;
+	    outline: none;
+	    opacity: 0.7;
+    	-webkit-transition: .2s;
+	    transition: opacity .2s;
+	}
+
+	.slider:hover {
+    	opacity: 1;
+	}
+
+	.slider::-webkit-slider-thumb {
+    	-webkit-appearance: none;
+    	appearance: none;
+	    width: 25px;
+    	height: 25px;
+	    border-radius: 50%;
+	    background: #4CAF50;
+    	cursor: pointer;
+	}
+
+	.slider::-moz-range-thumb {
+    	width: 25px;
+	    height: 25px;
+	    border-radius: 50%;
+    	background: #4CAF50;
+	    cursor: pointer;
+	}
+	</style>
 	<link rel="stylesheet" href="./main.css" />
 	<body>
-		<h1>Reading Goal</h1>
+		<h1>Math Goal</h1>
 		<div>
-			<form  action="">
+			<form action="">
+				<div class="slidecontainer">
+					<p>Percentage correct on worksheet: <span id="demo"></span></p>
+					<input type="range" min="1" max="100" value="50" class="slider" id="myRange"><br>
+				</div>
+
+				<script>
+					var slider = document.getElementById("myRange");
+					var output = document.getElementById("demo");
+					output.innerHTML = slider.value;
+
+					slider.oninput = function() {
+  						output.innerHTML = this.value;
+					}
+				</script><br>
 				<a href="Anna.html" class="submitButton">Submit</a><br><br><br>
 				<a href="Anna.html" class="backButton">Back</a>
 			</form>
