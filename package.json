@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/purdue-epics-isd/TRACK/issues"
   },
-  "homepage": "https://github.com/purdue-epics-isd/TRACK#readme"
+  "homepage": "https://github.com/purdue-epics-isd/TRACK#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.6"
+  }
 }
