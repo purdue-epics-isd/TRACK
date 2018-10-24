@@ -26,7 +26,7 @@ body {
 	text-align: center;
 }
 
-body.goalCreation {
+body.leftAligned {
 	text-align: left;
 	padding-left: 25%;
 
