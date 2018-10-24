@@ -6,7 +6,7 @@
 background-color: #0e47a1;
 }
 h1 {
-	text-align: center;
+  text-align: center;
   color: white;
   white-space: nowrap;
 }
@@ -52,8 +52,6 @@ h1 {
 .profilepic {
   max-width: 40px;
   max-height: 40px;
-  hihihihi
-  yaty
 }-->
 <script>
 /* When the user clicks on the button,
@@ -70,7 +68,7 @@ window.onclick = function(event) {
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show');
-      }
+}
     }
   }
 }
@@ -84,6 +82,7 @@ window.onclick = function(event) {
     font-size: 16px;
     border: none;
     cursor: pointer;
+
 }
 .dropbtn:hover, .dropbtn:focus {
     background-color: #2196F3;
@@ -114,19 +113,21 @@ window.onclick = function(event) {
 <body>
 
 
-<p id="demo"></p>
+<div id="demo"></div>
 
 <script>
-
-var temp = document.getElementById("demo");
-var list = "";
+// class grid buttons
+//var temp = document.getElementById("demo");
+//var list = "";
 var student = ["Sam", "Shwetha"];
-for(var i=0;i<student.length;i++)
-{
-  list += student[i] + "&emsp;" ;
-}
+var element = document.createElement("button");
+element.innerHTML = student[0];
+var btnDiv = document.getElementById("demo");
+//document.getElementById("button").className = 'button';
+//document.getElementById("demo").style.background-color = black;
+btnDiv.appendChild(element);
+console.log(element);
 
-temp.innerHTML = <a href="Anna.html" class="button">Anna</a></button>;
 </script>
 
 
@@ -134,11 +135,11 @@ temp.innerHTML = <a href="Anna.html" class="button">Anna</a></button>;
     <th style="padding-left: 34%">
 
 <div class="dropdown">
-<button onclick="myFunction()" class="dropbtn">1st Period English Class</button>
+<button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
   <div id="myDropdown" class="dropdown-content">
-    <a href="#home">2nd Period Physics Class</a>
-    <a href="#about">2nd Period Math Class</a>
-    <a href="#contact">3rd Period Chemistry Class</a>
+    <a href="#home">2st Period Physics Class</a>
+    <a href="#about">2st Period Math Class</a>
+    <a href="#contact">3st Period Chemistry Class</a>
   </div>
 </div>
     </th>
