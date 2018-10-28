@@ -17,6 +17,15 @@ cssTemplate {
 }
 */
 
+head {
+	/*pretty light blue color*/
+	background-color: #D6E6F2;
+	/*text font and alignment*/
+	color: #769FCD;
+	font-family: 'Fira Sans', sans-serif;
+	text-align: center;
+}
+
 body {
 	/*pretty light blue color*/
 	background-color: #D6E6F2;

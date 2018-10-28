@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
   <link rel="stylesheet" href="./main.css">
+  <script type="text/javascript" src="myScripts.js"></script>
+
   <body>
-        <!--Navigation bar-->
+    <div id="nav-placeholder"></div>
+
+    <!--Navigation bar-->
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="classPage.html">Home</a>
@@ -10,38 +14,23 @@
       <a href="#">Settings</a>
       <a href="#">About</a>
     </div>
-
-    <!--3 prong button that opens up navigation bar-->
-    <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned">&#9776; </div>
+    
+   <!-- 3 prong button that opens up navigation bar-->
+    <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px;position:fixed" onclick="openNav()" class="leftAligned">&#9776; </div>
 
     <h1>Anna's Profile</h1>
-    <div style="display:block;width:50%;center;">
       <a href="goalOne.html" class=goalButton>Counting to 10</a><br><br>
       <a href="goalTwo.html" class="goalButton">Eating Healthy</a><br><br>
       <a href="goalFour.html" class="goalButton">Reading Goal</a><br><br>
       <a href="goalFive.html" class="goalButton">Math Goal</a><br><br>
       <a href="goalThree.html" class="goalButton">Disruptive Behavior During Class</a><br><br><br>
       <a href="newgoal.html" class="goalButton">Create New Goal</a><br><br><br><br>
-    </div>
     <a href="index.html" class="backButton">Back</a>
     
     <h2>Example of Goal Progress Graph</h2>
-    <img src="img/percentagegraph.jpg"> alt="graph1"
-    width="485" height="350"
+    <img src="img/percentagegraph.jpg" alt="graph1" width="485" height="350"> 
 
     <h3>Example of Weekly Goal Progress</h3>
-    <img src="img/weeklyprogressgraph.jpg"> alt="graph2"
-    width="490" height="324"
+    <img src="img/weeklyprogressgraph.jpg" alt="graph2" width="490" height="324">
   </body>
 </html>
-
-<script>
-//openNav() and closeNav() allow for the side navigation bar to open and close
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-  }
-
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
-</script>

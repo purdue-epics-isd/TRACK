@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
-	<link rel="stylesheet" href="./main.css" />
-	<body>
-		<h1>Disruptive Behavior During Class</h1>
-		<div>
-			Disruptions today: <button>-</button> 2 <button>+</button><br><br>
-			Comments: <br><textarea></textarea><br><br><br>
-			<a href="Anna.html" class="submitButton">Submit</a><br><br><br>
-			<a href="Anna.html" class="backButton">Back</a>
-		</div>
-	</body>
+<link rel="stylesheet" href="./main.css">
+<script type="text/javascript" src="myScripts.js"></script>
+<body>
+	<div id="nav-placeholder"></div>
+
+	<!--Navigation bar-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="classPage.html">Home</a>
+		<a href="login.html">Login</a>
+		<a href="#">Settings</a>
+		<a href="#">About</a>
+	</div>
+	
+	<!-- 3 prong button that opens up navigation bar-->
+	<div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned">&#9776; </div>
+	
+	<h1>Disruptive Behavior During Class</h1>
+	<div>
+		Disruptions today: <button>-</button> 2 <button>+</button><br><br>
+		Comments: <br><textarea></textarea><br><br><br>
+		<a href="Anna.html" class="submitButton">Submit</a><br><br><br>
+		<a href="Anna.html" class="backButton">Back</a>
+	</div>
+</body>
 </html>
