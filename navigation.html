@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="classPage.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="#">Settings</a>
+    <a href="#">About</a>
+  </div>
+
+  <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned">&#9776; </div>
+</html>
+
+<script>
+//openNav() and closeNav() allow for the side navigation bar to open and close
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+</script>

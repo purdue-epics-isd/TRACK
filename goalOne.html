@@ -1,48 +1,32 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="./main.css" />
-<!--
-<style>
-body{
-	background-color: #0e47a1;
-	color:white;
-	text-align:center;
-}
-form{
-	position: absolute;
-	right:50%;
-	width:15%;
-	text-align:left;
-}
-input{ position:absolute;
-		width:75%;
-		height: 12px;
-		left:100%;
-}
-a{ 
-	color:black;
-	font-style:normal;
-	text-decoration:none;
-	position: absolute;
-	right:-60%;
-	top:110%;
-	color:white;
-	border:none;
-	background-color: #3e52b5;
-	padding: 10px 20px;
-}
-</style>
--->
-	<body>	
-		<h1>Counting to 10</h1>
-		<div>
-			<form  action="">
-				Percentage Completed: <input type="text" name="percentage"><br><br>
-				With how much support: <input type="text" name="support"><br><br>
-				Additional Comments: <input type="text" name="support"><br><br><br>
-				<a href="Anna.html" class="submitButton">Submit</a><br><br><br>
-				<a href="Anna.html" class="backButton">Back</a>
-			</form>
-		</div>
-	</body>
+<link rel="stylesheet" href="./main.css">
+<script type="text/javascript" src="myScripts.js"></script>
+<body>	
+	<div id="nav-placeholder"></div>
+
+	<!--Navigation bar-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="classPage.html">Home</a>
+		<a href="login.html">Login</a>
+		<a href="#">Settings</a>
+		<a href="#">About</a>
+	</div>
+
+	<!-- 3 prong button that opens up navigation bar-->
+	<div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned">&#9776; </div>
+
+	<h1>Counting to 10</h1>
+	<h2>Anna will count to 10 with less than one correction in 4 out of 5 trials</h2>
+	<div>
+		<form  action="">
+			Percentage Completed: <input type="text" name="percentage"><br><br>
+			With how much support: <input type="text" name="support"><br><br>
+			Additional Comments: <input type="text" name="support"><br><br><br>
+			<a href="Anna.html" class="submitButton">Submit</a><br><br><br>
+			<a href="Anna.html" class="backButton">Back</a>
+		</form>
+	</div>
+</body>
 </html>
