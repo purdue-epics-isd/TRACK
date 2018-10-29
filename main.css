@@ -178,6 +178,16 @@ p {
     color: white;
 }
 
+#openNav {
+	font-size:40px;
+	cursor:pointer;
+	text-align:left;
+	position: fixed;
+	left: 30px;
+	top: 20px;
+
+}
+
 #login
 {
 	background-color: #F7FBFC;
