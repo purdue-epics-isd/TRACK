@@ -136,7 +136,6 @@ p {
 	font-family: 'Fira Sans', sans-serif;
 	text-decoration:none;
 
-	border:none;
 	padding: 10px 20px;
 
 	transition-duration: 0.4s;
@@ -185,7 +184,6 @@ p {
 	position: fixed;
 	left: 30px;
 	top: 20px;
-
 }
 
 #login
