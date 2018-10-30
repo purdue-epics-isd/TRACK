@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html>
 
-	<link rel="stylesheet" href="./main.css" />
-	<body>
-		<h1>Eating Healthy</h1>
-		<div>
-			<form  action="">
-				Lunch Eaten:
-				<div class="custom-control custom-radio">
- 					<input type="radio" class="custom-control-input" id="all" name="All of Lunch">
-					<label class="custom-control-label" for="defaultUnchecked">All of Lunch</label>
-				</div>
-				<div class="custom-control custom-radio">
- 					<input type="radio" class="custom-control-input" id="some" name="Some of Lunch">
-					<label class="custom-control-label" for="defaultUnchecked">Some of Lunch</label>
-				</div>
-				<div class="custom-control custom-radio">
- 					<input type="radio" class="custom-control-input" id="none" name="None of Lunch">
-					<label class="custom-control-label" for="defaultUnchecked">None of Lunch</label>
-				</div><br><br>
-				<a href="Anna.html" class="submitButton">Submit</a><br><br><br>
-				<a href="Anna.html" class="backButton">Back</a>
-			</form>
-		</div>
-	</body>
+<link rel="stylesheet" href="./main.css">
+<script type="text/javascript" src="myScripts.js"></script>
+<body>
+	<div id="nav-placeholder"></div>
+
+	<!--Navigation bar-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="classPage.html">Home</a>
+		<a href="login.html">Login</a>
+		<a href="#">Settings</a>
+		<a href="#">About</a>
+	</div>
+
+	<!-- 3 prong button that opens up navigation bar-->
+	<div id="openNav" onclick="openNav()" class="leftAligned">&#9776; </div>
+
+	<h1>Positive Social Responses</h1>
+	<h2>Given social situations or peer conflicts, Anna will use and respond to non-verbal social cues with positive statements in 3 out of 5 trials weekly.</h2>
+
+	<form action="">
+		<input type="checkbox" name="Responsive" value="Responsive"> Anna is responsive. <br>
+		<input type="checkbox" name="Positive" value="Positive"> Anna's response is positive.<br><br><br>
+		<a href="Anna.html" class="backButton">Back</a>
+		<a href="Anna.html" class="submitButton">Submit</a>
+	</form>
+
+</body>
 </html>

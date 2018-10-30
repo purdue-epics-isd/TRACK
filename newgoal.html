@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html>
-	<link rel="stylesheet" href="./main.css" />
-	<style>
-		/*
-		body {
-			background-color: #0e47a1;
-			color: white;
-			padding-left: 30%;
-		}
-		h1 {
-			padding-left:20%;
-		}*/
-	</style>
+<link rel="stylesheet" href="./main.css">
+<script type="text/javascript" src="myScripts.js"></script>
+
+<header style="text-align:center">
+	<div id="nav-placeholder"></div>
+
+	<!--Navigation bar-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="classPage.html">Home</a>
+		<a href="login.html">Login</a>
+		<a href="#">Settings</a>
+		<a href="#">About</a>
+	</div>
+
+	<!-- 3 prong button that opens up navigation bar-->
+	<div id="openNav" onclick="openNav()">&#9776; </div>
+</header>
+
+<body class="leftAligned">
 	<h1>Create New Goal</h1>
-	<body class="leftAligned">
-		<form action="actionpage.html">
-			Goal Title: <input type="text" name="title"><br><br>
-			Goal Description: <input type="text" name="description" size="30" style="height:100px"><br><br>
-			Start Date: <input type="text" name="startdate">
-			End Date: <input type="text" name="enddate"><br><br>
-			Location: <br>
-			<input type="radio" name="location" value="classroom"> Classroom<br>
-			<input type="radio" name="location" value="dorm"> Dorm<br>
-			<input type="radio" name="location" value="other"> Other<br>
-			Method: <br>
-			<input type="checkbox" name="method" value="Checkbox"> Checkbox<br>
-			<input type="checkbox" name="method" value="Rubric"> Rubric<br>
-			<input type="checkbox" name="method" value="Counter"> Counter<br>
-			<input type="checkbox" name="method" value="Comments"> Comments<br>
-			<input type="submit" name="Submit" class="submitButton">
-		</form>
-		<button class="backButton"><a href="login.html">Start over</a></button>
-	</body>
+	<form action="">
+		Goal Title: <input type="text" name="title"><br><br>
+		Goal Description: <textarea></textarea><br><br>
+		Start Date: <input type="text" name="startdate">
+		End Date: <input type="text" name="enddate"><br><br>
+		Location: <br>
+		<input type="radio" name="location" value="classroom"> Classroom<br>
+		<input type="radio" name="location" value="dorm"> Dorm<br>
+		<input type="radio" name="location" value="other"> Other <input type="text" name="location"><br><br>
+		Method: <br>
+		Checkboxes: <button>-</button> 0 <button>+</button> <br><br>
+		Percentages: <button>-</button> 0 <button>+</button> <br><br>
+		Rubrics: <button>-</button> 0 <button>+</button> <br><br>
+		Counters: <button>-</button> 0 <button>+</button> <br><br>
+		Comments: <button>-</button> 0 <button>+</button> <br><br>
+		<a href="Anna.html" class="submitButton">Submit</a><br><br>
+		<!--<input type="submit" name="Submit" class="submitButton">-->
+	</form>
+	<button class="backButton"><a href="Anna.html">Back</a></button>
+</body>
 </html>
