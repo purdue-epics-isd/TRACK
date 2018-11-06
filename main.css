@@ -35,6 +35,11 @@ body {
 	text-align: center;
 }
 
+body.leftAligned {
+	text-align: left;
+	margin-left: 25%;
+}
+
 header{
 	/*pretty light blue color*/
 	background-color: #D6E6F2;
@@ -44,11 +49,6 @@ header{
 	text-align: center;
 }
 
-body.leftAligned {
-	text-align: left;
-	margin-left: 25%;
-}
-
 h1 {
 	/*TODO*/	
 	font-family: 'Fira Sans', sans-serif;
@@ -56,6 +56,10 @@ h1 {
 	font-size: 80px;
 
 	margin:20px;
+}
+
+h1.centered {
+	text-align: center;
 }
 
 h2 {
@@ -136,7 +140,6 @@ p {
 	font-family: 'Fira Sans', sans-serif;
 	text-decoration:none;
 
-	border:none;
 	padding: 10px 20px;
 
 	transition-duration: 0.4s;
@@ -185,7 +188,6 @@ p {
 	position: fixed;
 	left: 30px;
 	top: 20px;
-
 }
 
 #login

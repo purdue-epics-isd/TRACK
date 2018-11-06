@@ -10,6 +10,8 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
+    text-decoration: none;
+    font-style: none;
   }
   .dropbtn:hover, .dropbtn:focus {
     background-color: #2196F3;
@@ -42,9 +44,9 @@
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="classPage.html">Home</a>
-      <a href="login.html">Login</a>
       <a href="#">Settings</a>
       <a href="#">About</a>
+      <a href="logout.html">Logout</a>
     </div>
 
     <!--3 prong button that opens up navigation bar-->
@@ -53,11 +55,11 @@
     <table style="width: 90%">
       <th style="padding-left: 34%">
         <div class="dropdown">
-          <button onclick="myFunction()" class="dropbtn">1st Period English Class</button>
+          <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
           <div id="myDropdown" class="dropdown-content">
             <a href="#home">2nd Period Physics Class</a>
-            <a href="#about">2nd Period Math Class</a>
-            <a href="#contact">3rd Period Chemistry Class</a>
+            <a href="#about">3rd Period Math Class</a>
+            <a href="#contact">4th Period Chemistry Class</a>
           </div>
         </div>
       </th>
@@ -68,8 +70,8 @@
 
     <div class="grid-container" id="demo"></div> <!-- This is where all of our student page links go-->
 
-    <button type="button" class="dropbtn" ><a href="login.html" target="_self">Go back</a></button>
-    <button type="button" class="dropbtn" ><a href="logout.html" target="_self">Log Out</a></button>
+    <!--<button type="button" class="dropbtn" ><a href="login.html"">Go back</a></button>
+    <button type="button" class="dropbtn" ><a href="logout.html">Log Out</a></button>-->
     <button type="button" class="dropbtn" ><a href="newstudent.html">Add new student</a></button>
 
   </body>
@@ -108,7 +110,8 @@
 
     element.innerHTML = student[i];
     element.className="button";
-    var link = student[i] + '.html';
+    var link = 'Anna.html';
+    //var link = student[i] + '.html';
     element.href= link;
     var btnDiv = document.getElementById("demo");
     //document.getElementById("demo").style.color = black;
