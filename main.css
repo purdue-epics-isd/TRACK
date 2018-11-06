@@ -39,6 +39,10 @@ body.leftAligned {
 	text-align: left;
 	margin-left: 25%;
 }
+.rightAligned{
+	text-align: right;
+	margin-right: 25%;
+}
 
 header{
 	/*pretty light blue color*/
