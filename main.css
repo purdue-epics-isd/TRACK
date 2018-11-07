@@ -37,9 +37,9 @@ h2 {
 .studentIcon {
    width: 444px; /*width of your image*/
    height: 444px; /*height of your image*/
-   background: url('studentIcon.png');
+   background-image: url('studentIcon.png');
    background-repeat: no-repeat;
-   background-position: right top;
+   background-position: center;
    background-size: 100% auto;
    margin: 0; /*If you want no margin*/
    padding: 0; /*if your want to padding*/
@@ -50,6 +50,9 @@ h2 {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -58,6 +61,9 @@ h2 {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    transform: rotate(180deg); /*rotating the image*/
@@ -69,6 +75,7 @@ h2 {
    height:auto; /*height of your image*/
    background-image: url('socialGoal.png');
    background-repeat: no-repeat;
+   background-position: center;
    background-size: 100% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
@@ -79,7 +86,8 @@ h2 {
    height:auto; /*height of your image*/
    background-image: url('academicGoal.png');
    background-repeat: no-repeat;
-   background-size: 100% auto;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -89,7 +97,8 @@ h2 {
    height:auto; /*height of your image*/
    background: url('behaviorGoal.png');
    background-repeat: no-repeat;
-   background-size: 100% auto;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -104,7 +113,8 @@ h2 {
    height: 100px; /*height of your image*/
    background-image: url('taskBar.png');
    background-repeat: no-repeat;
-   background-size: 100% auto;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 
@@ -114,6 +124,9 @@ h2 {
    width:70px; /*width of your image*/
    height:70px; /*height of your image*/
    background-image: url('download.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -186,7 +199,7 @@ h2 {
   height: 0;
   padding-bottom: 100%;
   font-family: 'Fira Sans', sans-serif;
-    border: 0px solid #D6E6F2;
+    border: 2px solid #D6E6F2;
     /*border-color: black;*/
     color: black;
     text-align: center;
