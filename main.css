@@ -50,6 +50,7 @@ h2 {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
+   display: inline-block;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -58,6 +59,7 @@ h2 {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
+   display: inline-block;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    transform: rotate(180deg); /*rotating the image*/
