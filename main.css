@@ -38,11 +38,13 @@ h2 {
 
 /*Student Icon*/
 .studentIcon {
-   width:444px; /*width of your image*/
-   height:444px; /*height of your image*/
+   width: 100%; /*width of your image*/
+   height: 444px; /*height of your image*/
    background-image: url('studentIcon.png');
-   margin:0; /* If you want no margin */
-   padding:0; /*if your want to padding */
+   background-repeat: no-repeat;
+   background-size: cover; /*contain?*/
+   margin:0; /*If you want no margin*/
+   padding:0; /*if your want to padding*/
 }
 
 /*Arrow Buttons*/
@@ -95,9 +97,10 @@ h2 {
 }
 
 .taskBar{
-   width: 66px; /*width of your image*/
-   height:49px; /*height of your image*/
+   width: 100%; /*width of your image*/
+   height: 20px; /*height of your image*/
    background-image: url('taskBar.png');
+   background-size: contain;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 
