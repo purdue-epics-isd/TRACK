@@ -86,7 +86,7 @@ h2 {
 .behaviorGoal {
    width:698px; /*width of your image*/
    height:auto; /*height of your image*/
-   background-image: url('behaviorGoal.png');
+   background: url('behaviorGoal.png');
    background-repeat: no-repeat;
    background-size: 100% auto;
    margin:0; /* If you want no margin */
@@ -168,6 +168,7 @@ h2 {
 .grid-container {
   display: grid;
   grid-template-columns: 33% 33% 33%;
+  grid-template-rows: auto auto auto;
   border: 1px solid black;
   background-color: #6bd5e1;
   padding: 10px;
