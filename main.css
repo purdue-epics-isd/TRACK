@@ -35,18 +35,17 @@ h2 {
 
 /*Student Icon*/
 .studentIcon {
-   width: 100%; /*width of your image*/
+   width: 444px; /*width of your image*/
    height: 444px; /*height of your image*/
    background-image: url('studentIcon.png');
    background-repeat: no-repeat;
-   background-size: 100% auto; /*contain?*/
-   margin:0; /*If you want no margin*/
-   padding:0; /*if your want to padding*/
+   background-size: 100% auto;
+   margin: 0; /*If you want no margin*/
+   padding: 0; /*if your want to padding*/
 }
 
 /*Arrow Buttons*/
-
-.backButton{
+.backButton {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
@@ -54,7 +53,7 @@ h2 {
    padding:0; /*if your want to padding */
 }
 
-.submitButton{
+.submitButton {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
@@ -64,46 +63,53 @@ h2 {
 }
 
 /*Goal Types*/
-.socialGoal{
+.socialGoal {
    width:698px; /*width of your image*/
-   height:381px; /*height of your image*/
+   height:auto; /*height of your image*/
    background-image: url('socialGoal.png');
+   background-repeat: no-repeat;
+   background-size: 100% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
 
-.academicGoal{
+.academicGoal {
    width:698px; /*width of your image*/
-   height:381px; /*height of your image*/
+   height:auto; /*height of your image*/
    background-image: url('academicGoal.png');
+   background-repeat: no-repeat;
+   background-size: 100% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
 
-.behaviorGoal{
+.behaviorGoal {
    width:698px; /*width of your image*/
-   height:381px; /*height of your image*/
+   height:auto; /*height of your image*/
    background-image: url('behaviorGoal.png');
+   background-repeat: no-repeat;
+   background-size: 100% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
 
 /*Header Buttons*/
-.button{
+.button {
 
 }
 
-.taskBar{
-   width: 100%; /*width of your image*/
-   height: 20px; /*height of your image*/
+.taskBar {
+   width: 100px; /*width of your image*/
+   height: 100px; /*height of your image*/
    background-image: url('taskBar.png');
-   background-size: contain;
+   background-repeat: no-repeat;
+   background-size: 100% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 
 }
 
-.download{
+.download {
    width:70px; /*width of your image*/
    height:70px; /*height of your image*/
    background-image: url('download.png');
@@ -119,14 +125,14 @@ h2 {
     width: 50%;
 }
 
-.taskBarScaling{
+.taskBarScaling {
 	width: 10%;
 	height: 10%;
 }
 
 
 /*Taskbar Buttons*/
-.basicGrid{
+.basicGrid {
    width:476px; /*width of your image*/
    height:109px; /*height of your image*/
    background-image: url('basicGrid.png');
@@ -134,7 +140,7 @@ h2 {
    padding:0; /*if your want to padding */
 }
 
-.reminders{
+.reminders {
    width:439px; /*width of your image*/
    height:103px; /*height of your image*/
    background-image: url('reminders.png');
@@ -142,7 +148,7 @@ h2 {
    padding:0; /*if your want to padding */
 }
 
-.settings{
+.settings {
    width:400px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('settings.png');
@@ -150,7 +156,7 @@ h2 {
    padding:0; /*if your want to padding */
 }
 
-.signOut{
+.signOut {
    width:404px; /*width of your image*/
    height:97px; /*height of your image*/
    background-image: url('signOut.png');
@@ -161,9 +167,36 @@ h2 {
 /*********** Grid List Template ***********/
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 33% 33% 33%;
+  border: 1px solid black;
+  background-color: #6bd5e1;
+  padding: 10px;
+  justify-content: center;
+  /*align-items: center;
+  /*align-self: center;
   /*background-color: #0099ff;*/
-  padding: 1em 1em 1em 1em;
   /*padding: 10px;*/
 }
 
+.grid-container > div {
+    /*flex-direction: row;*/
+  width: 100%;
+  font-family: 'Fira Sans', sans-serif;
+    border: 2px solid #D6E6F2;
+    /*border-color: black;*/
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    left: 50%;
+    /*
+  border: 1px solid black;
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  font-size: 30px;
+  margin: auto;*/
+}
