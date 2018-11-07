@@ -81,13 +81,10 @@ h3 {
 p {
 	/*TODO*/
 }
-.downloadButton {
-	height: 100%;
-	width: 0;
+#downloadButton {
+	right: 30px;
+	top: 20px;
 	position: fixed;
-	top: 0;
-	left: 0;
-	padding-top: 60px;
 }
 .sidenav {
     height: 100%;
