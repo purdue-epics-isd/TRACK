@@ -39,7 +39,7 @@ h2 {
    height: 444px; /*height of your image*/
    background: url('studentIcon.png');
    background-repeat: no-repeat;
-    background-position: right top;
+   background-position: right top;
    background-size: 100% auto;
    margin: 0; /*If you want no margin*/
    padding: 0; /*if your want to padding*/
