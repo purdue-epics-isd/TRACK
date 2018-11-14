@@ -15,13 +15,13 @@
   </div>
 
   <!-- 3 prong button that opens up navigation bar-->
-  <div id="openNav" onclick="openNav()">&#9776; </div>
+  <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned"> &#9776; </div>
     <title>Create New Student</title>
   </head>
   <h1>Add a New Student</h1>
   <body class="leftAligned">
     <form action="actionpage.html">
-      Student Name: <input type="text" name="name"><br><br>
+      <h2>Student Name: <input type="text" name="name"><br><br>
       Class Period:  <select>
       <option value="Period 1">Period 1</option>
       <option value="Period 2">Period 2</option>
@@ -36,10 +36,11 @@
       <option value="5">5</option></select>
       <br><br>Gender:<br>
     	<input type="radio" name="gender" value="male" checked> Male<br>
-    	<input type="radio" name="gender" value="female"> Female<br><br>
-      <a href="classPage.html" class="submitButton">Submit</a><br><br><br>
+    	<input type="radio" name="gender" value="female"> Female<br><br></h2>
+      <a href="classPage.html" class="submitButton"></a><br><br><br>
     	<!--<input type="submit" name="Submit" class="submitButton"><br><br>-->
     </form>
-    <a href="classPage.html" class="backButton">Cancel</a> <!--  Go back and fix these links -->
+    <a href="classPage.html" class="backButton">
+    </a> <!--  Go back and fix these links -->
   </body>
 </html>

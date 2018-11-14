@@ -19,13 +19,12 @@ body {
 	background-color: #6bd5e1;
 	/*text font and alignment*/
 	color: #f9f9f9;
-	font-family: 'Niramit', sans-serif;
 	text-align: center;
 	margin: auto;
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 75px;
 }
 
 h2 {
@@ -35,12 +34,15 @@ h2 {
 
 /*Student Icon*/
 .studentIcon {
+   width: 444px; /*width of your image*/
+   height: 444px; /*height of your image*/
+   background-image: url('studentIcon.png');
    width: 111px; /*width of your image*/
    height: 111px; /*height of your image*/
    background: url('studentIcon.png');
    background-repeat: no-repeat;
-   background-position: right top;
-   background-size: 100% auto;
+   background-position: center;
+   background-size: 50% auto;
    margin: 0; /*If you want no margin*/
    padding: 0; /*if your want to padding*/
 }
@@ -50,19 +52,31 @@ h2 {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 150% auto;
    display: inline-block;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
+   position: fixed;
+   bottom: 0;
+   left: 0;
 }
 
 .submitButton {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 150% auto;
    display: inline-block;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    transform: rotate(180deg); /*rotating the image*/
+   position: fixed;
+   bottom: 0;
+   right: 0;
 }
 
 /*Goal Types*/
@@ -71,6 +85,7 @@ h2 {
    height: 381px; /*height of your image: OG - 381px*/
    background-image: url('socialGoal.png');
    background-repeat: no-repeat;
+   background-position: center;
    background-size: 100% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
@@ -82,7 +97,8 @@ h2 {
    height:381px; /*height of your image*/
    background-image: url('academicGoal.png');
    background-repeat: no-repeat;
-   background-size: 100% auto;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    text-align: center;
@@ -93,7 +109,8 @@ h2 {
    height:381px; /*height of your image*/
    background: url('behaviorGoal.png');
    background-repeat: no-repeat;
-   background-size: 100% auto;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    text-align: center;
@@ -109,16 +126,22 @@ h2 {
    height: 100px; /*height of your image*/
    background-image: url('taskBar.png');
    background-repeat: no-repeat;
-   background-size: 100% auto;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
-
+   position: fixed;
+   top: 0;
+   right: 0;
 }
 
 .download {
    width:70px; /*width of your image*/
    height:70px; /*height of your image*/
    background-image: url('download.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
