@@ -24,7 +24,7 @@ body {
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 75px;
 }
 
 h2 {
@@ -34,15 +34,12 @@ h2 {
 
 /*Student Icon*/
 .studentIcon {
-<<<<<<< HEAD
    width: 444px; /*width of your image*/
    height: 444px; /*height of your image*/
    background-image: url('studentIcon.png');
-=======
    width: 111px; /*width of your image*/
    height: 111px; /*height of your image*/
    background: url('studentIcon.png');
->>>>>>> 940f8aea671945c7771d3aabd8a17565e1b94a72
    background-repeat: no-repeat;
    background-position: center;
    background-size: 50% auto;
@@ -55,31 +52,31 @@ h2 {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
-<<<<<<< HEAD
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 50% auto;
-=======
+   background-size: 150% auto;
    display: inline-block;
->>>>>>> 940f8aea671945c7771d3aabd8a17565e1b94a72
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
+   position: fixed;
+   bottom: 0;
+   left: 0;
 }
 
 .submitButton {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
    background-image: url('backButton.png');
-<<<<<<< HEAD
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 50% auto;
-=======
+   background-size: 150% auto;
    display: inline-block;
->>>>>>> 940f8aea671945c7771d3aabd8a17565e1b94a72
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    transform: rotate(180deg); /*rotating the image*/
+   position: fixed;
+   bottom: 0;
+   right: 0;
 }
 
 /*Goal Types*/
@@ -133,7 +130,9 @@ h2 {
    background-size: 50% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
-
+   position: fixed;
+   top: 0;
+   right: 0;
 }
 
 .download {
