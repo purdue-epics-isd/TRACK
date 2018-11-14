@@ -40,7 +40,7 @@ h2 {
    background-image: url('studentIcon.png');
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 100% auto;
+   background-size: 50% auto;
    margin: 0; /*If you want no margin*/
    padding: 0; /*if your want to padding*/
 }
