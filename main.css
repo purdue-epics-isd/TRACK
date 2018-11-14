@@ -39,6 +39,10 @@ body.leftAligned {
 	text-align: left;
 	margin-left: 25%;
 }
+.rightAligned{
+	text-align: right;
+	margin-right: 25%;
+}
 
 header{
 	/*pretty light blue color*/
@@ -77,7 +81,11 @@ h3 {
 p {
 	/*TODO*/
 }
-
+#downloadButton {
+	right: 30px;
+	top: 20px;
+	position: fixed;
+}
 .sidenav {
     height: 100%;
     width: 0;
@@ -99,6 +107,7 @@ p {
     display: block;
     transition: 0.3s;
 }
+
 
 .sidenav a:hover {
     color: #f1f1f1;
@@ -172,11 +181,21 @@ p {
 	padding-left: 5%;
 	padding-right: 5%;
 
+	}
+
+
+
+.inlineButton{
+	color:black;
+	font-style:normal;
+	font-family: 'Fira Sans', sans-serif;
+	text-decoration:none;
+	background-color: #2196F3;
 	transition-duration: 0.4s;
 	cursor: pointer;
+	
 }
-
-.backButton:hover, .submitButton:hover, .goalButton:hover {
+.backButton:hover, .submitButton:hover, .goalButton:hover, .inlineButton:hover, {
 	background-color: #008CBA;
     color: white;
 }
@@ -204,6 +223,9 @@ p {
 	flex-direction: row;
 	display: inline-block;
 	padding: 1em 1em 1em 1em;
+
+	
+
 }
 * {
     box-sizing: border-box;
