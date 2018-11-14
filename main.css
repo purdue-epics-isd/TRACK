@@ -108,6 +108,7 @@ p {
     transition: 0.3s;
 }
 
+
 .sidenav a:hover {
     color: #f1f1f1;
 }
@@ -180,11 +181,21 @@ p {
 	padding-left: 5%;
 	padding-right: 5%;
 
+	}
+
+
+
+.inlineButton{
+	color:black;
+	font-style:normal;
+	font-family: 'Fira Sans', sans-serif;
+	text-decoration:none;
+
 	transition-duration: 0.4s;
 	cursor: pointer;
+	
 }
-
-.backButton:hover, .submitButton:hover, .goalButton:hover {
+.backButton:hover, .submitButton:hover, .goalButton:hover, .inlineButton:hover, {
 	background-color: #008CBA;
     color: white;
 }
@@ -212,6 +223,9 @@ p {
 	flex-direction: row;
 	display: inline-block;
 	padding: 1em 1em 1em 1em;
+
+	
+
 }
 * {
     box-sizing: border-box;
