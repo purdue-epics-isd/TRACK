@@ -54,7 +54,7 @@
     	</div>
     
    		<!-- 3 prong button that opens up navigation bar-->
-    	<div id="openNav" onclick="openNav()">&#9776; </div>
+    	<div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned"> &#9776; </div>
 		
 		<h1>Math Goal</h1>
 		<h2>Given various fractions and decimals, Anna will be able to convert fractions to decimals and decimals to fractions without a calculator with 80% accuracy, as measured by assignments</h2>
@@ -74,8 +74,10 @@
   						output.innerHTML = this.value;
 					}
 				</script><br>
-				<a href="Anna.html" class="submitButton">Submit</a><br><br><br>
-				<a href="Anna.html" class="backButton">Back</a>
+				<div>
+					<a href="Anna.html"><span class="backButton"></span></a>
+					<a href="Anna.html"><span class="submitButton"></span></a>
+			</div>
 			</form>
 		</div>
 	</body>
