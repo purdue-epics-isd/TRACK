@@ -34,15 +34,13 @@ h2 {
 
 /*Student Icon*/
 .studentIcon {
-   width: 444px; /*width of your image*/
+   width: 444px; /*width of your image - needs to stay at 444px to show the entire image*/
    height: 444px; /*height of your image*/
    background-image: url('studentIcon.png');
-   width: 111px; /*width of your image*/
-   height: 111px; /*height of your image*/
    background: url('studentIcon.png');
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 50% auto;
+   background-size: 60% auto; /*affects the scaling of the image*/
    margin: 0; /*If you want no margin*/
    padding: 0; /*if your want to padding*/
 }
@@ -59,8 +57,8 @@ h2 {
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    position: fixed;
-   bottom: 0;
-   left: 0;
+   bottom: 25px;
+   left: 25px;
 }
 
 .submitButton {
@@ -75,8 +73,8 @@ h2 {
    padding:0; /*if your want to padding */
    transform: rotate(180deg); /*rotating the image*/
    position: fixed;
-   bottom: 0;
-   right: 0;
+   bottom: 25px;
+   right: 25px;
 }
 
 /*Goal Types*/
@@ -86,19 +84,19 @@ h2 {
    background-image: url('socialGoal.png');
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 100% auto;
+   background-size: 90% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    text-align: center;
 }
 
 .academicGoal {
-   width:698px; /*width of your image*/
+   width:698px; /*width of original image*/
    height:381px; /*height of your image*/
    background-image: url('academicGoal.png');
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 50% auto;
+   background-size: 90% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    text-align: center;
@@ -110,7 +108,7 @@ h2 {
    background: url('behaviorGoal.png');
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 50% auto;
+   background-size: 90% auto;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    text-align: center;
@@ -235,9 +233,9 @@ h2 {
 /*********** Grid List Template ***********/
 .student-container {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: auto auto auto;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   background-color: #6bd5e1;
   padding: 10px;
   justify-content: center;
@@ -248,7 +246,7 @@ h2 {
   height: 0;
   padding-bottom: 100%;
   font-family: 'Fira Sans', sans-serif;
-  border: 2px solid #D6E6F2;
+  /*border: 2px solid #D6E6F2;*/
   color: black;
   text-align: center;
   text-decoration: none;
@@ -263,7 +261,7 @@ h2 {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: auto auto auto;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   background-color: #6bd5e1;
   padding: 10px;
   justify-content: center;
@@ -274,7 +272,7 @@ h2 {
   height: 0;
   padding-bottom: 60%;
   font-family: 'Fira Sans', sans-serif;
-  border: 2px solid #D6E6F2;
+  /*border: 2px solid #D6E6F2;*/
   color: black;
   text-align: center;
   text-decoration: none;
