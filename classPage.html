@@ -22,8 +22,7 @@
     background-color: #2196F3;
   }
   .dropdown {
-    position: relative;
-    display: inline-block;
+    text-align: center;
   }
   .dropdown-content {
     display: none;
@@ -58,7 +57,21 @@
     <!--3 prong button that opens up navigation bar-->
     <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned"> &#9776; </div>
 
-    <table style="width: 90%">
+    <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#home">2nd Period Physics Class</a>
+            <a href="#about">3rd Period Math Class</a>
+            <a href="#contact">4th Period Chemistry Class</a>
+          </div>
+        </div>
+    
+     <button type="button" style="position: absolute; top: 25px; right:25px"><a href="newstudent.html">Add new student</a></button>
+
+     <button type="button" class="profile" style="position: absolute; top:10%; right: 5%"><img src="img\profile_picture.png" class="profilepic"width="75"; height ="75"></button>
+      
+    <!--
+    <table style="width:100%">
       <th style="padding-left: 34%">
         <div class="dropdown">
           <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
@@ -73,12 +86,13 @@
         <button type="button" class="profile"><img src="img\profile_picture.png" class="profilepic" width = "75" height = "75"></button>
       </th>
     </table>
-
-    <div class="grid-container" id="demo"></div> <!-- This is where all of our student page links go-->
+  -->
+<br><br><br><br><br>
+    <div class="student-container" id="demo"></div> <!-- This is where all of our student page links go-->
 
     <!--<button type="button" class="dropbtn" ><a href="login.html"">Go back</a></button>
     <button type="button" class="dropbtn" ><a href="logout.html">Log Out</a></button>-->
-    <button type="button" class="dropbtn" ><a href="newstudent.html">Add new student</a></button>
+
 
   </body>
 </html>
@@ -113,15 +127,17 @@
   var student = ["Anna", "Sam", "Shwetha", "Mark", "George", "Valerie"];
   for (i = 0; i < student.length; i++) {
     var element = document.createElement("a");
-
-    element.innerHTML = student[i];
-    element.className="button";
+    var nameElement = document.createElement("div");
+    nameElement.innerHTML = student[i];
+    nameElement.className="studentName";
+    element.className="studentIcon";
     var link = 'Anna.html';
     //var link = student[i] + '.html';
     element.href= link;
     var btnDiv = document.getElementById("demo");
     //document.getElementById("demo").style.color = black;
     btnDiv.appendChild(element);
+    element.appendChild(nameElement);
     console.log(element);
   }
 </script>
