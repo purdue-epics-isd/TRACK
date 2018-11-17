@@ -37,12 +37,20 @@ h2 {
    width: 444px; /*width of your image - needs to stay at 444px to show the entire image*/
    height: 444px; /*height of your image*/
    background-image: url('studentIcon.png');
-   background: url('studentIcon.png');
+   /*background: url('studentIcon.png');*/
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 60% auto; /*affects the scaling of the image*/
+   background-size: 70% auto; /*affects the scaling of the image*/
+   vertical-align: text-bottom;
+   display: table-center;
+   font-size: 75px;
    margin: 0; /*If you want no margin*/
    padding: 0; /*if your want to padding*/
+}
+
+/*Affects the student name within the student icon button*/
+.studentName {
+  margin-top:85%;
 }
 
 /*Arrow Buttons*/
@@ -112,6 +120,15 @@ h2 {
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
    text-align: center;
+}
+
+.goalName {
+  font-family: "Bebas Neue W01 Regular";
+  text-align: left;
+  margin-top:20%;
+  margin-left:20%;
+  margin-right:25%;
+  font-size: 55px;
 }
 
 /*Header Buttons*/
