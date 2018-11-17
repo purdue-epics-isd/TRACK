@@ -126,9 +126,10 @@ h2 {
   font-family: "Bebas Neue W01 Regular";
   text-align: left;
   margin-top:20%;
-  margin-left:20%;
+  margin-left:17.5%;
   margin-right:25%;
-  font-size: 55px;
+  font-size: 200%;
+  /*font-size: 5vw; /*vw units allow for variable font size*/
 }
 
 /*Header Buttons*/
