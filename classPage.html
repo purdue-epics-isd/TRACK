@@ -18,12 +18,15 @@
     text-decoration: none;
     font-style: none;
   }
+
   .dropbtn:hover, .dropbtn:focus {
     background-color: #2196F3;
   }
+
   .dropdown {
     text-align: center;
   }
+
   .dropdown-content {
     display: none;
     position: absolute;
@@ -33,15 +36,18 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
+
   .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
   }
+
   .dropdown a:hover {background-color: #ddd;}
   .show {display: block;}
   </style>
+
   <body>
 
     <!--Navigation bar-->
@@ -66,35 +72,13 @@
           </div>
         </div>
     
-     <button type="button" style="position: absolute; top: 25px; right:25px"><a href="newstudent.html">Add new student</a></button>
+     <button type="button" class="addNew" style="position: absolute; top: 25px; right:25px"><a href="newstudent.html">Add new student</a></button>
 
      <!-- I don't think we need a profile for the teacher - anything we need for their info can go in the nav bar
       <button type="button" class="profile" style="position: absolute; top:10%; right: 5%"><img src="img\profile_picture.png" class="profilepic"width="75"; height ="75"></button>
     -->
-      
-    <!--
-    <table style="width:100%">
-      <th style="padding-left: 34%">
-        <div class="dropdown">
-          <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="#home">2nd Period Physics Class</a>
-            <a href="#about">3rd Period Math Class</a>
-            <a href="#contact">4th Period Chemistry Class</a>
-          </div>
-        </div>
-      </th>
-      <th>
-        <button type="button" class="profile"><img src="img\profile_picture.png" class="profilepic" width = "75" height = "75"></button>
-      </th>
-    </table>
-  -->
 
     <div class="student-container" id="demo"></div> <!-- This is where all of our student page links go-->
-
-    <!--<button type="button" class="dropbtn" ><a href="login.html"">Go back</a></button>
-    <button type="button" class="dropbtn" ><a href="logout.html">Log Out</a></button>-->
-
 
   </body>
 </html>
