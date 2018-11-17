@@ -121,7 +121,9 @@
   var student = ["Anna", "Sam", "Shwetha", "Mark", "George", "Valerie"];
   for (i = 0; i < student.length; i++) {
     var element = document.createElement("a");
-    element.innerHTML = student[i];
+    var nameElement = document.createElement("div");
+    nameElement.innerHTML = student[i];
+    nameElement.className="studentName";
     element.className="studentIcon";
     var link = 'Anna.html';
     //var link = student[i] + '.html';
@@ -129,6 +131,7 @@
     var btnDiv = document.getElementById("demo");
     //document.getElementById("demo").style.color = black;
     btnDiv.appendChild(element);
+    element.appendChild(nameElement);
     console.log(element);
   }
 </script>
