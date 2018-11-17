@@ -31,6 +31,11 @@ h2 {
     font-size: 25px;
 }
 
+a {
+  text-decoration: none;
+  /*gets rid of underlines on links*/
+}
+
 
 /*Student Icon*/
 .studentIcon {
@@ -134,22 +139,21 @@ h2 {
 
 /*Header Buttons*/
 .addNew {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #f9f9f9;
+  background-color: #2196F3;
+  font-family: 'Fira Sans', sans-serif;
   border: none;
-  color: #f9f9f9;
+  color: black;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
   font-size: 20px;
-  padding: 20px;
-  width: 200px;
-  transition: all 0.5s;
+  padding: 1em 1em 1em 1em;
+  transition-duration: 0.4s;
   cursor: pointer;
-  margin: 5px;
 }
 
 .taskBar {
-   width: 100px; /*width of your image*/
+ width: 100px; /*width of your image*/
    height: 100px; /*height of your image*/
    background-image: url('taskBar.png');
    background-repeat: no-repeat;
