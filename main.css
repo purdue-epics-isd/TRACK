@@ -25,6 +25,7 @@ body {
 
 h1 {
     font-size: 75px;
+    margin: 10px;
 }
 
 h2 {
@@ -172,7 +173,10 @@ a {
    background-image: url('download.png');
    background-repeat: no-repeat;
    background-position: center;
-   background-size: 50% auto;
+   background-size: 100% auto;
+   position: absolute;
+   right:20px;
+   top:20px;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -222,6 +226,14 @@ a {
    background-image: url('signOut.png');
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
+}
+
+.opennav {
+  font-size:40px;
+  cursor:pointer;
+  position: absolute;
+  left:20px;
+  top:20px;
 }
 
 .sidenav {
@@ -295,7 +307,7 @@ a {
 .goal-container {
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: auto auto auto;
+  /*grid-template-rows: 27% 27% 27% 27%;*/
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;

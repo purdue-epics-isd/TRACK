@@ -2,10 +2,11 @@
 
 <html>
 <head>
+  <!--
   <link rel="icon" type="image/gif/png" href="img/logo.png">
-  <title>Profile <a href="goalGraph.html" >
+  <title>Profile <a href="goalGraph.html">
       <img src="img/downloadarrow.png" alt="Export Data" width="50" height="50"></title>
- 
+ -->
 </head>
   <!-- testing-->
   <link rel="stylesheet" href="./main.css">
@@ -24,10 +25,17 @@
     </div>
     
    <!-- 3 prong button that opens up navigation bar-->
-    <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned"> &#9776; </div>
-    <a href="goalGraph.html">
+    <div class="opennav" onclick="openNav()"> &#9776; </div>
+    
+    <!--<a href="goalGraph.html">
       <img src="downarrow.jpg" alt="Export Data" width="30" height="30">
-    </a>
+    </a>-->
+
+    <a href="goalGraph.html"><div class="download"></div></a>
+    <!--<a href="goalGraph.html" class="download"></a>
+    <a href="goalGraph.html" style="padding-right:30px"><img src="img/downloadarrow.png" alt="Export Data" width="50" height="50"></a>
+    -->
+
     <h1>Anna's Profile</h1>
     <div class="goal-container">
       <a href="goalOne.html" class="academicGoal"><div class="goalName">Counting to 10</div></a>
@@ -36,13 +44,13 @@
       <a href="goalFive.html" class="academicGoal"><div class="goalName">Math Goal</div></a>
       <a href="goalThree.html" class="behaviorGoal"><div class="goalName">Disruptive Behavior During Class</div></a>
     </div>
-    <a href="newgoal.html" class="button">Create New Goal</a>
+    <a href="newgoal.html" class="addNew">Create New Goal</a>
     <a href="classPage.html"><span class="backButton"></span></a>
-    
+    <!--
     <h2>Example of Goal Progress Graph</h2>
     <img src="img/percentagegraph.jpg" alt="graph1" width="485" height="350"> 
 
     <h3>Example of Weekly Goal Progress</h3>
-    <img src="img/weeklyprogressgraph.jpg" alt="graph2" width="490" height="324">
+    <img src="img/weeklyprogressgraph.jpg" alt="graph2" width="490" height="324">-->
   </body>
 </html>
