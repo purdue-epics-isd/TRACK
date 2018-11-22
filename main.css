@@ -37,6 +37,11 @@ a {
   /*gets rid of underlines on links*/
 }
 
+form {
+  text-align: left;
+  padding-left: 24%;
+}
+
 
 /*Student Icon*/
 .studentIcon {
