@@ -16,7 +16,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/products', product);
+app.use(product);
+app.use(express.static('public'))
 
 let port = 1234;
 

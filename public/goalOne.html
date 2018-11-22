@@ -2,13 +2,6 @@
 <html>
 <link rel="stylesheet" href="./main.css">
 <script type="text/javascript" src="myScripts.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script language="JavaScript">
-    function showInput() {
-        document.getElementById('display').innerHTML = 
-                    document.getElementById("user_input").value;
-    }
-  </script>
 <body>	
 	<div id="nav-placeholder"></div>
 
@@ -28,13 +21,12 @@
 	<h2>Anna will count to 10 with less than one correction in 4 out of 5 trials</h2>
 	<div>
 		<form action="/goal/create" method="post">
-			Percentage Completed: <input type="text" name="percentage" id="user_input"><br><br>
+			Percentage Completed: <input type="text" name="percentage"><br><br>
 			With how much support: <input type="text" name="support"><br><br>
 			Additional Comments: <input type="text" name="comments"><br><br><br>
-			<input type="submit" onclick="showInput();" class="submitButton"><br><br><br>
+			<input type="submit" class="submitButton"><br><br><br>
 			<a href="Anna.html" class="backButton">Back</a>
 		</form>
-		<p><span id='display'></span></p>
 	</div>
 </body>
 </html>
