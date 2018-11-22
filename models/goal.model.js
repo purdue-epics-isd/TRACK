@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 let GoalSchema = new Schema({
     percentage: {type: Number, required: true, max: 100},
-    support: {type: Number, required: false},
+    support: {type: String, required: false},
     comments: {type: String, required: false},
 });
 
