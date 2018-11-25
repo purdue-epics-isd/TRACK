@@ -12,8 +12,9 @@ exports.goal_create = function (req, res) {
     goal.save(function (err) {
         if (err) {
             res.send(err);
+        } else {
+            res.send(goal);
         }
-        res.send(goal)
     })
 };
 

@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="./main.css">
-<script type="text/javascript" src="myScripts.js"></script>
+<head>
+	<link rel="stylesheet" href="./main.css">
+	<script type="text/javascript" src="../js/index.js"></script>
+	<script type="text/javascript" src="../js/myScripts.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
 <body>	
 	<div id="nav-placeholder"></div>
 
@@ -20,13 +24,39 @@
 	<h1>Counting to 10</h1>
 	<h2>Anna will count to 10 with less than one correction in 4 out of 5 trials</h2>
 	<div>
+		<!--<form action="/goal/create" id="submitForm">-->
 		<form action="/goal/create" method="post">
 			Percentage Completed: <input type="text" name="percentage"><br><br>
 			With how much support: <input type="text" name="support"><br><br>
 			Additional Comments: <input type="text" name="comments"><br><br><br>
-			<input type="submit" class="submitButton"><br><br><br>
+			<input type="submit" value = "Submit" class="submitButton"><br><br>
 			<a href="Anna.html" class="backButton">Back</a>
 		</form>
 	</div>
+	<!-- the result of the search will be rendered inside this div -->
+	<br><div id="result">Does this div even exist???</div>
+
+	<script>
+	// Attach a submit handler to the form
+	$( "#submitForm" ).submit(function( event ) {
+	  // Stop form from submitting normally
+	  event.preventDefault();
+	  // Get some values from elements on the page:
+	  var $form = $( this ),
+	  term = $form.find( "input[name='s']" ).val(),
+	  url = $form.attr( "action" );
+
+	  // Send the data using post
+	  var posting = $.post( url, { s: term } );
+
+	  // Put the results in a div
+	  posting.done(function( data ) {
+	  	var content = $( data ).find( "#content" );
+	  	$( "#result" ).empty().append( content );
+	  	$( "#result").css("background-color", "yellow");
+	  	alert("Bye! You now leave p1!");
+	  });
+	});
+	</script>
 </body>
 </html>

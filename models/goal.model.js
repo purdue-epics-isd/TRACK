@@ -7,6 +7,5 @@ let GoalSchema = new Schema({
     comments: {type: String, required: false},
 });
 
-
 // Export the model
 module.exports = mongoose.model('Goal', GoalSchema);
