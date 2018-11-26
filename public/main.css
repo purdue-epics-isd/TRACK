@@ -14,6 +14,16 @@ cssTemplate {
 }
 */
 
+/*stores all CSS variables*/
+:root {
+  --main-color: #6bd5e1; /*light blue*/
+  --secondary-color: #D6E6F2; /*sky blue*/
+  --text-color: #f9f9f9; /*white*/
+  --font-family: "Bebas Neue W01 Regular"; /*'Fira Sans', sans-serif;*/
+}
+
+/*QUESTION: WHY DO THE HEAD AND HEADER NEED STYLING?*/;
+
 head {
 	/*pretty light blue color*/
 	background-color: #D6E6F2;
@@ -34,9 +44,10 @@ header{
 
 body {
 	/*pretty light blue color*/
-	background-color: #6bd5e1;
+	background-color: var(--main-color);
 	/*text font and alignment*/
-	color: #f9f9f9;
+	color: var(--text-color);
+  font-family: var(--font-family);
 	text-align: center;
 	margin: auto;
 }
@@ -175,7 +186,7 @@ form input[type="submit"] {
 }
 
 .goalName {
-  font-family: "Bebas Neue W01 Regular";
+  font-family: var(--font-family);
   text-align: left;
   margin-top:20%;
   margin-left:17.5%;
@@ -186,8 +197,8 @@ form input[type="submit"] {
 
 /*Header Buttons*/
 .addNew {
-  background-color: #2196F3;
-  font-family: 'Fira Sans', sans-serif;
+  background-color: var(--secondary-color);
+  font-family: var(--font-family);
   border: none;
   color: black;
   text-align: center;
@@ -323,7 +334,7 @@ form input[type="submit"] {
 
 .button {
 	background-color: #2196F3;
-	font-family: 'Fira Sans', sans-serif;
+	font-family: var(--font-family);
   	/*border: 2px solid #4CAF50;*/
   	/*border-color: black;*/
   	color: black;
@@ -345,7 +356,7 @@ form input[type="submit"] {
   padding-left: 5%;
   padding-right: 5%;
   /*border: 1px solid black;*/
-  background-color: #6bd5e1;
+  background-color: var(--main-color);
   justify-content: center;
 }
 
@@ -353,7 +364,7 @@ form input[type="submit"] {
   width: 100%;
   height: 0;
   padding-bottom: 100%;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: var(--font-family);
   /*border: 2px solid #D6E6F2;*/
   color: black;
   text-align: center;
@@ -373,7 +384,7 @@ form input[type="submit"] {
   padding-left: 20px;
   padding-right: 20px;
   /*border: 1px solid black;*/
-  background-color: #6bd5e1;
+  background-color: var(--main-color);
   justify-content: center;
 }
 
@@ -381,7 +392,7 @@ form input[type="submit"] {
   width: 100%;
   height: 0;
   padding-bottom: 60%;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: var(--font-family);
   /*border: 2px solid #D6E6F2;*/
   color: black;
   text-align: center;
