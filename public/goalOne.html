@@ -19,20 +19,21 @@
 	</div>
 
 	<!-- 3 prong button that opens up navigation bar-->
-	<div id="openNav" onclick="openNav()">&#9776; </div>
+	<div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned"> &#9776; </div>
 
 	<h1>Counting to 10</h1>
 	<h2>Anna will count to 10 with less than one correction in 4 out of 5 trials</h2>
-	<div>
-		<!--<form action="/goal/create" id="submitForm">-->
-		<form action="/goal/create" method="post">
+		<form  action="./Anna.html" method="get">
 			Percentage Completed: <input type="text" name="percentage"><br><br>
 			With how much support: <input type="text" name="support"><br><br>
-			Additional Comments: <input type="text" name="comments"><br><br><br>
-			<input type="submit" value = "Submit" class="submitButton"><br><br>
-			<a href="Anna.html" class="backButton">Back</a>
+			Additional Comments: <input type="text" name="support"><br>
+			<a href="Anna.html"><span class="backButton"></span></a>
+			<a><input type="submit" value="" class="submitButton"></a>
 		</form>
-	</div>
+	
+	<!--
+			<input type="submit" value = "Submit" class="submitButton"><br><br>
+			<a href="Anna.html" class="backButton">Back</a>-->
 	<!-- the result of the search will be rendered inside this div -->
 	<br><div id="result">Does this div even exist???</div>
 
@@ -58,5 +59,11 @@
 	  });
 	});
 	</script>
+<!--======
+				<a href="Anna.html"><span class="submitButton"></span></a>
+			</div>
+		</form>
+	</div>
+>>>>>> styleSheet-->
 </body>
 </html>
