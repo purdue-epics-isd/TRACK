@@ -17,7 +17,8 @@ cssTemplate {
 /*stores all CSS variables*/
 :root {
   --main-color: #6bd5e1; /*light blue*/
-  --secondary-color: #D6E6F2; /*sky blue*/
+  --secondary-color: #4C98A1; /*darker blue*/
+  --tertiary-color: #D6E6F2; /*sky blue*/
   --text-color: #f9f9f9; /*white*/
   --font-family: "Bebas Neue W01 Regular"; /*'Fira Sans', sans-serif;*/
 }
@@ -127,6 +128,7 @@ form {
    right: 25px;
 }
 
+
 form input[type="submit"] {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
@@ -200,9 +202,10 @@ form input[type="submit"] {
   background-color: var(--secondary-color);
   font-family: var(--font-family);
   border: none;
-  color: black;
+  color: var(--text-color);
   text-align: center;
   text-decoration: none;
+  font-style: none;
   display: inline-block;
   font-size: 20px;
   padding: 1em 1em 1em 1em;
@@ -333,18 +336,18 @@ form input[type="submit"] {
 }
 
 .button {
-	background-color: #2196F3;
+	background-color: var(--secondary-color);
 	font-family: var(--font-family);
-  	/*border: 2px solid #4CAF50;*/
-  	/*border-color: black;*/
-  	color: black;
-  	text-align: center;
-  	text-decoration: none;
-  	display: inline-block;
-  	font-size: 20px;
-  	padding: 1em 1em 1em 1em;
-  	transition-duration: 0.4s;
-  	cursor: pointer;
+  /*border: 2px solid #4CAF50;*/
+  /*border-color: black;*/
+  color: var(--text-color);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  padding: 1em 1em 1em 1em;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }
 
 /*********** Grid List Template ***********/
@@ -403,3 +406,42 @@ form input[type="submit"] {
   cursor: pointer;
   left: 50%;
 }
+
+/* Dropdown */
+  .dropbtn {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-style: none;
+  }
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2196F3;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    top:40px;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+    
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+
+  .dropdown a:hover {background-color: #ddd;}
+  .show {display: block;}
