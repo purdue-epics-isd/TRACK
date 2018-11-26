@@ -39,5 +39,5 @@ $(document).ready(function() {
 		});
 
 	}).scroll();
-}
+});
 
