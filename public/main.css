@@ -116,6 +116,25 @@ form {
    right: 25px;
 }
 
+form input[type="submit"] {
+   width:106px; /*width of your image*/
+   height:106px; /*height of your image*/
+   background-image: url('backButton.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 150% auto;
+   display: inline-block;
+   margin:0; /* If you want no margin */
+   padding:0; /*if your want to padding */
+   transform: rotate(180deg); /*rotating the image*/
+   position: fixed;
+   bottom: 25px;
+   right: 25px;
+   background-color: #ffffff00;
+   border: none;
+   outline: none;
+}
+
 /*Goal Types*/
 .socialGoal {
    width:698px; /*width of your image: OG- 698px*/
