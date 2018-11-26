@@ -1,6 +1,6 @@
 /*
 cssTemplate {
-	background-color: ;
+	background-color:;
 	color:;
 	font-style:;
 	font-family:;
@@ -13,6 +13,24 @@ cssTemplate {
 	cursor:;
 }
 */
+
+head {
+	/*pretty light blue color*/
+	background-color: #D6E6F2;
+	/*text font and alignment*/
+	color: #769FCD;
+	font-family: 'Fira Sans', sans-serif;
+	text-align: center;
+}
+
+header{
+	/*pretty light blue color*/
+	background-color: #D6E6F2;
+	/*text font and alignment*/
+	color: #769FCD;
+	font-family: 'Fira Sans', sans-serif;
+	text-align: center;
+}
 
 body {
 	/*pretty light blue color*/
@@ -49,7 +67,7 @@ form {
 .studentIcon {
    width: 444px; /*width of your image - needs to stay at 444px to show the entire image*/
    height: 444px; /*height of your image*/
-   background-image: url('studentIcon.png');
+   background-image: url('img/studentIcon.png');
    /*background: url('studentIcon.png');*/
    background-repeat: no-repeat;
    background-position: center;
@@ -70,7 +88,7 @@ form {
 .backButton {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
-   background-image: url('backButton.png');
+   background-image: url('img/backButton.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 150% auto;
@@ -85,7 +103,7 @@ form {
 .submitButton {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
-   background-image: url('backButton.png');
+   background-image: url('img/backButton.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 150% auto;
@@ -98,11 +116,32 @@ form {
    right: 25px;
 }
 
+form input[type="submit"] {
+   width:106px; /*width of your image*/
+   height:106px; /*height of your image*/
+   background-image: url('img/backButton.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 150% auto;
+   display: inline-block;
+   margin:0; /* If you want no margin */
+   padding:0; /*if your want to padding */
+   transform: rotate(180deg); /*rotating the image*/
+   position: fixed;
+   bottom: 25px;
+   right: 25px;
+   background-color: #ffffff00;
+   border: none;
+   outline: none;
+   cursor: pointer;
+}
+
+
 /*Goal Types*/
 .socialGoal {
    width:698px; /*width of your image: OG- 698px*/
    height: 381px; /*height of your image: OG - 381px*/
-   background-image: url('socialGoal.png');
+   background-image: url('img/socialGoal.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 90% auto;
@@ -114,7 +153,7 @@ form {
 .academicGoal {
    width:698px; /*width of original image*/
    height:381px; /*height of your image*/
-   background-image: url('academicGoal.png');
+   background-image: url('img/academicGoal.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 90% auto;
@@ -126,7 +165,7 @@ form {
 .behaviorGoal {
    width:698px; /*width of your image*/
    height:381px; /*height of your image*/
-   background: url('behaviorGoal.png');
+   background: url('img/behaviorGoal.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 90% auto;
@@ -163,7 +202,7 @@ form {
 .taskBar {
  width: 100px; /*width of your image*/
    height: 100px; /*height of your image*/
-   background-image: url('taskBar.png');
+   background-image: url('img/taskBar.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 50% auto;
@@ -177,7 +216,7 @@ form {
 .download {
    width:70px; /*width of your image*/
    height:70px; /*height of your image*/
-   background-image: url('download.png');
+   background-image: url('img/download.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 100% auto;
@@ -206,7 +245,7 @@ form {
 .basicGrid {
    width:476px; /*width of your image*/
    height:109px; /*height of your image*/
-   background-image: url('basicGrid.png');
+   background-image: url('img/basicGrid.png');
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -214,7 +253,7 @@ form {
 .reminders {
    width:439px; /*width of your image*/
    height:103px; /*height of your image*/
-   background-image: url('reminders.png');
+   background-image: url('img/reminders.png');
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -222,7 +261,7 @@ form {
 .settings {
    width:400px; /*width of your image*/
    height:106px; /*height of your image*/
-   background-image: url('settings.png');
+   background-image: url('img/settings.png');
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -230,7 +269,7 @@ form {
 .signOut {
    width:404px; /*width of your image*/
    height:97px; /*height of your image*/
-   background-image: url('signOut.png');
+   background-image: url('img/signOut.png');
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
 }
@@ -280,6 +319,21 @@ form {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+.button {
+	background-color: #2196F3;
+	font-family: 'Fira Sans', sans-serif;
+  	/*border: 2px solid #4CAF50;*/
+  	/*border-color: black;*/
+  	color: black;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 20px;
+  	padding: 1em 1em 1em 1em;
+  	transition-duration: 0.4s;
+  	cursor: pointer;
 }
 
 /*********** Grid List Template ***********/

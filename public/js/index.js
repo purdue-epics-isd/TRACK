@@ -18,6 +18,10 @@ function gridView() {
   }
 }
 
+function showInput() {
+    document.getElementById('display').innerHTML = document.getElementById("user_input").value;
+}
+
 $(document).ready(function() {
 	$('#submit-button').click(ClickedSubmitButton);
 	$(window).scroll(function() {
@@ -36,3 +40,4 @@ $(document).ready(function() {
 
 	}).scroll();
 }
+
