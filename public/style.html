@@ -3,11 +3,11 @@
 <html>
 
 <style type="text/css">    @font-face{
-        font-family:"Bebas Neue W01 Regular";
-        src:url("Fonts/1444649/3d9ec9a9-76a2-4cfe-b376-76e7340c3b50.eot?#iefix");
-        src:url("Fonts/1444649/3d9ec9a9-76a2-4cfe-b376-76e7340c3b50.eot?#iefix") format("eot"),url("Fonts/1444649/e0d6f852-5401-4bbf-9672-47a50c5c87c6.woff2") format("woff2"),url("Fonts/1444649/7fedd582-6ae3-4850-be2f-4acae2e74fa5.woff") format("woff"),url("Fonts/1444649/d6e08ef3-40db-4ac3-82df-f062f55a72f5.ttf") format("truetype");
-    }
-  </style>
+  font-family:"Bebas Neue W01 Regular";
+  src:url("Fonts/1444649/3d9ec9a9-76a2-4cfe-b376-76e7340c3b50.eot?#iefix");
+  src:url("Fonts/1444649/3d9ec9a9-76a2-4cfe-b376-76e7340c3b50.eot?#iefix") format("eot"),url("Fonts/1444649/e0d6f852-5401-4bbf-9672-47a50c5c87c6.woff2") format("woff2"),url("Fonts/1444649/7fedd582-6ae3-4850-be2f-4acae2e74fa5.woff") format("woff"),url("Fonts/1444649/d6e08ef3-40db-4ac3-82df-f062f55a72f5.ttf") format("truetype");
+}
+</style>
 <head>
   <link href="https://fonts.googleapis.com/css?family=Mali" rel="stylesheet">
   <link rel="stylesheet" href="./main.css" />
@@ -40,7 +40,7 @@
 
   <a href="Anna.html"><span class="backButton"></span></a>
 
- <a href="style.html">
+  <a href="style.html">
    <div class="submitButton"></div>
  </a>
 
@@ -99,6 +99,70 @@
 <a href="style.html">
  <div class = "signOut"></div>
 </a>
+
+<br><br>
+<h1>Still needs to be styled:</h1>
+
+<button> Generic button </button><br><br>
+
+<style>
+  .dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-style: none;
+  }
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2196F3;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    top:40px;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+    
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+
+  .dropdown a:hover {background-color: #ddd;}
+  .show {display: block;}
+</style>
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Dropdown Menus</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#">Content</a>
+    <a href="#">Content</a>
+    <a href="#">Content</a>
+  </div>
+</div>   
+
+<script>
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  } 
+</script><br><br><br><br><br>
+
+<button class="addNew">Add new student/goal buttons</button>
+
+
 
 
 
