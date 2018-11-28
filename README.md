@@ -6,3 +6,7 @@ ISD, the Indianapolis School for the Deaf, is a K-12 school for deaf children. T
 
 This app would be used by teachers, primarily on iPads, and would affect their interactions with the students they teach. The problem that currently happens is that it becomes difficult to teach, track, and timestamp behaviors students are exhibiting while class is in session. TRACK aims to address all three of these issues with an easy to use iPad application. The main goal that TRACK should adhere to is making sure important behaviors can be recorded with as little taps as possible during class. The app should be able to be export data as either a PDF or an Excel sheet for convenience.
 
+-------------------------------------------------------------
+## Technical Information
+
+Everything to be accessed by a browser is put in the `public` folder. This includes the HTML,CSS, and Javascript. The `routes`, `models`, and `controllers` methods are all used for the server.

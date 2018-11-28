@@ -2,47 +2,12 @@
 <head>
   <link rel="icon" type="image/gif/png" href="img/logo.png">
   <title>Track</title>
- 
 </head>
+
 <html>
   <link rel="stylesheet" href="./main.css">
   <script type="text/javascript" src="myScripts.js"></script>
-  <style>
-  .dropbtn {
-    background-color: #3498DB;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    font-style: none;
-  }
-  .dropbtn:hover, .dropbtn:focus {
-    background-color: #2196F3;
-  }
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  .dropdown a:hover {background-color: #ddd;}
-  .show {display: block;}
-  </style>
+  
   <body>
 
     <!--Navigation bar-->
@@ -50,35 +15,29 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="classPage.html">Home</a>
       <a href="#">Settings</a>
-      <a href="#">About</a>
+      <a href="aboutus.html">About</a>
       <a href="logout.html">Logout</a>
-      <a href= "aboutus.html">About Us</a>
     </div>
 
     <!--3 prong button that opens up navigation bar-->
-    <div style="font-size:40px;cursor:pointer;text-align:left;padding-left:30px" onclick="openNav()" class="leftAligned"> &#9776; </div>
 
-    <table style="width: 90%">
-      <th style="padding-left: 34%">
-        <div class="dropdown">
+    <div onclick="openNav()" class="opennav"> &#9776; </div>
+
+    <div class="dropdown">
           <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
           <div id="myDropdown" class="dropdown-content">
             <a href="#home">2nd Period Physics Class</a>
             <a href="#about">3rd Period Math Class</a>
             <a href="#contact">4th Period Chemistry Class</a>
           </div>
-        </div>
-      </th>
-      <th>
-        <button type="button" class="profile"><img src="img\profile_picture.png" class="profilepic" width = "75" height = "75"></button>
-      </th>
-    </table>
+        </div>    
+     <a href="newstudent.html" class="addNew" style="position: absolute; top: 35px; right:35px">Add new student</a>
 
-    <div class="grid-container" id="demo"></div> <!-- This is where all of our student page links go-->
+     <!-- I don't think we need a profile for the teacher - anything we need for their info can go in the nav bar
+      <button type="button" class="profile" style="position: absolute; top:10%; right: 5%"><img src="img\profile_picture.png" class="profilepic"width="75"; height ="75"></button>
+    -->
 
-    <!--<button type="button" class="dropbtn" ><a href="login.html"">Go back</a></button>
-    <button type="button" class="dropbtn" ><a href="logout.html">Log Out</a></button>-->
-    <button type="button" class="dropbtn" ><a href="newstudent.html">Add new student</a></button>
+    <div class="student-container" id="demo"></div> <!-- This is where all of our student page links go-->
 
   </body>
 </html>
@@ -113,15 +72,17 @@
   var student = ["Anna", "Sam", "Shwetha", "Mark", "George", "Valerie"];
   for (i = 0; i < student.length; i++) {
     var element = document.createElement("a");
-
-    element.innerHTML = student[i];
-    element.className="button";
+    var nameElement = document.createElement("div");
+    nameElement.innerHTML = student[i];
+    nameElement.className="studentName";
+    element.className="studentIcon";
     var link = 'Anna.html';
     //var link = student[i] + '.html';
     element.href= link;
     var btnDiv = document.getElementById("demo");
     //document.getElementById("demo").style.color = black;
     btnDiv.appendChild(element);
+    element.appendChild(nameElement);
     console.log(element);
   }
 </script>
