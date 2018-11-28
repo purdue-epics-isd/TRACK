@@ -7,6 +7,14 @@ const bodyParser = require('body-parser');
 const product = require('./routes/routes'); // Imports routes for the products
 const app = express();
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
+// index page 
+app.get('views/', function(req, res) {
+    res.render('pages/index');
+});
+
 //Set up mongoose connection
 const mongoose = require('mongoose');
 let dev_db_url = 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track';
