@@ -194,10 +194,11 @@ form input[type="submit"] {
 .goalName {
   font-family: var(--font-family);
   text-align: left;
-  margin-top:20%;
-  margin-left:17.5%;
-  margin-right:25%;
-  font-size: 200%;
+  margin-top:17%;
+  margin-left:17%;
+  margin-right:30%;
+  margin-bottom: 17%;
+  font-size: xx-large;
   /*font-size: 5vw; /*vw units allow for variable font size*/
 }
 
@@ -385,7 +386,7 @@ form input[type="submit"] {
 
 .goal-container {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 33% 33% 33%;
   /*grid-template-rows: 27% 27% 27% 27%;*/
   padding: 10px;
   padding-left: 20px;
