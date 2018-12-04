@@ -1,3 +1,5 @@
+const PORT = process.env.PORT || 1234
+
 // track.js
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -19,9 +21,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(product);
 app.use(express.static('public'))
 
-let port = 1234;
 
-app.listen(port, () => {
-    console.log('Server is up and running on port number ' + port);
+app.listen(PORT, () => {
+    console.log('Server is up and running on port number ' + PORT);
 });
 
