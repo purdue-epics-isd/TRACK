@@ -51,6 +51,7 @@ body {
   font-family: var(--font-family);
 	text-align: center;
 	margin: auto;
+  font-size: 30px;
 }
 
 h1 {
@@ -59,7 +60,7 @@ h1 {
 }
 
 h2 {
-    font-size: 25px;
+    font-size: 40px;
     margin-left: 20%;
     margin-right: 20%;
 }
