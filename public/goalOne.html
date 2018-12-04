@@ -28,20 +28,24 @@
 
 	<h1>Counting to 10</h1>
 	<h2>Anna will count to 10 with less than one correction in 4 out of 5 trials</h2>
-
-	<div>
-		<form action="/goal/create" id="submitForm">
-		<!--<form action="/goal/create" method="post">-->
-			Percentage Completed: <input type="text" name="percentage" class="named"><br><br>
-			With how much support: <input type="text" name="support" class="named"><br><br>
-			Additional Comments: <input type="text" name="comments" class="named"><br><br><br>
-			<input type="submit" value = "Submit" class="submitButton"><br><br>
-			<a href="Anna.html" class="backButton">Back</a>
+		<form  action="/goal/create" id="submitForm">
+			<table style="position: center">
+				<tr>
+				<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td></tr>
+				<tr>
+					<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
+				<tr>
+					<td> Additional Comments: </td><td><input type="text" name="support"></td></tr></table>
+			<a href="Anna.html"><span class="backButton"></span></a>
+			<a><input type="submit" value="" class="submitButton"></a>
 		</form>
-	</div>
-	<!-- the result of the entry will be rendered inside this div -->
+	
+	<!--
+			<input type="submit" value = "Submit" class="submitButton"><br><br>
+			<a href="Anna.html" class="backButton">Back</a>-->
+	<!-- the result of the search will be rendered inside this div -->
 	<br><div id="result"></div>
-	<br><div id="delete"></div>
+  <br><div id="delete"></div>
 
 	<script>
 	$('#delete').click(function(event) {
