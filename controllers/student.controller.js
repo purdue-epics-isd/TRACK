@@ -9,7 +9,6 @@ exports.student_create = function (req, res) {
             age: req.body.age
         }
     );
-    console.log("Hello");
     student.save(function (err) {
         if (err) {
             if(err)
@@ -31,6 +30,8 @@ exports.student_details = function (req, res) {
 
 exports.run = function(req, res) {
     var students = [];
+    console.log("running");
+
     Student.find({}, {name: 1, period: 0, grade: 0, age: 0}).forEach(function(err, student) {
     for (var key in student){ 
         if(students.indexOf(key) < 0) {
@@ -40,5 +41,6 @@ exports.run = function(req, res) {
     res.render('pages/classPage', {
         students: students
     });
+    console.log(students);
 });
 }

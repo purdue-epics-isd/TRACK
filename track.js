@@ -5,20 +5,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
-//const student = require('./controllers/student.controller.js');
+const student = require('./controllers/student.controller.js');
 const app = express();
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
 // index page 
-app.get('/', function(req, res) {
+app.get('/', student.run(req, res) {
 //app.get('/students', function(req, res) {
-	var students = ["Anna", "Bob"];
+	// var students = ["Anna", "Bob"];
 	res.render('pages/classPage', {
         students: students,
     });
-	// Student.run(req,res);
 });
 
 //Set up mongoose connection
