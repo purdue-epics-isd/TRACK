@@ -15,6 +15,7 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="classPage.html">Home</a>
       <a href="#">Settings</a>
+      <a href="feedback.html">Feedback</a>
       <a href="aboutus.html">About</a>
       <a href="logout.html">Logout</a>
     </div>
@@ -41,11 +42,12 @@
       <!--Loads the Students and Creates Buttons for them-->
         <% students.forEach(function(student) { %>
         <!--Write the desired HTML for each student here -->
-            <a href="http://google.com" class = "studentButton">
+            <a href="#<%= student %>" class = "studentButton">
               <img class = "img-circle" src="img/studentIcon.png" width = "200" height = "200" >
               <div class = "studentName"><%= student %></div>
             </a>
         <% }); %>
+
     </div>
 
   </body>

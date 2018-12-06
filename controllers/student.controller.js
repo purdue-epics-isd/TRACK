@@ -30,17 +30,21 @@ exports.student_details = function (req, res) {
 
 exports.run = function(req, res) {
     var students = [];
+    var ids = [];
     console.log("running");
 
-    Student.find({}, {name: 1, period: 0, grade: 0, age: 0}).forEach(function(err, student) {
-    for (var key in student){ 
-        if(students.indexOf(key) < 0) {
-           students.push(key);
-        }
-    }
+    Student.find({}, 'name', function(err, student) {
+        student.forEach(function(s) { 
+            console.log(s); console.log(s.name); 
+            students.push(s.name);
+            ids.push(s.id);
+        });
+        console.log(students);
+    console.log(ids);
     res.render('pages/classPage', {
         students: students
+        //ids: ids
     });
-    console.log(students);
+
 });
 }
