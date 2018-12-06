@@ -19,25 +19,23 @@
   </head>
   <h1>Add a New Student</h1>
   <body>
-    <form action="actionpage.html">
+    <form action="student/create" method="post">
       Student Name: <input type="text" name="name"><br><br>
-      Class Period:  <select>
-      <option value="Period 1">Period 1</option>
-      <option value="Period 2">Period 2</option>
-      <option value="Period 3">Period 3</option>
-      <option value="Period 4">Period 4</option>
-      <option value="Period 5">Period 5</option></select>
-      Grade Level:  <select>
+      Class Period:  <select name = "period">
+      <option value="1">Period 1</option>
+      <option value="2">Period 2</option>
+      <option value="3">Period 3</option>
+      <option value="4">Period 4</option>
+      <option value="5">Period 5</option></select>
+      Grade Level:  <select name = "grade">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option></select>
-      <br><br>Gender:<br>
-    	<input type="radio" name="gender" value="male" checked> Male<br>
-    	<input type="radio" name="gender" value="female"> Female<br><br></h2>
-      <a href="classPage.html" class="submitButton"></a><br><br><br>
-    	<!--<input type="submit" name="Submit" class="submitButton"><br><br>-->
+      <br><br>Age:<br>
+    	<input type="text" name="age"><br><br>
+    	<input type="submit" class="submitButton"><br><br>
     </form>
     <a href="classPage.html" class="backButton">
     </a> <!--  Go back and fix these links -->

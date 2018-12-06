@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let StudentSchema = new Schema({
-    name: {type: String, required: true, max: 100},
-    price: {type: Number, required: true},
+    name: {type: String, required: true},
+    period: {type: Number, required: true},
+    grade: {type: Number, required: true},
+    age: {type: Number, required: false}
 });
 
 

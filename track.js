@@ -5,14 +5,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
+//const student = require('./controllers/student.controller.js');
 const app = express();
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
 // index page 
-app.get('views/', function(req, res) {
-    res.render('pages/index');
+app.get('/', function(req, res) {
+//app.get('/students', function(req, res) {
+	var students = ["Anna", "Bob"];
+	res.render('pages/classPage', {
+        students: students,
+    });
+	// Student.run(req,res);
 });
 
 //Set up mongoose connection
@@ -28,7 +34,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(product);
 app.use(express.static('public'))
-
 
 app.listen(PORT, () => {
     console.log('Server is up and running on port number ' + PORT);
