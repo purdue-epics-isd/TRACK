@@ -28,23 +28,24 @@ exports.student_details = function (req, res) {
     })
 };
 
+exports.student_name = function (req, res) {
+    Student.findById(req.params.id, function(err, student) {
+        res.render('pages/studentPage', {
+            student: student
+        });
+    });
+}
+
 exports.run = function(req, res) {
     var students = [];
-    var ids = [];
-    console.log("running");
 
     Student.find({}, 'name', function(err, student) {
         student.forEach(function(s) { 
             console.log(s); console.log(s.name); 
-            students.push(s.name);
-            ids.push(s.id);
+            students.push(s);
         });
-        console.log(students);
-    console.log(ids);
-    res.render('pages/classPage', {
-        students: students
-        //ids: ids
+        res.render('pages/classPage', {
+            students: students
+        });
     });
-
-});
 }

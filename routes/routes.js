@@ -11,7 +11,7 @@ router.post('/goal/delete', goal_controller.goal_delete);
 
 // a simple test url to check that all of our files are communicating correctly.
 router.get('/goal/:id', goal_controller.goal_details);
-router.get('/student/:id', student_controller.student_details);
-//router.get('/', student_controller.run);
+//router.get('/student/:id', student_controller.student_details);
+router.get('/student/:id', student_controller.student_name);
 
 module.exports = router;

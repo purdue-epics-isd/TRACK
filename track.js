@@ -7,9 +7,9 @@ const bodyParser = require('body-parser');
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
 const app = express();
+app.set('view engine', 'ejs');
 
 // set the view engine to ejs
-app.set('view engine', 'ejs');
 
 // index page 
 app.get('/', student.run);
