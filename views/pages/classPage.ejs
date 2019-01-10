@@ -9,11 +9,20 @@
   <script type="text/javascript" src="myScripts.js"></script>
  
  <header>
-    <%- include ('views/partials/header') %>
+    <%- include("../partials/header.ejs")%>
   </header>
 
   <body>
 
+    <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#home">2nd Period Physics Class</a>
+            <a href="#about">3rd Period Math Class</a>
+            <a href="#contact">4th Period Chemistry Class</a>
+          </div>
+        </div>  
+        
      <a href="newstudent.html" class="addNew" style="position: absolute; top: 35px; right:35px">Add new student</a>
 
      <!-- I don't think we need a profile for the teacher - anything we need for their info can go in the nav bar
