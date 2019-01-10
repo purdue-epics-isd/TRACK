@@ -11,7 +11,6 @@ exports.student_create = function (req, res) {
     );
     student.save(function (err) {
         if (err) {
-            if(err)
             res.send(err);
         } else {
             res.send(student);
