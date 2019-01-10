@@ -26,9 +26,11 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(product);
-app.use(express.static('public'))
+app.use(express.static('public/'))
 
 app.listen(PORT, () => {
     console.log('Server is up and running on port number ' + PORT);
 });
+
+
 
