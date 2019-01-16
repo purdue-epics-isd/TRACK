@@ -15,7 +15,7 @@
 <body>
     <h1><%= student.name %>'s Profile</h1>
 
-    <a href="/newgoal.html" class="addNew" style="position: absolute; top: 35px; right:35px">Add new goal</a>
+    <a href="/student/<%= student.id %>/newgoal" class="addNew" style="position: absolute; top: 35px; right:35px">Add new goal</a>
 
     <div class="goal-container">
       <a href="goalOne.html>" class="academicGoal"><div class="goalName">Counting to 10</div></a>
@@ -23,8 +23,7 @@
       <a href="goalFour.html" class="academicGoal"><div class="goalName">Reading Goal</div></a>
       <a href="goalFive.html" class="academicGoal"><div class="goalName">Math Goal</div></a>
       <a href="goalThree.html" class="behaviorGoal"><div class="goalName">Disruptive Behavior During Class</div></a>
-    </div>-->
-    <a href="newgoal.html" class="addNew">Create New Goal</a>
+    </div>
     <a href="/"><span class="backButton"></span></a>
   </body>
 </html>

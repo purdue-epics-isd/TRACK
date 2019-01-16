@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+//const goal = require('/controllers/goal.controller');
 
 let StudentSchema = new Schema({
     name: {type: String, required: true},

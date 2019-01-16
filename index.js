@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
+const goal = require('./controllers/goal.controller');
 const app = express();
 app.set('view engine', 'ejs');
 

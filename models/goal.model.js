@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let GoalSchema = new Schema({
-    percentage: {type: Number, required: false, max: 100},
-    support: {type: String, required: false},
-    comments: {type: String, required: false},
-    time: {type: Date}
+	name: {type: String, required: false},
+	description: {type: String, required: false},
+	//studentID: {type: String, require: false},
+    percentage: {type: String, required: false},
+    //comments: {type: String, required: false}
 });
 
 // Export the model
