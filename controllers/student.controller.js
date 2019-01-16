@@ -6,8 +6,7 @@ exports.student_create = function (req, res) {
             period: req.body.period,
             grade: req.body.grade,
             age: req.body.age,
-            //sample: req.body.sample
-            /*goals: [{type: Schema.ObjectId, ref: 'goal'}]*/
+            goals: [{type: Schema.ObjectId, ref: 'goal'}]
         }
     );
     student.save(function (err) {

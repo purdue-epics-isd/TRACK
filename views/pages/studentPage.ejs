@@ -8,12 +8,15 @@
   <script type="text/javascript" src="../myScripts.js"></script>
 </head>
 
- <header>
-    <%- include("../partials/header.ejs")%>
-  </header>
+<header>
+  <%- include("../partials/header.ejs")%>
+</header>
 
-  <body>
+<body>
     <h1><%= student.name %>'s Profile</h1>
+
+    <a href="/newgoal.html" class="addNew" style="position: absolute; top: 35px; right:35px">Add new goal</a>
+
     <div class="goal-container">
       <a href="goalOne.html>" class="academicGoal"><div class="goalName">Counting to 10</div></a>
       <a href="goalTwo.html" class="socialGoal"><div class="goalName">Positive Social Responses</div></a>

@@ -5,7 +5,8 @@ let StudentSchema = new Schema({
     name: {type: String, required: true},
     period: {type: Number, required: true},
     grade: {type: Number, required: true},
-    age: {type: Number, required: false}
+    age: {type: Number, required: false},
+    goals: [{type: Schema.ObjectId, required: false}]
 });
 
 
