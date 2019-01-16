@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
+const goal = require('./controllers/goal.controller')
 const app = express();
 app.set('view engine', 'ejs');
 
@@ -26,7 +27,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(product);
-app.use(express.static('public/'))
+app.use(express.static('public'))
 
 app.listen(PORT, () => {
     console.log('Server is up and running on port number ' + PORT);

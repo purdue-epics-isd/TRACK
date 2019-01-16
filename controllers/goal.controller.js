@@ -3,6 +3,9 @@ const Goal = require('../models/goal.model');
 exports.goal_create = function (req, res) {
     let goal = new Goal(
         {
+            name: req.body.name,
+            description: req.body.description,
+            studentID: req.body.studentID,
             percentage: req.body.percentage,
             support: req.body.support,
             comments: req.body.comments,
@@ -26,6 +29,14 @@ exports.goal_details = function (req, res) {
         res.send(goal);
     })
 };
+
+exports.goal_name = function (req, res) {
+    Student.findById(req.params.id, function(err, goal) {
+        res.render('pages/goalPage', {
+            goal: goal
+        });
+    });
+}
 
 exports.goal_delete = function (req, res) {
     console.log(req.body.id)

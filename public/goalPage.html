@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="./main.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<script type="text/javascript" src="./js/index.js"></script>
+	<script type="text/javascript" src="./js/myScripts.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>	
+	<div id="nav-placeholder"></div>
+
+	<!--Navigation bar-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="classPage.html">Home</a>
+		<a href="login.html">Login</a>
+		<a href="#">Settings</a>
+		<a href="#">About</a>
+	</div>
+
+	<!-- 3 prong button that opens up navigation bar-->
+	<div onclick="openNav()" class="opennav"> &#9776; </div>
+
+	<h1>Counting to 10</h1>
+	<h2>Anna will count to 10 with less than one correction in 4 out of 5 trials</h2>
+		<form  action="/goal/create" id="submitForm">
+			<table style="position: center">
+				<tr>
+				<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td></tr>
+				<tr>
+					<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
+				<tr>
+					<td> Additional Comments: </td><td><input type="text" name="support"></td></tr></table>
+			<a href="Anna.html"><span class="backButton"></span></a>
+			<a><input type="submit" value="" class="submitButton"></a>
+		</form>
+	
+	<!--
+			<input type="submit" value = "Submit" class="submitButton"><br><br>
+			<a href="Anna.html" class="backButton">Back</a>-->
+	<!-- the result of the search will be rendered inside this div -->
+	<br><div id="result"></div>
+  <br><div id="delete"></div>
+
+	<script>
+	$('#delete').click(function(event) {
+		_id = $(this).attr('objid');
+		dict = {'id':_id};
+		console.log(JSON.stringify(dict))
+		var deleting = $.post('/goal/delete', {id:_id})
+		deleting.done(function(data) {
+			console.log(JSON.stringify(data))
+		})
+		$('#result').empty()
+		$('#delete').empty()
+	})
+
+	// Attach a submit handler to the form
+	$( "#submitForm" ).submit(function( event ) {
+	  // Stop form from submitting normally
+	  event.preventDefault();
+	  // Get some values from elements on the page:
+	  var $form = $( this ),
+
+	  dict = {}
+
+	  var names = [];
+	  $(".named").each(function() {
+	  	names.push(this.name);
+	  });
+
+	  names.forEach(function(name) {
+	  	dict[name] = $form.find("input[name='" + name + "']").val()
+	  })
+
+	  url = $form.attr( "action" );
+
+	  // Send the data using post
+	  var posting = $.post( url, dict);
+
+	  // Put the results in a div
+	  posting.done(function( data ) {
+	  	var content = $( data ).find( "#content" );
+	  	$('#result').empty();
+	  	names.forEach(function (name) {
+	  		$('#result').append(name + ': ' + data[name] + '\n')
+	  	})
+
+	  	$('#result').append('time' + ': ' + (new Date(data['time'])).toLocaleString() + '\n')
+
+
+	  	console.log(JSON.stringify(data))
+	  	alert(JSON.stringify(data));
+	  	$('#delete').html('<i class="fas fa-trash"></i>');
+	  	$('#delete').attr('objId', data['_id'])
+	  });
+
+	});
+	</script>
+</body>
+</html>

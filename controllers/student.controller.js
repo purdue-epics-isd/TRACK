@@ -2,19 +2,20 @@ const Student = require('../models/student.model');
 
 exports.student_create = function (req, res) {
     let student = new Student(
-        {
-            name: req.body.name,
+        {   name: req.body.name,
             period: req.body.period,
             grade: req.body.grade,
-            age: req.body.age
+            age: req.body.age,
+            //sample: req.body.sample
+            /*goals: [{type: Schema.ObjectId, ref: 'goal'}]*/
         }
     );
     student.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.send(student);
-            //res.redirect('/classPage.html');
+            //res.send(student);
+            res.redirect('/');
         }
     })
 };
