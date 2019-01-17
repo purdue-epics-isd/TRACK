@@ -15,7 +15,7 @@ exports.goal_create = function (req, res) {
             name: req.body.name,
             description: req.body.description,
             studentID: req.body.studentID,
-            percentage: req.body.percentagename,
+            percentage: req.body.percentagename
             //support: req.body.support,
             //comments: req.body.comments,
         }
@@ -39,6 +39,13 @@ exports.goal_create = function (req, res) {
     })
     //console.log(subdoc) // { _id: '501d86090d371bab2c0341c5', name: 'Liesl' }
     subdoc.isNew; // true
+
+    Student.findById(req.params.id, function(err, student) {
+        res.render('pages/studentPage', {
+            student: student
+        });
+    });
+    
 };
 
 exports.goal_details = function (req, res) {

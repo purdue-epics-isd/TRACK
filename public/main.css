@@ -16,7 +16,7 @@ cssTemplate {
 
 /*stores all CSS variables*/
 :root {
-  --main-color: #25d5e1; /*light blue*/
+  --main-color: #6bd5e1; /*light blue*/
   --secondary-color: #4C98A1; /*darker blue*/
   --tertiary-color: #D6E6F2; /*sky blue*/
   --text-color: #f9f9f9; /*white*/
