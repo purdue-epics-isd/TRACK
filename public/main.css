@@ -83,16 +83,16 @@ form {
 .studentIcon {
 	width: 444px; /*width of your image - needs to stay at 444px to show the entire image*/
 	height: 444px; /*height of your image*/
-   background-image: url('img/studentIcon.png');
-   /*background: url('studentIcon.png');*/
-   background-repeat: no-repeat;
-   background-position: center;
-   background-size: 70% auto; /*affects the scaling of the image*/
-   vertical-align: text-bottom;
-   display: table-center;
-   font-size: 75px;
-   margin: 0; /*If you want no margin*/
-   padding: 0; /*if your want to padding*/
+  background-image: url('img/studentIcon.png');
+  /*background: url('studentIcon.png');*/
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70% auto; /*affects the scaling of the image*/
+  vertical-align: text-bottom;
+  display: table-center;
+  font-size: 75px;
+  margin: 0; /*If you want no margin*/
+  padding: 0; /*if your want to padding*/
 }
 
 /*Affects the student name within the student icon button*/
