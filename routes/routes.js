@@ -19,6 +19,6 @@ router.get('/student/:id/newgoal', goal_controller.goal_new);
 //router.get('/goal/:id', goal_controller.goal_name);
 //router.get('/student/:id', student_controller.student_details);
 router.get('/student/:id', student_controller.student_name);
-router.get('/logout',student_controller.logout);
+//router.get('pages/logout',student_controller.logout);
 
 module.exports = router;

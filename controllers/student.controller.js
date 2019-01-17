@@ -44,10 +44,6 @@ exports.student_name = function (req, res) {
 }
 
 
-app.get(‘/logout’, function(req, res) {
-   res.render(‘pages/logout’);
- });
-}
 
 exports.run = function(req, res) {
     /*var students = [];
