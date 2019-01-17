@@ -28,6 +28,14 @@ exports.student_details = function (req, res) {
 };
 
 exports.student_name = function (req, res) {
+    var students = [];
+
+    Student.find({}, 'name', function(err, student) {
+        student.forEach(function(s) { 
+            console.log(s); console.log(s.name); 
+            students.push(s);
+        });
+    });
     Student.findById(req.params.id, function(err, student) {
         res.render('pages/studentPage', {
             student: student
@@ -36,15 +44,17 @@ exports.student_name = function (req, res) {
 }
 
 exports.run = function(req, res) {
-    var students = [];
+    /*var students = [];
 
     Student.find({}, 'name', function(err, student) {
         student.forEach(function(s) { 
             console.log(s); console.log(s.name); 
             students.push(s);
         });
-        res.render('pages/classPage', {
+        res.render('/login.html', {
             students: students
-        });
-    });
+        });*/
+        var path = require('path');
+        res.sendFile(path.resolve(__dirname + '/../public/login.html'));
+    /*});*/
 }
