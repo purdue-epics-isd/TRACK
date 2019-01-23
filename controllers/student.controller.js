@@ -1,4 +1,5 @@
 const Student = require('../models/student.model');
+const Goal = require('../models/goal.model');
 
 exports.student_create = function (req, res) {
     let student = new Student(
@@ -13,8 +14,7 @@ exports.student_create = function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            //res.send(student);
-            res.redirect('/');
+            res.render('pages/classPage');
         }
     })
 };
@@ -28,6 +28,36 @@ exports.student_details = function (req, res) {
 };
 
 exports.student_name = function (req, res) {
+    //var students = [];
+/*
+    Student.find({}, 'name', function(err, student) {
+        student.forEach(function(s) { 
+            console.log(s); console.log(s.name); 
+            students.push(s);
+        });
+    });*/
+    var goals = [];
+
+    Goal.find({}, 'name', function(err, goal) {
+        goal.forEach(function(s) { 
+            if (goal.studentID = req.params.id) {
+            console.log(s); console.log(s.name); 
+            goals.push(s);
+            }
+        });
+    });
+
+    Student.findById(req.params.id, function(err, student) {
+        Goal.findById(req.params.id, function(err, goal) {
+            res.render('pages/studentPage', {
+                goals: goals,
+                student: student
+            });
+        });
+    });
+}
+
+exports.class_page = function (req, res) {
     var students = [];
 
     Student.find({}, 'name', function(err, student) {
@@ -37,8 +67,8 @@ exports.student_name = function (req, res) {
         });
     });
     Student.findById(req.params.id, function(err, student) {
-        res.render('pages/studentPage', {
-            student: student
+        res.render('pages/classPage', {
+            students: students
         });
     });
 }
@@ -56,7 +86,6 @@ exports.run = function(req, res) {
         res.render('/login.html', {
             students: students
         });*/
-        var path = require('path');
-        res.sendFile(path.resolve(__dirname + '/../public/login.html'));
+            res.render('pages/login');
     /*});*/
 }
