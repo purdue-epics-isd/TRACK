@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Create New Student</title>
+  <link rel="icon" type="image/gif/png" href="img/logo.png">
+  <link rel="stylesheet" href="/main.css">
+  <script type="text/javascript" src="myScripts.js"></script>
+</head>
+
+<header>
+  <%- include("../partials/header.ejs")%>
+</header>
+
+<body>
+  <h1>Add a New Student</h1>
+  <form action="student/create" method="post">
+    Student Name: <input type="text" name="name"><br><br>
+    Class Period:  <select name = "period">
+      <option value="1">Period 1</option>
+      <option value="2">Period 2</option>
+      <option value="3">Period 3</option>
+      <option value="4">Period 4</option>
+      <option value="5">Period 5</option></select><br><br>
+      Grade Level:  <select name = "grade">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option></select><br><br>
+      Age: <input type="text" name="age"><br><br>
+      <input type="submit" value="" class="submitButton"><br><br>
+  </form>
+  <a href="/classPage" class="backButton"></a>
+</body>
+</html>

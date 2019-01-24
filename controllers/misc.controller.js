@@ -1,5 +1,6 @@
 const Student = require('../models/student.model');
 
+/* TODO: authenticate login and change URL name when it redirects to the classpage*/
 exports.login = function (req, res) {
     var students = [];
 
@@ -16,6 +17,7 @@ exports.login = function (req, res) {
     });
 }
 
+/* TODO: actually log out */
 exports.logout = function (req, res) {
 	res.render('pages/logout');
 };

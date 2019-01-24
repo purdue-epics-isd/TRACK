@@ -13,21 +13,21 @@
 </header>
 
 <body>
-    <h1><%= student.name %>'s Profile</h1>
+  <h1><%= student.name %>'s Profile</h1>
 
-    <a href="/student/<%= student.id %>/newgoal" class="addNew" style="position: absolute; top: 35px; right:35px">Add new goal</a>
+  <a href="/student/<%= student.id %>/newgoal" class="addNew" style="position: absolute; top: 35px; right:35px">Add new goal</a>
 
-    <div class="goal-container">
-      <% goals.forEach(function(goal) { %>
-         <a href="goalOne.html>" class="academicGoal"><div class="goalName"><%= goal.name %></div></a>
-      <% }); %>
+  <div class="goal-container">
+    <% goals.forEach(function(goal) { %>
+      <a href="goalOne.html>" class="academicGoal"><div class="goalName"><%= goal.name %></div></a>
+    <% }); %>
       <!--
       <a href="goalOne.html>" class="academicGoal"><div class="goalName">Counting to 10</div></a>
       <a href="goalTwo.html" class="socialGoal"><div class="goalName">Positive Social Responses</div></a>
       <a href="goalFour.html" class="academicGoal"><div class="goalName">Reading Goal</div></a>
       <a href="goalFive.html" class="academicGoal"><div class="goalName">Math Goal</div></a>
       <a href="goalThree.html" class="behaviorGoal"><div class="goalName">Disruptive Behavior During Class</div></a>-->
-    </div>
-    <a href="/classPage"><span class="backButton"></span></a>
-  </body>
+  </div>
+  <a href="/classPage"><span class="backButton"></span></a>
+</body>
 </html>
