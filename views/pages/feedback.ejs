@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/main.css">
+<script type="text/javascript" src="myScripts.js"></script>
+</head>
+
+<header>
+    <%- include("../partials/header.ejs")%>
+ </header>
+
+<body>
+ <h1>Feedback Form</h1>
+ <p> Please let us know if you have any questions <br> or comments about our website so far! </p>
+ <form method="GET" action="mailto:purdue.epics.isd.track@gmail.com" enctype="text/plain">
+    <div>Subject</div>
+    <input type="text" name="subject" />
+
+    <div>Message</div>
+    <textarea name="body"></textarea>
+
+    <br/>
+    <input type="submit"/>
+</form>
+
+</body>
+
+<script>
+$(document).ready(function() {
+    $('#bt1').click(function() {
+        $('#fr1').attr('action',
+                       'mailto:purdue.epics.isd.track@gmail.com?subject=' +
+                       $('#tb1').val() + '&body=' + $('#tb2').val());
+        $('#fr1').submit();
+    });
+});
+</script>
+
+</html>

@@ -3,10 +3,14 @@
 <head>
   <link rel="icon" type="image/gif/png" href="img/logo.png">
   <title>Login</title>
-  <link rel="stylesheet" href="./main.css">
+  <link rel="stylesheet" href="/main.css">
   <script type="text/javascript" src="myScripts.js"></script>
 </head>
 
+<header>
+    <%- include("../partials/header.ejs")%>
+ </header>
+ 
 <style>
 form input[type="submit"] {
 	width:100px;
@@ -35,7 +39,7 @@ form input[type="submit"] {
   			Password: <input type="password" name="Password"><br><br>
   			<input type="submit" value="Sign In">
   		</form>
-  		<a href="/classPage" id="forgot">Forgot Your Password</a>
+  		<a href="#" id="forgot">Forgot Your Password</a>
 
 </body>
 </html>
