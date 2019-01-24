@@ -78,6 +78,23 @@ exports.class_page = function (req, res) {
     });
 }
 
+/*redirects to new student page*/
+exports.new_student = function (req, res) {
+    //var students = [];
+
+    /*Student.find({}, 'name', function(err, student) {
+        student.forEach(function(s) { 
+            console.log(s); console.log(s.name); 
+            students.push(s);
+        });
+    });*/
+    Student.findById(req.params.id, function(err, student) {
+        res.render('pages/newStudent', {
+            //students: students
+        });
+    });
+}
+
 /*first function used when website starts up*/
 exports.run = function(req, res) {
     /*var students = [];

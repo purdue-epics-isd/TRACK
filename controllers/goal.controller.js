@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
-    Student.findById(req.params.id, function(err, student) {
+    /*Student.findById(req.params.id, function(err, student) {
             student: student
             //console.log(student);
             console.log("StudentID: " + req.params.id);
 
-    });
+    });*/
 
     let goal = new Goal(
         {

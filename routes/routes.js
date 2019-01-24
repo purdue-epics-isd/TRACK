@@ -19,9 +19,11 @@ router.get('/classPage', student_controller.class_page); // navigates to the cla
 router.get('/student/:id', student_controller.student_name); //navigates to a student profile
 router.get('/student/:id/goal/:id', goal_controller.goal_name); // navigates to a goal within a student profile
 router.get('/student/:id/newgoal', goal_controller.goal_new); //navigates to the "create new goal" page
+router.get('/newStudent',student_controller.new_student);//navigates to new student page 
 //router.get('/goal/:id', goal_controller.goal_name);
 //router.get('/student/:id', student_controller.student_details);
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', misc_controller.logout); //navigates to logout page
+
 
 module.exports = router;
