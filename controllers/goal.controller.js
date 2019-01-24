@@ -2,52 +2,67 @@ const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 const mongoose = require('mongoose');
 
+/*creates a new goal in database*/
 exports.goal_create = function (req, res) {
-    var Student = mongoose.model('Student');
-    Student.findById(req.params.id, function(err, goal) {
-        var student = student;
-        //console.log(req.body.id);
-        console.log(student);
-    })
+    /*Student.findById(req.params.id, function(err, student) {
+            student: student
+            //console.log(student);
+            console.log("StudentID: " + req.params.id);
+
+    });*/
 
     let goal = new Goal(
         {
             name: req.body.name,
             description: req.body.description,
-            studentID: req.body.studentID,
+            studentID: req.params.id,
             percentage: req.body.percentagename
             //support: req.body.support,
             //comments: req.body.comments,
-        }
-    );
+        })
 
-    goal.save(function (err) {
+    Student.findById(req.params.id, function (err, student) {
+    //student = student[0];
+    //student.name = student.name;
+    //student.period = student.period;
+    //student.grade = student.grade;
+    //student.age = student.age;
+    student: student
+    /*console.log("Student update -");
+    console.log("student: " + student);
+    console.log("goal: " + goal);*/
+    student.goals = student.goals + goal;
+    //console.log("student 2.0:" + student);
+    student.save(function (err) {
+        if(err) {
+            res.send(err);
+        }
+    });
+});
+
+    goal.save(function (err) { 
         if (err) {
             res.send(err);
-            //console.log('Success!');
         } else {
-            res.send(goal);
-        }
-    });
 
-    // create a comment
-   // Student.findById(req.params.id, function(err, goal) {
-        //Student.goals.push(goal);
-    //})
-    var subdoc = Student.findById(req.params.id, function(err, goal) {
-        goal[0];
-    })
-    //console.log(subdoc) // { _id: '501d86090d371bab2c0341c5', name: 'Liesl' }
-    subdoc.isNew; // true
+            Student.findById(req.params.id, function(err, student) {
+                console.log(student.goals);
+                /*
+                Student.find({}, 'goals', function(err, student) {
+                    Student.goals.forEach(function(s) { 
+                    console.log(s);
+            });*/
+/*
+        });*/
+                //Student.goals = goal;
+                res.render('pages/studentPage', {
+                    student: student
+                });
+           });
+        }});
+}
 
-    Student.findById(req.params.id, function(err, student) {
-        res.render('pages/studentPage', {
-            student: student
-        });
-    });
-    
-};
-
+/*TODO: figure out what this does*/
 exports.goal_details = function (req, res) {
     Goal.findById(req.params.id, function (err, goal) {
         if (err) return next(err);
@@ -55,18 +70,20 @@ exports.goal_details = function (req, res) {
     })
 };
 
+/* renders goal page TODO: change function name to something more applicable*/
 exports.goal_name = function (req, res) {
     Student.findById(req.params.id, function(err, goal) {
         var student = student
     })
     Goal.findById(req.params.id, function(err, goal) {
         res.render('pages/goalPage', {
-            goal: goal
-            //student: student
+            goal: goal,
+            student: student
         });
     });
 }
 
+/*deletes goal from database TODO: implement in actual website*/
 exports.goal_delete = function (req, res) {
     console.log(req.body.id)
     Goal.findByIdAndRemove(req.body.id, function (err) {
@@ -75,11 +92,12 @@ exports.goal_delete = function (req, res) {
     })
 };
 
+/*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
 exports.goal_new = function (req, res) {
     Student.findById(req.params.id, function(err, student) {
         //console.log(req.Student.id);
         var path = require('path');
-        res.sendFile(path.resolve(__dirname + '/../public/newgoal.html'));
+        res.sendFile(path.resolve(__dirname + '/../public/newgoal.html'));//TODO: change path to .ejs file
         //res.sendFile('../newgoal.html');
     });
     /*console.log(req.Student.id)

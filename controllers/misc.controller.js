@@ -18,19 +18,7 @@ exports.login = function (req, res) {
 }
 
 /* TODO: actually log out */
-//logs 
-exports.new_student = function (req, res) {
-    //var students = [];
+exports.logout = function (req, res) {
+	res.render('pages/logout');
+};
 
-    /*Student.find({}, 'name', function(err, student) {
-        student.forEach(function(s) { 
-            console.log(s); console.log(s.name); 
-            students.push(s);
-        });
-    });*/
-    Student.findById(req.params.id, function(err, student) {
-        res.render('pages/logout', {
-            //students: students
-        });
-    });
-}
