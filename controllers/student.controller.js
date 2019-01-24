@@ -1,6 +1,7 @@
 const Student = require('../models/student.model');
 const Goal = require('../models/goal.model');
 
+/*creates new student profile in database*/
 exports.student_create = function (req, res) {
     let student = new Student(
         {   name: req.body.name,
@@ -14,12 +15,13 @@ exports.student_create = function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            //res.render('pages/classPage');
-            res.run("/classPage");
+            res.render('pages/classPage');//TODO: render students with the classPage OR figure out how to call the /classPage function in the router file
+            //res.run("/classPage");
         }
     })
 };
 
+/*TODO: figure out what this does*/
 exports.student_details = function (req, res) {
     Student.findById(req.params.id, function (err, student) {
         //if (err) return next(err);
@@ -28,6 +30,7 @@ exports.student_details = function (req, res) {
     })
 };
 
+/*redirects to student Page TODO: update function name to something more applicable*/
 exports.student_name = function (req, res) {
     //var students = [];
 /*
@@ -58,6 +61,7 @@ exports.student_name = function (req, res) {
     });
 }
 
+/*redirects to class page*/
 exports.class_page = function (req, res) {
     var students = [];
 
@@ -74,8 +78,7 @@ exports.class_page = function (req, res) {
     });
 }
 
-
-
+/*first function used when website starts up*/
 exports.run = function(req, res) {
     /*var students = [];
 

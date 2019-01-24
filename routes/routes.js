@@ -7,11 +7,10 @@ const student_controller = require('../controllers/student.controller');
 const goaldata_controller = require('../controllers/goaldata.controller');
 const misc_controller = require('../controllers/misc.controller');
 
-
+//TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:id/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
-
 router.post('/goal/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
 
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
