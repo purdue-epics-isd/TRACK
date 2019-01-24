@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
-    Student.findById(req.params.id, function(err, student) {
+    /*Student.findById(req.params.id, function(err, student) {
             student: student
             //console.log(student);
             console.log("StudentID: " + req.params.id);
 
-    });
+    });*/
 
     let goal = new Goal(
         {
@@ -22,16 +22,13 @@ exports.goal_create = function (req, res) {
         })
 
     Student.findById(req.params.id, function (err, student) {
-    //student = student[0];
-    //student.name = student.name;
-    //student.period = student.period;
-    //student.grade = student.grade;
-    //student.age = student.age;
-    student: student
-    /*console.log("Student update -");
-    console.log("student: " + student);
-    console.log("goal: " + goal);*/
-    student.goals = student.goals + goal;
+        student: student
+        /*console.log("Student update -");
+        console.log("student: " + student);
+        console.log("goal: " + goal);*/
+        student.update (
+            {$push: {goals: goal}}
+        )
     //console.log("student 2.0:" + student);
     student.save(function (err) {
         if(err) {
@@ -39,6 +36,7 @@ exports.goal_create = function (req, res) {
         }
     });
 });
+}
 
     goal.save(function (err) { 
         if (err) {
@@ -60,7 +58,6 @@ exports.goal_create = function (req, res) {
                 });
            });
         }});
-}
 
 /*TODO: figure out what this does*/
 exports.goal_details = function (req, res) {
