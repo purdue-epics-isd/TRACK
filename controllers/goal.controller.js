@@ -30,15 +30,9 @@ exports.goal_create = function (req, res) {
     /*console.log("Student update -");
     console.log("student: " + student);
     console.log("goal: " + goal);*/
-    student.goals = goal;
+    student.goals = student.goals + goal;
     //console.log("student 2.0:" + student);
     student.save(function (err) {
-        if(err) {
-            res.send(err);
-        }
-    });
-
-    goal.save(function (err) {
         if(err) {
             res.send(err);
         }

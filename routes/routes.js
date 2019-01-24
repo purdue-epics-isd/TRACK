@@ -7,21 +7,22 @@ const student_controller = require('../controllers/student.controller');
 const goaldata_controller = require('../controllers/goaldata.controller');
 const misc_controller = require('../controllers/misc.controller');
 
-router.post('/student/create', student_controller.student_create);
-router.post('/student/:id/goal/create', goal_controller.goal_create);
-router.post('/goaldata/create', goaldata_controller.goaldata_create);
-router.post('/goal/delete', goal_controller.goal_delete);
-router.get('/login', misc_controller.login); //why can't I post?
+
+router.post('/student/create', student_controller.student_create); //adds new student to database
+router.post('/student/:id/goal/create', goal_controller.goal_create); //adds new goal to database
+router.post('/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+
+router.post('/goal/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
 
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
-// a simple test url to check that all of our files are communicating correctly.
-router.get('/test', student_controller.student_details);
-router.get('/classPage', student_controller.class_page);
-router.get('/student/:id/goal/:id', goal_controller.goal_name);
-router.get('/student/:id/newgoal', goal_controller.goal_new);
+router.get('/test', student_controller.student_details); // a simple test url to check that all of our files are communicating correctly.
+router.get('/classPage', student_controller.class_page); // navigates to the class page
+router.get('/student/:id', student_controller.student_name); //navigates to a student profile
+router.get('/student/:id/goal/:id', goal_controller.goal_name); // navigates to a goal within a student profile
+router.get('/student/:id/newgoal', goal_controller.goal_new); //navigates to the "create new goal" page
 //router.get('/goal/:id', goal_controller.goal_name);
 //router.get('/student/:id', student_controller.student_details);
-router.get('/student/:id', student_controller.student_name);
-router.get('/logout', misc_controller.logout);
+router.get('/login', misc_controller.login); //navigates to login page
+router.get('/logout', misc_controller.logout); //navigates to logout page
 
 module.exports = router;
