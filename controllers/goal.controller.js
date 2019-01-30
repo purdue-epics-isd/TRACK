@@ -74,13 +74,15 @@ exports.goal_details = function (req, res) {
 exports.goal_name = function (req, res) {
     Student.findById(req.params.id, function(err, goal) {
         var student = student
-    })
     Goal.findById(req.params.id, function(err, goal) {
         res.render('pages/goalPage', {
             goal: goal,
             student: student
         });
+        console.log("Student: " + student);
+        console.log("Goal: " + goal);
     });
+})
 }
 
 /*deletes goal from database TODO: implement in actual website*/
