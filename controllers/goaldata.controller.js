@@ -1,22 +1,28 @@
-const Goaldata = require('../models/goaldata.model');
+const goaldata = require('../models/goaldata.model');
 
 exports.goaldata_create = function (req, res) {
     let goaldata = new Goaldata(
         {
             name: req.body.name,
-            description: req.body.description,
-            goalID: req.body.studentID,
-            percentage: req.body.percentagename,
-            support: req.body.support,
-            comments: req.body.comments,
-            time: Date.now()
+            //description: req.body.description,
+            //goalID: req.body.goalID,
+            //percentage: req.body.percentagename,
+            //support: req.body.support,
+            //comments: req.body.comments,
+            //time: Date.now()
         }
     );
     goaldata.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            res.send(goaldata);
+            console.log(goaldata);
+            Student.findById(req.params.id, function(err, student) {
+                console.log(student.goals);
+                res.render('pages/studentPage', {
+                    student: student
+                });
+           });
         }
     })
 };
