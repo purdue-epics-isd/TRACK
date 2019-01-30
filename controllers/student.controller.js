@@ -15,8 +15,12 @@ exports.student_create = function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            res.render('pages/classPage');//TODO: render students with the classPage OR figure out how to call the /classPage function in the router file
-            //res.run("/classPage");
+            Student.findById(req.params.id, function(err, student) {
+                console.log(student.goals);
+                res.render('pages/studentPage', {
+                    student: student
+                });
+           });
         }
     })
 };
