@@ -51,7 +51,7 @@ exports.goal_details = function (req, res) {
 };
 
 /* renders goal page TODO: change function name to something more applicable*/
-exports.goal_name = function (req, res) {
+exports.goalProfileNavigation = function (req, res) {
     Student.findById(req.params.id, function(err, goal) {
         var student = student
     Goal.findById(req.params.id, function(err, goal) {
@@ -75,7 +75,7 @@ exports.goal_delete = function (req, res) {
 };
 
 /*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
-exports.goal_new = function (req, res) {
+exports.newGoalNavigation = function (req, res) {
     Student.findById(req.params.id, function(err, student) {
         //console.log(req.Student.id);
         var path = require('path');

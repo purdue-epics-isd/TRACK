@@ -35,7 +35,7 @@ exports.student_details = function (req, res) {
 };
 
 /*redirects to student Page TODO: update function name to something more applicable*/
-exports.student_name = function (req, res) {
+exports.studentProfileNavigation = function (req, res) {
     //var students = [];
 /*
     Student.find({}, 'name', function(err, student) {
@@ -66,7 +66,7 @@ exports.student_name = function (req, res) {
 }
 
 /*redirects to class page*/
-exports.class_page = function (req, res) {
+exports.classPageNavigation = function (req, res) {
     var students = [];
 
     Student.find({}, 'name', function(err, student) {

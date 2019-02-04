@@ -17,14 +17,14 @@ exports.goaldata_create = function (req, res) {
             res.send(err);
         } else {
             console.log(goaldata);
-            Student.findById(req.params.id, function(err, student) {
+            /*Student.findById(req.params.id, function(err, student) {
                 console.log(student.goals);
                 res.render('pages/studentPage', {
                     student: student
                 });
-           });
+            });*/
         }
-    })
+    });
 };
 
 exports.goaldata_details = function (req, res) {

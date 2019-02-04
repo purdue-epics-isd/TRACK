@@ -14,12 +14,12 @@ router.post('/goaldata/create', goaldata_controller.goaldata_create); //adds new
 router.post('/goal/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
 
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
-router.get('/test', student_controller.student_details); // a simple test url to check that all of our files are communicating correctly.
-router.get('/classPage', student_controller.class_page); // navigates to the class page
-router.get('/student/:id', student_controller.student_name); //navigates to a student profile
-router.get('/student/:id/goal/:id', goal_controller.goal_name); // navigates to a goal within a student profile
-router.get('/student/:id/newgoal', goal_controller.goal_new); //navigates to the "create new goal" page
-router.get('/newStudent',student_controller.new_student);//navigates to new student page 
+//router.get('/test', student_controller.student_details); // a simple test url to check that all of our files are communicating correctly.
+router.get('/classPage', student_controller.classPageNavigation); // navigates to the class page
+router.get('/student/:id', student_controller.studentProfileNavigation); //navigates to a student profile
+router.get('/student/:id/goal/:id', goal_controller.goalProfileNavigation); // navigates to a goal within a student profile
+router.get('/student/:id/newgoal', goal_controller.newGoalNavigation); //navigates to the "create new goal" page
+router.get('/newStudent',student_controller.new_student); //navigates to new student page 
 //router.get('/goal/:id', goal_controller.goal_name);
 //router.get('/student/:id', student_controller.student_details);
 router.get('/login', misc_controller.login); //navigates to login page
