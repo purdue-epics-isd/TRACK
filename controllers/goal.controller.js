@@ -4,13 +4,6 @@ const mongoose = require('mongoose');
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
-    /*Student.findById(req.params.id, function(err, student) {
-            student: student
-            //console.log(student);
-            console.log("StudentID: " + req.params.id);
-
-    });*/
-
     let goal = new Goal(
         {
             name: req.body.name,
@@ -23,41 +16,31 @@ exports.goal_create = function (req, res) {
 
     Student.findById(req.params.id, function (err, student) {
         student: student
-        /*console.log("Student update -");
-        console.log("student: " + student);
-        console.log("goal: " + goal);*/
         student.update (
             {$push: {goals: goal}}
         )
-    //console.log("student 2.0:" + student);
-    student.save(function (err) {
-        if(err) {
-            res.send(err);
-        }
-    });
-});
-}
+        //console.log("student 2.0:" + student);
+        student.save(function (err) {
+            if(err) {
+                res.send(err);
+            }
+        });
 
-    goal.save(function (err) { 
-        if (err) {
-            res.send(err);
-        } else {
-
-            Student.findById(req.params.id, function(err, student) {
-                console.log(student.goals);
-                /*
-                Student.find({}, 'goals', function(err, student) {
-                    Student.goals.forEach(function(s) { 
-                    console.log(s);
-            });*/
-/*
-        });*/
-                //Student.goals = goal;
-                res.render('pages/studentPage', {
-                    student: student
+        goal.save(function (err) { 
+            if (err) {
+                res.send(err);
+            } else {
+                Student.findById(req.params.id, function(err, student) {
+                    console.log(student.goals);
+                    res.render('pages/studentPage', {
+                        student: student
+                    });
                 });
-           });
-        }});
+            };
+        });
+    });
+};
+
 
 /*TODO: figure out what this does*/
 exports.goal_details = function (req, res) {
