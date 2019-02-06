@@ -7,6 +7,7 @@ let GoalSchema = new Schema({
 	studentID: {type: String, require: false},
     percentage: {type: String, required: false},
     //comments: {type: String, required: false}
+    goalID: {type: String, required: false}
 });
 
 // Export the model

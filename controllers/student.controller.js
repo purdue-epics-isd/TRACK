@@ -15,10 +15,18 @@ exports.student_create = function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            Student.findById(req.params.id, function(err, student) {
-                console.log(student.goals);
+            var goals = [];
+
+            Goal.find({}, {}, function(err, goal) {
+                goal.forEach(function(s) {
+                    goals.push(s);
+                });
+            });
+
+            Student.findById(student.id, function(err, student) {
                 res.render('pages/studentPage', {
-                    student: student
+                    student: student,
+                    goals: goals
                 });
            });
         }
@@ -35,7 +43,7 @@ exports.student_details = function (req, res) {
 };
 
 /*redirects to student Page TODO: update function name to something more applicable*/
-exports.student_name = function (req, res) {
+exports.studentProfileNavigation = function (req, res) {
     //var students = [];
 /*
     Student.find({}, 'name', function(err, student) {
@@ -46,17 +54,19 @@ exports.student_name = function (req, res) {
     });*/
     var goals = [];
 
-    Goal.find({}, 'name', function(err, goal) {
+    Goal.find({}, {}, function(err, goal) {
         goal.forEach(function(s) { 
-            if (goal.studentID = req.params.id) {
-            console.log(s); console.log(s.name); 
-            goals.push(s);
+            console.log("s.studentID: " + s.studentID);
+            console.log("req.params.id: " + req.params.id);
+            if (s.studentID == req.params.id) {
+                //console.log(s); console.log(s.name); 
+                goals.push(s);
             }
         });
     });
 
     Student.findById(req.params.id, function(err, student) {
-        Goal.findById(req.params.id, function(err, goal) {
+        Goal.findById(req.params.goalid, function(err, goal) {
             res.render('pages/studentPage', {
                 goals: goals,
                 student: student
@@ -66,7 +76,7 @@ exports.student_name = function (req, res) {
 }
 
 /*redirects to class page*/
-exports.class_page = function (req, res) {
+exports.classPageNavigation = function (req, res) {
     var students = [];
 
     Student.find({}, 'name', function(err, student) {
@@ -75,6 +85,7 @@ exports.class_page = function (req, res) {
             students.push(s);
         });
     });
+
     Student.findById(req.params.id, function(err, student) {
         res.render('pages/classPage', {
             students: students

@@ -15,16 +15,16 @@
 <body>
 	<h1><%= goal.name %></h1>
 	<h2><%= goal.description %></h2>
-		<form  action="/goaldata/create" id="submitForm">
+		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm">
 			<table style="position: center">
 				<tr>
-					<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td></tr>
+					<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
 				<tr>
 					<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
 				<tr>
-					<td> Additional Comments: </td><td><input type="text" name="support"></td></tr></table>
-			<a href="Anna.html"><span class="backButton"></span></a>
-			<a><input type="submit" value="Submit" class="submitButton"></a>
+					<td> Additional Comments: </td><td><input type="text" name="comments"></td></tr></table>
+			<a href="/student/<%= student.id %>"><span class="backButton"></span></a>
+			<a><input type="submit" value="" class="submitButton"></a>
 		</form>
 	
 	<!--

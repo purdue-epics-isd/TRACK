@@ -8,12 +8,19 @@ const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
 const goal = require('./controllers/goal.controller')
 const app = express();
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 // set the view engine to ejs
 
-// index page 
+// navigate to login.ejs
 app.get('/', student.run);
+
+// navigate to newStudent.ejs
+app.get('/createNewStudent', (req, res) => { 
+	res.render('./pages/newStudent.ejs') 
+});
+
 
 //Set up mongoose connection
 const mongoose = require('mongoose');
