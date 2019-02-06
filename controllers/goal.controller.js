@@ -52,14 +52,13 @@ exports.goal_details = function (req, res) {
 
 /* renders goal page TODO: change function name to something more applicable*/
 exports.goalProfileNavigation = function (req, res) {
-    Student.findById(req.params.id, function(err, goal) {
-        var student = student
-    Goal.findById(req.params.id, function(err, goal) {
-        res.render('pages/goalPage', {
-            goal: goal,
-            student: student
-        });
-        console.log("Student: " + student);
+    Student.findById(req.params.id, function(err, student) {
+        Goal.findById(req.params.goalid, function(err, goal) {
+            res.render('pages/goalPage', {
+                student: student,
+                goal: goal
+            });
+        //console.log("Student: " + student);
         console.log("Goal: " + goal);
     });
 })

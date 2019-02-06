@@ -49,7 +49,7 @@ exports.studentProfileNavigation = function (req, res) {
     Goal.find({}, 'name', function(err, goal) {
         goal.forEach(function(s) { 
             if (goal.studentID = req.params.id) {
-            console.log(s); console.log(s.name); 
+            //console.log(s); console.log(s.name); 
             goals.push(s);
             }
         });
@@ -71,7 +71,7 @@ exports.classPageNavigation = function (req, res) {
 
     Student.find({}, 'name', function(err, student) {
         student.forEach(function(s) { 
-            console.log(s); console.log(s.name); 
+            //console.log(s); console.log(s.name); 
             students.push(s);
         });
     });
