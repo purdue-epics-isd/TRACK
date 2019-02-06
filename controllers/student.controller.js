@@ -79,7 +79,7 @@ exports.studentProfileNavigation = function (req, res) {
 exports.classPageNavigation = function (req, res) {
     var students = [];
 
-    Student.find({}, 'name', function(err, student) {
+    Student.find({}, {}, function(err, student) {
         student.forEach(function(s) { 
             console.log(s); console.log(s.name); 
             students.push(s);

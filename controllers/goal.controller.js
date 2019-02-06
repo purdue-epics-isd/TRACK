@@ -14,46 +14,47 @@ exports.goal_create = function (req, res) {
             //comments: req.body.comments,
         })
 
-    Student.findById(req.params.id, function (err, student) {
-        student: student;
+    Student.findOneAndUpdate({_id: req.params.id}, {$push: {goals: goal}}, function (err, student) {
+            console.log("Student to be updated: " + student);
+            console.log("goal to be added: " + goal);
+        });
+        /*student: student;
         student.update (
             {$push: {goals: goal}}
-        )
-        //console.log("student 2.0:" + student);
-        student.save(function (err) {
-            if(err) {
-                res.send(err);
+        )}*/
+    //console.log("student 2.0:" + student);
+    /*student.save(function (err) {
+        if(err) {
+            res.send(err);
+        }
+    });*/
+
+    goal.save(function (err) { 
+        if (err) {
+            res.send(err);
+        }
+    });
+
+    var goals = [];
+
+    Goal.find({}, {}, function(err, goal) {
+        goal.forEach(function(s) { 
+            console.log("s.studentID: " + s.studentID);
+            console.log("req.params.id: " + req.params.id);
+            if (s.studentID == req.params.id) {
+                //console.log(s); console.log(s.name); 
+                goals.push(s);
             }
         });
+    });
 
-        goal.save(function (err) { 
-            if (err) {
-                res.send(err);
-            } else {
-            };
+    Student.findById(req.params.id, function(err, student) {
+        console.log(student.goals);
+        console.log(goals);
+        res.render('pages/studentPage', {
+            student: student,
+            goals: goals
         });
-
-        var goals = [];
-
-        Goal.find({}, {}, function(err, goal) {
-            goal.forEach(function(s) { 
-                console.log("s.studentID: " + s.studentID);
-                console.log("req.params.id: " + req.params.id);
-                if (s.studentID == req.params.id) {
-                    //console.log(s); console.log(s.name); 
-                    goals.push(s);
-                }
-            });
-        });
-
-        Student.findById(req.params.id, function(err, student) {
-                    console.log(student.goals);
-                    console.log(goals);
-                    res.render('pages/studentPage', {
-                        student: student,
-                        goals: goals
-                    });
-                });
     });
 };
 
