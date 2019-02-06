@@ -15,10 +15,18 @@ exports.student_create = function (req, res) {
         if (err) {
             res.send(err);
         } else {
-            Student.findById(req.params.id, function(err, student) {
-                console.log(student.goals);
+            var goals = [];
+
+            Goal.find({}, {}, function(err, goal) {
+                goal.forEach(function(s) {
+                    goals.push(s);
+                });
+            });
+
+            Student.findById(student.id, function(err, student) {
                 res.render('pages/studentPage', {
-                    student: student
+                    student: student,
+                    goals: goals
                 });
            });
         }
@@ -46,17 +54,19 @@ exports.studentProfileNavigation = function (req, res) {
     });*/
     var goals = [];
 
-    Goal.find({}, 'name', function(err, goal) {
+    Goal.find({}, {}, function(err, goal) {
         goal.forEach(function(s) { 
-            if (goal.studentID = req.params.id) {
-            //console.log(s); console.log(s.name); 
-            goals.push(s);
+            console.log("s.studentID: " + s.studentID);
+            console.log("req.params.id: " + req.params.id);
+            if (s.studentID == req.params.id) {
+                //console.log(s); console.log(s.name); 
+                goals.push(s);
             }
         });
     });
 
     Student.findById(req.params.id, function(err, student) {
-        Goal.findById(req.params.id, function(err, goal) {
+        Goal.findById(req.params.goalid, function(err, goal) {
             res.render('pages/studentPage', {
                 goals: goals,
                 student: student
@@ -71,10 +81,11 @@ exports.classPageNavigation = function (req, res) {
 
     Student.find({}, 'name', function(err, student) {
         student.forEach(function(s) { 
-            //console.log(s); console.log(s.name); 
+            console.log(s); console.log(s.name); 
             students.push(s);
         });
     });
+
     Student.findById(req.params.id, function(err, student) {
         res.render('pages/classPage', {
             students: students

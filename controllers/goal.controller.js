@@ -15,7 +15,7 @@ exports.goal_create = function (req, res) {
         })
 
     Student.findById(req.params.id, function (err, student) {
-        student: student
+        student: student;
         student.update (
             {$push: {goals: goal}}
         )
@@ -30,14 +30,30 @@ exports.goal_create = function (req, res) {
             if (err) {
                 res.send(err);
             } else {
-                Student.findById(req.params.id, function(err, student) {
-                    console.log(student.goals);
-                    res.render('pages/studentPage', {
-                        student: student
-                    });
-                });
             };
         });
+
+        var goals = [];
+
+        Goal.find({}, {}, function(err, goal) {
+            goal.forEach(function(s) { 
+                console.log("s.studentID: " + s.studentID);
+                console.log("req.params.id: " + req.params.id);
+                if (s.studentID == req.params.id) {
+                    //console.log(s); console.log(s.name); 
+                    goals.push(s);
+                }
+            });
+        });
+
+        Student.findById(req.params.id, function(err, student) {
+                    console.log(student.goals);
+                    console.log(goals);
+                    res.render('pages/studentPage', {
+                        student: student,
+                        goals: goals
+                    });
+                });
     });
 };
 
@@ -50,7 +66,7 @@ exports.goal_details = function (req, res) {
     })
 };
 
-/* renders goal page TODO: change function name to something more applicable*/
+/* renders goal page */
 exports.goalProfileNavigation = function (req, res) {
     Student.findById(req.params.id, function(err, student) {
         Goal.findById(req.params.goalid, function(err, goal) {
@@ -58,16 +74,16 @@ exports.goalProfileNavigation = function (req, res) {
                 student: student,
                 goal: goal
             });
-        //console.log("Student: " + student);
-        console.log("Goal: " + goal);
-    });
-})
+            //console.log("Student: " + student);
+            console.log("Goal: " + goal);
+        });
+    })
 }
 
 /*deletes goal from database TODO: implement in actual website*/
 exports.goal_delete = function (req, res) {
-    console.log(req.body.id)
-    Goal.findByIdAndRemove(req.body.id, function (err) {
+    console.log(req.params.goalid)
+    Goal.findByIdAndRemove(req.params.goalid, function (err) {
         if (err) return next(err);
         res.send('Deleted successfully!');
     })
