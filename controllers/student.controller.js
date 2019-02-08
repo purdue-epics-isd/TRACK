@@ -95,7 +95,7 @@ exports.navigate_to_classPage = function (req, res) {
 }
 
 /*redirects to new student page*/
-exports.navigate_to_createNewGoal = function (req, res) {
+exports.navigate_to_createNewStudent = function (req, res) {
     //var students = [];
 
     /*Student.find({}, 'name', function(err, student) {

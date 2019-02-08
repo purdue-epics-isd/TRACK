@@ -13,9 +13,7 @@ router.post('/student/:id/goal/create', goal_controller.goal_create); //adds new
 //TODO: figure out why I can't use post when I try to use goaldata create
 router.get('/student/:id/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 
-
 //router.post('/goal/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
-
 
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
 //router.get('/test', student_controller.student_details); // a simple test url to check that all of our files are communicating correctly.
