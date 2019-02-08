@@ -20,19 +20,9 @@ exports.goal_create = function (req, res) {
         goal.save(function (err) { 
             if (err) {
                 res.send(err);
-                }
+            }
         });
     });
-        /*student: student;
-        student.update (
-            {$push: {goals: goal}}
-        )}*/
-    //console.log("student 2.0:" + student);
-    /*student.save(function (err) {
-        if(err) {
-            res.send(err);
-        }
-    });*/
 
     var goals = [];
 
@@ -82,11 +72,7 @@ exports.navigate_to_goalProfile = function (req, res) {
 
 /*deletes goal from database TODO: implement in actual website*/
 exports.goal_delete = function (req, res) {
-<<<<<<< HEAD
-    console.log("Deleting goals")
-=======
     console.log(req.params.goalid)
->>>>>>> 7440f2ff71e617bc8627a61832c12fef2c5f50bd
     Goal.findByIdAndRemove(req.params.goalid, function (err) {
         if (err) return next(err);
         res.send('Deleted successfully!');
