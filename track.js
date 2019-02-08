@@ -17,12 +17,6 @@ app.set('view engine', 'ejs');
 // navigate to login.ejs
 app.get('/', student.run);
 
-// navigate to newStudent.ejs
-app.get('/createNewStudent', (req, res) => { 
-	res.render('./pages/newStudent.ejs') 
-});
-
-
 //Set up mongoose connection
 const mongoose = require('mongoose');
 let dev_db_url = 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track';
