@@ -24,7 +24,7 @@ exports.student_create = function (req, res) {
             });
 
             Student.findById(student.id, function(err, student) {
-                res.render('pages/studentPage', {
+                res.render('pages/studentProfile', {
                     student: student,
                     goals: goals
                 });
@@ -68,7 +68,7 @@ exports.navigate_to_studentProfile = function (req, res) {
 
     Student.findById(req.params.id, function(err, student) {
         Goal.findById(req.params.goalid, function(err, goal) {
-            res.render('pages/studentPage', {
+            res.render('pages/studentProfile', {
                 goals: goals,
                 student: student
             });
@@ -105,7 +105,7 @@ exports.navigate_to_createNewStudent = function (req, res) {
         });
     });*/
     Student.findById(req.params.id, function(err, student) {
-        res.render('pages/newStudent', {
+        res.render('pages/createNewStudent', {
             //students: students
         });
     });

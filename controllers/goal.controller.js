@@ -50,7 +50,7 @@ exports.goal_create = function (req, res) {
     Student.findById(req.params.id, function(err, student) {
         console.log(student.goals);
         console.log(goals);
-        res.render('pages/studentPage', {
+        res.render('pages/studentProfile', {
             student: student,
             goals: goals
         });
@@ -70,7 +70,7 @@ exports.goal_create = function (req, res) {
 exports.navigate_to_goalProfile = function (req, res) {
     Student.findById(req.params.id, function(err, student) {
         Goal.findById(req.params.goalid, function(err, goal) {
-            res.render('pages/goalPage', {
+            res.render('pages/goalProfile', {
                 student: student,
                 goal: goal
             });

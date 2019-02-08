@@ -31,7 +31,7 @@ exports.goaldata_create = function (req, res) {
                     //console.log("Here is the final list:" + goals);
                 });
 
-                res.render('pages/studentPage', {
+                res.render('pages/studentProfile', {
                     student: student,
                     goals: goals
                 });
@@ -49,7 +49,7 @@ exports.goaldata_create = function (req, res) {
 
 exports.goaldata_name = function (req, res) {
     Student.findById(req.params.id, function(err, goal) {
-        res.render('pages/goalPage', {
+        res.render('pages/goalProfile', {
             goaldata: goaldata
         });
     });
