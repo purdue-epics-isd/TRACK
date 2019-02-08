@@ -8,6 +8,32 @@
     <script type="text/javascript" src="myScripts.js"></script>
 </head>
 
+<style>
+	table#t01 {
+	  width:80%;
+	  margin-left: 10%;
+	  color: black;
+	}
+	table#t01, th#t01, td#t01 {
+	  border: 1px solid black;
+	  border-collapse: collapse;
+	}
+	th#t01, td#t01 {
+	  padding: 15px;
+	  text-align: left;
+	}
+	table#t01 tr:nth-child(even) {
+	  background-color: #eee;
+	}
+	table#t01 tr:nth-child(odd) {
+	 background-color: #fff;
+	}
+	table#t01 th {
+	  background-color: black;
+	  color: white;
+	}
+</style>
+
 <header>
     <%- include("../partials/header.ejs")%>
 </header>
@@ -15,17 +41,41 @@
 <body>
 	<h1><%= goal.name %></h1>
 	<h2><%= goal.description %></h2>
-		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm">
-			<table style="position: center">
-				<tr>
-					<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
-				<tr>
-					<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
-				<tr>
-					<td> Additional Comments: </td><td><input type="text" name="comments"></td></tr></table>
+	<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+		<table style="position: center">
+			<tr>
+				<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
+			<tr>
+				<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
+			<tr>
+				<td> Additional Comments: </td><td><input type="text" name="comments"></td></tr>
 			<a href="/student/<%= student.id %>"><span class="backButton"></span></a>
 			<a><input type="submit" value="" class="submitButton"></a>
-		</form>
+		</table>
+	</form>
+
+	<h2>Progress Monitoring</h2>
+	<table style="position: center" id="t01">
+		<tr>
+			<th>Percentage</th>
+			<th>Support</th> 
+			<th>Comments</th>
+			<th>Time</th>
+		</tr>
+		<tr>
+			<td>Jill</td>
+			<td>Smith</td> 
+			<td>50</td>
+			<td>35</td>
+		</tr>
+		<tr>
+			<td>Eve</td>
+			<td>Jackson</td> 
+			<td>94</td>
+			<td>35</td>
+		</tr>
+		</table>
+
 	
 	<!--
 			<input type="submit" value = "Submit" class="submitButton"><br><br>

@@ -13,30 +13,38 @@ exports.goaldata_create = function (req, res) {
         }
     );
 
-    console.log(goaldata);
+    console.log("percentage: " + req.body.percentage);
+    console.log("support: " + req.body.support);
 
-    goaldata.save(function (err) {
-        if (err) {
-            res.send(err);
-        } else {
-            Student.findById(req.params.id, function(err, student) {
-                var goals = [];
-                Goal.find({studentID: req.params.id}, {}, function(err, goal) {
-                    goal.forEach(function(s) { 
-                        console.log("Goal: " + s);
-                        console.log("Student ID: " + s.studentID + "|" + s.name);
-                        console.log("req.params.id: " + req.params.id + "|" + student.name);
-                        goals.push(s);
-                    });
-                    //console.log("Here is the final list:" + goals);
-                });
+    //console.log(goaldata);
 
-                res.render('pages/studentProfile', {
-                    student: student,
-                    goals: goals
-                });
+    Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
+        console.log("Goal to be updated: " + goal);
+        console.log("goaldata to be added: " + goaldata);
+        goaldata.save(function (err) { 
+            if (err) {
+                res.send(err);
+            }
+        });
+    });
+
+
+    Student.findById(req.params.id, function(err, student) {
+        var goals = [];
+        Goal.find({studentID: req.params.id}, {}, function(err, goal) {
+            goal.forEach(function(s) { 
+                console.log("Goal: " + s);
+                console.log("Student ID: " + s.studentID + "|" + s.name);
+                console.log("req.params.id: " + req.params.id + "|" + student.name);
+                goals.push(s);
             });
-        }
+            //console.log("Here is the final list:" + goals);
+        });
+
+        res.render('pages/studentProfile', {
+            student: student,
+            goals: goals
+        });
     });
 };
 

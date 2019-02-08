@@ -11,9 +11,9 @@ const misc_controller = require('../controllers/misc.controller');
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:id/goal/create', goal_controller.goal_create); //adds new goal to database
 
-router.post('/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 //router.post()
 
+//WHY DO I HAVE TO GET THIS
 router.post('/student/:id/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 router.post('/goal/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
 

@@ -9,7 +9,8 @@ exports.goal_create = function (req, res) {
             name: req.body.name,
             description: req.body.description,
             studentID: req.params.id,
-            percentage: req.body.percentagename
+            percentage: req.body.percentagename,
+            goaldata: []
             //support: req.body.support,
             //comments: req.body.comments,
         })
@@ -26,14 +27,11 @@ exports.goal_create = function (req, res) {
 
     var goals = [];
 
-    Goal.find({}, {}, function(err, goal) {
+    Goal.find({studentID: req.params.id}, {}, function(err, goal) {
         goal.forEach(function(s) { 
             console.log("s.studentID: " + s.studentID);
             console.log("req.params.id: " + req.params.id);
-            if (s.studentID == req.params.id) {
-                //console.log(s); console.log(s.name); 
-                goals.push(s);
-            }
+            goals.push(s);
         });
     });
 
