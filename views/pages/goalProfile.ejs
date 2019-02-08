@@ -60,14 +60,14 @@
 			<th>Percentage</th>
 			<th>Support</th> 
 			<th>Comments</th>
-			<th>Time</th>
+			<th>Date</th>
 		</tr>
 		<% goalDatas.forEach(function(goalData) { %>
 			<tr>
-				<td><%= goal.name %></td>
+				<td><%= goalData.percentage %></td>
 				<td><%= goalData.support %></td>
 				<td><%= goalData.comments %></td>
-				<td><%= goalData.times %></td>
+				<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 			</tr>
 		<% }); %>
 	</table>

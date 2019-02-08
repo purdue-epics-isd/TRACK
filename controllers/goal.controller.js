@@ -25,7 +25,7 @@ exports.goal_create = function (req, res) {
             }
         });
     });
-
+/*
     var goals = [];
 
     Goal.find({studentID: req.params.id}, {}, function(err, goal) {
@@ -43,7 +43,8 @@ exports.goal_create = function (req, res) {
             student: student,
             goals: goals
         });
-    });
+    });*/
+    res.redirect('/student/' + req.params.id);
 };
 
 
@@ -58,12 +59,17 @@ exports.goal_create = function (req, res) {
 /* renders goal page */
 exports.navigate_to_goalProfile = function (req, res) {
     goalDatas = [];
+    //console.log("goalID: " + GoalData.goalID);
+    //console.log("req.params.goalid: " + req.params.goalid);
 
     GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
-        console.log("LETS ADD SOME GOAL DATA");
-        console.log("goaldata: " + goaldata);
-        //console.log("goaldata: " + req.params.id);
-        goalDatas.push(goaldata);
+        goaldata.forEach(function(s) { 
+            //console.log("LETS ADD SOME GOAL DATA");
+            //console.log("goaldata.goalID: " + s.goalID);
+            //sconsole.log("goaldata: " + s);
+            //console.log("goaldata: " + req.params.id);
+            goalDatas.push(s);
+        });
     });
 
     Student.findById(req.params.id, function(err, student) {

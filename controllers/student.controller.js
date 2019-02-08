@@ -14,7 +14,7 @@ exports.student_create = function (req, res) {
     student.save(function (err) {
         if (err) {
             res.send(err);
-        } else {
+        } /*else {
             var goals = [];
 
             Student.findById(student.id, function(err, student) {
@@ -23,8 +23,9 @@ exports.student_create = function (req, res) {
                     goals: goals
                 });
            });
-        }
+        }*/
     })
+    res.redirect("/classPage");
 };
 
 /*TODO: figure out what this does*/

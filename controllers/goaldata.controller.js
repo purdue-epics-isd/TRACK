@@ -28,7 +28,7 @@ exports.goaldata_create = function (req, res) {
         });
     });
 
-
+    /*
     Student.findById(req.params.id, function(err, student) {
         var goals = [];
         Goal.find({studentID: req.params.id}, {}, function(err, goal) {
@@ -45,7 +45,8 @@ exports.goaldata_create = function (req, res) {
             student: student,
             goals: goals
         });
-    });
+    });*/
+    res.redirect("/student/" + req.params.id);
 };
 
 /*exports.goaldata_details = function (req, res) {
