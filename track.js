@@ -6,13 +6,15 @@ const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
-const goal = require('./controllers/goal.controller')
+const goal = require('./controllers/goal.controller');
+const goaldata = require('./controllers/goaldata.controller');
 const app = express();
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 // set the view engine to ejs
 
-// index page 
+// navigate to login.ejs
 app.get('/', student.run);
 
 //Set up mongoose connection

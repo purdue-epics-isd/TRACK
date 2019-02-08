@@ -1,42 +1,55 @@
-const goaldata = require('../models/goaldata.model');
+const Goaldata = require('../models/goaldata.model');
+const Goal = require('../models/goal.model');
+const Student = require('../models/student.model');
 
 exports.goaldata_create = function (req, res) {
     let goaldata = new Goaldata(
         {
-            name: req.body.name,
-            //description: req.body.description,
-            //goalID: req.body.goalID,
-            //percentage: req.body.percentagename,
-            //support: req.body.support,
-            //comments: req.body.comments,
-            //time: Date.now()
+            goalID: req.params.goalid,
+            percentage: req.body.percentage,
+            support: req.body.support,
+            comments: req.body.comments,
+            time: Date.now()
         }
     );
+
+    console.log(goaldata);
+
     goaldata.save(function (err) {
         if (err) {
             res.send(err);
         } else {
-            console.log(goaldata);
             Student.findById(req.params.id, function(err, student) {
-                console.log(student.goals);
-                res.render('pages/studentPage', {
-                    student: student
+                var goals = [];
+                Goal.find({studentID: req.params.id}, {}, function(err, goal) {
+                    goal.forEach(function(s) { 
+                        console.log("Goal: " + s);
+                        console.log("Student ID: " + s.studentID + "|" + s.name);
+                        console.log("req.params.id: " + req.params.id + "|" + student.name);
+                        goals.push(s);
+                    });
+                    //console.log("Here is the final list:" + goals);
                 });
-           });
+
+                res.render('pages/studentProfile', {
+                    student: student,
+                    goals: goals
+                });
+            });
         }
-    })
+    });
 };
 
-exports.goaldata_details = function (req, res) {
+/*exports.goaldata_details = function (req, res) {
     Goaldata.findById(req.params.id, function (err, goal) {
         if (err) return next(err);
         res.send(goaldata);
     })
-};
+};*/
 
 exports.goaldata_name = function (req, res) {
     Student.findById(req.params.id, function(err, goal) {
-        res.render('pages/goalPage', {
+        res.render('pages/goalProfile', {
             goaldata: goaldata
         });
     });

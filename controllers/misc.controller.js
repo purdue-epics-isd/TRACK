@@ -10,6 +10,7 @@ exports.login = function (req, res) {
             students.push(s);
         });
     });
+    
     Student.findById(req.params.id, function(err, student) {
         res.render('pages/classPage', {
             students: students
