@@ -30,6 +30,9 @@ router.get('/aboutUs', (req, res) => {
 router.get('/feedback', (req, res) => { 
 	res.render('./pages/feedback.ejs') 
 });
+router.get('/settings', (req, res) => { 
+	res.render('./pages/settings.ejs') 
+});
 
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', misc_controller.logout); //navigates to logout page

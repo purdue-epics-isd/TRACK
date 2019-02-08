@@ -80,7 +80,7 @@ exports.navigate_to_goalProfile = function (req, res) {
                 goal: goal
             });
             //console.log("Student: " + student);
-            console.log("Goaldatas: " + goalDatas);
+            //console.log("Goaldatas: " + goalDatas);
         });
     })
 }

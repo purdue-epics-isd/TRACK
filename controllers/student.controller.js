@@ -25,7 +25,7 @@ exports.student_create = function (req, res) {
            });
         }*/
     })
-    res.redirect("/classPage");
+    res .redirect("/classPage");
 };
 
 /*TODO: figure out what this does*/
@@ -37,8 +37,8 @@ exports.student_create = function (req, res) {
     })
 };
 */
-/*redirects to student Page TODO: update function name to something more applicable*/
 
+/*redirects to student Page*/
 exports.navigate_to_studentProfile = function (req, res) {
     var goals = [];
 
@@ -107,6 +107,6 @@ exports.run = function(req, res) {
         res.render('/login.html', {
             students: students
         });*/
-            res.render('pages/login');
+    res.render('pages/login');
     /*});*/
 }
