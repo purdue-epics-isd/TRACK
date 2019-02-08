@@ -20,19 +20,9 @@ exports.goal_create = function (req, res) {
         goal.save(function (err) { 
             if (err) {
                 res.send(err);
-                }
+            }
         });
     });
-        /*student: student;
-        student.update (
-            {$push: {goals: goal}}
-        )}*/
-    //console.log("student 2.0:" + student);
-    /*student.save(function (err) {
-        if(err) {
-            res.send(err);
-        }
-    });*/
 
     var goals = [];
 

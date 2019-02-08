@@ -1,9 +1,9 @@
-const Goaldata = require('../models/goaldata.model');
+const GoalData = require('../models/goaldata.model');
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 
 exports.goaldata_create = function (req, res) {
-    let goaldata = new Goaldata(
+    let goaldata = new GoalData(
         {
             goalID: req.params.goalid,
             percentage: req.body.percentage,
@@ -47,13 +47,13 @@ exports.goaldata_create = function (req, res) {
     })
 };*/
 
-exports.goaldata_name = function (req, res) {
+/*exports.goaldata_name = function (req, res) {
     Student.findById(req.params.id, function(err, goal) {
         res.render('pages/goalProfile', {
             goaldata: goaldata
         });
     });
-}
+}*/
 
 exports.goaldata_delete = function (req, res) {
     console.log(req.body.id)

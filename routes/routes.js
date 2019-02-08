@@ -22,11 +22,14 @@ router.get('/classPage', student_controller.navigate_to_classPage); // navigates
 router.get('/student/:id', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/student/:id/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:id/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
-router.get('/createNewStudent', (req, res) => { 
-	res.render('./pages/createNewStudent.ejs') 
-});
-router.get('/newStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page 
+router.get('/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page 
 
+router.get('/aboutUs', (req, res) => { 
+	res.render('./pages/aboutUs.ejs') 
+});
+router.get('/feedback', (req, res) => { 
+	res.render('./pages/feedback.ejs') 
+});
 
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', misc_controller.logout); //navigates to logout page
