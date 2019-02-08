@@ -20,7 +20,7 @@ router.get('/student/:id/goal/:goalid/goaldata/create', goaldata_controller.goal
 router.get('/classPage', student_controller.navigate_to_classPage); // navigates to the class page
 router.get('/student/:id', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/student/:id/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
-router.get('/student/:id/newgoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
+router.get('/student/:id/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
 router.get('/newStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page 
 
 
