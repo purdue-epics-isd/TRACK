@@ -24,7 +24,7 @@ exports.student_create = function (req, res) {
             });
 
             Student.findById(student.id, function(err, student) {
-                res.render('pages/studentPage', {
+                res.render('pages/studentProfile', {
                     student: student,
                     goals: goals
                 });
@@ -34,16 +34,17 @@ exports.student_create = function (req, res) {
 };
 
 /*TODO: figure out what this does*/
-exports.student_details = function (req, res) {
+/*exports.student_details = function (req, res) {
     Student.findById(req.params.id, function (err, student) {
         //if (err) return next(err);
         if (err) return err;
         res.send(student);
     })
 };
-
+*/
 /*redirects to student Page TODO: update function name to something more applicable*/
-exports.studentProfileNavigation = function (req, res) {
+
+exports.navigate_to_studentProfile = function (req, res) {
     //var students = [];
 /*
     Student.find({}, 'name', function(err, student) {
@@ -67,7 +68,7 @@ exports.studentProfileNavigation = function (req, res) {
 
     Student.findById(req.params.id, function(err, student) {
         Goal.findById(req.params.goalid, function(err, goal) {
-            res.render('pages/studentPage', {
+            res.render('pages/studentProfile', {
                 goals: goals,
                 student: student
             });
@@ -76,10 +77,10 @@ exports.studentProfileNavigation = function (req, res) {
 }
 
 /*redirects to class page*/
-exports.classPageNavigation = function (req, res) {
+exports.navigate_to_classPage = function (req, res) {
     var students = [];
 
-    Student.find({}, 'name', function(err, student) {
+    Student.find({}, {}, function(err, student) {
         student.forEach(function(s) { 
             console.log(s); console.log(s.name); 
             students.push(s);
@@ -94,7 +95,7 @@ exports.classPageNavigation = function (req, res) {
 }
 
 /*redirects to new student page*/
-exports.new_student = function (req, res) {
+exports.navigate_to_createNewStudent = function (req, res) {
     //var students = [];
 
     /*Student.find({}, 'name', function(err, student) {
@@ -104,7 +105,7 @@ exports.new_student = function (req, res) {
         });
     });*/
     Student.findById(req.params.id, function(err, student) {
-        res.render('pages/newStudent', {
+        res.render('pages/createNewStudent', {
             //students: students
         });
     });
