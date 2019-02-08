@@ -1,5 +1,6 @@
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
+const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
 
 /*creates a new goal in database*/
@@ -56,14 +57,24 @@ exports.goal_create = function (req, res) {
 
 /* renders goal page */
 exports.navigate_to_goalProfile = function (req, res) {
+    goalDatas = [];
+
+    GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
+        console.log("LETS ADD SOME GOAL DATA");
+        console.log("goaldata: " + goaldata);
+        //console.log("goaldata: " + req.params.id);
+        goalDatas.push(goaldata);
+    });
+
     Student.findById(req.params.id, function(err, student) {
         Goal.findById(req.params.goalid, function(err, goal) {
             res.render('pages/goalProfile', {
+                goalDatas: goalDatas,
                 student: student,
                 goal: goal
             });
             //console.log("Student: " + student);
-            console.log("Goal: " + goal);
+            console.log("Goaldatas: " + goalDatas);
         });
     })
 }

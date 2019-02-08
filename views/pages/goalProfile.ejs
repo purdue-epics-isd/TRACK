@@ -62,19 +62,15 @@
 			<th>Comments</th>
 			<th>Time</th>
 		</tr>
-		<tr>
-			<td>Jill</td>
-			<td>Smith</td> 
-			<td>50</td>
-			<td>35</td>
-		</tr>
-		<tr>
-			<td>Eve</td>
-			<td>Jackson</td> 
-			<td>94</td>
-			<td>35</td>
-		</tr>
-		</table>
+		<% goalDatas.forEach(function(goalData) { %>
+			<tr>
+				<td><%= goal.name %></td>
+				<td><%= goalData.support %></td>
+				<td><%= goalData.comments %></td>
+				<td><%= goalData.times %></td>
+			</tr>
+		<% }); %>
+	</table>
 
 	
 	<!--
