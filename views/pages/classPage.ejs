@@ -7,7 +7,7 @@
     <link rel="icon" type="image/gif/png" href="img/logo.png">
     <link rel="stylesheet" href="/main.css">
     <script type="text/javascript" src="myScripts.js"></script>
-  </head>
+  </head> 
 
   <header>
     <%- include("../partials/header.ejs")%>
@@ -15,12 +15,26 @@
 
   <body>
     <div class="dropdown">
-      <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
-      <div id="myDropdown" class="dropdown-content">
-        <a href="#home">2nd Period Physics Class</a>
-        <a href="#about">3rd Period Math Class</a>
-        <a href="#contact">4th Period Chemistry Class</a>
-      </div>
+      
+   <select id="selectNumber" class="dropbtn" >
+    <script>
+    var sel = document.getElementById('selectNumber');
+    var options = [ "1st Period English Class", "2nd Period Physics Class", "3rd Period Math Class", "4th Period Chemistry Class" ]; 
+for(var i = 0; i < options.length; i++) {
+    var opt = document.createElement('option');
+    opt.innerHTML = options[i];
+    opt.value="/createNewStudent"
+     document.getElementById('selectNumber').onchange = function() {
+        if (this.selectedIndex!==0) {
+            window.location.href = this.value;
+        }        
+    };
+    //opt.value = options[i];
+    sel.appendChild(opt);
+}
+   </script>
+</select>
+      
     </div>
 
     <a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a><!-- TODO: change reference-->
