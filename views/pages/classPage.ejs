@@ -1,63 +1,63 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 
-  <html>
+<html>
 
-  <head>
-    <title>Track</title>
-    <link rel="icon" type="image/gif/png" href="img/logo.png">
-    <link rel="stylesheet" href="/main.css">
-    <script type="text/javascript" src="myScripts.js"></script>
-  </head>
+<head>
+  <title>Track</title>
+  <link rel="icon" type="image/gif/png" href="img/logo.png">
+  <link rel="stylesheet" href="/main.css">
+  <script type="text/javascript" src="myScripts.js"></script>
+</head>
 
-  <header>
-    <%- include("../partials/header.ejs")%>
-  </header>
+<header>
+  <%- include("../partials/header.ejs")%>
+</header>
 
-  <body>
-    <div class="dropdown">
-      <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
-      <div id="myDropdown" class="dropdown-content">
-        <a href="#home">2nd Period Physics Class</a>
-        <a href="#about">3rd Period Math Class</a>
-        <a href="#contact">4th Period Chemistry Class</a>
-      </div>
+<body>
+  <div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
+    <div id="myDropdown" class="dropdown-content">
+      <a href="#home">2nd Period Physics Class</a>
+      <a href="#about">3rd Period Math Class</a>
+      <a href="#contact">4th Period Chemistry Class</a>
+    </div>
+  </div>
+
+  <a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a><!-- TODO: change reference-->
+
+    <div class="student-container" id="demo">
+      <!--Loads the Students and Creates Buttons for them-->
+      <% students.forEach(function(student) { %>
+      <!--Write the desired HTML for each student here -->
+      <a href="/student/<%= student.id %>" class = "studentButton">
+        <img class = "img-circle" src="img/studentIcon.png" width = "200" height = "200" >
+        <div class = "studentName"><%= student.name %></div>
+      </a>
+      <% }); %>
+
     </div>
 
-    <a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a><!-- TODO: change reference-->
+  </body>
+</html>
 
-      <div class="student-container" id="demo">
-        <!--Loads the Students and Creates Buttons for them-->
-        <% students.forEach(function(student) { %>
-        <!--Write the desired HTML for each student here -->
-        <a href="/student/<%= student.id %>" class = "studentButton">
-          <img class = "img-circle" src="img/studentIcon.png" width = "200" height = "200" >
-          <div class = "studentName"><%= student.name %></div>
-        </a>
-        <% }); %>
+<script>
+  /* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
 
-      </div>
-
-    </body>
-  </html>
-
-  <script>
-    /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
         }
       }
     }
-  </script>
+  }
+</script>
