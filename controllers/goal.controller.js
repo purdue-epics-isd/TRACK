@@ -1,5 +1,6 @@
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
+const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
 
 /*creates a new goal in database*/
@@ -9,7 +10,8 @@ exports.goal_create = function (req, res) {
             name: req.body.name,
             description: req.body.description,
             studentID: req.params.id,
-            percentage: req.body.percentagename
+            percentage: req.body.percentagename,
+            goaldata: []
             //support: req.body.support,
             //comments: req.body.comments,
         })
@@ -23,17 +25,14 @@ exports.goal_create = function (req, res) {
             }
         });
     });
-
+/*
     var goals = [];
 
-    Goal.find({}, {}, function(err, goal) {
+    Goal.find({studentID: req.params.id}, {}, function(err, goal) {
         goal.forEach(function(s) { 
             console.log("s.studentID: " + s.studentID);
             console.log("req.params.id: " + req.params.id);
-            if (s.studentID == req.params.id) {
-                //console.log(s); console.log(s.name); 
-                goals.push(s);
-            }
+            goals.push(s);
         });
     });
 
@@ -44,7 +43,8 @@ exports.goal_create = function (req, res) {
             student: student,
             goals: goals
         });
-    });
+    });*/
+    res.redirect('/student/' + req.params.id);
 };
 
 
@@ -58,14 +58,29 @@ exports.goal_create = function (req, res) {
 
 /* renders goal page */
 exports.navigate_to_goalProfile = function (req, res) {
+    goalDatas = [];
+    //console.log("goalID: " + GoalData.goalID);
+    //console.log("req.params.goalid: " + req.params.goalid);
+
+    GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
+        goaldata.forEach(function(s) { 
+            //console.log("LETS ADD SOME GOAL DATA");
+            //console.log("goaldata.goalID: " + s.goalID);
+            //sconsole.log("goaldata: " + s);
+            //console.log("goaldata: " + req.params.id);
+            goalDatas.push(s);
+        });
+    });
+
     Student.findById(req.params.id, function(err, student) {
         Goal.findById(req.params.goalid, function(err, goal) {
             res.render('pages/goalProfile', {
+                goalDatas: goalDatas,
                 student: student,
                 goal: goal
             });
             //console.log("Student: " + student);
-            console.log("Goal: " + goal);
+            //console.log("Goaldatas: " + goalDatas);
         });
     })
 }
