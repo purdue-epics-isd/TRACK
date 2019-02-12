@@ -78,6 +78,17 @@ exports.navigate_to_classPage = function (req, res) {
     });
 }
 
+/*redirects to class page*/
+exports.navigate_to_classPage = function (req, res) {
+    
+
+    Student.findById(req.params.id, function(err, student) {
+        res.render('pages/classPage1', {
+           
+        });
+    });
+}
+
 /*redirects to new student page*/
 exports.navigate_to_createNewStudent = function (req, res) {
     //var students = [];
