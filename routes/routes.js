@@ -18,7 +18,8 @@ router.post('/goal/delete', goal_controller.goal_delete); //TODO: deletes goal f
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
 //router.get('/test', student_controller.student_details); // a simple test url to check that all of our files are communicating correctly.
 
-router.get('/classPage', student_controller.navigate_to_classPage); // navigates to the class page
+router.get('/classPage', student_controller.navigate_to_classPage);
+//router.get('/classPage1', student_controller.navigate_to_classPage1); // navigates to the class page
 router.get('/student/:id', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/student/:id/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:id/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page

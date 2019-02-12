@@ -25,7 +25,7 @@ exports.student_create = function (req, res) {
            });
         }*/
     })
-    res .redirect("/classPage");
+    res.redirect("/classPage");
 };
 
 /*TODO: figure out what this does*/
@@ -77,6 +77,17 @@ exports.navigate_to_classPage = function (req, res) {
         });
     });
 }
+
+/*redirects to class page*/
+/*exports.navigate_to_classPage1 = function (req, res) {
+    
+
+    Student.findById(req.params.id, function(err, student) {
+        res.render('pages/classPage1', {
+           
+        });
+    });
+}*/
 
 /*redirects to new student page*/
 exports.navigate_to_createNewStudent = function (req, res) {

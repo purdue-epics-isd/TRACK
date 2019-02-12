@@ -1,25 +1,82 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 
-<html>
+  <html>
 
-<head>
-  <title>Track</title>
-  <link rel="icon" type="image/gif/png" href="img/logo.png">
-  <link rel="stylesheet" href="/main.css">
-  <script type="text/javascript" src="myScripts.js"></script>
-</head>
+  <head>
+    <title>Track</title>
+    <link rel="icon" type="image/gif/png" href="img/logo.png">
+    <link rel="stylesheet" href="/main.css">
+    <script type="text/javascript" src="myScripts.js"></script>
+  </head> 
 
-<header>
-  <%- include("../partials/header.ejs")%>
-</header>
+  <header>
+    <%- include("../partials/header.ejs")%>
+  </header>
 
-<body>
-  <div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
-    <div id="myDropdown" class="dropdown-content">
-      <a href="#home">2nd Period Physics Class</a>
-      <a href="#about">3rd Period Math Class</a>
-      <a href="#contact">4th Period Chemistry Class</a>
+  <body>
+    <div class="dropdown">
+      
+   <select id="selectNumber" class="dropbtn" >
+    <script>
+      var sel = document.getElementById('selectNumber');
+      var options = [ "1st Period English Class", "2nd Period Physics Class", "3rd Period Math Class", "4th Period Chemistry Class" ]; 
+      for(var i = 0; i < options.length; i++) {
+        var opt = document.createElement('option');
+        opt.innerHTML = options[i];
+        /*if(i==0) {
+          opt.value="/classPage";
+        } else {
+          opt.value="/classPage";
+        }*/
+        document.getElementById('selectNumber').onchange = function() {
+          //if (this.selectedIndex!==0) {
+            If(Dropdown1.Selected.Value = 1); "1"; Dropdown1.Selected.Value;
+/*
+            var x = document.getElementById('demo')
+            for(student in students) {
+              var c = document.body.children;
+              var txt = "";
+              var i;
+              for (i = 0; i < c.length; i++) {
+                txt = txt + c[i].tagName + "<br>";
+              }
+              var btn = document.createElement("BUTTON");
+              var t = document.createTextNode("student.name");
+              btn.appendChild(t);
+              document.body.appendChild(btn);             
+            };*/
+              //}
+            //window.location.href = this.value;
+          //}        
+        };
+        //opt.value = options[i];
+        sel.appendChild(opt);
+        }
+/*var sel = document.getElementById('selectNumber');
+var options = [ "1st Period English Class", "2nd Period Physics Class", "3rd Period Math Class", "4th Period Chemistry Class" ];
+var options_val = [ "/classPage", "/classPage1", "/classPage1", "/classPage1" ];
+f//or(var i = 0; i < options.length; i++) {
+var opt = document.createElement('option');
+opt.innerHTML = options[0];
+opt.value=options_val[0];
+//opt.value = options[i];
+sel.appendChild(opt);
+
+var opt = document.createElement('option');
+opt.innerHTML = options[1];
+opt.value=options_val[1];
+//opt.value = options[i];
+sel.appendChild(opt);
+//}
+document.getElementById('selectNumber').onchange = function() {
+if (this.selectedIndex!==0) {
+    window.location.href = this.value;
+}          
+};*/
+
+   </script>
+
+</select>s
     </div>
   </div>
 
