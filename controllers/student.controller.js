@@ -79,7 +79,7 @@ exports.navigate_to_classPage = function (req, res) {
 }
 
 /*redirects to class page*/
-exports.navigate_to_classPage = function (req, res) {
+exports.navigate_to_classPage1 = function (req, res) {
     
 
     Student.findById(req.params.id, function(err, student) {
