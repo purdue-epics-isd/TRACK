@@ -25,25 +25,6 @@ exports.goal_create = function (req, res) {
             }
         });
     });
-/*
-    var goals = [];
-
-    Goal.find({studentID: req.params.id}, {}, function(err, goal) {
-        goal.forEach(function(s) { 
-            console.log("s.studentID: " + s.studentID);
-            console.log("req.params.id: " + req.params.id);
-            goals.push(s);
-        });
-    });
-
-    Student.findById(req.params.id, function(err, student) {
-        console.log(student.goals);
-        console.log(goals);
-        res.render('pages/studentProfile', {
-            student: student,
-            goals: goals
-        });
-    });*/
     res.redirect('/student/' + req.params.id);
 };
 
@@ -87,10 +68,13 @@ exports.navigate_to_goalProfile = function (req, res) {
 
 /*deletes goal from database TODO: implement in actual website*/
 exports.goal_delete = function (req, res) {
-    console.log(req.params.goalid)
+    console.log("Goal id: [delete]: " + req.params.goalid);
     Goal.findByIdAndRemove(req.params.goalid, function (err) {
-        if (err) return next(err);
-        res.send('Deleted successfully!');
+        if (err) {
+            console.log(err);
+        } else {
+        res.redirect('/student/' + req.params.id);
+        }
     })
 };
 

@@ -12,7 +12,11 @@ router.post('/student/create', student_controller.student_create); //adds new st
 router.post('/student/:id/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/student/:id/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 
-router.post('/goal/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
+//Delete data
+router.get('/student/:id/goal/:goalid/delete',goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
+//router.delete('/goal/delete',goal_controller.goal_delete);
+//router.post('/goal/:goalid/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
+router.get('/student/:id/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
 
 
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
@@ -37,12 +41,5 @@ router.get('/settings', (req, res) => {
 
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', misc_controller.logout); //navigates to logout page
-
-//router.delete('/student/:id/goal/:goalid/delete', goal_controller.goalProfileNavigation);
-
-
-//Delete data
-router.delete('/student/:id/goal/:goalid/delete',goal_controller.goal_delete);
-//router.delete('/goal/delete',goal_controller.goal_delete);
 
 module.exports = router;

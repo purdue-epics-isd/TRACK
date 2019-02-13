@@ -106,6 +106,16 @@ exports.navigate_to_createNewStudent = function (req, res) {
     });
 }
 
+exports.student_delete = function (req, res) {
+    Student.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+        res.redirect('/classPage');
+        }
+    })
+};
+
 /*first function used when website starts up*/
 exports.run = function(req, res) {
     /*var students = [];
