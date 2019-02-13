@@ -1,6 +1,6 @@
 # TRACK
 
-Try it out here: https://purdue-epics-isd-track.herokuapp.com/goalOne.html
+Try it out here: https://purdue-epics-isd-track.herokuapp.com/
 
 TRACK started as an idea for teachers to track behaviors in class, specifically targeted at younger children. Because all teachers have an iPad, we thought about repurposing an old team’s iOS application and customizing it to fit the teacher’s needs. However, as we visited ISD early in the semester, it became clear that many other teachers at the school wanted the app as well, and that they would prefer the app as a web application. We thus pivoted to a web application with a focus on storing student data from year to year to help teachers understand their students more thoroughly.
 
