@@ -125,14 +125,14 @@ form {
 .submitButton {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
-   background-image: url('img/backButton.png');
+   background-image: url('img/submitButton.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 150% auto;
    display: inline-block;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
-   transform: rotate(180deg); /*rotating the image*/
+   /*transform: rotate(180); /*rotating the image*/
    position: fixed;
    bottom: 25px;
    right: 25px;
@@ -142,14 +142,14 @@ form {
 form input[type="submit"] {
    width:106px; /*width of your image*/
    height:106px; /*height of your image*/
-   background-image: url('img/backButton.png');
+   background-image: url('img/submitButton.png');
    background-repeat: no-repeat;
    background-position: center;
    background-size: 150% auto;
    display: inline-block;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
-   transform: rotate(180deg); /*rotating the image*/
+   /*transform: rotate(180deg); /*rotating the image*/
    position: fixed;
    bottom: 25px;
    right: 25px;
