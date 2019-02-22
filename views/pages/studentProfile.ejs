@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Profile</title>
+  <link rel="icon" type="image/gif/png" href="img/logo.png">
+  <link rel="stylesheet" href="/main.css">
+  <script type="text/javascript" src="../myScripts.js"></script>
+</head>
+
+<header>
+  <%- include("../partials/header.ejs")%>
+</header>
+
+<body>
+  <h1><%= student.name %>'s Profile</h1>
+
+  <a href="/student/<%= student.id %>/delete" class="Delete" style="position: absolute; bottom: 35px; right:35px">Delete student file</a>
+  <a href="/student/<%= student.id %>/createNewGoal" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Goal</a>
+
+  <div class="goal-container">
+    <% goals.forEach(function(goal) { %>
+      <a href="/student/<%= student.id %>/goal/<%= goal.id %>" class="academicGoal"><div class="goalName"><%= goal.name %></div></a>
+    <% }); %>
+      <!--
+      <a href="goalOne.html>" class="academicGoal"><div class="goalName">Counting to 10</div></a>
+      <a href="goalTwo.html" class="socialGoal"><div class="goalName">Positive Social Responses</div></a>
+      <a href="goalFour.html" class="academicGoal"><div class="goalName">Reading Goal</div></a>
+      <a href="goalFive.html" class="academicGoal"><div class="goalName">Math Goal</div></a>
+      <a href="goalThree.html" class="behaviorGoal"><div class="goalName">Disruptive Behavior During Class</div></a>-->
+  </div>
+  <a href="/classPage"><span class="backButton"></span></a>
+</body>
+</html>

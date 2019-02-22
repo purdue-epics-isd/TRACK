@@ -8,25 +8,74 @@
     <script type="text/javascript" src="myScripts.js"></script>
 </head>
 
- <header>
-    <%- include("../partials/header.ejs")%>
- </header>
+<style>
+	table#t01 {
+	  width:80%;
+	  margin-left: 10%;
+	  color: black;
+	}
+	table#t01, th#t01, td#t01 {
+	  border: 1px solid black;
+	  border-collapse: collapse;
+	}
+	th#t01, td#t01 {
+	  padding: 15px;
+	  text-align: left;
+	}
+	table#t01 tr:nth-child(even) {
+	  background-color: #eee;
+	}
+	table#t01 tr:nth-child(odd) {
+	 background-color: #fff;
+	}
+	table#t01 th {
+	  background-color: black;
+	  color: white;
+	}
+</style>
 
-<body>	
-	<h1><%= student.name %></h1>
-	<h1>Counting to 10</h1>
-	<h2>Anna will count to 10 with less than one correction in 4 out of 5 trials</h2>
-		<form  action="/goaldata/create" id="submitForm">
-			<table style="position: center">
-				<tr>
-				<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td></tr>
-				<tr>
-					<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
-				<tr>
-					<td> Additional Comments: </td><td><input type="text" name="support"></td></tr></table>
-			<a href="Anna.html"><span class="backButton"></span></a>
-			<a><input type="submit" value="" class="submitButton"></a>
-		</form>
+<header>
+    <%- include("../partials/header.ejs")%>
+</header>
+
+<body>
+
+	<a href="/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete" style="position: absolute; top: 35px; right:35px">Delete goal file</a>
+
+	
+	<h1><%= goal.name %></h1>
+	<h2><%= goal.description %></h2>
+	<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+		<table style="position: center">
+			<tr>
+				<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
+			<tr>
+				<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
+			<tr>
+				<td> Additional Comments: </td><td><input type="text" name="comments"></td></tr>
+			<a href="/student/<%= student.id %>"><span class="backButton"></span></a>
+			<a><input type="submit" value="Submit" class="submitButton"></a>
+		</table>
+	</form>
+
+	<h2>Progress Monitoring</h2>
+	<table style="position: center" id="t01">
+		<tr>
+			<th>Percentage</th>
+			<th>Support</th> 
+			<th>Comments</th>
+			<th>Date</th>
+		</tr>
+		<% goalDatas.forEach(function(goalData) { %>
+			<tr>
+				<td><%= goalData.percentage %></td>
+				<td><%= goalData.support %></td>
+				<td><%= goalData.comments %></td>
+				<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
+			</tr>
+		<% }); %>
+	</table>
+
 	
 	<!--
 			<input type="submit" value = "Submit" class="submitButton"><br><br>

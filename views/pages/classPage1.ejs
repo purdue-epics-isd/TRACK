@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+  <html>
+
+  <head>
+    <title>Track</title>
+    <link rel="icon" type="image/gif/png" href="img/logo.png">
+    <link rel="stylesheet" href="/main.css">
+    <script type="text/javascript" src="myScripts.js"></script>
+  </head> 
+
+  <header>
+    <%- include("../partials/header.ejs")%>
+  </header>
+
+  <body>
+    <div class="dropdown">
+      
+   <select id="selectNumber" class="dropbtn" >
+    <script>
+    /*var sel = document.getElementById('selectNumber');
+    var options = [ "1st Period English Class", "2nd Period Physics Class", "3rd Period Math Class", "4th Period Chemistry Class" ]; 
+for(var i = 0; i < options.length; i++) {
+    var opt = document.createElement('option');
+    opt.innerHTML = options[i];
+    opt.value=""
+     document.getElementById('selectNumber').onchange = function() {
+        if (this.selectedIndex!==0) {
+            window.location.href = this.value;
+        }        
+    };
+    //opt.value = options[i];
+    sel.appendChild(opt);
+}*/ 
+   </script>
+</select>
+      
+    </div>
+
+    <a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a><!-- TODO: change reference-->
+
+      <div class="student-container" id="demo">
+        <!--Loads the Students and Creates Buttons for them-->
+        <% students.forEach(function(student) { %>
+        <!--Write the desired HTML for each student here -->
+        <a href="/student/<%= student.id %>" class = "studentButton">
+          <img class = "img-circle" src="img/studentIcon.png" width = "200" height = "200" >
+          <div class = "studentName"><%= student.name %></div>
+        </a>
+        <% }); %>
+
+      </div>
+
+    </body>
+  </html>
+
+  <script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>

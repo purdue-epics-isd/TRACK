@@ -1,40 +1,68 @@
-const Goaldata = require('../models/goaldata.model');
+const GoalData = require('../models/goaldata.model');
+const Goal = require('../models/goal.model');
+const Student = require('../models/student.model');
 
 exports.goaldata_create = function (req, res) {
-    let goaldata = new Goaldata(
+    let goaldata = new GoalData(
         {
-            name: req.body.name,
-            description: req.body.description,
-            goalID: req.body.studentID,
-            percentage: req.body.percentagename,
+            goalID: req.params.goalid,
+            percentage: req.body.percentage,
             support: req.body.support,
             comments: req.body.comments,
             time: Date.now()
         }
     );
-    goaldata.save(function (err) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(goaldata);
-        }
-    })
+
+    console.log("percentage: " + req.body.percentage);
+    console.log("support: " + req.body.support);
+
+    //console.log(goaldata);
+
+    Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
+        console.log("Goal to be updated: " + goal);
+        console.log("goaldata to be added: " + goaldata);
+        goaldata.save(function (err) { 
+            if (err) {
+                res.send(err);
+            }
+        });
+    });
+
+    /*
+    Student.findById(req.params.id, function(err, student) {
+        var goals = [];
+        Goal.find({studentID: req.params.id}, {}, function(err, goal) {
+            goal.forEach(function(s) { 
+                console.log("Goal: " + s);
+                console.log("Student ID: " + s.studentID + "|" + s.name);
+                console.log("req.params.id: " + req.params.id + "|" + student.name);
+                goals.push(s);
+            });
+            //console.log("Here is the final list:" + goals);
+        });
+
+        res.render('pages/studentProfile', {
+            student: student,
+            goals: goals
+        });
+    });*/
+    res.redirect("/student/" + req.params.id);
 };
 
-exports.goaldata_details = function (req, res) {
+/*exports.goaldata_details = function (req, res) {
     Goaldata.findById(req.params.id, function (err, goal) {
         if (err) return next(err);
         res.send(goaldata);
     })
-};
+};*/
 
-exports.goaldata_name = function (req, res) {
+/*exports.goaldata_name = function (req, res) {
     Student.findById(req.params.id, function(err, goal) {
-        res.render('pages/goalPage', {
+        res.render('pages/goalProfile', {
             goaldata: goaldata
         });
     });
-}
+}*/
 
 exports.goaldata_delete = function (req, res) {
     console.log(req.body.id)
