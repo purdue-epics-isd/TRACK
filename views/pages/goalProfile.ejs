@@ -44,7 +44,7 @@
 
 	
 	<h1><%= goal.name %></h1>
-	<h2><%= goal.description %></h2>
+	<h2><%= goal.description %> | <%= goal.startDate %> - <%=goal.endDate %></h2>
 	<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 		<table style="position: center">
 			<tr>

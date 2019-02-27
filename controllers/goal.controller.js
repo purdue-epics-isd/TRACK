@@ -9,8 +9,10 @@ exports.goal_create = function (req, res) {
         {
             name: req.body.name,
             description: req.body.description,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate,
+            goalType: req.body.goalType,
             studentID: req.params.id,
-            percentage: req.body.percentagename,
             goaldata: []
             //support: req.body.support,
             //comments: req.body.comments,
@@ -27,15 +29,6 @@ exports.goal_create = function (req, res) {
     });
     res.redirect('/student/' + req.params.id);
 };
-
-
-/*TODO: figure out what this does*/
-/*exports.goal_details = function (req, res) {
-    Goal.findById(req.params.id, function (err, goal) {
-        if (err) return next(err);
-        res.send(goal);
-    })
-};*/
 
 /* renders goal page */
 exports.navigate_to_goalProfile = function (req, res) {
