@@ -77,21 +77,21 @@ input.invalid {
 	<h1>Create New Goal</h1>
 
 	<!-- One "tab" for each step in the form: -->
-		<div class="tab">Method of Collection: <br>
+	<div class="tab">Method of Collection: <br>
 		<input type="checkbox" style="width: auto" name="singlePoint" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
 		<input type="checkbox" style="width: auto" name="rubric" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
 		<div id="test" style="display: none">
-			<p><input placeholder="Rubric Field" type="text" name="name"></p>
+			<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
 			<button onclick="addMore()">Add more</button>
 		</div>
 		<input type="checkbox" style="width: auto" name="comments" value="comments" id="comments"> Comments <br>
 		<script>
 			function addMore() {
-				var btn = document.createElement("BUTTON");        // Create a <button> element
+				var txt = document.createElement("input");        // Create a <input> element
 				var t = document.createTextNode("Rubric Field");       // Create a text node
-				t.name = "name";
-				btn.appendChild(t);                                // Append the text to <button>
-				document.getElementById("test").appendChild(btn);                    // Append <button> to <body>
+				t.name = "rubricField";
+				txt.appendChild(t);                                // Append the text to <input>
+				document.getElementById("test").appendChild(txt);      // Append <input> to <body>
 			}
 
 			function rubricVisibility() {
@@ -150,6 +150,7 @@ showTab(currentTab); // Display the current tab
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
+  console.log("Welcome"); //debugging statement
   x[n].style.display = "block";
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
@@ -163,7 +164,7 @@ function showTab(n) {
   	document.getElementById("nextBtn").innerHTML = "Next";
   }
   // ... and run a function that displays the correct step indicator:
-  fixStepIndicator(n)
+  fixStepIndicator(n);
 }
 
 function nextPrev(n) {
@@ -186,25 +187,37 @@ function nextPrev(n) {
 }
 
 function validateForm() {
-  // This function deals with validation of the form fields
-  var x, y, i, valid = true;
-  x = document.getElementsByClassName("tab");
-  y = x[currentTab].getElementsByTagName("input");
-  // A loop that checks every input field in the current tab:
-  for (i = 0; i < y.length; i++) {
-    // If a field is empty...
-    if (y[i].value == "") {
-      // add an "invalid" class to the field:
-      y[i].className += " invalid";
-      // and set the current valid status to false:
-      valid = false;
-  }
-}
-  // If the valid status is true, mark the step as finished and valid:
-  if (valid) {
-  	document.getElementsByClassName("step")[currentTab].className += " finish";
-  }
-  return valid; // return the valid status
+	// This function deals with validation of the form fields
+  	var x, y, i, valid = true;
+  	x = document.getElementsByClassName("tab");
+  	y = x[currentTab].getElementsByTagName("input");
+  	// A loop that checks every input field in the current tab:
+  	for (i = 0; i < y.length; i++) {
+    	// If a field is empty...
+    	console.log("I am in the loop");
+	    if (y[i].value == "") {
+	   		// add an "invalid" class to the field:
+	   		y[i].className += " invalid";
+	   		console.log(y[i].className);
+	      	// and set the current valid status to false:
+	      	valid = false;
+	      	//check to see if this is the rubric field bc it is okay to leave rubric field empty as long as the checkbox is unchecked
+	      	if (y[i].name == "rubricField") {
+	      		console.log("I am a rubric field");
+	      		if (document.getElementById("rubric").checked == false) {
+	      			y[i].className = "";
+	      			console.log("rubric not checked");
+	      			console.log(y[i].className);
+	      			valid = true;
+	  			}
+			}
+		}
+	}
+	// If the valid status is true, mark the step as finished and valid:
+	if (valid) {
+		document.getElementsByClassName("step")[currentTab].className += " finish";
+	}
+	return valid; // return the valid status
 }
 
 function fixStepIndicator(n) {
