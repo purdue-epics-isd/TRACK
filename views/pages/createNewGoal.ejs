@@ -13,6 +13,9 @@
 	width: 70%;
 	min-width: 300px;
 }
+p {
+	margin: 10px;
+}
 
 /* Style the input fields */
 input {
@@ -75,42 +78,65 @@ input.invalid {
 <form id="regForm" action="goal/create" method="post">
 
 	<h1>Create New Goal</h1>
-
-
 	<!-- One "tab" for each step in the form: -->
 	<div class="tab">Method of Collection: <br>
 		<input type="checkbox" style="width: auto" name="singlePoint" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
 		<input type="checkbox" style="width: auto" name="rubric" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
-		<div id="test" style="display: none">
-			<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
-			<button onclick="addMore()">Add more</button>
+		<div style="display: none" id="rubricDiv">
+			<div id = "rubricFieldsHolder">
+				<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
+			</div>
+
+			<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
+			<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
 		</div>
 		<input type="checkbox" style="width: auto" name="comments" value="comments" id="comments"> Comments <br>
 		<script>
-			function addMore() {
-				var txt = document.createElement("input");        // Create a <input> element
-				var t = document.createTextNode("Rubric Field");       // Create a text node
-				t.name = "rubricField";
-				txt.appendChild(t);                                // Append the text to <input>
-				document.getElementById("test").appendChild(txt);      // Append <input> to <body>
+			function addRubricField() {
+				var rubricHolder = document.createElement("p");
+				var rubricField = document.createElement("input");        // Create a <input> element
+				rubricField.placeholder = "Rubric Field";
+				rubricField.type = "text";
+				rubricField.name = "rubricField";
+				rubricHolder.appendChild(rubricField);
+				var n = rubricFieldsHolder.childNodes.length - 4;
+				console.log(rubricFieldsHolder.childNodes);
+				console.log(n);
+				document.getElementById("rubricFieldsHolder").insertBefore(rubricHolder, rubricFieldsHolder.childNodes[n]);      // Append <input> to <body>
+			}
+
+			function deleteRubricField() {
+				var n = rubricFieldsHolder.childNodes.length - 5;
+				console.log(rubricFieldsHolder.childNodes);
+				console.log(rubricFieldsHolder.children[n]);
+				console.log(n);
+				rubricFields = document.getElementById("rubricFieldsHolder");
+				document.getElementById("rubricFieldsHolder").childNodes[n].remove();
+				//rubricFields.children[n-4].remove();
 			}
 
 			function rubricVisibility() {
 				// Get the checkbox
 				var checkBox = document.getElementById("rubric");
 				// Get the output text
-				var text = document.getElementById("test");
+				var rubricDiv = document.getElementById("rubricDiv");
 
 				// If the checkbox is checked, display the output text
 				if (checkBox.checked == true){
-					text.style.display = "block";
+					rubricDiv.style.display = "block";
 				} else {
-					text.style.display = "none";
+					rubricDiv.style.display = "none";
 				}
 			}
 		</script>
 	</div>
 
+	<div class="tab" id="preview">
+		<p>Goal Preview</p>
+		<div id="preview">
+		</div>
+	</div>
+	
 	<div class="tab">
 		<p><input placeholder="Goal Title..." type="text" name="name"></p>
 		<p><textarea placeholder="Goal Description..."" name="description"></textarea></p>
@@ -151,7 +177,6 @@ showTab(currentTab); // Display the current tab
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
-  console.log("Welcome"); //debugging statement
   x[n].style.display = "block";
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
@@ -177,7 +202,83 @@ function nextPrev(n) {
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
   currentTab = currentTab + n;
-  // if you have reached the end of the form... :
+
+//show preview of the goal
+  if (x[currentTab].id == "preview") {
+  	console.log("Welcome to tab 2")
+
+  	//clear previous preview
+  	var preview = document.getElementById("preview");
+	while (preview.firstChild) {
+	    preview.removeChild(preview.firstChild);
+	}
+
+	if (document.getElementById("singlePoint").checked == true) {
+		console.log("single point testing");
+		var txt = document.createElement("p");
+		txt.innerHTML = "Percentage Complete:";
+		var input = document.createElement("input");
+		input.type = "value";
+		input.name = "percentage";
+
+		var percentageElement = document.createElement("div");
+		percentageElement.appendChild(txt);
+		percentageElement.appendChild(input);
+		document.getElementById("preview").appendChild(percentageElement);
+	}
+
+	if (document.getElementById("rubric").checked == true) {
+		console.log("rubric preview testing");
+		var rubricDiv = document.getElementById("rubricFieldsHolder");
+		//console.log(rubricDiv.childNodes.length);
+		//console.log(rubricDiv.childNodes);
+		console.log(rubricDiv.children);
+		//console.log(rubricDiv.children[0].children[0].value);
+		//console.log(rubricDiv.children[1].children[0].value);
+		//console.log(rubricDiv.childNodes[0]);
+		//console.log(rubricDiv.childNodes[1].value);
+		var rubricElement = document.createElement("div");
+
+		for (var i = 0; i < rubricDiv.children.length; i++) {
+			//console.log(rubricDiv.childNodes[i]);
+			var radiobtn = document.createElement("input");
+			radiobtn.type = "radio";
+			radiobtn.name = "rubric";
+			radiobtn.value = rubricDiv.children[i].children[0].value;
+			radiobtn.innerHTML = rubricDiv.children[i].children[0].value;
+
+			var txt = document.createElement("p");
+			var node = document.createTextNode(rubricDiv.children[i].children[0].value);
+			txt.appendChild(node);
+			//txt.node = rubricDiv.children[i].children[0].value;
+			console.log("Text: " + txt);
+
+			console.log(rubricDiv.children[i].children[0].value);
+			rubricElement.appendChild(radiobtn);
+			rubricElement.appendChild(txt);
+		}
+
+		document.getElementById("preview").appendChild(rubricElement);
+  
+	}
+
+	if (document.getElementById("comments").checked == true) {
+		console.log("comment testing");
+		var txt = document.createElement("p");
+		txt.innerHTML = "Additional Comments:";
+		var input = document.createElement("input");
+		input.type = "value";
+		input.name = "comments";
+
+		var commentElement = document.createElement("div");
+		commentElement.appendChild(txt);
+		commentElement.appendChild(input);
+		document.getElementById("preview").appendChild(commentElement);
+	}
+
+  }
+
+// if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:
     document.getElementById("regForm").submit();
@@ -195,22 +296,24 @@ function validateForm() {
   	// A loop that checks every input field in the current tab:
   	for (i = 0; i < y.length; i++) {
     	// If a field is empty...
-    	console.log("I am in the loop");
 	    if (y[i].value == "") {
-	   		// add an "invalid" class to the field:
-	   		y[i].className += " invalid";
-	   		console.log(y[i].className);
-	      	// and set the current valid status to false:
-	      	valid = false;
 	      	//check to see if this is the rubric field bc it is okay to leave rubric field empty as long as the checkbox is unchecked
-	      	if (y[i].name == "rubricField") {
-	      		console.log("I am a rubric field");
-	      		if (document.getElementById("rubric").checked == false) {
-	      			y[i].className = "";
-	      			console.log("rubric not checked");
-	      			console.log(y[i].className);
-	      			valid = true;
-	  			}
+	      	if ((y[i].name == "rubricField" || y[i].type == "button")) {
+	      		if (document.getElementById("rubric").checked == true) {
+					// add an "invalid" class to the field:
+					y[i].className += " invalid";
+					console.log(y[i].className);
+					// and set the current valid status to false:
+					valid = false;
+	      		}
+	  		} else if (x[currentTab].id = "Preview") { 
+	  			//we good
+	  		} else {
+				// add an "invalid" class to the field:
+		   		y[i].className += " invalid";
+		   		console.log(y[i].className);
+		      	// and set the current valid status to false:
+		      	valid = false;
 			}
 		}
 	}
