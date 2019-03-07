@@ -75,11 +75,27 @@ input.invalid {
 	<%- include("../partials/header.ejs")%>
 </header>
 
-<form id="regForm" action="goal/create" method="post">
+<h1>Create New Goal</h1>
 
-	<h1>Create New Goal</h1>
+<form id="regForm" action="goal/create" method="post">
 	<!-- One "tab" for each step in the form: -->
-	<div class="tab">Method of Collection: <br>
+	
+	<div class="tab">
+		<p><input placeholder="Goal Title..." type="text" name="name" id="name"></p>
+		<p><textarea placeholder="Goal Description..."" name="description" id="description"></textarea></p>
+	</div>
+
+	<div class="tab">
+		<p><input placeholder="Start Date..." type="text" name="startDate" id="startDate"></p>
+		<p><input placeholder="EndDate..." type="text" name="endDate" id="endDate"></p>
+	</div>
+
+	<div class="tab"> Goal Type: <br>
+		<input type="radio" style="width: auto" name="goalType" value="academic"> Academic <br>
+		<input type="radio" style="width: auto" name="goalType" value="behavioral"> Behavioral <br>
+	</div>
+
+		<div class="tab">Method of Collection: <br>
 		<input type="checkbox" style="width: auto" name="singlePoint" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
 		<input type="checkbox" style="width: auto" name="rubric" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
 		<div style="display: none" id="rubricDiv">
@@ -99,14 +115,14 @@ input.invalid {
 				rubricField.type = "text";
 				rubricField.name = "rubricField";
 				rubricHolder.appendChild(rubricField);
-				var n = rubricFieldsHolder.childNodes.length - 4;
-				console.log(rubricFieldsHolder.childNodes);
-				console.log(n);
-				document.getElementById("rubricFieldsHolder").insertBefore(rubricHolder, rubricFieldsHolder.childNodes[n]);      // Append <input> to <body>
+				//var n = rubricFieldsHolder.childNodes.length - 6;
+				//console.log(rubricFieldsHolder.childNodes);
+				//console.log(n);
+				document.getElementById("rubricFieldsHolder").insertBefore(rubricHolder, rubricFieldsHolder.childNodes[-1]);      // Append <input> to <body>
 			}
 
 			function deleteRubricField() {
-				var n = rubricFieldsHolder.childNodes.length - 5;
+				var n = rubricFieldsHolder.childNodes.length - 1;
 				console.log(rubricFieldsHolder.childNodes);
 				console.log(rubricFieldsHolder.children[n]);
 				console.log(n);
@@ -133,23 +149,6 @@ input.invalid {
 
 	<div class="tab" id="preview">
 		<p>Goal Preview</p>
-		<div id="preview">
-		</div>
-	</div>
-	
-	<div class="tab">
-		<p><input placeholder="Goal Title..." type="text" name="name"></p>
-		<p><textarea placeholder="Goal Description..."" name="description"></textarea></p>
-	</div>
-
-	<div class="tab">
-		<p><input placeholder="Start Date..." type="text" name="startDate"></p>
-		<p><input placeholder="EndDate..." type="text" name="endDate"></p>
-	</div>
-
-	<div class="tab"> Goal Type: <br>
-		<input type="radio" style="width: auto" name="goalType" value="academic"> Academic <br>
-		<input type="radio" style="width: auto" name="goalType" value="behavioral"> Behavioral <br>
 	</div>
 
 	<div style="overflow:auto;">
@@ -205,13 +204,29 @@ function nextPrev(n) {
 
 //show preview of the goal
   if (x[currentTab].id == "preview") {
-  	console.log("Welcome to tab 2")
 
   	//clear previous preview
   	var preview = document.getElementById("preview");
 	while (preview.firstChild) {
 	    preview.removeChild(preview.firstChild);
 	}
+
+	var heading = document.createElement("h1");
+	heading.innerHTML = "Preview";
+	var goalTitle = document.createElement("h2");
+	goalTitle.innerHTML = document.getElementById("name").value;
+	goalTitle.style["margin-left"] = "0%";
+	var goalDescription = document.createElement("p");
+	goalDescription.innerHTML = document.getElementById("description").value;
+	var startDate = document.getElementById("startDate").value;
+	var endDate = document.getElementById("endDate").value;
+	var dates = document.createElement("p");
+	dates.innerHTML = startDate + " - " + endDate;
+
+	document.getElementById("preview").appendChild(heading);
+	document.getElementById("preview").appendChild(goalTitle);
+	document.getElementById("preview").appendChild(goalDescription);
+	document.getElementById("preview").appendChild(dates);
 
 	if (document.getElementById("singlePoint").checked == true) {
 		console.log("single point testing");
@@ -230,32 +245,20 @@ function nextPrev(n) {
 	if (document.getElementById("rubric").checked == true) {
 		console.log("rubric preview testing");
 		var rubricDiv = document.getElementById("rubricFieldsHolder");
-		//console.log(rubricDiv.childNodes.length);
-		//console.log(rubricDiv.childNodes);
-		console.log(rubricDiv.children);
-		//console.log(rubricDiv.children[0].children[0].value);
-		//console.log(rubricDiv.children[1].children[0].value);
-		//console.log(rubricDiv.childNodes[0]);
-		//console.log(rubricDiv.childNodes[1].value);
 		var rubricElement = document.createElement("div");
 
 		for (var i = 0; i < rubricDiv.children.length; i++) {
-			//console.log(rubricDiv.childNodes[i]);
 			var radiobtn = document.createElement("input");
 			radiobtn.type = "radio";
 			radiobtn.name = "rubric";
+			radiobtn.style["width"] = "10%";
+			var label = document.createElement("label");
+			label.innerHTML = rubricDiv.children[i].children[0].value + "<br />";
 			radiobtn.value = rubricDiv.children[i].children[0].value;
-			radiobtn.innerHTML = rubricDiv.children[i].children[0].value;
 
-			var txt = document.createElement("p");
-			var node = document.createTextNode(rubricDiv.children[i].children[0].value);
-			txt.appendChild(node);
-			//txt.node = rubricDiv.children[i].children[0].value;
-			console.log("Text: " + txt);
-
-			console.log(rubricDiv.children[i].children[0].value);
 			rubricElement.appendChild(radiobtn);
-			rubricElement.appendChild(txt);
+			rubricElement.appendChild(label);
+			//rubricElement.appendChild(txt);
 		}
 
 		document.getElementById("preview").appendChild(rubricElement);

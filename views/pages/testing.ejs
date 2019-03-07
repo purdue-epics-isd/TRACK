@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+label {
+	font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+	margin: .4rem;
+}
+</style>
+<body>
+	<p>Select a maintenance drone:</p>
+
+	<div>
+		<input type="radio" id="huey" name="drone" value="huey"
+		checked>
+		<label for="huey">Huey</label>
+	</div>
+
+	<div>
+		<input type="radio" id="dewey" name="drone" value="dewey">
+		<label for="dewey">Dewey</label>
+	</div>
+
+	<div>
+		<input type="radio" id="louie" name="drone" value="louie">
+		<label for="louie">Louie</label>
+	</div>
+
+<input type="button" style="height: 30px; width: 30px" onclick="createRadioElement('hello')"></input>
+		<div id="test">
+		
+		</div>
+</body>
+
+<script>
+function createRadioElement(name) {
+   var radioInput;
+   try {
+        var radioHtml = '<input type="radio" name="' + name + '"';
+        radioHtml += '/>';
+        radioInput = document.createElement(radioHtml);
+    } catch( err ) {
+        radioInput = document.createElement('input');
+        radioInput.setAttribute('type', 'radio');
+        radioInput.setAttribute('name', name);
+        radioInput.setAttribute('id', 'issame');
+        radioInput.setAttribute('value', 'issame');
+    }
+    var lbl1 = document.createElement("label");
+	lbl1.innerHTML = "YES";
+    document.getElementById("test").appendChild(lbl1);
+    document.getElementById("test").append(radioInput);
+}
+</script>
+</html>

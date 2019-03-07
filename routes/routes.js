@@ -41,6 +41,9 @@ router.get('/settings', (req, res) => {
 router.get('/signup', (req, res) => { 
 	res.render('./pages/signup.ejs') 
 });
+router.get('/testing', (req, res) => {
+	res.render('./pages/testing.ejs')
+});
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', misc_controller.logout); //navigates to logout page
 
