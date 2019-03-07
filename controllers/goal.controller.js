@@ -19,8 +19,6 @@ exports.goal_create = function (req, res) {
         })
 
     Student.findOneAndUpdate({_id: req.params.id}, {$push: {goals: goal}}, function (err, student) {
-        //console.log("Student to be updated: " + student);
-        //console.log("goal to be added: " + goal);
         goal.save(function (err) { 
             if (err) {
                 res.send(err);
@@ -33,15 +31,9 @@ exports.goal_create = function (req, res) {
 /* renders goal page */
 exports.navigate_to_goalProfile = function (req, res) {
     goalDatas = [];
-    //console.log("goalID: " + GoalData.goalID);
-    //console.log("req.params.goalid: " + req.params.goalid);
 
     GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
         goaldata.forEach(function(s) { 
-            //console.log("LETS ADD SOME GOAL DATA");
-            //console.log("goaldata.goalID: " + s.goalID);
-            //sconsole.log("goaldata: " + s);
-            //console.log("goaldata: " + req.params.id);
             goalDatas.push(s);
         });
     });
@@ -53,8 +45,6 @@ exports.navigate_to_goalProfile = function (req, res) {
                 student: student,
                 goal: goal
             });
-            //console.log("Student: " + student);
-            //console.log("Goaldatas: " + goalDatas);
         });
     })
 }
@@ -66,7 +56,7 @@ exports.goal_delete = function (req, res) {
         if (err) {
             console.log(err);
         } else {
-        res.redirect('/student/' + req.params.id);
+            res.redirect('/student/' + req.params.id);
         }
     })
 };
@@ -75,13 +65,5 @@ exports.goal_delete = function (req, res) {
 exports.navigate_to_createNewGoal = function (req, res) {
     Student.findById(req.params.id, function(err, student) {
         res.render('pages/createNewGoal');
-        //console.log(req.Student.id);
-        /*var path = require('path');
-        res.sendFile(path.resolve(__dirname + '/../public/newgoal.html'));//TODO: change path to .ejs file*/
-        //res.sendFile('../newgoal.html');
     });
-    /*console.log(req.Student.id)
-        res.redirect('/newGoal.html', {
-            //student: student
-        });*/
 };

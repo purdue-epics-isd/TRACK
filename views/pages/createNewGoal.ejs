@@ -82,7 +82,7 @@ input.invalid {
 	
 	<div class="tab">
 		<p><input placeholder="Goal Title..." type="text" name="name" id="name"></p>
-		<p><textarea placeholder="Goal Description..."" name="description" id="description"></textarea></p>
+		<p><input type="textarea" placeholder="Goal Description..."" name="description" id="description"></input></p>
 	</div>
 
 	<div class="tab">
@@ -91,7 +91,7 @@ input.invalid {
 	</div>
 
 	<div class="tab"> Goal Type: <br>
-		<input type="radio" style="width: auto" name="goalType" value="academic"> Academic <br>
+		<input type="radio" style="width: auto" name="goalType" value="academic" checked> Academic <br>
 		<input type="radio" style="width: auto" name="goalType" value="behavioral"> Behavioral <br>
 	</div>
 
@@ -164,6 +164,7 @@ input.invalid {
 		<span class="step"></span>
 		<span class="step"></span>
 		<span class="step"></span>
+		<span class="step"></span>
 	</div>
 
 </form>
@@ -177,6 +178,9 @@ function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("tab");
   x[n].style.display = "block";
+
+  console.log("x.length: " + x.length);
+  console.log("N: " + n);
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
   	document.getElementById("prevBtn").style.display = "none";
@@ -201,6 +205,13 @@ function nextPrev(n) {
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
   currentTab = currentTab + n;
+
+  // if you have reached the end of the form... s
+  if (currentTab >= x.length) {
+    //...the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+}
 
 //show preview of the goal
   if (x[currentTab].id == "preview") {
@@ -281,12 +292,6 @@ function nextPrev(n) {
 
   }
 
-// if you have reached the end of the form... :
-  if (currentTab >= x.length) {
-    //...the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-}
   // Otherwise, display the correct tab:
   showTab(currentTab);
 }
@@ -298,10 +303,13 @@ function validateForm() {
   	y = x[currentTab].getElementsByTagName("input");
   	// A loop that checks every input field in the current tab:
   	for (i = 0; i < y.length; i++) {
+  		console.log("y[i].value: " + y[i].value);
     	// If a field is empty...
 	    if (y[i].value == "") {
 	      	//check to see if this is the rubric field bc it is okay to leave rubric field empty as long as the checkbox is unchecked
+	      	console.log("I am an empty field");
 	      	if ((y[i].name == "rubricField" || y[i].type == "button")) {
+	      		console.log("and a rubric field");
 	      		if (document.getElementById("rubric").checked == true) {
 					// add an "invalid" class to the field:
 					y[i].className += " invalid";
@@ -309,10 +317,12 @@ function validateForm() {
 					// and set the current valid status to false:
 					valid = false;
 	      		}
-	  		} else if (x[currentTab].id = "Preview") { 
+	  		} else if (x[currentTab].id == "preview") { 
+	  			console.log("and a preview page");
 	  			//we good
 	  		} else {
 				// add an "invalid" class to the field:
+				console.log("and im being marked as invalid");
 		   		y[i].className += " invalid";
 		   		console.log(y[i].className);
 		      	// and set the current valid status to false:
@@ -324,6 +334,7 @@ function validateForm() {
 	if (valid) {
 		document.getElementsByClassName("step")[currentTab].className += " finish";
 	}
+	console.log("I am value? " + valid);
 	return valid; // return the valid status
 }
 
