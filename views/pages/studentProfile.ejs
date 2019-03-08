@@ -4,31 +4,99 @@
 <head>
   <title>Profile</title>
   <link rel="icon" type="image/gif/png" href="img/logo.png">
-  <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="/flatly.css">
+  <link rel="stylesheet" href="/dashboard.css">
   <script type="text/javascript" src="../myScripts.js"></script>
 </head>
 
-<header>
-  <%- include("../partials/header.ejs")%>
-</header>
+<div class="grid-container">
+   <div class="menu-icon">
+    <i class="fas fa-bars header__menu"></i>
+  </div>
+   
+  <header class="header">
+    <div class="header__search">Search...</div>
+    <div class="header__avatar">Your face</div>
+  </header>
+
+  <aside class="sidenav">
+    <div class="sidenav__close-icon">
+      <i class="fas fa-times sidenav__brand-close"></i>
+    </div>
+    <ul class="sidenav__list">
+      <li class="sidenav__list-item">Home</li>
+      <li class="sidenav__list-item">Student List</li>
+      <li class="sidenav__list-item">Class</li>
+      <li class="sidenav__list-item">About</li>
+      <li class="sidenav__list-item">Log Out</li>
+    </ul>
+  </aside>
+
+
+
+
+
+
+  <main class="main">
+
+   <div class="main-overview">
+
+    <% goals.forEach(function(goal) { %> 
+    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+      <div class="card-header">Academic Goal</div>
+      <div class="card-body">
+        <h4 class="card-title"><%= goal.name %></h4>
+        <p class="card-text">Goal Information</p>
+        <div class="progress">
+         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+         </div>
+       </div>
+     </div>
+   </div>
+   
+   <% }); %>
+
+ </div>
+
+
+
+
+</main>
+
+
+
+
+
+
+
+<footer class="footer">
+  <div class="footer__copyright">&copy; 2018 MTH</div>
+  <div class="footer__signature">Made with love by pure genius</div>
+</footer>
+</div>
+
+
+>
 
 <body>
   <h1><%= student.name %>'s Profile</h1>
 
   <a href="/student/<%= student.id %>/delete" class="Delete" style="position: absolute; bottom: 35px; right:35px">Delete student file</a>
-  <a href="/student/<%= student.id %>/createNewGoal" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Goal</a>
 
-  <div class="goal-container">
-    <% goals.forEach(function(goal) { %>
-      <a href="/student/<%= student.id %>/goal/<%= goal.id %>" class="academicGoal"><div class="goalName"><%= goal.name %></div></a>
-    <% }); %>
-      <!--
-      <a href="goalOne.html>" class="academicGoal"><div class="goalName">Counting to 10</div></a>
-      <a href="goalTwo.html" class="socialGoal"><div class="goalName">Positive Social Responses</div></a>
-      <a href="goalFour.html" class="academicGoal"><div class="goalName">Reading Goal</div></a>
-      <a href="goalFive.html" class="academicGoal"><div class="goalName">Math Goal</div></a>
-      <a href="goalThree.html" class="behaviorGoal"><div class="goalName">Disruptive Behavior During Class</div></a>-->
-  </div>
-  <a href="/classPage"><span class="backButton"></span></a>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <a href="/classPage"><span class="backButton"></span></a>
+  </body>
+  </html>
