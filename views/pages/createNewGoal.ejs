@@ -76,18 +76,18 @@ input.invalid {
 </header>
 
 <h1>Create New Goal</h1>
-
+<body>
 <form id="regForm" action="goal/create" method="post">
 	<!-- One "tab" for each step in the form: -->
 	
 	<div class="tab">
 		<p><input placeholder="Goal Title..." type="text" name="name" id="name"></p>
-		<p><input type="textarea" placeholder="Goal Description..."" name="description" id="description"></input></p>
+		<p><input type="textarea" placeholder="Goal Description..."" name="description" id="description"></p>
 	</div>
 
 	<div class="tab">
 		<p><input placeholder="Start Date..." type="text" name="startDate" id="startDate"></p>
-		<p><input placeholder="EndDate..." type="text" name="endDate" id="endDate"></p>
+		<p><input placeholder="End Date..." type="text" name="endDate" id="endDate"></p>
 	</div>
 
 	<div class="tab"> Goal Type: <br>
@@ -95,7 +95,7 @@ input.invalid {
 		<input type="radio" style="width: auto" name="goalType" value="behavioral"> Behavioral <br>
 	</div>
 
-		<div class="tab">Method of Collection: <br>
+	<div class="tab">Method of Collection: <br>
 		<input type="checkbox" style="width: auto" name="singlePoint" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
 		<input type="checkbox" style="width: auto" name="rubric" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
 		<div style="display: none" id="rubricDiv">
@@ -168,6 +168,7 @@ input.invalid {
 	</div>
 
 </form>
+</body>
 </html>
 
 <script>

@@ -5,6 +5,20 @@ const mongoose = require('mongoose');
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
+    collectionMethod = [];
+    console.log("Let's make a goal!");
+    console.log("req.body.name: " + req.body.name);
+    console.log("req.body.singlePoint.name: " + req.body.singlePoint.name);
+    console.log("req.body.singlePoint.value: " + req.body.singlePoint.value);
+    console.log("req.body.rubric: " + req.body.rubric);
+    console.log("req.body.rubric.value: " + req.body.rubric.value);
+    console.log("req.body.comments: " + req.body.comments);
+    console.log("req.body.comments.value: " + req.body.comments.value);
+    if(req.body.singlePoint.checked == true) {
+        console.log('I am check');
+        collectionMethod = "singlePoint";
+    }
+
     let goal = new Goal(
         {
             name: req.body.name,
@@ -13,9 +27,8 @@ exports.goal_create = function (req, res) {
             endDate: req.body.endDate,
             goalType: req.body.goalType,
             studentID: req.params.id,
+            collectionMethod: collectionMethod,
             goaldata: []
-            //support: req.body.support,
-            //comments: req.body.comments,
         })
 
     Student.findOneAndUpdate({_id: req.params.id}, {$push: {goals: goal}}, function (err, student) {
