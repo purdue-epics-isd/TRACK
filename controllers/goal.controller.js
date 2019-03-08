@@ -6,14 +6,14 @@ const mongoose = require('mongoose');
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
     collectionMethod = [];
-    console.log("Let's make a goal!");
+    /*console.log("Let's make a goal!");
     console.log("req.body.name: " + req.body.name);
     console.log("req.body.singlePoint.name: " + req.body.singlePoint.name);
     console.log("req.body.singlePoint.value: " + req.body.singlePoint.value);
     console.log("req.body.rubric: " + req.body.rubric);
     console.log("req.body.rubric.value: " + req.body.rubric.value);
     console.log("req.body.comments: " + req.body.comments);
-    console.log("req.body.comments.value: " + req.body.comments.value);
+    console.log("req.body.comments.value: " + req.body.comments.value);*/
     if(req.body.singlePoint.checked == true) {
         console.log('I am check');
         collectionMethod = "singlePoint";
@@ -77,6 +77,8 @@ exports.goal_delete = function (req, res) {
 /*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
 exports.navigate_to_createNewGoal = function (req, res) {
     Student.findById(req.params.id, function(err, student) {
-        res.render('pages/createNewGoal');
+        res.render('pages/createNewGoal', {
+            student: student
+        });
     });
 };
