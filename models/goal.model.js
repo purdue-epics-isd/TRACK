@@ -9,7 +9,7 @@ let GoalSchema = new Schema({
 	endDate: {type: String, required: false},
     goalType: {type: String, required: false},
     studentID: {type: String, require: false},
-    collectionMethod: [{type: String, require: false}],
+    methodOfCollection: [{type: String, require: false}],
     goaldata: [{type: Schema.ObjectId, ref: 'GoalData'}]
 });
 

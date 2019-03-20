@@ -29,7 +29,8 @@ input {
 		<label for="louie">Louie</label>
 	</div>
 
-<input type="button" style="height: 30px; width: 30px" onclick="createRadioElement('hello')"></input>
+<input type="button" style="height: 30px; width: 30px" onclick="createRadioElement('hello')"></input><br><br>
+<input type="button" style="height: 30px; width: 30px" name="Submit" onclick="submit()">Submit!</input>
 		<div id="test">
 		
 		</div>
@@ -53,6 +54,10 @@ function createRadioElement(name) {
 	lbl1.innerHTML = "YES";
     document.getElementById("test").appendChild(lbl1);
     document.getElementById("test").append(radioInput);
+}
+
+function submit() {
+	console.log("radio")
 }
 </script>
 </html>

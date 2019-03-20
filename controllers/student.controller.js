@@ -5,7 +5,7 @@ const Goal = require('../models/goal.model');
 exports.student_create = function (req, res) {
     let student = new Student(
         {   name: req.body.name,
-            period: req.body.period,
+            period: "period" + req.body.period,
             grade: req.body.grade,
             age: req.body.age,
             goals: []
@@ -44,8 +44,8 @@ exports.navigate_to_studentProfile = function (req, res) {
 
     Goal.find({studentID: req.params.id}, {}, function(err, goal) {
         goal.forEach(function(s) { 
-            console.log("s.studentID: " + s.studentID);
-            console.log("req.params.id: " + req.params.id);
+            //console.log("s.studentID: " + s.studentID);
+            //console.log("req.params.id: " + req.params.id);
             goals.push(s);
         });
     });
@@ -66,7 +66,7 @@ exports.navigate_to_classPage = function (req, res) {
 
     Student.find({}, {}, function(err, student) {
         student.forEach(function(s) { 
-            console.log(s); console.log(s.name); 
+            //console.log(s); console.log(s.name); 
             students.push(s);
         });
     });

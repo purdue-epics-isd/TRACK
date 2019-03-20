@@ -20,7 +20,7 @@
 
   <div class="goal-container">
     <% goals.forEach(function(goal) { %>
-      <a href="/student/<%= student.id %>/goal/<%= goal.id %>" class="academicGoal"><div class="goalName"><%= goal.name %></div></a>
+      <a href="/student/<%= student.id %>/goal/<%= goal.id %>" class="<%= goal.goalType %>Goal"><div class="goalName"><%= goal.name %></div></a>
     <% }); %>
       <!--
       <a href="goalOne.html>" class="academicGoal"><div class="goalName">Counting to 10</div></a>
