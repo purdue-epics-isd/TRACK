@@ -6,6 +6,7 @@
   <link rel="icon" type="image/gif/png" href="img/logo.png">
   <link rel="stylesheet" href="/flatly.css">
   <link rel="stylesheet" href="/dashboard.css">
+  <link rel="stylesheet" href="/icons.css">
   <script type="text/javascript" src="../myScripts.js"></script>
 </head>
 
@@ -15,8 +16,14 @@
   </div>
    
   <header class="header">
-    <div class="header__search">Search...</div>
-    <div class="header__avatar">Your face</div>
+    <div class="header__menu">
+       <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+   
+
   </header>
 
   <aside class="sidenav">
@@ -24,11 +31,11 @@
       <i class="fas fa-times sidenav__brand-close"></i>
     </div>
     <ul class="sidenav__list">
-      <li class="sidenav__list-item">Home</li>
-      <li class="sidenav__list-item">Student List</li>
-      <li class="sidenav__list-item">Class</li>
-      <li class="sidenav__list-item">About</li>
-      <li class="sidenav__list-item">Log Out</li>
+      <li class="sidenav__list-item"><a href="/classPage"><i class="material-icons">home</i> Home</a></li>
+      <li class="sidenav__list-item"><a href="/settings"><i class="material-icons">settings</i> Settings</a></li>
+      <li class="sidenav__list-item"><a href="/feedback"><i class="material-icons">feedback</i> Feedback</a></li>
+      <li class="sidenav__list-item"><a href="/aboutUs"><i class="material-icons">info</i> About</a></li>
+      <li class="sidenav__list-item"><a href="/logout">Logout</a></li>
     </ul>
   </aside>
 
@@ -38,9 +45,15 @@
 
 
   <main class="main">
+    <div class="name-display">
+      <h3><%= student.name %>'s Profile</h3>
+
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
+    </form>
+
+    </div>
 
    <div class="main-overview">
-
     <% goals.forEach(function(goal) { %> 
     <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
       <div class="card-header">Academic Goal</div>
@@ -70,33 +83,10 @@
 
 
 <footer class="footer">
-  <div class="footer__copyright">&copy; 2018 MTH</div>
-  <div class="footer__signature">Made with love by pure genius</div>
+  <div class="footer__copyright">&copy; 2019 TRACK</div>
+  
+  <a href="/student/<%= student.id %>/delete" class="Delete" <div class="footer__signature">Delete Student</div></a>
 </footer>
 </div>
 
-
->
-
-<body>
-  <h1><%= student.name %>'s Profile</h1>
-
-  <a href="/student/<%= student.id %>/delete" class="Delete" style="position: absolute; bottom: 35px; right:35px">Delete student file</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-    <a href="/classPage"><span class="backButton"></span></a>
-  </body>
   </html>

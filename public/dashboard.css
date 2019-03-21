@@ -39,12 +39,20 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background-color: #648ca6;
+  background-color: #2C3E50;
 }
 
 /* Make room for the menu icon on mobile */
 .header__search {
   margin-left: 42px;
+}
+
+.header_container {
+  width: 100%;
+  padding-right: .75rem;
+  padding-left: .75rem;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .sidenav {
@@ -115,12 +123,12 @@ body {
   margin: 20px;
 }
 
-.overviewcard {
+.name-display {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: #d3d3;
+  //background-color: #d3d3;
 }
 
 .main-cards {
@@ -128,6 +136,8 @@ body {
   column-gap: 20px;
   margin: 20px;
 }
+
+
 
 .card {
   display: flex;
