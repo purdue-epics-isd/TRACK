@@ -8,6 +8,7 @@ const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
 const goal = require('./controllers/goal.controller');
 const goaldata = require('./controllers/goaldata.controller');
+const user = require('./controllers/user.controller');
 const app = express();
 app.set('views', './views');
 app.set('view engine', 'ejs');

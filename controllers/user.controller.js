@@ -1,7 +1,6 @@
 const User = require('../models/login.model');
 
-
-exports.signup = function (req, res) {
+exports.creatUser = function (req, res) {
 	console.log("Signning up for new user");
     let  user = new User(
         {   username: req.body.username,
@@ -14,4 +13,9 @@ exports.signup = function (req, res) {
         } 
     })
     res.redirect("/");
+};
+
+
+exports.varify= function (req, res) {
+
 };
