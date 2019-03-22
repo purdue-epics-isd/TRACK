@@ -6,12 +6,12 @@ const goal_controller = require('../controllers/goal.controller');
 const student_controller = require('../controllers/student.controller');
 const goaldata_controller = require('../controllers/goaldata.controller');
 const misc_controller = require('../controllers/misc.controller');
-
+const user_controller = require('../controllers/user.controller')
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:id/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/student/:id/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
-
+router.post('/signUp/creatUser',user_controller.signup);
 //Delete data
 router.get('/student/:id/goal/:goalid/delete',goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 //router.delete('/goal/delete',goal_controller.goal_delete);
@@ -38,7 +38,12 @@ router.get('/feedback', (req, res) => {
 router.get('/settings', (req, res) => { 
 	res.render('./pages/settings.ejs') 
 });
-
+router.get('/signup', (req, res) => { 
+	res.render('./pages/signup.ejs') 
+});
+router.get('/testing', (req, res) => {
+	res.render('./pages/testing.ejs')
+});
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', misc_controller.logout); //navigates to logout page
 

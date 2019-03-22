@@ -3,33 +3,349 @@
 <link rel="stylesheet" href="/main.css">
 <script type="text/javascript" src="/myScripts.js"></script>
 
+<style>
+/* Style the form */
+#regForm {
+	background-color: white;
+	color: black;
+	margin: 100px auto;
+	padding: 40px;
+	width: 70%;
+	min-width: 300px;
+}
+p {
+	margin: 10px;
+}
+
+/* Style the input fields */
+input {
+	padding: 10px;
+	width: 100%;
+	font-size: 17px;
+	font-family: Raleway;
+	border: 1px solid #aaaaaa;
+}
+
+textarea {
+	padding: 10px;
+	width: 100%;
+	font-size: 17px;
+	font-family: Raleway;
+	border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+	background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+	display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbbbbb;
+	border: none; 
+	border-radius: 50%;
+	display: inline-block;
+	opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+	opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+	background-color: #4CAF50;
+}
+
+.test {
+
+}
+</style>
+
 <header>
-  <%- include("../partials/header.ejs")%>
+	<%- include("../partials/header.ejs")%>
 </header>
 
+<h1>Create New Goal for <%= student.name %></h1>
 <body>
-	<h1>Create New Goal</h1>
+<form id="regForm" action="goal/create" method="post">
+	<!-- One "tab" for each step in the form: -->
 	
-	<form action="goal/create" method="post">
-		Goal Title: <input type="text" name="name"><br><br>
-		Goal Description: <textarea name="description"></textarea><br><br>
-		<!--Percentage Name: <input type="text" name="percentagename"><br><br>-->
-		Start Date: <input type="text" name="startdate">
-		End Date: <input type="text" name="enddate"><br><br>
-		<!--Location: <br>
-		<input type="radio" name="location" value="classroom"> Classroom<br>
-		<input type="radio" name="location" value="dorm"> Dorm<br>
-		<input type="radio" name="location" value="other"> Other <input type="text" name="location"><br><br>-->
-		<!--Method: <br>
-		Checkboxes: <button>-</button> 0 <button>+</button> <br><br>
-		Percentages: <button>-</button> 0 <button>+</button> <br><br>
-		Rubrics: <button>-</button> 0 <button>+</button> <br><br>
-		Counters: <button>-</button> 0 <button>+</button> <br><br>
-		Comments: <button>-</button> 0 <button>+</button> <br><br>
-		<a href="Anna.html" class="submitButton"></a><br><br><br>-->
-		<input type="submit" value="Submit" class="submitButton">
-		<!--<input type="submit" name="Submit" value="" class="submitButton">-->
-	</form>
-	<a href="/classPage" class="backButton"></a>
+	<div class="tab">
+		<p><input placeholder="Goal Title..." type="text" name="name" id="name"></p>
+		<p><input type="textarea" placeholder="Goal Description..."" name="description" id="description"></p>
+	</div>
+
+	<div class="tab">
+		<p><input placeholder="Start Date..." type="text" name="startDate" id="startDate"></p>
+		<p><input placeholder="End Date..." type="text" name="endDate" id="endDate"></p>
+	</div>
+
+	<div class="tab"> Goal Type: <br>
+		<input type="radio" style="width: auto" name="goalType" value="academic" checked> Academic <br>
+		<input type="radio" style="width: auto" name="goalType" value="behavioral"> Behavioral <br>
+	</div>
+
+	<div class="tab">Method of Collection: <br>
+		<input type="checkbox" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
+		<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
+		<div style="display: none" id="rubricDiv">
+			<div id = "rubricFieldsHolder">
+				<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
+			</div>
+
+			<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
+			<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
+		</div>
+		<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>
+		<script>
+			function addRubricField() {
+				var rubricHolder = document.createElement("p");
+				var rubricField = document.createElement("input");        // Create a <input> element
+				rubricField.placeholder = "Rubric Field";
+				rubricField.type = "text";
+				rubricField.name = "rubricField";
+				rubricHolder.appendChild(rubricField);
+				//var n = rubricFieldsHolder.childNodes.length - 6;
+				//console.log(rubricFieldsHolder.childNodes);
+				//console.log(n);
+				document.getElementById("rubricFieldsHolder").insertBefore(rubricHolder, rubricFieldsHolder.childNodes[-1]);      // Append <input> to <body>
+			}
+
+			function deleteRubricField() {
+				var n = rubricFieldsHolder.childNodes.length - 1;
+				console.log(rubricFieldsHolder.childNodes);
+				console.log(rubricFieldsHolder.children[n]);
+				console.log(n);
+				rubricFields = document.getElementById("rubricFieldsHolder");
+				document.getElementById("rubricFieldsHolder").childNodes[n].remove();
+				//rubricFields.children[n-4].remove();
+			}
+
+			function rubricVisibility() {
+				// Get the checkbox
+				var checkBox = document.getElementById("rubric");
+				// Get the output text
+				var rubricDiv = document.getElementById("rubricDiv");
+
+				// If the checkbox is checked, display the output text
+				if (checkBox.checked == true){
+					rubricDiv.style.display = "block";
+				} else {
+					rubricDiv.style.display = "none";
+				}
+			}
+		</script>
+	</div>
+
+	<div class="tab" id="preview">
+		<p>Goal Preview</p>
+	</div>
+
+	<div style="overflow:auto;">
+		<div style="float:right;">
+			<button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+			<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+		</div>
+	</div>
+
+	<!-- Circles which indicates the steps of the form: -->
+	<div style="text-align:center;margin-top:40px;">
+		<span class="step"></span>
+		<span class="step"></span>
+		<span class="step"></span>
+		<span class="step"></span>
+		<span class="step"></span>
+	</div>
+
+</form>
 </body>
 </html>
+
+<script>
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form ...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+
+  console.log("x.length: " + x.length);
+  console.log("N: " + n);
+  // ... and fix the Previous/Next buttons:
+  if (n == 0) {
+  	document.getElementById("prevBtn").style.display = "none";
+  } else {
+  	document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+  	document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+  	document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  // ... and run a function that displays the correct step indicator:
+  fixStepIndicator(n);
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+
+  // if you have reached the end of the form... s
+  if (currentTab >= x.length) {
+    //...the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+}
+
+//show preview of the goal
+  if (x[currentTab].id == "preview") {
+
+  	//clear previous preview
+  	var preview = document.getElementById("preview");
+	while (preview.firstChild) {
+	    preview.removeChild(preview.firstChild);
+	}
+
+	var heading = document.createElement("h1");
+	heading.innerHTML = "Preview";
+	var goalTitle = document.createElement("h2");
+	goalTitle.innerHTML = document.getElementById("name").value;
+	goalTitle.style["margin-left"] = "0%";
+	var goalDescription = document.createElement("p");
+	goalDescription.innerHTML = document.getElementById("description").value;
+	var startDate = document.getElementById("startDate").value;
+	var endDate = document.getElementById("endDate").value;
+	var dates = document.createElement("p");
+	dates.innerHTML = startDate + " - " + endDate;
+
+	document.getElementById("preview").appendChild(heading);
+	document.getElementById("preview").appendChild(goalTitle);
+	document.getElementById("preview").appendChild(goalDescription);
+	document.getElementById("preview").appendChild(dates);
+
+	if (document.getElementById("singlePoint").checked == true) {
+		console.log("single point testing");
+		var txt = document.createElement("p");
+		txt.innerHTML = "Percentage Complete:";
+		var input = document.createElement("input");
+		input.type = "value";
+		input.name = "percentage";
+
+		var percentageElement = document.createElement("div");
+		percentageElement.appendChild(txt);
+		percentageElement.appendChild(input);
+		document.getElementById("preview").appendChild(percentageElement);
+	}
+
+	if (document.getElementById("rubric").checked == true) {
+		console.log("rubric preview testing");
+		var rubricDiv = document.getElementById("rubricFieldsHolder");
+		var rubricElement = document.createElement("div");
+
+		for (var i = 0; i < rubricDiv.children.length; i++) {
+			var radiobtn = document.createElement("input");
+			radiobtn.type = "radio";
+			radiobtn.name = "rubric";
+			radiobtn.style["width"] = "10%";
+			var label = document.createElement("label");
+			label.innerHTML = rubricDiv.children[i].children[0].value + "<br />";
+			radiobtn.value = rubricDiv.children[i].children[0].value;
+
+			rubricElement.appendChild(radiobtn);
+			rubricElement.appendChild(label);
+			//rubricElement.appendChild(txt);
+		}
+
+		document.getElementById("preview").appendChild(rubricElement);
+  
+	}
+
+	if (document.getElementById("comments").checked == true) {
+		console.log("comment testing");
+		var txt = document.createElement("p");
+		txt.innerHTML = "Additional Comments:";
+		var input = document.createElement("input");
+		input.type = "value";
+		input.name = "comments";
+
+		var commentElement = document.createElement("div");
+		commentElement.appendChild(txt);
+		commentElement.appendChild(input);
+		document.getElementById("preview").appendChild(commentElement);
+	}
+
+  }
+
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+	// This function deals with validation of the form fields
+  	var x, y, i, valid = true;
+  	x = document.getElementsByClassName("tab");
+  	y = x[currentTab].getElementsByTagName("input");
+  	// A loop that checks every input field in the current tab:
+  	for (i = 0; i < y.length; i++) {
+  		console.log("y[i].value: " + y[i].value);
+    	// If a field is empty...
+	    if (y[i].value == "") {
+	      	//check to see if this is the rubric field bc it is okay to leave rubric field empty as long as the checkbox is unchecked
+	      	console.log("I am an empty field");
+	      	if ((y[i].name == "rubricField" || y[i].type == "button")) {
+	      		console.log("and a rubric field");
+	      		if (document.getElementById("rubric").checked == true) {
+					// add an "invalid" class to the field:
+					y[i].className += " invalid";
+					console.log(y[i].className);
+					// and set the current valid status to false:
+					valid = false;
+	      		}
+	  		} else if (x[currentTab].id == "preview") { 
+	  			console.log("and a preview page");
+	  			//we good
+	  		} else {
+				// add an "invalid" class to the field:
+				console.log("and im being marked as invalid");
+		   		y[i].className += " invalid";
+		   		console.log(y[i].className);
+		      	// and set the current valid status to false:
+		      	valid = false;
+			}
+		}
+	}
+	// If the valid status is true, mark the step as finished and valid:
+	if (valid) {
+		document.getElementsByClassName("step")[currentTab].className += " finish";
+	}
+	console.log("I am value? " + valid);
+	return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+  	x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class to the current step:
+  x[n].className += " active";
+}
+</script>
