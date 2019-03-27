@@ -9,6 +9,7 @@
 </head>
 
 <style>
+
 	table#t01 {
 	  width:80%;
 	  margin-left: 10%;
@@ -47,6 +48,9 @@
 	<h2><%= goal.description %></h2>
 	<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 		<table style="position: center">
+			<% methodOfCollection.forEach(function(collection) { %>
+				<p> <%= collection %><p>
+			<% }); %>
 			<tr>
 				<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
 			<tr>
@@ -75,15 +79,13 @@
 			</tr>
 		<% }); %>
 	</table>
-
-	
 	<!--
 			<input type="submit" value = "Submit" class="submitButton"><br><br>
 			<a href="Anna.html" class="backButton">Back</a>-->
 	<!-- the result of the search will be rendered inside this div -->
 	<br><div id="result"></div>
   <br><div id="delete"></div>
-
+<!--
 	<script>
 	$('#delete').click(function(event) {
 		_id = $(this).attr('objid');
@@ -138,6 +140,6 @@
 	  });
 
 	});
-	</script>
+	</script>-->
 </body>
 </html>

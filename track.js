@@ -1,8 +1,8 @@
 const PORT = process.env.PORT || 1234
-
 // track.js
 const express = require('express');
 const bodyParser = require('body-parser');
+var session = require('express-session')
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
@@ -10,10 +10,13 @@ const goal = require('./controllers/goal.controller');
 const goaldata = require('./controllers/goaldata.controller');
 const user = require('./controllers/user.controller');
 const app = express();
+
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-// set the view engine to ejs
+//use sessions for tracking logins
+
+
 
 // navigate to login.ejs
 app.get('/', student.run);
@@ -28,6 +31,11 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(product);
 app.use(express.static('public'))

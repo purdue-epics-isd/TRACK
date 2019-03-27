@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 
   <html>
 
@@ -15,89 +15,24 @@
 
   <body>
     <div class="dropdown">
-    
+     <select id="selectNumber" class="dropbtn"></select>
+   </div>
 
-    
+   <a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a>
 
-   <select id="selectNumber" class="dropbtn" >
-    <script>
-      var sel = document.getElementById('selectNumber');
-      var options = [ "1st Period English Class", "2nd Period Physics Class", "3rd Period Math Class", "4th Period Chemistry Class" ]; 
-      for(var i = 0; i < options.length; i++) {
-        var opt = document.createElement('option');
-        opt.innerHTML = options[i];
-        /*if(i==0) {
-          opt.value="/classPage";
-        } else {
-          opt.value="/classPage";
-        }*/
-        document.getElementById('selectNumber').onchange = function() {
-          //if (this.selectedIndex!==0) {
-            If(Dropdown1.Selected.Value = 1); "1"; Dropdown1.Selected.Value;
-/*
-            var x = document.getElementById('demo')
-            for(student in students) {
-              var c = document.body.children;
-              var txt = "";
-              var i;
-              for (i = 0; i < c.length; i++) {
-                txt = txt + c[i].tagName + "<br>";
-              }
-              var btn = document.createElement("BUTTON");
-              var t = document.createTextNode("student.name");
-              btn.appendChild(t);
-              document.body.appendChild(btn);             
-            };*/
-              //}
-            //window.location.href = this.value;
-          //}        
-        };
-        //opt.value = options[i];
-        sel.appendChild(opt);
-        }
-/*var sel = document.getElementById('selectNumber');
-var options = [ "1st Period English Class", "2nd Period Physics Class", "3rd Period Math Class", "4th Period Chemistry Class" ];
-var options_val = [ "/classPage", "/classPage1", "/classPage1", "/classPage1" ];
-f//or(var i = 0; i < options.length; i++) {
-var opt = document.createElement('option');
-opt.innerHTML = options[0];
-opt.value=options_val[0];
-//opt.value = options[i];
-sel.appendChild(opt);
+   <div class="student-container" id="demo">
+    <!--Loads the Students and Creates Buttons for them-->
+    <% students.forEach(function(student) { %>
+    <!--Write the desired HTML for each student here -->
+    <a href="/student/<%= student.id %>" class = "studentButton <%= student.period %>" >
+      <img class = "img-circle" src="img/studentIcon.png" width = "200" height = "200" >
+      <div class = "studentName"><%= student.name %></div>
+    </a>
+    <% }); %>
 
-var opt = document.createElement('option');
-opt.innerHTML = options[1];
-opt.value=options_val[1];
-//opt.value = options[i];
-sel.appendChild(opt);
-//}
-document.getElementById('selectNumber').onchange = function() {
-if (this.selectedIndex!==0) {
-    window.location.href = this.value;
-}          
-};*/
-
-   </script>
-
-</select>
-    </div>
   </div>
 
-  <a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a><!-- TODO: change reference-->
-
-    <div class="student-container" id="demo">
-      <!--Loads the Students and Creates Buttons for them-->
-      <% students.forEach(function(student) { %>
-      <!--Write the desired HTML for each student here -->
-      <a href="/student/<%= student.id %>" class = "studentButton">
-        <img class = "img-circle" src="img/studentIcon.png" width = "200" height = "200" >
-        <div class = "studentName"><%= student.name %></div>
-      </a>
-      <% }); %>
-
-    </div>
-
-  </body>
+</body>
 </html>
 
 <script>
@@ -120,4 +55,45 @@ if (this.selectedIndex!==0) {
       }
     }
   }
+
+  var sel = document.getElementById('selectNumber');
+  var options = ["All students", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period", "10th Period",]; 
+  for(var i = 0; i < options.length; i++) {
+    var opt = document.createElement('option');
+    opt.innerHTML = options[i];
+        /*if(i==0) {
+          opt.value="/classPage";
+        } else {
+          opt.value="/classPage";
+        }*/
+        sel.onchange = function() {
+          console.log("changing period");
+         //Dropdown1.Selected.Value;
+         var studentContainer = document.getElementById('demo');
+         for(var j = 0; j < studentContainer.children.length; j++) {
+          //console.log("studencontainer.children[0] class: " + studentContainer.children[j].className.split(" ")[1]);
+          //console.log("options[i]: "+ options);
+          //console.log("i:" + sel.options[sel.selectedIndex].value);
+          var studentPeriod = studentContainer.children[j].className.split(" ")[1];
+          var currentPeriod = sel.options[sel.selectedIndex].text;
+          var currentPeriodSimplified = sel.options[sel.selectedIndex].value[0];
+          console.log("studentPeriod: " + studentPeriod);
+          console.log("currentPeriod: " + currentPeriod);
+          console.log("currentPeriodSimplified: " + currentPeriodSimplified);
+          if(currentPeriod != "All students") {
+            if(studentPeriod == currentPeriod || studentPeriod == currentPeriodSimplified){
+              studentContainer.children[j].style.visibility = "visible";
+            } else {
+              studentContainer.children[j].style.visibility = "hidden";
+            }
+          } else {
+            studentContainer.children[j].style.visibility = "visible";
+          }
+         }
+
+        };
+          sel.appendChild(opt);
+
+
+        };
 </script>

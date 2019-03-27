@@ -16,6 +16,4 @@ exports.creatUser = function (req, res) {
 };
 
 
-exports.varify= function (req, res) {
 
-};
