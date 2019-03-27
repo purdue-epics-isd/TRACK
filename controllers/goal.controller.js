@@ -77,17 +77,27 @@ exports.navigate_to_goalProfile = function (req, res) {
                 }
                 //console.log(goal);
                 //console.log("not broken yet");
+                setTimeout(function(){
                 res.render('pages/goalProfile', {
                     goalDatas: goalDatas,
                     student: student,
                     goal: goal,
                     methodOfCollection: goal.methodOfCollection
                 });
+            }, 2000);
+                if (err) {
+                    console.log(err);
+                    res.render('./error');
+                }
             });
+                if (err) {
+                    console.log(err);
+                    res.render('./error');
+                }
         });
         //console.log("pls workmaybe");
         return;
-    } catch(err) {
+    } catch(error) {
         console.log(err);
         res.render('./error');
     }

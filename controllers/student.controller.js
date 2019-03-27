@@ -28,7 +28,7 @@ exports.student_create = function (req, res) {
         })
         res.redirect("/classPage");
     } catch(err) {
-        console.log(err);
+        //console.log(err);
         res.render('./error');
     }
 };
