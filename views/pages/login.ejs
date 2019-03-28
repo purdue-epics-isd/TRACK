@@ -34,18 +34,18 @@
 		<img style="width:6%;" src="img/logo.png" alt="clipboard Image Logo">
 		<form action="/login_confirm" method="get">
   			Username: <input type="text" name="username"><br><br>
-  			Password: <input type="password" value="FakePSW" id="myInput"><br><br>
-<input type="checkbox" onclick="myFunction()">Show Password
+  			Password: <input type="password" id="myInput"><br><br>
+<input type="checkbox" onclick="showPassword()">Show Password
 
 <script>
-function myFunction() {
-  var x = document.getElementById("myInput");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
+  function showPassword() {
+    var passwordTextbox = document.getElementById("myInput");
+    if (passwordTextbox.type == "password") {
+      passwordTextbox.type = "text";
+    } else {
+      passwordTextbox.type = "password";
+    }
   }
-}
 </script>
 
         <!--<input type="text" name="username" placeholder="Username" required="">
