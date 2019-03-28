@@ -13,6 +13,7 @@ exports.createUser = function (req, res) {
         } 
     })
     res.redirect("/");
+
 };
 
 
