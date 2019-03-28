@@ -1,6 +1,6 @@
 const User = require('../models/login.model');
 
-exports.creatUser = function (req, res) {
+exports.createUser = function (req, res) {
 	console.log("Signning up for new user");
     let  user = new User(
         {   username: req.body.username,
