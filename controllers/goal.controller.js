@@ -61,7 +61,7 @@ exports.navigate_to_goalProfile = function (req, res) {
 
 
         Student.findById(req.params.id, function(err, student) {
-            console.log(err);
+            //console.log(err);
             if (err) {
                 //console.log(err);
                 res.send(err);
@@ -70,9 +70,10 @@ exports.navigate_to_goalProfile = function (req, res) {
 
 
             Goal.findById(req.params.goalid, function(err, goal) {
-                //var methodsOfCollection = goal.methodOfCollection;
-                console.log(goal.methodOfCollection);
-                console.log(goal);
+                var methodsOfCollection = goal.methodOfCollection;
+                console.log("method:" + goal.methodOfCollection);
+                console.log("method as var:" + methodsOfCollection);
+                console.log("goal:" + goal);
                 res.render('pages/goalProfile', {
                     goalDatas: goalDatas,
                     student: student,
@@ -84,7 +85,7 @@ exports.navigate_to_goalProfile = function (req, res) {
         //console.log("pls workmaybe");
         return;
     } catch(error) {
-        console.log(err);
+        console.log("err:" + err);
         res.render('./error');
     }
 }
