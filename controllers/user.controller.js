@@ -4,6 +4,7 @@ var LocalStrategy   = require("passport-local");
 var passportLocalMongoose   = require("passport-local-mongoose");
 
 
+
 exports.creatUser = function (req, res) {
 User.register(new User({username:req.body.username}),req.body.password, function(err, user){
        if(err){
@@ -14,7 +15,7 @@ User.register(new User({username:req.body.username}),req.body.password, function
             res.redirect("/"); //once the user sign up
        }); 
     });
-};
+
 
 
 exports.login_confirm = passport.authenticate("local",{
