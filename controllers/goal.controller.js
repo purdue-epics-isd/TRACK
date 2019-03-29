@@ -67,33 +67,19 @@ exports.navigate_to_goalProfile = function (req, res) {
                 res.send(err);
                 return;
             }
+
+
             Goal.findById(req.params.goalid, function(err, goal) {
-                //console.log(goal.methodOfCollection);
-                //console.log(goal);
-                if (err) {
-                    //console.log(err);
-                    res.send(err);
-                    return;
-                }
-                //console.log(goal);
-                //console.log("not broken yet");
-                setTimeout(function(){
+                //var methodsOfCollection = goal.methodOfCollection;
+                console.log(goal.methodOfCollection);
+                console.log(goal);
                 res.render('pages/goalProfile', {
                     goalDatas: goalDatas,
                     student: student,
                     goal: goal,
-                    methodOfCollection: goal.methodOfCollection
+                    methodOfCollection: methodsOfCollection
                 });
-            }, 2000);
-                if (err) {
-                    console.log(err);
-                    res.render('./error');
-                }
             });
-                if (err) {
-                    console.log(err);
-                    res.render('./error');
-                }
         });
         //console.log("pls workmaybe");
         return;

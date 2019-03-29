@@ -47,9 +47,24 @@
 	<h1><%= goal.name %></h1>
 	<h2><%= goal.description %></h2>
 	<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
-		<table style="position: center">
+		<table style="position: center" id="goalInput">
 			<% methodOfCollection.forEach(function(collection) { %>
-				<p> <%= collection %><p>
+				<!--<p><%= collection %><p>-->
+
+					<script>
+						console.log("<%= collection %>");
+
+						if("<%= collection %>"=="singlePoint") {
+							var collection = document.createElement("p");
+							collection.text = "single Point";
+							document.getElementById("goalInput").appendChild(collection);
+						} else if ("<%= collection %>"=="rubric") {
+							var collection = document.createElement("p");
+							collection.text = "Rubric";
+							document.getElementById("goalInput").appendChild(collection);
+						}
+						
+					</script>
 			<% }); %>
 			<tr>
 				<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
@@ -85,61 +100,5 @@
 	<!-- the result of the search will be rendered inside this div -->
 	<br><div id="result"></div>
   <br><div id="delete"></div>
-<!--
-	<script>
-	$('#delete').click(function(event) {
-		_id = $(this).attr('objid');
-		dict = {'id':_id};
-		console.log(JSON.stringify(dict))
-		var deleting = $.post('/goal/delete', {id:_id})
-		deleting.done(function(data) {
-			console.log(JSON.stringify(data))
-		})
-		$('#result').empty()
-		$('#delete').empty()
-	})
-
-	// Attach a submit handler to the form
-	$( "#submitForm" ).submit(function( event ) {
-	  // Stop form from submitting normally
-	  event.preventDefault();
-	  // Get some values from elements on the page:
-	  var $form = $( this ),
-
-	  dict = {}
-
-	  var names = [];
-	  $(".named").each(function() {
-	  	names.push(this.name);
-	  });
-
-	  names.forEach(function(name) {
-	  	dict[name] = $form.find("input[name='" + name + "']").val()
-	  })
-
-	  url = $form.attr( "action" );
-
-	  // Send the data using post
-	  var posting = $.post( url, dict);
-
-	  // Put the results in a div
-	  posting.done(function( data ) {
-	  	var content = $( data ).find( "#content" );
-	  	$('#result').empty();
-	  	names.forEach(function (name) {
-	  		$('#result').append(name + ': ' + data[name] + '\n')
-	  	})
-
-	  	$('#result').append('time' + ': ' + (new Date(data['time'])).toLocaleString() + '\n')
-
-
-	  	console.log(JSON.stringify(data))
-	  	alert(JSON.stringify(data));
-	  	$('#delete').html('<i class="fas fa-trash"></i>');
-	  	$('#delete').attr('objId', data['_id'])
-	  });
-
-	});
-	</script>-->
 </body>
 </html>
