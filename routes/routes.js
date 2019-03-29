@@ -96,6 +96,9 @@ router.get('/testing', (req, res) => {
 	})*/
 });
 
+router.get('/userfile', (req, res) => {
+	res.render('./pages/userfile.ejs')
+});
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', misc_controller.logout); //navigates to logout page
 
