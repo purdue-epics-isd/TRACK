@@ -2,7 +2,11 @@ const PORT = process.env.PORT || 1234
 // track.js
 const express = require('express');
 const bodyParser = require('body-parser');
-var session = require('express-session')
+var User  = require('./models/login.model');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy   = require("passport-local");
+var passportLocalMongoose   = require("passport-local-mongoose");
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
@@ -29,14 +33,33 @@ mongoose.connect(mongoDB, ({useNewUrlParser: true}));
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
+////////////////
 app.use(bodyParser.json());
-app.use(session({
-  secret: 'work hard',
-  resave: true,
-  saveUninitialized: false
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(require("express-session")({
+    secret:"Rusty is the best og in the world",
+    resave: false,
+    saveUninitialized: false
 }));
-app.use(bodyParser.urlencoded({extended: false}));
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+app.post("/login_confirm", passport.authenticate("local",{
+    successRedirect:"/userfile",
+    failureRedirect:"/"
+}),function(req, res){
+    res.send("User is "+ req.user.id);
+});
+
+app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+});
+
+/////////////////////////
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(product);
 app.use(express.static('public'))
 

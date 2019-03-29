@@ -17,7 +17,7 @@ router.get('/student/:id/goal/:goalid/delete',goal_controller.goal_delete);//WHY
 //router.delete('/goal/delete',goal_controller.goal_delete);
 //router.post('/goal/:goalid/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
 router.get('/student/:id/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
-//router.get('/login_confirm',user_controller.login_confirm)
+router.get('/login_confirm',user_controller.login_confirm)
 //router.get('/profile',user_controller.get_profile)
 //router.get('/logout',user_controller.logout)
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
@@ -44,6 +44,9 @@ router.get('/signup', (req, res) => {
 });
 router.get('/testing', (req, res) => {
 	res.render('./pages/testing.ejs')
+});
+router.get('/userfile', (req, res) => {
+	res.render('./pages/userfile.ejs')
 });
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', misc_controller.logout); //navigates to logout page

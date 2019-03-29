@@ -1,19 +1,26 @@
 const User = require('../models/login.model');
+var passport = require('passport');
+var LocalStrategy   = require("passport-local");
+var passportLocalMongoose   = require("passport-local-mongoose");
+
 
 exports.creatUser = function (req, res) {
-	console.log("Signning up for new user");
-    let  user = new User(
-        {   username: req.body.username,
-            password: req.body.password
-        }
-    );
-    user.save(function (err) {
-        if (err) {
-            res.send(err);
-        } 
-    })
-    res.redirect("/");
+User.register(new User({username:req.body.username}),req.body.password, function(err, user){
+       if(err){
+            console.log(err);
+            return res.render('pages/signup');
+        } //user stragety
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/"); //once the user sign up
+       }); 
+    });
 };
 
 
+exports.login_confirm = passport.authenticate("local",{
+   successRedirect:"/userfile",
+    failureRedirect:"/"
+}),function(req, res){
+    res.send("User is "+ req.user.id);
+};
 
