@@ -133,6 +133,14 @@ body {
   //background-color: #d3d3;
 }
 
+/*.name-extra {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
+}*/
+
+
 /*part of the name-header*/
 /*.name-overview {
   padding-right: 30px;
