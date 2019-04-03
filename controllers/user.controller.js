@@ -11,7 +11,7 @@ User.register(new User({username:req.body.username}),req.body.password, function
             return res.render('pages/signup');
         } //user stragety
         passport.authenticate("local")(req, res, function(){
-            res.redirect("/"); //once the user sign up
+            res.redirect("/signupSuccess"); //once the user sign up
        }); 
     });
 };
