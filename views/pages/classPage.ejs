@@ -5,22 +5,48 @@
   <head>
     <title>Track</title>
     <link rel="icon" type="image/gif/png" href="img/logo.png">
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/flatly.css">
+    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="/icons.css">
     <script type="text/javascript" src="myScripts.js"></script>
   </head> 
 
-  <header>
-    <%- include("../partials/header.ejs")%>
+<div class="grid-container">
+  <header class="header">
+    <div class="header__menu">
+       <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
   </header>
 
-  <body>
+<aside class="sidenav">
+    <div class="sidenav__close-icon">
+      <h1>Hello</h1>
+    </div>
+    <ul class="sidenav__list">
+      <li class="sidenav__list-item"><a href="/classPage"><i class="material-icons">home</i> Home</a></li>
+      <li class="sidenav__list-item"><a href="/settings"><i class="material-icons">settings</i> Settings</a></li>
+      <li class="sidenav__list-item"><a href="/feedback"><i class="material-icons">feedback</i> Feedback</a></li>
+      <li class="sidenav__list-item"><a href="/aboutUs"><i class="material-icons">info</i> About</a></li>
+      <li class="sidenav__list-item"><a href="/logout">Logout</a></li>
+    </ul>
+  </aside>
+
+
+
+
+
+
+<main class="main">
     <div class="dropdown">
      <select id="selectNumber" class="dropbtn"></select>
-   </div>
 
-   <a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a>
 
-   <div class="student-container" id="demo">
+<a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a>
+
+<div class="student-container" id="demo">
     <!--Loads the Students and Creates Buttons for them-->
     <% students.forEach(function(student) { %>
     <!--Write the desired HTML for each student here -->
@@ -32,8 +58,32 @@
 
   </div>
 
-</body>
+</main>
+
+
+
+
+
+
+
+<footer class="footer">
+  <div class="footer__copyright">&copy; 2019 TRACK</div>
+  
+</footer>
+
+
+</div>
+
+
 </html>
+
+
+
+
+
+
+
+
 
 <script>
   /* When the user clicks on the button,

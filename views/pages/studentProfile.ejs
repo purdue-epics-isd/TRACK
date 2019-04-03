@@ -4,31 +4,96 @@
 <head>
   <title>Profile</title>
   <link rel="icon" type="image/gif/png" href="img/logo.png">
-  <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="/flatly.css">
+  <link rel="stylesheet" href="/dashboard.css">
+  <link rel="stylesheet" href="/icons.css">
   <script type="text/javascript" src="../myScripts.js"></script>
 </head>
 
-<header>
-  <%- include("../partials/header.ejs")%>
-</header>
 
-<body>
-  <h1><%= student.name %>'s Profile</h1>
+<div class="grid-container">
+   
+  <header class="header">
+    <div class="header__menu">
+       <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+  </header>
 
-  <a href="/student/<%= student.id %>/delete" class="Delete" style="position: absolute; bottom:; right:35px">Delete student file</a>
-  <a href="/student/<%= student.id %>/createNewGoal" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Goal</a>
+  <aside class="sidenav">
+    <div class="sidenav__close-icon">
+      <h1>Hello</h1>
+    </div>
+    <ul class="sidenav__list">
+      <li class="sidenav__list-item"><a href="/classPage"><i class="material-icons">home</i> Home</a></li>
+      <li class="sidenav__list-item"><a href="/settings"><i class="material-icons">settings</i> Settings</a></li>
+      <li class="sidenav__list-item"><a href="/feedback"><i class="material-icons">feedback</i> Feedback</a></li>
+      <li class="sidenav__list-item"><a href="/aboutUs"><i class="material-icons">info</i> About</a></li>
+      <li class="sidenav__list-item"><a href="/logout">Logout</a></li>
+    </ul>
+  </aside>
 
-  <div class="goal-container">
-    <% goals.forEach(function(goal) { %>
-      <a href="/student/<%= student.id %>/goal/<%= goal.id %>" class="<%= goal.goalType %>Goal"><div class="goalName"><%= goal.name %></div></a>
-    <% }); %>
-      <!--
-      <a href="goalOne.html>" class="academicGoal"><div class="goalName">Counting to 10</div></a>
-      <a href="goalTwo.html" class="socialGoal"><div class="goalName">Positive Social Responses</div></a>
-      <a href="goalFour.html" class="academicGoal"><div class="goalName">Reading Goal</div></a>
-      <a href="goalFive.html" class="academicGoal"><div class="goalName">Math Goal</div></a>
-      <a href="goalThree.html" class="behaviorGoal"><div class="goalName">Disruptive Behavior During Class</div></a>-->
-  </div>
-  <a href="/classPage"><span class="backButton"></span></a>
-</body>
+
+
+
+
+
+  <main class="main">
+    <div class="name-header">
+      
+      
+        <h3><%= student.name %>'s Profile</h3>
+
+      
+        <i class="material-icons" style = "position: absolute; margin-left: 250px; margin-top: -2px;">edit</i>
+      
+
+        <a href="/student/<%=student.id%>/createNewGoal">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
+        </a>
+          </form>
+
+     
+       
+     </div>
+
+   <div class="main-overview">
+    <% goals.forEach(function(goal) { %> 
+    <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
+    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+      <div class="card-header">Academic Goal</div>
+      <div class="card-body">
+        <h4 class="card-title"><%= goal.name %></h4>
+        <p class="card-text">Goal Information</p>
+        <div class="progress">
+         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+         </div>
+       </div>
+     </div>
+   </div>
+   
+   <% }); %>
+  </a>
+ </div>
+
+
+
+
+</main>
+
+
+
+
+
+
+
+<footer class="footer">
+  <div class="footer__copyright">&copy; 2019 TRACK</div>
+  
+  <a href="/student/<%= student.id %>/delete" class="Delete" <div class="footer__signature">Delete Student</div></a>
+</footer>
+</div>
+
 </html>
