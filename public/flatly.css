@@ -105,7 +105,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #ecf0f1; /*subject to change*/
 }
 
 [tabindex="-1"]:focus {
@@ -2047,6 +2047,7 @@ pre code {
 
 .form-control {
   display: block;
+  /*align-items: center;*/
   width: 500px;
   height: calc(2.15625rem + 2px);
   padding: 0.375rem 0.75rem;

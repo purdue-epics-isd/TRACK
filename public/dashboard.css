@@ -123,13 +123,21 @@ body {
   margin: 20px;
 }
 
-.name-display {
+/*for the goal page*/
+.name-header {
   display: flex;
+  /*float: left;*/
   align-items: center;
   justify-content: space-between;
   padding: 20px;
   //background-color: #d3d3;
 }
+
+/*part of the name-header*/
+/*.name-overview {
+  padding-right: 30px;
+
+}*/
 
 .main-cards {
   column-count: 1;

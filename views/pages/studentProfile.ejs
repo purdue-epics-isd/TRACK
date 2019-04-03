@@ -42,17 +42,24 @@
 
 
   <main class="main">
-    <div class="name-display">
-      <h3><%= student.name %>'s Profile</h3>
-      <a href="/student/<%=student.id%>/createNewGoal">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
-    </a>
-    </form>
+    <div class="name-header">
+      
+        <h3><%= student.name %>'s Profile</h3>
 
-    </div>
+      
+        <i class="material-icons" style = "padding-right:  125px">edit</i>
+      
+
+        <a href="/student/<%=student.id%>/createNewGoal">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
+        </a>
+          </form>
+       
+     </div>
 
    <div class="main-overview">
     <% goals.forEach(function(goal) { %> 
+    <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
     <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
       <div class="card-header">Academic Goal</div>
       <div class="card-body">
@@ -66,7 +73,7 @@
    </div>
    
    <% }); %>
-
+  </a>
  </div>
 
 
