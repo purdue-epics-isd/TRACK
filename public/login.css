@@ -26,6 +26,22 @@
 
 }
 
+.item-b {
+  grid-column: 3;
+  grid-row: 1;
+
+  align-self: center;
+  position: relative;
+
+  padding-top: 5px;
+  padding-bottom: 33px;
+
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 150px 1fr 150px;
