@@ -48,18 +48,23 @@
 
 
 /* 
-<h1>IEP Goal Tracker</h1>
-            <h2>LOGIN</h2>
-            <a href="/signUp" class="" </a>
-            <img style="width:6%;" src="img/logo.png" alt="clipboard Image Logo">
-            <form action="/login" style=":10px;"><!--this will need to be changed eventually-->
-                    Login: <input type="text" name="Login"><br><br>
-                    Password: <input type="password" name="Password" value="FakePSW" id="myInput"><br><br>
-                    <input type="checkbox" onclick="myFunction()">Show Password
-                    <input type="submit" value="Sign In">
-                </form>
-                <a href="#" id="forgot">Forgot Your Password?</a>
-                <form>
+<div class = "item-a">
+        <h1>IEP GOAL TRACKER</h1>
+        <div class="form-group center">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group center">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
         
-            </form>
+        <div class = "center">
+             <a href="/signUp"><button class="btn btn-primary center">Sign Up</button></a>
+
+             <a href="/login"><button type="submit" class="btn btn-primary center">Sign In</button></a>
+        </div>
+    </div>
 */
