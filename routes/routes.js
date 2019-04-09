@@ -13,13 +13,13 @@ const Student = require('../models/student.model');
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:id/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/student/:id/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
-router.post('/signUp/createUser',user_controller.createUser);
+router.post('/signUp/createUser', user_controller.createUser);
 //Delete data
-router.get('/student/:id/goal/:goalid/delete',goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
+router.get('/student/:id/goal/:goalid/delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 //router.delete('/goal/delete',goal_controller.goal_delete);
 //router.post('/goal/:goalid/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
 router.get('/student/:id/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
-router.get('/login_confirm',user_controller.login_confirm)
+router.get('/login_confirm', user_controller.login_confirm)
 //router.get('/profile',user_controller.get_profile)
 //router.get('/logout',user_controller.logout)
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
