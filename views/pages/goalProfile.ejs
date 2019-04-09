@@ -2,44 +2,39 @@
 
 <html>
 <head>
-    <title>Goal</title>
-    <link rel="icon" type="image/gif/png" href="img/logo.png">
-    
-    <link rel="stylesheet" href="/flatly.css">
-  	<link rel="stylesheet" href="/dashboard.css">
-  	<link rel="stylesheet" href="/icons.css">
-    <script type="text/javascript" src="myScripts.js"></script>
+	<title>Goal</title>
+	<%- include("../partials/head.ejs")%>
 </head>
 
 <style>
 
 	table#t01 {
-	  width:80%;
-	  margin-left: 10%;
-	  color: black;
+		width:80%;
+		margin-left: 10%;
+		color: black;
 	}
 	table#t01, th#t01, td#t01 {
-	  border: 1px solid black;
-	  border-collapse: collapse;
+		border: 1px solid black;
+		border-collapse: collapse;
 	}
 	th#t01, td#t01 {
-	  padding: 15px;
-	  text-align: left;
+		padding: 15px;
+		text-align: left;
 	}
 	table#t01 tr:nth-child(even) {
-	  background-color: #eee;
+		background-color: #eee;
 	}
 	table#t01 tr:nth-child(odd) {
-	 background-color: #fff;
+		background-color: #fff;
 	}
 	table#t01 th {
-	  background-color: black;
-	  color: white;
+		background-color: black;
+		color: white;
 	}
 </style>
 
 <header>
-    <%- include("../partials/header.ejs")%>
+	<%- include("../partials/header.ejs")%>
 </header>
 
 <body>
@@ -68,48 +63,41 @@
 						}
 						
 					</script>
-			<% }); %>-->
+					<% }); %>-->
 
-			<tr>
-				<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
-			<tr>
-				<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
-			<tr>
-				<td> Additional Comments: </td><td><input type="text" name="comments"></td></tr>
-			<a href="/student/<%= student.id %>"><span class="backButton"></span></a>
-			<a><input type="submit" value="Submit" class="submitButton"></a>
-		</table>
-	</form>
+					<tr>
+						<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
+						<tr>
+							<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
+							<tr>
+								<td> Additional Comments: </td><td><input type="text" name="comments"></td></tr>
+								<a href="/student/<%= student.id %>"><span class="backButton"></span></a>
+								<a><input type="submit" value="Submit" class="submitButton"></a>
+							</table>
+						</form>
 
-	<div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-
-
-	<h2>Progress Monitoring</h2>
-	<table style="position: center" id="t01">
-		<tr>
-			<th>Percentage</th>
-			<th>Support</th> 
-			<th>Comments</th>
-			<th>Date</th>
-		</tr>
-		<% goalDatas.forEach(function(goalData) { %>
-			<tr>
-				<td><%= goalData.percentage %></td>
-				<td><%= goalData.support %></td>
-				<td><%= goalData.comments %></td>
-				<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
-			</tr>
-		<% }); %>
-	</table>
+						<h2>Progress Monitoring</h2>
+						<table style="position: center" id="t01">
+							<tr>
+								<th>Percentage</th>
+								<th>Support</th> 
+								<th>Comments</th>
+								<th>Date</th>
+							</tr>
+							<% goalDatas.forEach(function(goalData) { %>
+							<tr>
+								<td><%= goalData.percentage %></td>
+								<td><%= goalData.support %></td>
+								<td><%= goalData.comments %></td>
+								<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
+							</tr>
+							<% }); %>
+						</table>
 	<!--
 			<input type="submit" value = "Submit" class="submitButton"><br><br>
 			<a href="Anna.html" class="backButton">Back</a>-->
-	<!-- the result of the search will be rendered inside this div -->
-	<br><div id="result"></div>
-  <br><div id="delete"></div>
-</body>
-</html>
+			<!-- the result of the search will be rendered inside this div -->
+			<br><div id="result"></div>
+			<br><div id="delete"></div>
+		</body>
+		</html>
