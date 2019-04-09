@@ -33,11 +33,14 @@
 	}
 </style>
 
+<div class="grid-container">
 <header>
-	<%- include("../partials/header.ejs")%>
+	<%- include("../partials/head.ejs")%>
 </header>
+<%- include("../partials/header.ejs")%>
 
-<body>
+	<main class="main">
+
 
 	<a href="/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete" style="position: absolute; top: 35px; right:35px">Delete goal file</a>
 
@@ -99,5 +102,6 @@
 			<!-- the result of the search will be rendered inside this div -->
 			<br><div id="result"></div>
 			<br><div id="delete"></div>
-		</body>
+		</main>
+		
 		</html>
