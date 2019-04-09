@@ -8,37 +8,36 @@
 
 
 <div class="grid-container">
-   
+
   <header class="header">
     <div class="header__menu">
-       <form class="form-inline my-2 my-lg-0">
+     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>
-    </div>
-  </header>
+  </div>
+</header>
 
 <%- include("../partials/header.ejs")%>
-  </aside>
 
 
 
 
 
 
-  <main class="main">
-    <div class="name-header">
-        <h3><%= student.name %>'s Profile</h3>
-        <i class="material-icons" style = "position: absolute; margin-left: 250px; margin-top: -2px;">edit</i>
-        <a href="/student/<%=student.id%>/createNewGoal">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
-        </a>
-          </form>
-     </div>
 
-   <div class="main-overview">
-    <% goals.forEach(function(goal) { %> 
-    <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
+<main class="main">
+  <div class="name-header">
+    <h3><%= student.name %>'s Profile</h3>
+    <i class="material-icons" style = "position: absolute; margin-left: 250px; margin-top: -2px;">edit</i>
+    <a href="/student/<%=student.id%>/createNewGoal">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
+    </a>
+</div>
+
+<div class="main-overview">
+  <% goals.forEach(function(goal) { %> 
+  <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
     <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
       <div class="card-header">Academic Goal</div>
       <div class="card-body">
@@ -51,8 +50,8 @@
      </div>
    </div>
    <% }); %>
-  </a>
- </div>
+ </a>
+</div>
 </main>
 
 <footer class="footer">

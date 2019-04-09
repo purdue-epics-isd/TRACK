@@ -72,9 +72,12 @@ input.invalid {
 }
 </style>
 
+<div class="grid-container">
 <header>
 	<%- include("../partials/header.ejs")%>
 </header>
+
+	<main class="main">
 
 <h1>Create New Goal for <%= student.name %></h1>
 <body>
@@ -170,6 +173,8 @@ input.invalid {
 
 </form>
 </body>
+</main>
+</div>
 </html>
 
 <script>
