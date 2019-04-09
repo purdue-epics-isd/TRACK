@@ -11,14 +11,14 @@ User.register(new User({username:req.body.username}),req.body.password, function
             return res.render('pages/signup');
         } //user stragety
         passport.authenticate("local")(req, res, function(){
-            res.redirect("/signupSuccess"); //once the user sign up
+            res.redirect("/"); //once the user sign up
        }); 
     });
 };
 
 
 exports.login_confirm = passport.authenticate("local",{
-   successRedirect:"/userfile",
+   successRedirect:"/classPage",
     failureRedirect:"/"
 }),function(req, res){
     res.send("User is "+ req.user.id);
