@@ -3,16 +3,18 @@
 
 <head>
   <title>Create New Student</title>
-  <link rel="icon" type="image/gif/png" href="img/logo.png">
+  <%- include("../partials/head.ejs")%>
+  <!--<link rel="icon" type="image/gif/png" href="img/logo.png">
   <link rel="stylesheet" href="/main.css">
-  <script type="text/javascript" src="myScripts.js"></script>
+  <script type="text/javascript" src="myScripts.js"></script>-->
 </head>
 
-<header>
-  <%- include("../partials/header.ejs")%>
-</header>
+<div class="grid-container">
+  
+<%- include("../partials/header.ejs")%>
 
-<body>
+
+  <main class="main">
   <h1>Add New Student</h1>
   <form action="student/create" method="post">
    Last Name: <input type="text" name="name"> First Name: <input type="text" name="name"><br><br>
@@ -50,5 +52,11 @@
     <input type="submit" value="Submit" class="submitButton"><br><br>
   </form>
   <a href="/classPage" class="backButton"></a>
-</body>
+</main>
+
+<footer class="footer">
+  <div class="footer__copyright">&copy; 2019 TRACK</div>
+</footer>
+</div>
+
 </html>
