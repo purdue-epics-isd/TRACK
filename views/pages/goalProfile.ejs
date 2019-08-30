@@ -8,47 +8,50 @@
 
 <style>
 
-	table#t01 {
-		width:80%;
-		margin-left: 10%;
-		color: black;
-	}
-	table#t01, th#t01, td#t01 {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	th#t01, td#t01 {
-		padding: 15px;
-		text-align: left;
-	}
-	table#t01 tr:nth-child(even) {
-		background-color: #eee;
-	}
-	table#t01 tr:nth-child(odd) {
-		background-color: #fff;
-	}
-	table#t01 th {
-		background-color: black;
-		color: white;
-	}
+table#t01 {
+	width:80%;
+	margin-left: 10%;
+	color: black;
+}
+table#t01, th#t01, td#t01 {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+th#t01, td#t01 {
+	padding: 15px;
+	text-align: left;
+}
+table#t01 tr:nth-child(even) {
+	background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+	background-color: #fff;
+}
+table#t01 th {
+	background-color: black;
+	color: white;
+}
 </style>
 
 <div class="grid-container">
-<header>
-	<%- include("../partials/head.ejs")%>
-</header>
-<%- include("../partials/header.ejs")%>
+
+	<header>
+		<div class="header__menu">
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</header>
+	<%- include("../partials/header.ejs")%>
 
 	<main class="main">
 
-
-	<a href="/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete" style="position: absolute; top: 35px; right:35px">Delete goal file</a>
-
-	
-	<h1><%= goal.name %></h1>
-	<h2><%= goal.description %></h2>
-	<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
-		<table style="position: center" id="goalInput">
+		
+		<h1><%= goal.name %></h1>
+		<h2><%= goal.description %></h2>
+		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+			<table style="position: center" id="goalInput">
 			<!--<% methodOfCollection.forEach(function(collection) { %>
 				<p><%= collection %><p>-->
 
@@ -102,5 +105,11 @@
 			<br><div id="result"></div>
 			<br><div id="delete"></div>
 		</main>
-		
-		</html>
+
+		<footer class="footer">
+			<div class="footer__copyright">&copy; 2019 TRACK</div>
+			<a href="/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete">Delete goal file</a>
+		</footer>
+	</div>
+	
+	</html>
