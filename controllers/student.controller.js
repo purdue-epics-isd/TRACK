@@ -9,7 +9,8 @@ exports.student_create = function (req, res) {
                 period: "period" + req.body.period,
                 grade: req.body.grade,
                 age: req.body.age,
-                goals: []
+                goals: [],
+                userid: req.params.userid
             }
         );
         student.save(function (err) {

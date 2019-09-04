@@ -4,17 +4,21 @@ const Student = require('../models/student.model');
 exports.login = function (req, res) {
     try {
         var students = [];
-
-        Student.find({}, 'name', function(err, student) {
-            student.forEach(function(s) { 
-                console.log(s); console.log(s.name); 
-                students.push(s);
+        User.findById(req.params.userid, function(err, user) {
+            Student.find({}, 'name', function(err, student) {
+                student.forEach(function(s) { 
+                    if(student.userid==req.params.userid) {
+                    console.log(s); console.log(s.name); 
+                    students.push(s);
+                }
+                });
             });
         });
-        
-        Student.findById(req.params.id, function(err, student) {
-            res.render('pages/classPage', {
-                students: students
+        User.findById(req.params.userid, function(err, user) {
+            Student.findById(req.params.id, function(err, student) {
+                res.render('pages/classPage', {
+                    students: students
+                });
             });
         });
     } catch(err) {
