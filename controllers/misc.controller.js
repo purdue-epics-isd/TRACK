@@ -15,9 +15,10 @@ exports.login = function (req, res) {
             });
         });
         User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.id, function(err, student) {
+            Student.findById(req.params.studentid, function(err, student) {
                 res.render('pages/classPage', {
-                    students: students
+                    students: students,
+                    user: user
                 });
             });
         });

@@ -14,14 +14,14 @@ const Student = require('../models/student.model');
 
 //TODO: figure out the real difference between router.post and router.get
 router.post('/:userid/student/create', student_controller.student_create); //adds new student to database
-router.post('/:userid/student/:id/goal/create', goal_controller.goal_create); //adds new goal to database
-router.post('/:userid/student/:id/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+router.post('/:userid/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
+router.post('/:userid/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 
 //Delete data
-router.get('/:userid/student/:id/goal/:goalid/delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
+router.get('/:userid/student/:studentid/goal/:goalid/delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 //router.delete('/goal/delete',goal_controller.goal_delete);
 //router.post('/goal/:goalid/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
-router.get('/:userid/student/:id/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
+router.get('/:userid/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 	  if (err) { return next(err); }
@@ -40,9 +40,9 @@ router.get('/login_confirm', function(req, res, next) {
 router.get('/:userid/classPage', student_controller.navigate_to_classPage);
 //router.get('/classPage', student_controller.navigate_to_classPage);
 //router.get('/classPage1', student_controller.navigate_to_classPage1); // navigates to the class page
-router.get('/:userid/student/:id', student_controller.navigate_to_studentProfile); //navigates to a student profile
-router.get('/:userid/student/:id/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
-router.get('/:userid/student/:id/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
+router.get('/:userid/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
+router.get('/:userid/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
+router.get('/:userid/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
 router.get('/:userid/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page 
 
 router.get('/:userid/aboutUs', (req, res) => { 

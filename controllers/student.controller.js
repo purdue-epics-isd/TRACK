@@ -41,15 +41,15 @@ exports.navigate_to_studentProfile = function (req, res) {
     try {
         var goals = [];
 
-        Goal.find({studentID: req.params.id}, {}, function(err, goal) {
+        Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
             goal.forEach(function(s) { 
                 //console.log("s.studentID: " + s.studentID);
-                //console.log("req.params.id: " + req.params.id);
+                //console.log("req.params.studentid: " + req.params.studentid);
                 goals.push(s);
             });
         });
         User.findById(req.params.userid, function(err, goal) {
-            Student.findById(req.params.id, function(err, student) {
+            Student.findById(req.params.studentid, function(err, student) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     res.render('pages/studentProfile', {
                         goals: goals,
@@ -78,7 +78,7 @@ exports.navigate_to_classPage = function (req, res) {
         });
 
         User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.id, function(err, student) {
+            Student.findById(req.params.studentid, function(err, student) {
                 res.render('pages/classPage', {
                     students: students, 
                     user: user
@@ -95,7 +95,7 @@ exports.navigate_to_classPage = function (req, res) {
 exports.navigate_to_createNewStudent = function (req, res) {
     try {
         User.findById(req.params.userid, function(err, user){ 
-            Student.findById(req.params.id, function(err, student) {
+            Student.findById(req.params.studentid, function(err, student) {
                 res.render('pages/createNewStudent', {
                     user: user
                 });
@@ -109,7 +109,7 @@ exports.navigate_to_createNewStudent = function (req, res) {
 
 exports.student_delete = function (req, res) {
     try {
-        Student.findByIdAndRemove(req.params.id, function (err) {
+        Student.findByIdAndRemove(req.params.studentid, function (err) {
             if (err) {
                 console.log(err);
             } else {
