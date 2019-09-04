@@ -69,7 +69,7 @@ exports.navigate_to_goalProfile = function (req, res) {
                 return;
             }
 
-            User.findById(req.paramas.userid, function(err, user) {
+            User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
                     console.log("method:" + goal.methodOfCollection);

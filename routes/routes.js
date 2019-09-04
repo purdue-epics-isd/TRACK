@@ -11,6 +11,7 @@ const goaldata_controller = require('../controllers/goaldata.controller');
 const misc_controller = require('../controllers/misc.controller');
 const user_controller = require('../controllers/user.controller')
 const Student = require('../models/student.model');
+const User = require('../models/user.model');
 
 //TODO: figure out the real difference between router.post and router.get
 router.post('/:userid/student/create', student_controller.student_create); //adds new student to database
@@ -46,13 +47,25 @@ router.get('/:userid/student/:studentid/createNewGoal', goal_controller.navigate
 router.get('/:userid/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page 
 
 router.get('/:userid/aboutUs', (req, res) => { 
-	res.render('./pages/aboutUs.ejs') 
+	User.findById(req.params.userid, function(err, user) {
+		res.render('./pages/aboutUs.ejs', {
+			user: user
+		}) 
+	});
 });
 router.get('/:userid/feedback', (req, res) => { 
-	res.render('./pages/feedback.ejs') 
+	User.findById(req.params.userid, function(err, user) {
+		res.render('./pages/feedback.ejs', {
+			user: user
+		})
+	}); 
 });
 router.get('/:userid/settings', (req, res) => { 
-	res.render('./pages/settings.ejs') 
+	User.findById(req.params.userid, function(err, user) {
+		res.render('./pages/settings.ejs', {
+			user: user
+		}) 
+	});
 });
 router.get('/signup', (req, res) => { 
 	res.render('./pages/signup.ejs') 
