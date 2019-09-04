@@ -38,12 +38,12 @@
 	<%- include("../partials/header.ejs")%>
 
 	<main class="main">
-		<a href="/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete" style="position: absolute; top: 35px; right:35px">Delete goal file</a>
+		<a href="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete" style="position: absolute; top: 35px; right:35px">Delete goal file</a>
 
 
 		<h1><%= goal.name %></h1>
 		<h2><%= goal.description %></h2>
-		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+		<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 			<table style="position: center" id="goalInput">
 			<!--<% methodOfCollection.forEach(function(collection) { %>
 				<p><%= collection %><p>-->

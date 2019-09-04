@@ -15,14 +15,14 @@
   <div class="name-header">
     <h3><%= student.name %>'s Profile</h3>
     <i class="material-icons" style = "position: absolute; margin-left: 250px; margin-top: -2px;">edit</i>
-    <a href="/student/<%=student.id%>/createNewGoal">
+    <a href="/<%= user.id%>/student/<%=student.id%>/createNewGoal">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
     </a>
 </div>
 
 <div class="main-overview">
   <% goals.forEach(function(goal) { %> 
-  <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
+  <a href="/<%= user.id%>/student/<%=student.id%>/goal/<%=goal.id%>">
     <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
       <div class="card-header">Academic Goal</div>
       <div class="card-body">
@@ -42,7 +42,7 @@
 <footer class="footer">
   <div class="footer__copyright">&copy; 2019 TRACK</div>
   
-  <a href="/student/<%= student.id %>/delete" class="Delete"> <div class="footer__signature">Delete Student</div></a>
+  <a href="/<%= user.id%>/student/<%= student.id %>/delete" class="Delete"> <div class="footer__signature">Delete Student</div></a>
 </footer>
 </div>
 
