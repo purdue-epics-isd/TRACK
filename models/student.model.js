@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 //const goal = require('/controllers/goal.controller');
 
 let StudentSchema = new Schema({
-    name: {type: String, required: true},
+    firstname: {type: String, required: true},
+    lastname: {type: String, required: true},
     period: {type: String, required: true},
     grade: {type: String, required: true},
     age: {type: String, required: false},

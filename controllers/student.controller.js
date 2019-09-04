@@ -6,7 +6,8 @@ const User = require('../models/login.model');
 exports.student_create = function (req, res) {
     try {
         let student = new Student(
-            {   name: req.body.name,
+            {   firstname: req.body.firstname,
+                lastname: req.body.lastname,
                 period: "period" + req.body.period,
                 grade: req.body.grade,
                 age: req.body.age,
@@ -28,7 +29,7 @@ exports.student_create = function (req, res) {
                });
             }*/
         })
-        res.redirect("/classPage");
+        res.redirect("/" + req.params.userid + "/classPage");
     } catch(err) {
         //console.log(err);
         res.render('./error');
@@ -47,12 +48,14 @@ exports.navigate_to_studentProfile = function (req, res) {
                 goals.push(s);
             });
         });
-
-        Student.findById(req.params.id, function(err, student) {
-            Goal.findById(req.params.goalid, function(err, goal) {
-                res.render('pages/studentProfile', {
-                    goals: goals,
-                    student: student
+        User.findById(req.params.userid, function(err, goal) {
+            Student.findById(req.params.id, function(err, student) {
+                Goal.findById(req.params.goalid, function(err, goal) {
+                    res.render('pages/studentProfile', {
+                        goals: goals,
+                        student: student, 
+                        user: user
+                    });
                 });
             });
         });
@@ -91,9 +94,11 @@ exports.navigate_to_classPage = function (req, res) {
 /*redirects to new student page*/
 exports.navigate_to_createNewStudent = function (req, res) {
     try {
-        Student.findById(req.params.id, function(err, student) {
-            res.render('pages/createNewStudent', {
-                //students: students
+        User.findById(req.params.userid, function(err, user){ 
+            Student.findById(req.params.id, function(err, student) {
+                res.render('pages/createNewStudent', {
+                    user: user
+                });
             });
         });
     } catch(err) {
