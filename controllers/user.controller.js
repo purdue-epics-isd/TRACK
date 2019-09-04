@@ -1,4 +1,4 @@
-const User = require('../models/login.model');
+const User = require('../models/user.model');
 var passport = require('passport');
 var LocalStrategy   = require("passport-local");
 var passportLocalMongoose   = require("passport-local-mongoose");

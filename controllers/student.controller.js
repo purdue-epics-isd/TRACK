@@ -1,6 +1,6 @@
 const Student = require('../models/student.model');
 const Goal = require('../models/goal.model');
-const User = require('../models/login.model');
+const User = require('../models/user.model');
 
 /*creates new student profile in database*/
 exports.student_create = function (req, res) {
@@ -48,7 +48,7 @@ exports.navigate_to_studentProfile = function (req, res) {
                 goals.push(s);
             });
         });
-        User.findById(req.params.userid, function(err, goal) {
+        User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     res.render('pages/studentProfile', {
