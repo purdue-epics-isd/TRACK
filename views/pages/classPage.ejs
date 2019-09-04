@@ -23,8 +23,8 @@
     <% students.forEach(function(student) { %>
     <!--Write the desired HTML for each student here -->
     <a href="/<%= user.id%>/student/<%= student.id %>" class = "studentButton <%= student.period %>" >
-      <img class = "img-circle" src="img/studentIcon.png" width = "200" height = "200" >
-      <div class = "studentName"><%= student.name %></div>
+      <img class = "img-circle" src="/img/studentIcon.png" width = "200" height = "200" >
+      <div class = "studentName"><%= student.firstname %></div>
     </a>
     <% }); %>
 
