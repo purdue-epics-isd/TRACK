@@ -2,7 +2,7 @@ const PORT = process.env.PORT || 1234
 // track.js
 const express = require('express');
 const bodyParser = require('body-parser');
-var User  = require('./models/login.model');
+var User  = require('./models/user.model');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy   = require("passport-local");

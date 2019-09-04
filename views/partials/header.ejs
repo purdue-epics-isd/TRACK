@@ -1,14 +1,22 @@
  <!-- views/partials/header.ejs -->
  
+<header class="header">
+  <div class="header__menu">
+     <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</header>
+
  <aside class="sidenav">
  <div class="sidenav__close-icon">
- <h1>Hello</h1>
  </div>
  <ul class="sidenav__list" position=fixed>
- <li class="sidenav__list-item"><a href="/classPage"><i class="material-icons">home</i> Home</a></li>
- <li class="sidenav__list-item"><a href="/settings"><i class="material-icons">settings</i> Settings</a></li>
- <li class="sidenav__list-item"><a href="/feedback"><i class="material-icons">feedback</i> Feedback</a></li>
- <li class="sidenav__list-item"><a href="/aboutUs"><i class="material-icons">info</i> About</a></li>
+ <li class="sidenav__list-item"><a href="/<%= user.id%>/classPage"><i class="material-icons">home</i> Home</a></li>
+ <li class="sidenav__list-item"><a href="/<%= user.id%>/settings"><i class="material-icons">settings</i> Settings</a></li>
+ <li class="sidenav__list-item"><a href="/<%= user.id%>/feedback"><i class="material-icons">feedback</i> Feedback</a></li>
+ <li class="sidenav__list-item"><a href="/<%= user.id%>/aboutUs"><i class="material-icons">info</i> About</a></li>
  <li class="sidenav__list-item"><a href="/logout">Logout</a></li>
  </ul>
  </aside>  

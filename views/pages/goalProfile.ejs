@@ -1,56 +1,49 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-	<title>Goal</title>
-	<%- include("../partials/head.ejs")%>
-</head>
+	<head>
+		<title>Goal</title>
+		<%- include("../partials/head.ejs")%>
+	</head>
 
-<style>
+	<style>
 
-table#t01 {
-	width:80%;
-	margin-left: 10%;
-	color: black;
-}
-table#t01, th#t01, td#t01 {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-th#t01, td#t01 {
-	padding: 15px;
-	text-align: left;
-}
-table#t01 tr:nth-child(even) {
-	background-color: #eee;
-}
-table#t01 tr:nth-child(odd) {
-	background-color: #fff;
-}
-table#t01 th {
-	background-color: black;
-	color: white;
-}
-</style>
+		table#t01 {
+			width:80%;
+			margin-left: 10%;
+			color: black;
+		}
+		table#t01, th#t01, td#t01 {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+		th#t01, td#t01 {
+			padding: 15px;
+			text-align: left;
+		}
+		table#t01 tr:nth-child(even) {
+			background-color: #eee;
+		}
+		table#t01 tr:nth-child(odd) {
+			background-color: #fff;
+		}
+		table#t01 th {
+			background-color: black;
+			color: white;
+		}
+	</style>
 
 <div class="grid-container">
 
-	<header>
-		<div class="header__menu">
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-			</form>
-		</div>
-	</header>
 	<%- include("../partials/header.ejs")%>
 
 	<main class="main">
 
-		
+
 		<h1><%= goal.name %></h1>
 		<h2><%= goal.description %></h2>
-		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+		<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+
 			<table style="position: center" id="goalInput">
 			<!--<% methodOfCollection.forEach(function(collection) { %>
 				<p><%= collection %><p>-->
@@ -72,7 +65,7 @@ table#t01 th {
 					<% }); %>-->
 
 					<tr>
-						<td>Percentage Completed:</td><td> <input type="value" name="percentage"></td></tr>
+						<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td></tr>
 						<tr>
 							<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
 							<tr>
@@ -98,17 +91,13 @@ table#t01 th {
 							</tr>
 							<% }); %>
 						</table>
-	<!--
-			<input type="submit" value = "Submit" class="submitButton"><br><br>
-			<a href="Anna.html" class="backButton">Back</a>-->
-			<!-- the result of the search will be rendered inside this div -->
 			<br><div id="result"></div>
 			<br><div id="delete"></div>
 		</main>
 
 		<footer class="footer">
 			<div class="footer__copyright">&copy; 2019 TRACK</div>
-			<a href="/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete">Delete goal file</a>
+			<a href="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete">Delete goal file</a>
 		</footer>
 	</div>
 	
