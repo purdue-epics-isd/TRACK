@@ -38,7 +38,7 @@ router.get('/login_confirm', function(req, res, next) {
 //router.get('/test', student_controller.student_details); // a simple test url to check that all of our files are communicating correctly.
 
 router.get('/:userid/classPage', student_controller.navigate_to_classPage);
-router.get('/classPage', student_controller.navigate_to_classPage);
+//router.get('/classPage', student_controller.navigate_to_classPage);
 //router.get('/classPage1', student_controller.navigate_to_classPage1); // navigates to the class page
 router.get('/:userid/student/:id', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/:userid/student/:id/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
