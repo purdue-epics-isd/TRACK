@@ -8,7 +8,8 @@ let StudentSchema = new Schema({
     period: {type: String, required: true},
     grade: {type: String, required: true},
     age: {type: String, required: false},
-    goals: [{type: Schema.ObjectId, ref: 'Goal'}]
+    goals: [{type: Schema.ObjectId, ref: 'Goal'}],
+    userid: {type: String, required: true}
 });
 
 
