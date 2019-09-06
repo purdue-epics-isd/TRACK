@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 
-  <html>
+<html>
 
-  <head>
-    <title>Track</title>
+<head>
+  <title>Track</title>
   <%- include("../partials/head.ejs")%>
-  </head> 
+</head> 
 
 <div class="grid-container">
 
-<%- include("../partials/header.ejs")%>
+    <header class="header">
+      <div class="header__menu">
+       <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </header>
 
-<main class="main">
-    <div class="dropdown">
-     <select id="selectNumber" class="dropbtn"></select>
+  <%- include("../partials/header.ejs")%>
+
+  <main class="main">
+    
+        <div class="dropdown">
+          <select class="custom-select" id="selectNumber" class="dropbtn"></select>
+        </div>
+    
+    
+
+    
 
 
-<a href="/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a>
+      <a href="/<%= user.id%>/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a>
 
-<div class="student-container" id="demo">
-    <!--Loads the Students and Creates Buttons for them-->
-    <% students.forEach(function(student) { %>
-    <!--Write the desired HTML for each student here -->
-    <a href="/student/<%= student.id %>" class = "studentButton <%= student.period %>" >
-      <img class = "img-circle" src="img/studentIcon.png" width = "200" height = "200" >
-      <div class = "studentName"><%= student.name %></div>
-    </a>
-    <% }); %>
+       <div class="student-container" id="demo">
+        <!--Loads the Students and Creates Buttons for them-->
+        <% students.forEach(function(student) { %>
+        <!--Write the desired HTML for each student here -->
+        <a href="/<%= user.id%>/student/<%= student.id %>" class = "studentButton <%= student.period %>" >
+          <img class = "img-circle" src="/img/studentIcon.png" width = "200" height = "200" >
+          <div class = "studentName"><%= student.firstname %></div>
+        </a>
+        <% }); %>
+       </div>
 
-  </div>
+    </div>
 
-</main>
+  </main>
 
-<footer class="footer">
-  <div class="footer__copyright">&copy; 2019 TRACK</div>
-</footer>
+    <footer class="footer">
+      <div class="footer__copyright">&copy; 2019 TRACK</div>
+    </footer>
 </div>
-
 
 </html>
 

@@ -30,13 +30,13 @@ exports.goaldata_create = function (req, res) {
         });
 
         /*
-        Student.findById(req.params.id, function(err, student) {
+        Student.findById(req.params.studentid, function(err, student) {
             var goals = [];
-            Goal.find({studentID: req.params.id}, {}, function(err, goal) {
+            Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
                 goal.forEach(function(s) { 
                     console.log("Goal: " + s);
                     console.log("Student ID: " + s.studentID + "|" + s.name);
-                    console.log("req.params.id: " + req.params.id + "|" + student.name);
+                    console.log("req.params.studentid: " + req.params.studentid + "|" + student.name);
                     goals.push(s);
                 });
                 //console.log("Here is the final list:" + goals);
@@ -47,7 +47,7 @@ exports.goaldata_create = function (req, res) {
                 goals: goals
             });
         });*/
-        res.redirect("/student/" + req.params.id);
+        res.redirect("/" + req.params.userid + "/student/" + req.params.studentid);
     } catch(err) {
         console.log(err);
         res.render('./error');
@@ -55,14 +55,14 @@ exports.goaldata_create = function (req, res) {
 };
 
 /*exports.goaldata_details = function (req, res) {
-    Goaldata.findById(req.params.id, function (err, goal) {
+    Goaldata.findById(req.params.studentid, function (err, goal) {
         if (err) return next(err);
         res.send(goaldata);
     })
 };*/
 
 /*exports.goaldata_name = function (req, res) {
-    Student.findById(req.params.id, function(err, goal) {
+    Student.findById(req.params.studentid, function(err, goal) {
         res.render('pages/goalProfile', {
             goaldata: goaldata
         });
