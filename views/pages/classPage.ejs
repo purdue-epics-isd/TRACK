@@ -14,49 +14,53 @@
        <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </header>
+        </form>
+      </div>
+    </header>
 
   <%- include("../partials/header.ejs")%>
 
-  <main class="main">
-      <div class =  class-header>
-        <div class="form-group">
-          <select class="custom-select" id="selectNumber" class="dropbtn"></select>
-        </div>
+    <main class="main">
+        <div class =  class-header>
+          <div class="form-group">
+            <select class="custom-select" id="selectNumber" class="dropbtn"></select>
+          </div>
 
-        <button type="button" class="btn btn-primary">
-          <a href="/<%= user.id%>/createNewStudent">Create New Student</a>
-        </button>
-      </div>
-    
+          <button type="button" class="btn btn-primary">
+            <a href="/<%= user.id%>/createNewStudent">Create New Student</a>
+          </button>
+        </div>
+      
+        
+
       
 
-    
+
+      
+
+         <div class="main-overview" id="demo">
+            <!--Loads the Students and Creates Buttons for them-->
+            <% students.forEach(function(student) { %>
+            <!--Write the desired HTML for each student here -->
+            <a href="/<%= user.id%>/student/<%= student.id %>" class = "studentButton <%= student.period %>" >
+              <img class = "img-circle" src="/img/studentIcon.png" width = "200" height = "200" >
+              <div class = "studentName"><%= student.firstname %></div>
+            </a>
+            <% }); %>
+         </div>
+
+      
+
+    </main>
 
 
-    
-
-       <div class="main-overview" id="demo">
-        <!--Loads the Students and Creates Buttons for them-->
-        <% students.forEach(function(student) { %>
-        <!--Write the desired HTML for each student here -->
-        <a href="/<%= user.id%>/student/<%= student.id %>" class = "studentButton <%= student.period %>" >
-          <img class = "img-circle" src="/img/studentIcon.png" width = "200" height = "200" >
-          <div class = "studentName"><%= student.firstname %></div>
-        </a>
-        <% }); %>
-       </div>
-
-    </div>
-
-  </main>
-
-    <footer class="footer">
+  <footer class="footer">
       <div class="footer__copyright">&copy; 2019 TRACK</div>
-    </footer>
+  </footer>
+
 </div>
+
+
 
 </html>
 
