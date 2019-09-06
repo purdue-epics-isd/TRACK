@@ -3,52 +3,42 @@
 <html>
 <head>
   <title>Profile</title>
-  <link rel="icon" type="image/gif/png" href="img/logo.png">
-  <link rel="stylesheet" href="/main.css">
+  <%- include("../partials/head.ejs")%>
   <script type="text/javascript" src="myScripts.js"></script>
 </head>
 <!-- testing-->
 
+
+<div class="grid-container">
+
+
+
+  <header class="header">
+    <div class="header__menu">
+       <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+  </header>
+
 <%- include("../partials/header.ejs")%>
 
-<style>
-body, html {
-  height: 100%;
-  margin: 0;
-}
+<div class="main">
 
-.topleft {
-  position: absolute;
-  top: 0;
-  left: 16px;
-}
-.bottomleft {
-  position: absolute;
-  bottom: 0;
-  left: 16px;
-}
-.middle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-hr {
-  margin: auto;
-  width: 40%;
-}
-</style>
 <body>
   <div class="middle">
-    <h1>COMING SOON</h1>
+    <h1>COMING SOON!! :D</h1>
     <p id="demo" style="font-size:30px"></p>
   </div>
 </body>
 
+</div>
+
+
 <script>
   // Set the date we're counting down to
-  var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+  var countDownDate = new Date("Jan 5, 2020 15:37:25").getTime();
   // Update the count down every 1 second
   var countdownfunction = setInterval(function() {
   // Get todays date and time
@@ -74,4 +64,12 @@ hr {
   }
 }, 1000);
 </script>
+
+
+
+<footer class="footer">
+  <div class="footer__copyright">&copy; 2019 TRACK</div>
+</footer>
+
+</div>
 </html>
