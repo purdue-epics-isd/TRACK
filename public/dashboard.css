@@ -115,6 +115,16 @@ body {
   color: slategray;
 }
 
+.class-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  height: 80px;
+  background-color: #e3e4e6;
+  /*color: slategray;*/
+}
+
 .main-overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
