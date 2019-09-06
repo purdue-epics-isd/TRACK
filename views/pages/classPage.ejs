@@ -21,19 +21,24 @@
   <%- include("../partials/header.ejs")%>
 
   <main class="main">
-    
-        <div class="dropdown">
+      <div class =  class-header>
+        <div class="form-group">
           <select class="custom-select" id="selectNumber" class="dropbtn"></select>
         </div>
+
+        <button type="button" class="btn btn-primary">
+          <a href="/<%= user.id%>/createNewStudent">Create New Student</a>
+        </button>
+      </div>
     
-    
+      
 
     
 
 
-      <a href="/<%= user.id%>/createNewStudent" class="addNew" style="position: absolute; top: 35px; right:35px">Create New Student</a>
+    
 
-       <div class="student-container" id="demo">
+       <div class="main-overview" id="demo">
         <!--Loads the Students and Creates Buttons for them-->
         <% students.forEach(function(student) { %>
         <!--Write the desired HTML for each student here -->
