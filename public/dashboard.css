@@ -32,6 +32,18 @@ body {
   padding: 12px;
 }
 
+a {
+  color: #fff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+b {
+  color: #DADAE3;
+  text-decoration: none;
+  background-color: transparent;
+}
+
 /* Give every child element its grid name */
 .header {
   grid-area: header;
@@ -39,7 +51,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background-color: #2C3E50;
+  background-color: #fff;
 }
 
 /* Make room for the menu icon on mobile */
@@ -67,7 +79,7 @@ body {
   transition: all .6s ease-in-out;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   z-index: 2; /* Needs to sit above the hamburger menu icon */
-  background-color: #394263;
+  background-color:  #2C3E50;
 }
 
 .sidenav.active {
@@ -102,7 +114,7 @@ body {
 
 .main {
   grid-area: main;
-  background-color: #8fd4d9;
+  background-color: #ecf0f1;
 }
 
 .main-header {
@@ -115,18 +127,10 @@ body {
   color: slategray;
 }
 
-.class-header {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-  padding: 20px;
-  height: 80px;
-  background-color: #e3e4e6;
-  /*color: slategray;*/
-}
+
 
 .main-overview {
-  display: grid;
+  display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   /*grid-auto-rows: 94px;*/
   grid-gap: 20px;
@@ -143,6 +147,9 @@ body {
   //background-color: #d3d3;
 }
 
+
+
+
 /*.name-extra {
   display: flex;
   flex-direction: row;
@@ -157,11 +164,59 @@ body {
 
 }*/
 
+
+
 .main-cards {
   column-count: 1;
   column-gap: 20px;
   margin: 20px;
 }
+
+
+/*Goal Page starts*/
+
+.class-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  height: 80px;
+  background-color: #e3e4e6;
+  /*color: slategray;*/
+}
+
+.overviewcard { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin: 20px;
+  /*vertical-align: top;
+  align-items: center;
+  justify-content: space-between; */
+  padding: 20px;
+  background-color: #d3d3;
+}
+
+.cardName {
+  display: flex;
+  justify-content: center;
+
+  /*vertical-align: top;
+  display: inline-block;
+  align-items: center;
+  justify-content: space-between;*/
+  padding: 20px;
+  background-color: #d3d3;
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+}
+/*Goal Page ends*/
+
+
+
 
 
 
@@ -197,7 +252,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background-color: #648ca6;
+  background-color: #fff;
 }
 
 /* Non-mobile styles, 750px breakpoint */

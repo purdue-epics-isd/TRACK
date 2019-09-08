@@ -198,7 +198,7 @@ sup {
 }
 
 a {
-  color: #18BC9C;
+  color: #fff;
   text-decoration: none;
   background-color: transparent;
 }
@@ -241,6 +241,7 @@ figure {
 }
 
 img {
+  
   vertical-align: middle;
   border-style: none;
 }
