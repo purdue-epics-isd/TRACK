@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  color: #fff;
+  /*color: #fff;*/
   font-family: 'Open Sans', Helvetica, sans-serif;
   box-sizing: border-box;
 }
@@ -166,13 +166,6 @@ b {
 
 
 
-.main-cards {
-  column-count: 1;
-  column-gap: 20px;
-  margin: 20px;
-}
-
-
 /*Goal Page starts*/
 
 .class-header {
@@ -217,6 +210,37 @@ b {
 
 
 
+/*Student Page Starts*/
+
+.nameArea {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 15px;
+  justify-content: space-around;
+  justify-items: start;
+
+}
+
+
+/*Student Page Ends*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-cards {
+  column-count: 1;
+  column-gap: 20px;
+  margin: 20px
+}
 
 
 

@@ -14,50 +14,64 @@
 <%- include("../partials/header.ejs")%>
 
 
-  <main class="main">
-  <h1>Add New Student</h1>
-  <form action="/<%=user.id%>/student/create" method="post">
-    First Name: <input type="text" name="firstname"><br><br>
-    Last Name: <input type="text" name="lastname"><br><br>
-    D.O.B.: <input type="date" name="dateofbirth"><br><br>
-    Email: <input type="email" name="studentemail"><br><br>
-    Grade Level:  <select name = "grade">
-      <option value="Pre-K"></option>
-      <option value="Kindergarten"></option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-    </select><br><br>
-    Class Name: <input type="text" name="classname">
-    Class Period:  <select name = "period">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-    </select><br><br>
-    <input type="submit" value="Submit" class="submitButton"><br><br>
-  </form>
-  <a href="/<%=user.id%>/classPage" class="backButton"></a>
+<main class="main">
+  <div class =  class-header>
+          <h1>Add New Student</h1>
+  </div>
+
+  <div class = "main-cards">
+      
+
+      <div class = "card">
+        <form action="/<%=user.id%>/student/create" method="post">
+          First Name: <input type="text" name="firstname"><br><br>
+          Last Name: <input type="text" name="lastname"><br><br>
+          D.O.B.: <input type="date" name="dateofbirth"><br><br>
+      </div>
+      
+      <div class = "card">
+        Email: <input type="email" name="studentemail"><br><br>
+        Grade Level:  <select name = "grade">
+          <option value="Pre-K"></option>
+          <option value="Kindergarten"></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select><br><br>
+        Class Name: <input type="text" name="classname">
+        Class Period:  <select name = "period">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select><br><br>
+      </div>
+
+      <input type="submit" value="Submit" class="submitButton"><br><br>
+
+      </form>
+      <a href="/<%=user.id%>/classPage" class="backButton"></a>
+  </div>
 </main>
 
 <footer class="footer">
   <div class="footer__copyright">&copy; 2019 TRACK</div>
 </footer>
-</div>
+
 
 </html>
