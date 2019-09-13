@@ -8,10 +8,10 @@ exports.createUser = function (req, res) {
 User.register(new User({username:req.body.username}),req.body.password, function(err, user){
        if(err){
             console.log(err);
-            return res.render('pages/signup');
+            return res.render('pages/signupSuccess');
         } //user stragety
         passport.authenticate("local")(req, res, function(){
-            res.redirect("/"); //once the user sign up
+            res.render("pages/signupSuccess"); //once the user sign up
        }); 
     });
 };
