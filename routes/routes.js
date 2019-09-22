@@ -17,6 +17,7 @@ const User = require('../models/user.model');
 router.post('/:userid/student/create', student_controller.student_create); //adds new student to database
 router.post('/:userid/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/:userid/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+router.post('/signUp/createUser', user_controller.createUser);
 
 //Delete data
 router.get('/:userid/student/:studentid/goal/:goalid/delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
