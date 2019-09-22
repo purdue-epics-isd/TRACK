@@ -48,7 +48,7 @@
 			</div>
 		
 		
-			<div class = "main-header">
+			<div class = "main-header" style="justify-content: space-around;">
 				
 				
 
@@ -73,8 +73,9 @@
 								
 							</script>
 					<% }); %>-->
-
-							<tr class = "table-active">
+<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+							<tr>
+							<!--<tr class = "table-active">-->
 								<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 							</tr>
 
@@ -82,9 +83,8 @@
 								<td>With how much support:</td><td> <input type="text" name="support"></td></tr>
 									<tr>
 										<td> Additional Comments: </td><td><input type="text" name="comments"></td></tr>
-										<a><input type="submit" value="Submit"></a>
+										<a><input type="submit" value="Submit" style="margin-top: 30px"></a>
 								</table>
-				<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 
 				</form>
 			
