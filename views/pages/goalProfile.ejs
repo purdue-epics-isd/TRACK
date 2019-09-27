@@ -48,8 +48,6 @@
 			</div>
 		
 		
-			
-				
 				
 				
 
@@ -74,12 +72,13 @@
 								
 							</script>
 					<% }); %>-->
+
 				<div class = "class-input">
 					<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 						<table style="position: center" id="goalInput">
 							
 							<tr class = "table-active">
-								<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
+								<td>Percentage Correct:</td><td> <input type="text" name="percentage"></td>
 							</tr>
 
 							<tr class = "table-active">
@@ -93,6 +92,7 @@
 						</table>				
 						<input type="submit" input class="btn btn-primary">
 					</form>
+
 
 				</div>
 			

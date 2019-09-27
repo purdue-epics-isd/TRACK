@@ -115,6 +115,7 @@ b {
 .main {
   grid-area: main;
   background-color: #ecf0f1;
+  margin: 20px;
 }
 
 .main-header {
