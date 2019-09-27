@@ -225,10 +225,34 @@ b {
 /*Student Page Ends*/
 
 
+/*Goal Profile starts*/
+
+/*middle of the goal page*/
+.class-input {
+  display: flex;
+  margin: 20px;
+  float: center;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #d3d3;
+}
+
+/*bottom of the goal page*/
+.goal-data {
+ 
+  justify-content: space-between;
+  float: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  height: 150px;
+  background-color: #e3e4e6;
+  color: slategray;
+}
 
 
-
-
+/*Goal Profile Ends*/
 
 
 
