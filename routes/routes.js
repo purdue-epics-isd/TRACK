@@ -24,6 +24,7 @@ router.get('/:userid/student/:studentid/goal/:goalid/delete', goal_controller.go
 //router.delete('/goal/delete',goal_controller.goal_delete);
 //router.post('/goal/:goalid/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
 router.get('/:userid/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
+router.get('/:userid/student/:studentid/edit', student_controller.student_edit);
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 	  if (err) { return next(err); }

@@ -115,7 +115,68 @@ exports.student_delete = function (req, res) {
             if (err) {
                 console.log(err);
             } else {
-            res.redirect('/classPage');
+                try {
+                    var students = [];
+            
+                    Student.find({}, {}, function(err, student) {
+                        student.forEach(function(s) { 
+                            if(s.userid==req.params.userid) {
+                                console.log(s); console.log(s.name); 
+                                students.push(s);
+                            };
+                        });
+                    });
+            
+                    User.findById(req.params.userid, function(err, user) {
+                        Student.findById(req.params.studentid, function(err, student) {
+                            res.render('pages/classPage', {
+                                students: students, 
+                                user: user
+                            });
+                        });
+                    });
+                } catch(err) {
+                    console.log(err);
+                    res.render('./error');
+                }
+            }
+        })
+    } catch(err) {
+        console.log(err);
+        res.render('./error');
+    }        
+};
+
+exports.student_edit = function (req, res) {
+    try {
+        Student.findByIdAndRemove(req.params.studentid, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                try {
+                    var students = [];
+            
+                    Student.find({}, {}, function(err, student) {
+                        student.forEach(function(s) { 
+                            if(s.userid==req.params.userid) {
+                                console.log(s); console.log(s.name); 
+                                students.push(s);
+                            };
+                        });
+                    });
+            
+                    User.findById(req.params.userid, function(err, user) {
+                        Student.findById(req.params.studentid, function(err, student) {
+                            res.render('pages/classPage', {
+                                students: students, 
+                                user: user
+                            });
+                        });
+                    });
+                } catch(err) {
+                    console.log(err);
+                    res.render('./error');
+                }
             }
         })
     } catch(err) {
