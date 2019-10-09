@@ -12,31 +12,40 @@
 <%- include("../partials/header.ejs")%>
 
 <main class="main">
-  <div class="name-header">
+  <div class="class-header">
+    <div class = "nameArea">
     <h3><%= student.firstname %>'s Profile</h3>
-    <i class="material-icons" style = "position: absolute; margin-left: 250px; margin-top: -2px;">edit</i>
-    <a href="/<%= user.id%>/student/<%=student.id%>/createNewGoal">
+    <button type="button" class="btn btn-info">Info</button>
+  </div>
+    
+
+  <a href="/<%= user.id%>/student/<%=student.id%>/createNewGoal">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
-    </a>
+  </a>
+
 </div>
 
-<div class="main-overview">
+<div class = "overviewcard">
 
   <% goals.forEach(function(goal) { %> 
-  <a href="/<%= user.id%>/student/<%=student.id%>/goal/<%=goal.id%>">
-    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-      <div class="card-header">Academic Goal</div>
-      <div class="card-body">
-        <h4 class="card-title"><%= goal.name %></h4>
-        <p class="card-text">Goal Information</p>
-        <div class="progress">
-         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+    
+      <div class = "cardName">
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+          <a href="/<%= user.id%>/student/<%=student.id%>/goal/<%=goal.id%>">
+          <div class="card-header">Academic Goal</div>
+          <div class="card-body">
+            <h4 class="card-title"><%= goal.name %></h4>
+            <p class="card-text">Goal Progress</p>
+            <div class="progress">
+             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+             </div>
+           </div>
          </div>
+         </a>
        </div>
      </div>
-   </div>
+
    <% }); %>
- </a>
  
 </div>
 
