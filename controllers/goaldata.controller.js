@@ -73,8 +73,15 @@ exports.goaldata_delete = function (req, res) {
     try {
         console.log(req.body.id)
         Goaldata.findByIdAndRemove(req.body.id, function (err) {
-            if (err) return next(err);
-            res.send('Deleted successfully!');
+            if (err) 
+            {
+                return next(err);
+            }
+            else 
+            {
+             res.send('Deleted successfully!');  
+              
+            }         
         })
     } catch(err) {
         console.log(err);

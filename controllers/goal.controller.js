@@ -60,6 +60,62 @@ exports.navigate_to_goalProfile = function (req, res) {
             });
         });
 
+        if(goaldata)
+        {
+        Student.findById(req.params.studentid, function(err, student) {
+            //console.log(err);
+            if (err) {
+                //console.log(err);
+                res.send(err);
+                return;
+            }
+
+            User.findById(req.params.userid, function(err, user) {
+                Goal.findById(req.params.goalid, function(err, goal) {
+                    var methodsOfCollection = goal.methodOfCollection;
+                    console.log("method:" + goal.methodOfCollection);
+                    console.log("method as var:" + methodsOfCollection);
+                    console.log("goal:" + goal);
+                    res.render('pages/goalProfile', {
+                        user: user,
+                        goalDatas: goalDatas,
+                        student: student,
+                        goal: goal,
+                        methodOfCollection: methodsOfCollection
+                    });
+                });
+            });
+        });
+    }
+        //console.log("pls workmaybe");
+        return;
+    } catch(error) {
+        console.log("err:" + err);
+        res.render('./error');
+    }
+}
+
+/*deletes goal from database*/
+exports.goal_delete = function (req, res) {
+    try {
+        console.log("Goal id: [delete]: " + req.params.goalid);
+        Goal.findByIdAndRemove(req.params.goalid, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                try {
+        goalDatas = [];
+
+        GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
+            if (err) {
+                res.send(err);
+                return;
+            }
+            goaldata.forEach(function(s) { 
+                goalDatas.push(s);
+            });
+        });
+
 
         Student.findById(req.params.studentid, function(err, student) {
             //console.log(err);
@@ -91,17 +147,6 @@ exports.navigate_to_goalProfile = function (req, res) {
         console.log("err:" + err);
         res.render('./error');
     }
-}
-
-/*deletes goal from database*/
-exports.goal_delete = function (req, res) {
-    try {
-        console.log("Goal id: [delete]: " + req.params.goalid);
-        Goal.findByIdAndRemove(req.params.goalid, function (err) {
-            if (err) {
-                console.log(err);
-            } else {
-                res.redirect('/' + req.params.studentid + '/student/' + req.params.studentid);
             }
         })
     } catch(err) {
