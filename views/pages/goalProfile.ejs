@@ -77,7 +77,7 @@
 				<div class = "class-input">
 					<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 						<table style="position: center" id="goalInput">
-							
+							<!--TODO: Single percentage point-->
 							<tr class = "table-active">
 								<td>Percentage Correct:</td><td> <input type="text" name="percentage"></td>
 							</tr>
@@ -90,6 +90,9 @@
 							<tr class = "table-active">
 								<td> Additional Comments: </td><td><input type="text" name="comments"></td>
 							</tr>
+							<!--TODO: Rubric goal-->
+
+							<!--TODO: Descriptive goal-->
 						
 						</table>				
 						<input type="submit" input class="btn btn-primary">
