@@ -50,7 +50,8 @@ var port = 30662; // process.env.PORT || 30662;
 //app.use(morgan('dev')); //DO I NEED THIS HELP
 
 // Set the front-end folder to serve public assets.
-app.use(express.static('JavaScriptSPA'));
+//app.use(express.static('JavaScriptSPA'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //link up route.js file
 app.use(product);
