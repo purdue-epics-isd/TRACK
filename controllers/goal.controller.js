@@ -30,6 +30,10 @@ exports.goal_create = function (req, res) {
                 methodOfCollection: req.body.methodOfCollection,
                 goaldata: []
             })
+                let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
+        async function init() {
+            await sleep(5000);
+        }
 
         Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {
             goal.save(function (err) { 
@@ -38,6 +42,10 @@ exports.goal_create = function (req, res) {
                 }
             });
         });
+        let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
+        //async function init() {
+          //  await sleep(5000);
+        //}
         res.redirect('/' + req.params.userid + '/student/' + req.params.studentid);
     } catch (err) {
         console.log(err);

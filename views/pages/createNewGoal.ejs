@@ -90,9 +90,9 @@ input.invalid {
 
 	<div class="tab">
 		<p>Start Date:</p>
-		<p><input placeholder="Start Date..." type="date" name="startDate" id="startDate"></p>
+		<p><input placeholder="Start Date..." value="2019-01-01" type="date" name="startDate" id="startDate"></p>
 		<p>End Date:</p>
-		<p><input placeholder="End Date..." type="date" name="endDate" id="endDate"></p>
+		<p><input placeholder="End Date..." value="2019-02-01" type="date" name="endDate" id="endDate"></p>
 	</div>
 
 	<div class="tab"> Goal Type: <br>
@@ -101,7 +101,7 @@ input.invalid {
 	</div>
 
 	<div class="tab">Method of Collection: <br>
-		<input type="radio" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
+		<input type="radio" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint" checked> Single Point Percentages <br>
 		<input type="radio" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
 		<div style="display: none" id="rubricDiv">
 			<div id = "rubricFieldsHolder">

@@ -29,6 +29,7 @@ exports.student_create = function (req, res) {
                });
             }*/
         })
+        let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
         res.redirect("/" + req.params.userid + "/classPage");
     } catch(err) {
         //console.log(err);
