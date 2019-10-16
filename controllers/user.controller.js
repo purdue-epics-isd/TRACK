@@ -31,29 +31,7 @@ exports.login_confirm = function (req, res, next) {
   });
 }
 
-passport.use(new OutlookStrategy({
-    clientID: OUTLOOK_CLIENT_ID,
-    clientSecret: OUTLOOK_CLIENT_SECRET,
-    callbackURL: 'http://www.example.com/auth/outlook/callback'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    var user = {
-      outlookId: profile.id,
-      name: profile.DisplayName,
-      email: profile.EmailAddress,
-      accessToken:  accessToken
-    };
-    if (refreshToken)
-      user.refreshToken = refreshToken;
-    if (profile.MailboxGuid)
-      user.mailboxGuid = profile.MailboxGuid;
-    if (profile.Alias)
-      user.alias = profile.Alias;
-    User.findOrCreate(user, function (err, user) {
-      return done(err, user);
-    });
-  }
-));
+
 /*
 exports.login_confirm = passport.authenticate("local",{
    successRedirect: "/" + req.user.id + "/classPage",
