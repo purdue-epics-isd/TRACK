@@ -47,8 +47,7 @@ exports.goaldata_create = function (req, res) {
                 goals: goals
             });
         });*/
-        let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
-        res.redirect("/" + req.params.userid + "/student/" + req.params.studentid);
+        res.redirect('/' + req.params.userid + '/student/' + req.params.studentid);
     } catch(err) {
         console.log(err);
         res.render('./error');

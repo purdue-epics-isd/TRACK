@@ -29,8 +29,13 @@ exports.student_create = function (req, res) {
                });
             }*/
         })
-        let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
-        res.redirect("/" + req.params.userid + "/classPage");
+        //sleep before rendering student page to make sure that everything loads properly
+        let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+        async function init(){
+           await sleep(1000)
+           res.redirect("/" + req.params.userid + "/classPage");
+        }
+        init();
     } catch(err) {
         //console.log(err);
         res.render('./error');
