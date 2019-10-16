@@ -40,14 +40,14 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 //var app = express();
-var morgan = require('morgan');
-var path = require('path');
+//var morgan = require('morgan'); //DO I NEED THIS HELP
+//var path = require('path');
 
 // Initialize variables.
 var port = 30662; // process.env.PORT || 30662;
 
 // Configure morgan module to log all requests.
-app.use(morgan('dev'));
+//app.use(morgan('dev')); //DO I NEED THIS HELP
 
 // Set the front-end folder to serve public assets.
 app.use(express.static('JavaScriptSPA'));
