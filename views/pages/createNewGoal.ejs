@@ -78,14 +78,14 @@ input.invalid {
 <%- include("../partials/header.ejs")%>
 <main class="main">
 
-<h1>Create New Goal for <%= student.name %></h1>
+<h1>Create New Goal for <%= student.firstname %></h1>
 <body>
 <form id="regForm" action="/<%= user.id%>/student/<%= student.id%>/goal/create" method="post">
 	<!-- One "tab" for each step in the form: -->
 	
 	<div class="tab">
 		<p><input placeholder="Goal Title..." type="text" name="name" id="name"></p>
-		<p><input type="textarea" placeholder="Goal Description..."" name="description" id="description"></p>
+		<p><input type="textarea" placeholder="Goal Description..." name="description" id="description"></p>
 	</div>
 
 	<div class="tab">
@@ -101,8 +101,8 @@ input.invalid {
 	</div>
 
 	<div class="tab">Method of Collection: <br>
-		<input type="checkbox" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
-		<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
+		<input type="radio" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
+		<input type="radio" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
 		<div style="display: none" id="rubricDiv">
 			<div id = "rubricFieldsHolder">
 				<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
@@ -111,7 +111,7 @@ input.invalid {
 			<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
 			<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
 		</div>
-		<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>
+		<input type="radio" style="width: auto" name="methodOfCollection" value="descriptive" id="descriptive"> Descriptive <br>
 		<script>
 			function addRubricField() {
 				var rubricHolder = document.createElement("p");
@@ -152,17 +152,16 @@ input.invalid {
 		</script>
 	</div>
 
-	<div class="tab" id="preview">
+	<!--<div class="tab" id="preview">
 		<p>Goal Preview</p>
 	</div>
-
+-->
 	<div style="overflow:auto;">
 		<div style="float:right;">
 			<button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
 			<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
 		</div>
 	</div>
-
 	<!-- Circles which indicates the steps of the form: -->
 	<div style="text-align:center;margin-top:40px;">
 		<span class="step"></span>
