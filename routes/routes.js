@@ -14,16 +14,16 @@ const Student = require('../models/student.model');
 const User = require('../models/user.model');
 
 //TODO: figure out the real difference between router.post and router.get
-router.post('/:userid/student/create', student_controller.student_create); //adds new student to database
-router.post('/:userid/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
-router.post('/:userid/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+router.post('/student/create', student_controller.student_create); //adds new student to database
+router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
+router.post('/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 router.post('/signUp/createUser', user_controller.createUser);
 
 //Delete data
-router.get('/:userid/student/:studentid/goal/:goalid/delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
+router.get('/student/:studentid/goal/:goalid/delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 //router.delete('/goal/delete',goal_controller.goal_delete);
 //router.post('/goal/:goalid/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
-router.get('/:userid/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
+router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 	  if (err) { return next(err); }
@@ -39,29 +39,29 @@ router.get('/login_confirm', function(req, res, next) {
 //GET request can be cached and remains in browser history. This is why GET is not suppose to use for sensitive data (passwords, ATM pins etc). GET are suppose to use to retrieve data only.
 //router.get('/test', student_controller.student_details); // a simple test url to check that all of our files are communicating correctly.
 
-router.get('/:userid/classPage', student_controller.navigate_to_classPage);
+router.get('/classPage', student_controller.navigate_to_classPage);
 //router.get('/classPage', student_controller.navigate_to_classPage);
 //router.get('/classPage1', student_controller.navigate_to_classPage1); // navigates to the class page
-router.get('/:userid/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
-router.get('/:userid/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
-router.get('/:userid/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
-router.get('/:userid/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page 
+router.get('/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
+router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
+router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
+router.get('/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page 
 
-router.get('/:userid/aboutUs', (req, res) => { 
+router.get('/aboutUs', (req, res) => { 
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/aboutUs.ejs', {
 			user: user
 		}) 
 	});
 });
-router.get('/:userid/feedback', (req, res) => { 
+router.get('/feedback', (req, res) => { 
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/feedback.ejs', {
 			user: user
 		})
 	}); 
 });
-router.get('/:userid/settings', (req, res) => { 
+router.get('/settings', (req, res) => { 
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/settings.ejs', {
 			user: user

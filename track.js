@@ -1,3 +1,10 @@
+/*
+*  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
+*  See LICENSE in the source repository root for complete license information.
+*/
+
+
+
 const PORT = process.env.PORT || 1234
 // track.js
 const express = require('express');
@@ -23,9 +30,47 @@ const app = express();
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-//use sessions for tracking logins
+//Set up mongoose connection
+const mongoose = require('mongoose');
+let dev_db_url = 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track';
+let mongoDB = process.env.MONGO_URI || dev_db_url;
+mongoose.connect(mongoDB, ({useNewUrlParser: true}));
+mongoose.Promise = global.Promise;
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-var OUTLOOK_CLIENT_ID = "--insert-outlook-client-id-here--";
+//var app = express();
+var morgan = require('morgan');
+var path = require('path');
+
+// Initialize variables.
+var port = 30662; // process.env.PORT || 30662;
+
+// Configure morgan module to log all requests.
+app.use(morgan('dev'));
+
+// Set the front-end folder to serve public assets.
+app.use(express.static('JavaScriptSPA'))
+
+//link up route.js file
+app.use(product);
+
+// Set up our one route to the index.html file.
+app.get('/', (req, res) => {
+  res.render('./pages/index.ejs')
+}); //navigates back to log in menu
+/*
+app.get('*', function (req, res) {
+  res.render('/index');
+    //res.sendFile(path.join(__dirname + '/views/pages/index.html'));
+});*/
+
+// Start the server.
+app.listen(port);
+console.log('Listening on port ' + port + '...');
+
+
+/*var OUTLOOK_CLIENT_ID = "--insert-outlook-client-id-here--";
 var OUTLOOK_CLIENT_SECRET = "--insert-outlook-client-secret-here--";
 
 // navigate to login.ejs
@@ -66,91 +111,7 @@ passport.use(new OutlookStrategy({
 ));
 
 
-// configure Express
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-app.use(cookieParser());
-app.use(bodyParser());
-app.use(methodOverride());
-app.use(session({ secret: 'keyboard cat' }));
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.static(__dirname + '/public'));
-app.get('/', function(req, res){
-  res.render('index', { user: req.user });
-});
 
-app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user });
-});
-
-app.get('/login', function(req, res){
-  res.render('login', { user: req.user });
-});
-
-// GET /auth/outlook
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in Outlook authentication will involve
-//   redirecting the user to outlook.com.  After authorization, Outlook
-//   will redirect the user back to this application at
-//   /auth/outlook/callback
-app.get('/auth/outlook',
-  passport.authenticate('windowslive', { scope: [
-    'openid',
-    'profile',
-    'offline_access',
-    'https://outlook.office.com/Mail.Read'
-  ] }),
-  function(req, res){
-    // The request will be redirected to Outlook for authentication, so
-    // this function will not be called.
-  });
-
-// GET /auth/outlook/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get('/auth/outlook/callback', 
-  passport.authenticate('windowslive', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
-app.listen(3000);
-
-
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
-}
-
-
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(function(user, done) {
-	done(null,user);
-});
-passport.deserializeUser(function(obj, done) {
-	done(null, obj);
-});
-app.post("/login_confirm", passport.authenticate("local",{
-    successRedirect:"/userfile",
-    failureRedirect:"/"
-}),function(req, res){
-    res.send("User is "+ req.user.id);
-});
 
 app.get("/logout", function(req, res){
     req.logout();
@@ -166,4 +127,4 @@ app.use(express.static('public'))
 
 app.listen(PORT, () => {
     console.log('Server is up and running on port number ' + PORT);
-});
+});*/

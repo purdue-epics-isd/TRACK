@@ -27,22 +27,15 @@
           </div>
 
           <button type="button" class="btn btn-primary">
-            <a href="/<%= user.id%>/createNewStudent">Create New Student</a>
+            <a href="/createNewStudent">Create New Student</a>
           </button>
         </div>
-      
-        
-
-      
-
-
-      
 
          <div class="main-overview" id="demo">
             <!--Loads the Students and Creates Buttons for them-->
             <% students.forEach(function(student) { %>
             <!--Write the desired HTML for each student here -->
-            <a href="/<%= user.id%>/student/<%= student.id %>" class = "studentButton <%= student.period %>" >
+            <a href="/student/<%= student.id %>" class = "studentButton <%= student.period %>" >
               <img class = "img-circle" src="/img/studentIcon.png" width = "200" height = "200" >
               <div class = "studentName"><%= student.firstname %></div>
             </a>
@@ -60,17 +53,7 @@
 
 </div>
 
-
-
 </html>
-
-
-
-
-
-
-
-
 
 <script>
   /* When the user clicks on the button,
