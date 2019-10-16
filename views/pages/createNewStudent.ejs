@@ -14,10 +14,10 @@
 <%- include("../partials/header.ejs")%>
 
 
-  <main class="main">
+<main class="main">
   <h1>Add New Student</h1>
   <form action="/<%=user.id%>/student/create" method="post">
-    First Name: <input type="text" name="firstname"><br><br>
+    First Name<font color=red>*</font>: <input type="text" name="firstname"><br><br>
     Last Name: <input type="text" name="lastname"><br><br>
     D.O.B.: <input type="date" name="dateofbirth"><br><br>
     <!--Email: <input type="email" name="studentemail"><br><br>-->
@@ -54,10 +54,9 @@
   </form>
   <a href="/<%=user.id%>/classPage" class="backButton"></a>
 </main>
-
 <footer class="footer">
   <div class="footer__copyright">&copy; 2019 TRACK</div>
 </footer>
-</div>
+
 
 </html>
