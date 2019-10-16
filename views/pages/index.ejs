@@ -21,7 +21,7 @@
     auth: {
         clientId: "f4238741-ebe5-4017-94b5-4de9dc3c20b8",
         authority: "https://login.microsoftonline.com/organizations",
-        redirectURI: "http://localhost:30662/"
+        redirectURI: "http://localhost:30662/classPage"
     },
     cache: {
         cacheLocation: "localStorage",
@@ -52,6 +52,7 @@
             showWelcomeMessage();
             //Call MS Graph using the token in the response
             acquireTokenPopupAndCallMSGraph();
+            window.location.replace("./classPage");//NEW
         }).catch(function (error) {
             //Please check the console for errors
             console.log(error);

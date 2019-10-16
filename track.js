@@ -50,15 +50,16 @@ var port = 30662; // process.env.PORT || 30662;
 app.use(morgan('dev'));
 
 // Set the front-end folder to serve public assets.
-app.use(express.static('JavaScriptSPA'))
+app.use(express.static('JavaScriptSPA'));
 
 //link up route.js file
 app.use(product);
 
 // Set up our one route to the index.html file.
-app.get('/', (req, res) => {
+app.get('/', student.run);
+/*app.get('/', (req, res) => {
   res.render('./pages/index.ejs')
-}); //navigates back to log in menu
+});*/ //navigates back to log in menu
 /*
 app.get('*', function (req, res) {
   res.render('/index');
