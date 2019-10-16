@@ -76,104 +76,114 @@ input.invalid {
 <div class="grid-container">
 
 <%- include("../partials/header.ejs")%>
-<main class="main">
+	<main class="main">
+			<div class =  class-header>
+		            <h3>Create Goal</h3>
+		    </div>
 
-<h1>Create New Goal for <%= student.name %></h1>
-<body>
-<form id="regForm" action="/<%= user.id%>/student/<%= student.id%>/goal/create" method="post">
-	<!-- One "tab" for each step in the form: -->
-	
-	<div class="tab">
-		<p><input placeholder="Goal Title..." type="text" name="name" id="name"></p>
-		<p><input type="textarea" placeholder="Goal Description..."" name="description" id="description"></p>
-	</div>
 
-	<div class="tab">
-		<p><input placeholder="Start Date..." type="date" name="startDate" id="startDate"></p>
-		<p><input placeholder="End Date..." type="date" name="endDate" id="endDate"></p>
-	</div>
+		<form id="regForm" action="/<%= user.id%>/student/<%= student.id%>/goal/create" method="post">
+			
+			<!-- One "tab" for each step in the form: -->
 
-	<div class="tab"> Goal Type: <br>
-		<input type="radio" style="width: auto" name="goalType" value="academic" checked> Academic <br>
-		<input type="radio" style="width: auto" name="goalType" value="behavioral"> Behavioral <br>
-	</div>
-
-	<div class="tab">Method of Collection: <br>
-		<input type="checkbox" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
-		<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
-		<div style="display: none" id="rubricDiv">
-			<div id = "rubricFieldsHolder">
-				<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
+			<!---Goal Title and Descriptoin-->
+			<div class="tab">
+				<p><input placeholder="Goal Title..."  type="text" name="name" id="name"></p>
+				<p><input type="textarea" placeholder="Goal Description..." name="description" id="description"></p>
 			</div>
 
-			<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
-			<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
-		</div>
-		<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>
-		<script>
-			function addRubricField() {
-				var rubricHolder = document.createElement("p");
-				var rubricField = document.createElement("input");        // Create a <input> element
-				rubricField.placeholder = "Rubric Field";
-				rubricField.type = "text";
-				rubricField.name = "rubricField";
-				rubricHolder.appendChild(rubricField);
-				//var n = rubricFieldsHolder.childNodes.length - 6;
-				//console.log(rubricFieldsHolder.childNodes);
-				//console.log(n);
-				document.getElementById("rubricFieldsHolder").insertBefore(rubricHolder, rubricFieldsHolder.childNodes[-1]);      // Append <input> to <body>
-			}
 
-			function deleteRubricField() {
-				var n = rubricFieldsHolder.childNodes.length - 1;
-				console.log(rubricFieldsHolder.childNodes);
-				console.log(rubricFieldsHolder.children[n]);
-				console.log(n);
-				rubricFields = document.getElementById("rubricFieldsHolder");
-				document.getElementById("rubricFieldsHolder").childNodes[n].remove();
-				//rubricFields.children[n-4].remove();
-			}
+			<!---Start and End Date-->
+			<div class="tab">
+				<p><input placeholder="Start Date..." type="date" name="startDate" id="startDate"></p>
+				<p><input placeholder="End Date..." type="date" name="endDate" id="endDate"></p>
+			</div>
+		
 
-			function rubricVisibility() {
-				// Get the checkbox
-				var checkBox = document.getElementById("rubric");
-				// Get the output text
-				var rubricDiv = document.getElementById("rubricDiv");
+			<!--Goal Type -->
+				<div class="tab"> Goal Type: <br>
+					<div class="custom-control custom-radio">
+						<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="academic" checked> Academic <br>
+					</div>
+					<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>
+				</div>
 
-				// If the checkbox is checked, display the output text
-				if (checkBox.checked == true){
-					rubricDiv.style.display = "block";
-				} else {
-					rubricDiv.style.display = "none";
-				}
-			}
-		</script>
-	</div>
+			<!--Goal Collection Type -->
+			<div class="tab">Method of Collection: <br>
+				<input type="checkbox" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
+				<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
+				<div style="display: none" id="rubricDiv">
+						<div id = "rubricFieldsHolder">
+							<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
+						</div>
 
-	<div class="tab" id="preview">
-		<p>Goal Preview</p>
-	</div>
+						<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
+						<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
+				</div>
+					<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>
+					<script>
+						function addRubricField() {
+							var rubricHolder = document.createElement("p");
+							var rubricField = document.createElement("input");        // Create a <input> element
+							rubricField.placeholder = "Rubric Field";
+							rubricField.type = "text";
+							rubricField.name = "rubricField";
+							rubricHolder.appendChild(rubricField);
+							//var n = rubricFieldsHolder.childNodes.length - 6;
+							//console.log(rubricFieldsHolder.childNodes);
+							//console.log(n);
+							document.getElementById("rubricFieldsHolder").insertBefore(rubricHolder, rubricFieldsHolder.childNodes[-1]);      // Append <input> to <body>
+						}
 
-	<div style="overflow:auto;">
-		<div style="float:right;">
-			<button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-			<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-		</div>
-	</div>
+						function deleteRubricField() {
+							var n = rubricFieldsHolder.childNodes.length - 1;
+							console.log(rubricFieldsHolder.childNodes);
+							console.log(rubricFieldsHolder.children[n]);
+							console.log(n);
+							rubricFields = document.getElementById("rubricFieldsHolder");
+							document.getElementById("rubricFieldsHolder").childNodes[n].remove();
+							//rubricFields.children[n-4].remove();
+						}
 
-	<!-- Circles which indicates the steps of the form: -->
-	<div style="text-align:center;margin-top:40px;">
-		<span class="step"></span>
-		<span class="step"></span>
-		<span class="step"></span>
-		<span class="step"></span>
-		<span class="step"></span>
-	</div>
+						function rubricVisibility() {
+							// Get the checkbox
+							var checkBox = document.getElementById("rubric");
+							// Get the output text
+							var rubricDiv = document.getElementById("rubricDiv");
 
-</form>
-</body>
-</main>
-</div>
+							// If the checkbox is checked, display the output text
+							if (checkBox.checked == true){
+								rubricDiv.style.display = "block";
+							} else {
+								rubricDiv.style.display = "none";
+							}
+						}
+					</script>
+			</div>
+
+			<div class="tab" id="preview">
+				<p>Goal Preview</p>
+			</div>
+
+			<div style="overflow:auto;">
+				<div style="float:right;">
+					<button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+					<button type="button"  class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+				</div>
+			</div>
+
+			<!-- Circles which indicates the steps of the form: -->
+			<div style="text-align:center;margin-top:40px;">
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+			</div>
+
+		</form>
+		</body>
+	</main>
 </html>
 
 <script>
