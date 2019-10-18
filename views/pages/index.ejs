@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quickstart for MSAL JS</title>
+    <title>Login</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/msal.js"></script>
+
+    
+    <link rel="icon" type="image/gif/png" href="img/logo.png">
+    <link rel="stylesheet" href="/flatly.css">
+    <link rel="stylesheet" href="/login.css">
+    <script type="text/javascript" src="myScripts.js"></script>
+
 </head>
 
-<body>
-    <div class="container">
-        <div class="leftContainer">
-            <p id="WelcomeMessage">Welcome to the Microsoft Authentication Library For Javascript Quickstart</p>
-            <button id="SignIn" onclick="signIn()">Sign In</button>
-        </div>
-        <div class="rightContainer">
-            <pre id="json"></pre>
-        </div>
+<div class="grid-container">
+
+    <div class = "item-a">
+
+            <center><h1>IEP GOAL TRACKER</h1><center>
+        <div class="form-group center">
+
+
+        <p id="WelcomeMessage">Welcome to ISD IEP Tracker!</p>
     </div>
+            <button id="SignIn" class="btn btn-primary center" onclick="signIn()">Sign In</button>
+
+    </div>
+
+</div>
+<body>
 <script>
     var msalConfig = {
     auth: {
@@ -98,7 +111,7 @@
 
     function showWelcomeMessage() {
         var divWelcome = document.getElementById('WelcomeMessage');
-        divWelcome.innerHTML = "Welcome " + myMSALObj.getAccount().userName + " to Microsoft Graph API";
+        divWelcome.innerHTML = "Welcome " + myMSALObj.getAccount().userName + " to IEP Tracker";
         var loginbutton = document.getElementById('SignIn');
         loginbutton.innerHTML = 'Sign Out';
         loginbutton.setAttribute('onclick', 'signOut();');
