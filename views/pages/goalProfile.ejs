@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="urn:schemas-microsoft-com:office:excel"> 
 	<head>
-		<title>Goal</title>
+   <title>Goal</title>
 		<%- include("../partials/head.ejs")%>
-	</head>
+   </head>
 
 	<style>
 
-		table#t01 {
+		table#myTable {
 			width:80%;
 			margin-left: 10%;
 			color: black;
 		}
-		table#t01, th#t01, td#t01 {
+		table#myTable, th#myTable, td#myTable {
 			border: 1px solid black;
 			border-collapse: collapse;
 		}
-		th#t01, td#t01 {
+		th#myTable, td#myTable {
 			padding: 15px;
 			text-align: left;
 		}
-		table#t01 tr:nth-child(even) {
+		table#myTable tr:nth-child(even) {
 			background-color: #eee;
 		}
-		table#t01 tr:nth-child(odd) {
+		table#myTable tr:nth-child(odd) {
 			background-color: #fff;
 		}
-		table#t01 th {
+		table#myTable th {
 			background-color: black;
 			color: white;
 		}
+		button#btnExport {
+			position:absolute;
+			bottom: 38%;
+			left: 90%;
+		}
+
 	</style>
 
 <div class="grid-container">
@@ -76,6 +82,7 @@
 
 				<div class = "class-input">
 					<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+
 						<table style="position: center" id="goalInput">
 							
 							<tr class = "table-active">
@@ -101,7 +108,8 @@
 
 				<div class = "goal-data">
 								<h2>Progress Monitoring</h2>
-								<table style="position: center" id="t01">
+
+								<table style="position: center" id="myTable">
 									<tr>
 										<th>Percentage</th>
 										<th>Support</th> 
@@ -117,19 +125,57 @@
 									</tr>
 									<% }); %>
 								</table>
+								<button id="btnExport" onclick="fnExcelReport();" type="submit" class="btn btn-primary right" style="position: relative; top: 10px"> Export </button>
+								
 					<br><div id="result"></div>
 					<br><div id="delete"></div>
-				</div>
-
-		
-				
+				</div>	
 		</div>
 		
+
 
 		<footer class="footer">
 			<div class="footer__copyright">&copy; 2019 TRACK</div>
 			<a href="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete">Delete goal file</a>
 		</footer>
 	</div>
+
 	
 	</html>
+
+<script type="text/javascript">
+
+function fnExcelReport()
+{
+    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
+    tab = document.getElementById('myTable'); // id of table
+
+    for(j = 0 ; j < tab.rows.length ; j++) 
+    {     
+        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE "); 
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
+        txtArea1.focus(); 
+        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }  
+    else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+    return (sa);
+}
+</script>
