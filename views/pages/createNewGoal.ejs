@@ -19,6 +19,27 @@ p {
 	margin: 10px;
 }
 
+.form-modified-control {
+  display: block;
+  /*align-items: center;*/
+  /*width: 500px;*/
+  height: calc(2.15625rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #7b8a8b;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
 /* Style the input fields */
 input {
 	padding: 10px;
@@ -82,35 +103,51 @@ input.invalid {
 		    </div>
 
 
+
 		<form id="regForm" action="/<%= user.id%>/student/<%= student.id%>/goal/create" method="post">
-			
+
 			<!-- One "tab" for each step in the form: -->
 
 			<!---Goal Title and Descriptoin-->
 			<div class="tab">
-				<p><input placeholder="Goal Title..."  type="text" name="name" id="name"></p>
-				<p><input type="textarea" placeholder="Goal Description..." name="description" id="description"></p>
+				<h1>Goal Creation</h1>
+				<p><input placeholder="Goal Title..."  class="form-modified-control"  type="text" name="name" id="name"></p>
+				<p><input type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></p>
 			</div>
 
 
 			<!---Start and End Date-->
 			<div class="tab">
-				<p><input placeholder="Start Date..." type="date" name="startDate" id="startDate"></p>
-				<p><input placeholder="End Date..." type="date" name="endDate" id="endDate"></p>
+				<h1>Dates</h1>
+				<p><input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
+				<p><input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
 			</div>
-		
 
 			<!--Goal Type -->
-				<div class="tab"> Goal Type: <br>
+
+				<div class="tab">
+					<h1>Goal Types</h1>
+					<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
+
 					<div class="custom-control custom-radio">
-						<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="academic" checked> Academic <br>
+						<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="academic">
+      					<label class="custom-control-label" for="customRadio2">Academic</label>
 					</div>
-					<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>
+					<!--<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>-->
+					
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="behavioral">
+      					<label class="custom-control-label" for="customRadio3">Behavior</label>
+      				</div>
 				</div>
 
 			<!--Goal Collection Type -->
-			<div class="tab">Method of Collection: <br>
+			<div class="tab">
+				<h1>Method of Collection:</h1>
+				
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
+
+				
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
 				<div style="display: none" id="rubricDiv">
 						<div id = "rubricFieldsHolder">
@@ -120,7 +157,15 @@ input.invalid {
 						<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
 						<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
 				</div>
+
+
+
+
+					<!--<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>-->
+
 					<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>
+
+
 					<script>
 						function addRubricField() {
 							var rubricHolder = document.createElement("p");
