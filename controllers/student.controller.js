@@ -15,6 +15,7 @@ exports.student_create = function (req, res) {
                 userid: req.params.userid
             }
         );
+        concole.log(student);
         student.save(function (err) {
             if (err) {
                 res.send(err);

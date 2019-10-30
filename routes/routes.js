@@ -12,6 +12,7 @@ const misc_controller = require('../controllers/misc.controller');
 const user_controller = require('../controllers/user.controller')
 const Student = require('../models/student.model');
 const User = require('../models/user.model');
+//var userID = sessionStorage.getItem("userID");
 
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
@@ -40,6 +41,7 @@ router.get('/login_confirm', function(req, res, next) {
 //router.get('/test', student_controller.student_details); // a simple test url to check that all of our files are communicating correctly.
 
 router.get('/classPage', student_controller.navigate_to_classPage);
+
 //router.get('/classPage', student_controller.navigate_to_classPage);
 //router.get('/classPage1', student_controller.navigate_to_classPage1); // navigates to the class page
 router.get('/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
