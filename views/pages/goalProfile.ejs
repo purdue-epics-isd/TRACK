@@ -158,7 +158,7 @@
 								</tr>--->
 
 								<div class="generic-box">
-      								<label for="exampleTextarea">Comments</label>
+      								<label for="exampleTextarea">Descriptive Comments</label>
       								<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type Comment" name="comments"></textarea>
     							</div>
 
@@ -190,12 +190,12 @@
 										<%} %>
 							
 										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
-											<th>Rubric Option</th>
+											<th>Progress</th>
 										<%} %>
 
 										<th>Support</th> 
 										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
-											<th>Comments</th>
+											<th>Descriptive Comments</th>
 										<%} %>
 										<th>Date</th>
 									</tr>
@@ -211,7 +211,7 @@
 										
 										<td><%= goalData.support %></td>
 										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
-											<<td><%= goalData.comments %></td>
+											<td><%= goalData.comments %></td>
 										<%} %>
 										
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
