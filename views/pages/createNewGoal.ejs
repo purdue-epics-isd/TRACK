@@ -97,22 +97,37 @@ input.invalid {
 <div class="grid-container">
 
 <%- include("../partials/header.ejs")%>
-	<main class="main">
-			<div class =  class-header>
-		            <h3>Create Goal</h3>
-		    </div>
 
+<main class="main">
 
+<h1>Create New Goal for <%= student.name %></h1>
+<body>
+<form id="regForm" action="/<%= user.id%>/student/<%= student.id%>/goal/create" method="post">
+	<!-- One "tab" for each step in the form: -->
+	
+	<div class="tab">
+		<p><input placeholder="Goal Title..." type="text" name="name" id="name"></p>
+		<p><input type="textarea" placeholder="Goal Description..."" name="description" id="description"></p>
+	</div>
 
-		<form id="regForm" action="/<%= user.id%>/student/<%= student.id%>/goal/create" method="post">
+	<div class="tab">
+		<p>Start Date:</p>
+		<p><input placeholder="Start Date..." type="date" name="startDate" id="startDate"></p>
+		<p>End Date:</p>
+		<p><input placeholder="End Date..." type="date" name="endDate" id="endDate"></p>
+	</div>
 
-			<!-- One "tab" for each step in the form: -->
+	<div class="tab"> Goal Type: <br>
+		<input type="radio" style="width: auto" name="goalType" value="academic" checked> Academic <br>
+		<input type="radio" style="width: auto" name="goalType" value="behavioral"> Behavioral <br>
+	</div>
 
-			<!---Goal Title and Descriptoin-->
-			<div class="tab">
-				<h1>Goal Creation</h1>
-				<p><input placeholder="Goal Title..."  class="form-modified-control"  type="text" name="name" id="name"></p>
-				<p><input type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></p>
+	<div class="tab">Method of Collection: <br>
+		<input type="checkbox" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
+		<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubrics <br>
+		<div style="display: none" id="rubricDiv">
+			<div id = "rubricFieldsHolder">
+				<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
 			</div>
 
 
@@ -122,6 +137,7 @@ input.invalid {
 				<p><input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
 				<p><input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
 			</div>
+
 
 			<!--Goal Type -->
 
@@ -226,9 +242,15 @@ input.invalid {
 				<span class="step"></span>
 			</div>
 
+
 		</form>
-		</body>
+	</body>
 	</main>
+ <footer class="footer">
+      <div class="footer__copyright">&copy; 2019 TRACK</div>
+  </footer>
+
+</div>
 </html>
 
 <script>

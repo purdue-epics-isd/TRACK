@@ -51,8 +51,6 @@
 			</div>
 		
 		
-			
-				
 				
 				
 
@@ -77,10 +75,13 @@
 								
 							</script>
 					<% }); %>-->
+
+
 				<div class = "class-input">
 					<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 						<table style="position: center" id="goalInput">
 							
+
 							<%if(goal.methodOfCollection[0] == "singlePoint") { %>
 								<!---<tr class = "table-active">
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
@@ -97,7 +98,6 @@
 
 								<label for="exampleInputPassword1">With how much support:</label>
       								<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support">
-
 							</tr>
 							
 							<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
@@ -175,6 +175,7 @@
 						</table>				
 						<input type="submit" input class="btn btn-primary">
 					</form>
+
 
 				</div>
 			

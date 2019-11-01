@@ -1,26 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sign Up</title>
+      <style>
+         .button {
+         background-color: #1c87c9;
+         border: none;
+         color: white;
+         padding: 20px 34px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 20px;
+         margin: 4px 2px;
+         cursor: pointer;
+         }
+      </style>
 <link rel="stylesheet" href="/flatly.css">
 <script type="text/javascript" src="myScripts.js"></script>
 </head>
 
-
- <header>
-    <%- include("../partials/header.ejs")%>
- </header>
-
- <body>
-
+<body>
   	<!--<a href="/signUp/creatUser" class="addNew" style="position: absolute; bottom: 35px; right:35px">Sign up</a>-->
-  	<a href="/flatly.css" class="" style="position: absolute; bottom: 35px; left: : 25px">Back</a>
-	<form action="/signUp/createUser" method="post">
-		Username:<input type="text" name="username" placeholder="Username" required="" style="width: 50%; height: 150%;"><br><br>
-		Password:<input type="password" name="password" placeholder="Password" required="" style="width: 50%; height: 150%;">
-		<input type="submit" value="Submit" class="submitButton">
+  	<a href="/" class="" style="position: absolute; bottom: 35px; left: 25px"><button type="submit" class="btn btn-primary">Back</button></a>
+	<!--login form I THINK-->
 
-		
+	<form action="/signUp/createUser" method="post" >
+		<div class="form-group center">
+   
+  			<div class="container">
+
+    			<h1 align="center">SIGN UP</h1>
+
+    			<p align="center">Please fill in this form to create an account.</p>
+	   			<hr>
+	   			<div class="form-group">
+    			<label> Username:</label>
+    			<input type="email" placeholder="Enter Email" class="form-control" name="Username" required="">
+    			</div>
+    			<br>
+    			<div class="form-group">
+    			<label> Password:</label>
+    			<input type="password" placeholder="Enter Password" class="form-control" name="password" id="password" required>
+    			</div>
+    			<br>
+    			<div class="form-group">
+    			<label> Confirm:</label>
+    			<input type="password" placeholder="Repeat Password" class="form-control" name="psw-repeat" id="confirm_password" required>
+
+    			</div>
+    			<br>
+   				 <label>
+     			 <!--<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me-->
+   		 		</label>
+   	 		</div>
+   	 		<input type="button" onclick="location.href='/'" style="position: absolute;bottom: 35 px;right: 25px" href="/" type="submit" value="submit" class="submitbutton">
+   	 		
+   	 		
+    </div>
+		</div>
+	</form>
+
+	</script>
+
 </body>
 
 </html>
