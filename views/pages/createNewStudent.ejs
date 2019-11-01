@@ -15,8 +15,9 @@
 
 
 <main class="main">
+  <body>
   <h1>Add New Student</h1>
-  <form action="/<%=user.id%>/student/create" method="post">
+  <form action="/student/create" method="post">
     First Name<font color=red>*</font>: <input type="text" name="firstname"><br><br>
     Last Name: <input type="text" name="lastname"><br><br>
     D.O.B.: <input type="date" name="dateofbirth"><br><br>
@@ -49,10 +50,13 @@
       <option value="8">8</option>
       <option value="9">9</option>
       <option value="10">10</option>
-    </select><br><br>
+    </select>
+    <input type="hidden" name="userID" id="userID">
+    <br><br>
     <input type="submit" value="Submit" class="submitButton"><br><br>
   </form>
-  <a href="/<%=user.id%>/classPage" class="backButton"></a>
+  <a href="/classPage" class="backButton"></a>
+</body>
 </main>
 <footer class="footer">
   <div class="footer__copyright">&copy; 2019 TRACK</div>
@@ -60,3 +64,9 @@
 
 
 </html>
+
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  document.getElementById("userID").value = localStorage.getItem("userID");
+  console.log(localStorage.getItem("userID"));
+</script>

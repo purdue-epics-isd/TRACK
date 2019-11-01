@@ -5,6 +5,8 @@ const User = require('../models/user.model');
 /*creates new student profile in database*/
 exports.student_create = function (req, res) {
     try {
+        console.log("creating new student...");
+        //console.log(localStorage.getItem("userID"));
         let student = new Student(
             {   firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -12,10 +14,12 @@ exports.student_create = function (req, res) {
                 grade: req.body.grade,
                 age: req.body.age,
                 goals: [],
-                userid: req.params.userid
+                userid: req.body.userID
             }
         );
-        concole.log(student);
+        //console.log("userid upon student creation: " + localStorage.getItem("userID"));
+
+        console.log(student);
         student.save(function (err) {
             if (err) {
                 res.send(err);
@@ -30,10 +34,10 @@ exports.student_create = function (req, res) {
                });
             }*/
         })
-        res.redirect("/" + req.params.userid + "/classPage");
+        res.redirect("/classPage");
     } catch(err) {
-        //console.log(err);
-        res.render('./error');
+        console.log(err);
+        res.render('/error');
     }
 };
 
