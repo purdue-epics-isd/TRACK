@@ -78,18 +78,97 @@
 					<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 						<table style="position: center" id="goalInput">
 							
-							<tr class = "table-active">
-								<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
-							</tr>
+							<%if(goal.methodOfCollection[0] == "singlePoint") { %>
+								<!---<tr class = "table-active">
+									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
+								</tr>--->
+								<div class="generic-box">
+      								<label for="exampleInputPassword1">Percentage Completed:</label>
+      								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Input Number">
+    							</div>
 
-							<tr class = "table-active">
-								<td>With how much support:</td><td> <input type="text" name="support"></td>
+							<%} %>
+
+							<tr class = "generic-box">
+								<!--<td>With how much support:</td><td> <input type="text" name="support"></td>-->
+
+								<label for="exampleInputPassword1">With how much support:</label>
+      								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Input Support">
+
 							</tr>
 							
-							<tr class = "table-active">
-								<td> Additional Comments: </td><td><input type="text" name="comments"></td>
-							</tr>
-						
+							<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+									<div class="generic-box">
+									      <legend>Rubric</legend>
+
+									      <div class="form-check">
+									        <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+									          Not evident
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          Introduced
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          Emerging
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          Developing
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          Ongoing
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          Demonstrated
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          Applied
+									        </label>
+									      </div>
+									</div>
+							<%} %>
+
+
+
+
+
+							<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
+								<!--<tr class = "table-active">
+									<td> Additional Comments: </td><td><input type="text" name="comments"></td>
+								</tr>--->
+
+								<div class="generic-box">
+      								<label for="exampleTextarea">Comments</label>
+      								<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type Comment"></textarea>
+    							</div>
+
+							<%} %>
+
+
 						</table>				
 						<input type="submit" input class="btn btn-primary">
 					</form>

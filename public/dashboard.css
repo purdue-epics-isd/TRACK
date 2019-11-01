@@ -238,6 +238,15 @@ b {
   background-color: #d3d3;
 }
 
+.generic-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+
+
 /*bottom of the goal page*/
 .goal-data {
  
