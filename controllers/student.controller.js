@@ -2,6 +2,7 @@ const Student = require('../models/student.model');
 const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
 
+
 /*creates new student profile in database*/
 exports.student_create = function (req, res) {
     try {
@@ -18,6 +19,7 @@ exports.student_create = function (req, res) {
             }
         );
         //console.log("userid upon student creation: " + localStorage.getItem("userID"));
+
 
         console.log(student);
         student.save(function (err) {
@@ -74,9 +76,14 @@ exports.navigate_to_studentProfile = function (req, res) {
 exports.navigate_to_classPage = function (req, res) {
     try {
         var students = [];
+        //
+        //var id = User.Identity.GetUserId();
+        var userId= Session["userId"] ;
+        //console.log(user);
 
         Student.find({}, {}, function(err, student) {
             student.forEach(function(s) { 
+                
         //        if(s.userid==req.params.userid) {
                     console.log(s); console.log(s.name); 
                     students.push(s);
