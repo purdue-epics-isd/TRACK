@@ -229,13 +229,25 @@ b {
 
 /*middle of the goal page*/
 .class-input {
-  display: flex;
+  display: grid;
+  grid-gap: 10px;
   margin: 20px;
   float: center;
   align-items: center;
+  align-content: space-between;
   justify-content: center;
   padding: 20px;
   background-color: #d3d3;
+}
+
+.description{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  height: 80px;
+  background-color: #e3e4e6;
+
 }
 
 .generic-box {
@@ -255,7 +267,7 @@ b {
   align-items: center;
   margin: 20px;
   padding: 20px;
-  height: 150px;
+  
   background-color: #e3e4e6;
   color: slategray;
 }

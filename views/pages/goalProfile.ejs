@@ -44,7 +44,10 @@
 		
 			<div class = "class-header">
 				<h1><%= goal.name %></h1>
-				<h2><%= goal.description %></h2>
+			</div>
+
+			<div class = "description">
+				<h5><%= goal.description %></h5>
 			</div>
 		
 		
@@ -83,8 +86,8 @@
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 								</tr>--->
 								<div class="generic-box">
-      								<label for="exampleInputPassword1">Percentage Completed:</label>
-      								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Input Number">
+      								<label for="percentage">Percentage Completed:</label>
+      								<input type="texts" class="form-control" id="percentage" placeholder="Input Number">
     							</div>
 
 							<%} %>
@@ -93,13 +96,13 @@
 								<!--<td>With how much support:</td><td> <input type="text" name="support"></td>-->
 
 								<label for="exampleInputPassword1">With how much support:</label>
-      								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Input Support">
+      								<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support">
 
 							</tr>
 							
 							<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
 									<div class="generic-box">
-									      <legend>Rubric</legend>
+									      <label for="exampleInputPassword1">Rubric</label>
 
 									      <div class="form-check">
 									        <label class="form-check-label">
@@ -178,8 +181,9 @@
 
 				<div class = "goal-data">
 								<h2>Progress Monitoring</h2>
-								<table style="position: center" id="t01">
-									<tr>
+								<table class="table table-hover" id="t01">
+								<!--<table style="display: : center" id="t01">-->
+									<tr class="table-active">
 										<th>Percentage</th>
 										<th>Support</th> 
 										<th>Comments</th>
@@ -193,6 +197,7 @@
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 									</tr>
 									<% }); %>
+									</tbody>
 								</table>
 					<br><div id="result"></div>
 					<br><div id="delete"></div>
@@ -200,7 +205,7 @@
 
 		
 				
-		</div>
+		</main>
 		
 
 		<footer class="footer">
