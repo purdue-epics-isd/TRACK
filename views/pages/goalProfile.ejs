@@ -99,49 +99,49 @@
 
 									      <div class="form-check">
 									        <label class="form-check-label">
-									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Not evident" checked="">
 									          Not evident
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
-									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Introduced">
 									          Introduced
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
-									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Emerging">
 									          Emerging
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
-									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Developing">
 									          Developing
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
-									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Ongoing">
 									          Ongoing
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
-									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Demonstrated">
 									          Demonstrated
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
-									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Applied">
 									          Applied
 									        </label>
 									      </div>
@@ -185,16 +185,35 @@
 								<table class="table table-hover" id="t01">
 								<!--<table style="display: : center" id="t01">-->
 									<tr class="table-active">
-										<th>Percentage</th>
+										<%if(goal.methodOfCollection[0] == "singlePoint") { %>
+											<th>Percentage</th>
+										<%} %>
+							
+										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+											<th>Rubric Option</th>
+										<%} %>
+
 										<th>Support</th> 
-										<th>Comments</th>
+										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
+											<th>Comments</th>
+										<%} %>
 										<th>Date</th>
 									</tr>
 									<% goalDatas.forEach(function(goalData) { %>
 									<tr>
-										<td><%= goalData.percentage %></td>
+										<%if(goal.methodOfCollection[0] == "singlePoint") { %>
+											<td><%= goalData.percentage %></td>
+										<%} %>
+
+										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+											<td><%= goalData.rubricOption %></td>
+										<%} %>
+										
 										<td><%= goalData.support %></td>
-										<td><%= goalData.comments %></td>
+										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
+											<<td><%= goalData.comments %></td>
+										<%} %>
+										
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 									</tr>
 									<% }); %>
