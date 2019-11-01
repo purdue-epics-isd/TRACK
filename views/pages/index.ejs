@@ -59,9 +59,10 @@ function signIn() {
 
     myMSALObj.loginPopup(requestObj).then(function (loginResponse) {
         //Login Success
-        showWelcomeMessage();
+        //showWelcomeMessage();
         acquireTokenPopupAndCallMSGraph();
-        window.location.href = "./classPage";
+
+        
        //window.location.replace("./classPage");
     }).catch(function (error) {
         console.log(error);
@@ -103,6 +104,7 @@ function graphAPICallback(data) {
     console.log(typeof data.id);
     localStorage.setItem("userID",data.id);   
     console.log(localStorage.getItem("userID"));
+    window.location.href = "./classPage";
     //document.getElementById("json").innerHTML = JSON.stringify(data, null, 2);
 }
 
