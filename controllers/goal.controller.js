@@ -101,7 +101,7 @@ exports.goal_delete = function (req, res) {
             if (err) {
                 console.log(err);
             } else {
-                res.redirect('/' + req.params.studentid + '/student/' + req.params.studentid);
+                res.redirect('/' + req.params.userid + '/student/' + req.params.studentid);
             }
         })
     } catch(err) {

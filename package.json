@@ -2,10 +2,13 @@
   "name": "track-web-app",
   "version": "1.0.0",
   "description": "a web app for teachers at isd",
-  "main": "index.js",
+  "main": "track.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "10.15.1"
+    }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/purdue-epics-isd/TRACK.git"
