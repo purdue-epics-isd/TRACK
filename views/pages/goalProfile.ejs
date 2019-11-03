@@ -8,26 +8,26 @@
 
 	<style>
 
-		table#myTable {
+		table#t01 {
 			width:80%;
 			margin-left: 10%;
 			color: black;
 		}
-		table#myTable, th#myTable, td#myTable {
+		table#t01, th#t01, td#t01 {
 			border: 1px solid black;
 			border-collapse: collapse;
 		}
-		th#myTable, td#myTable {
+		th#t01, td#t01 {
 			padding: 15px;
 			text-align: left;
 		}
-		table#myTable tr:nth-child(even) {
+		table#t01 tr:nth-child(even) {
 			background-color: #eee;
 		}
-		table#myTable tr:nth-child(odd) {
+		table#t01 tr:nth-child(odd) {
 			background-color: #fff;
 		}
-		table#myTable th {
+		table#t01 th {
 			background-color: black;
 			color: white;
 		}
@@ -253,7 +253,7 @@ function fnExcelReport()
 {
     var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
     var textRange; var j=0;
-    tab = document.getElementById('myTable'); // id of table
+    tab = document.getElementById('t01'); // id of table
 
     for(j = 0 ; j < tab.rows.length ; j++) 
     {     
