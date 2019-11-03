@@ -203,10 +203,13 @@
 										<%} %>
 
 										<th>Support</th> 
+										
 										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
 											<th>Descriptive Comments</th>
 										<%} %>
+
 										<th>Date</th>
+
 										<th>Delete Goal</th>>
 									</tr>
 									<% goalDatas.forEach(function(goalData) { %>
@@ -220,6 +223,7 @@
 										<%} %>
 										
 										<td><%= goalData.support %></td>
+										
 										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
 											<td><%= goalData.comments %></td>
 										<%} %>
