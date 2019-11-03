@@ -49,7 +49,7 @@
 		          <h1><%= goal.name %></h1>
 
 		          <button type="button" class="btn btn-primary">
-		            <a href="/<%= user.id%>/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete">Delete Goal</a>
+		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete">Delete Goal</a>
 		          </button>
         	</div>
 
@@ -228,7 +228,7 @@
 										
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 
-										<td><a href="/<%= user.id%>/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
+										<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
 									</tr>
 									<% }); %>
 									</tbody>

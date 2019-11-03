@@ -78,7 +78,7 @@ exports.navigate_to_classPage = function (req, res) {
         var students = [];
         //
         //var id = User.Identity.GetUserId();
-        var userId= Session["userId"] ;
+        //var userId= Session["userId"] ;
         //console.log(user);
 
         Student.find({}, {}, function(err, student) {
