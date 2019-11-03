@@ -45,12 +45,14 @@
 
 	<main class="main">
 
-		
-		
-		
-			<div class = "class-header">
-				<h1><%= goal.name %></h1>
-			</div>
+
+			 <div class =  class-header>
+		          <h1><%= goal.name %></h1>
+
+		          <button type="button" class="btn btn-primary">
+		            <a href="/<%= user.id%>/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete">Delete Goal</a>
+		          </button>
+        	</div>
 
 			<div class = "description">
 				<h5><%= goal.description %></h5>
@@ -201,10 +203,14 @@
 										<%} %>
 
 										<th>Support</th> 
+										
 										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
 											<th>Descriptive Comments</th>
 										<%} %>
+
 										<th>Date</th>
+
+										<th>Delete Goal</th>
 									</tr>
 									<% goalDatas.forEach(function(goalData) { %>
 									<tr>
@@ -217,11 +223,14 @@
 										<%} %>
 										
 										<td><%= goalData.support %></td>
+										
 										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
 											<td><%= goalData.comments %></td>
 										<%} %>
 										
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
+
+										<td><a href="/<%= user.id%>/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
 									</tr>
 									<% }); %>
 									</tbody>
@@ -240,7 +249,7 @@
 
 		<footer class="footer">
 			<div class="footer__copyright">&copy; 2019 TRACK</div>
-			<a href="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete">Delete goal file</a>
+			<!--<a href="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete">Delete goal file</a>-->
 		</footer>
 	</div>
 
