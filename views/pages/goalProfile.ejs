@@ -45,12 +45,14 @@
 
 	<main class="main">
 
-		
-		
-		
-			<div class = "class-header">
-				<h1><%= goal.name %></h1>
-			</div>
+
+			 <div class =  class-header>
+		          <h1><%= goal.name %></h1>
+
+		          <button type="button" class="btn btn-primary">
+		            <a href="/<%= user.id%>/createNewStudent">Delete Goal</a>
+		          </button>
+        	</div>
 
 			<div class = "description">
 				<h5><%= goal.description %></h5>
@@ -205,6 +207,7 @@
 											<th>Descriptive Comments</th>
 										<%} %>
 										<th>Date</th>
+										<th>Delete Goal</th>>
 									</tr>
 									<% goalDatas.forEach(function(goalData) { %>
 									<tr>
@@ -222,6 +225,8 @@
 										<%} %>
 										
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
+
+										<td><i class="material-icons">delete</i></td>
 									</tr>
 									<% }); %>
 									</tbody>
