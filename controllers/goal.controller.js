@@ -38,12 +38,7 @@ exports.goal_create = function (req, res) {
                 }
             });
         });
-        let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
-        async function init() {
-            await sleep(5000);
-        }
-        init();
-        res.redirect('/student/' + req.params.studentid);
+        res.redirect('/' + req.params.userid + '/student/' + req.params.studentid);
     } catch (err) {
         console.log(err);
         res.render('./error');
@@ -106,7 +101,7 @@ exports.goal_delete = function (req, res) {
             if (err) {
                 console.log(err);
             } else {
-                res.redirect('/student/' + req.params.studentid);
+                res.redirect('/' + req.params.userid + '/student/' + req.params.studentid);
             }
         })
     } catch(err) {
