@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+  <link rel="icon" type="image/gif/png" href="img/logo.png">
+  <title>Track</title>
+</head>
+
+<html>
+  <link rel="stylesheet" href="./flatly.css">
+  <link rel="stylesheet" href="./main.css">
+  <script type="text/javascript" src="myScripts.js"></script>
+  
+  <body>
+
+    <!--Navigation bar-->
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="classPage.html">Home</a>
+      <a href="#">Settings</a>
+      <a href="#">Feedback</a>
+      <a href="aboutus.html">About</a>
+      <a href="logout.html">Logout</a>
+    </div>
+
+    <!--3 prong button that opens up navigation bar-->
+
+    <div onclick="openNav()" class="opennav"> &#9776; </div>
+
+    <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">1st Period English Class ⬇ </button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#home">2nd Period Physics Class</a>
+            <a href="#about">3rd Period Math Class</a>
+            <a href="#contact">4th Period Chemistry Class</a>
+          </div>
+        </div>    
+     <a href="newstudent.html" class="addNew" style="position: absolute; top: 35px; right:35px">Add new student</a>
+
+     <!-- I don't think we need a profile for the teacher - anything we need for their info can go in the nav bar
+      <button type="button" class="profile" style="position: absolute; top:10%; right: 5%"><img src="img\profile_picture.png" class="profilepic"width="75"; height ="75"></button>
+    -->
+
+    <div class="student-container" id="demo"></div> <!-- This is where all of our student page links go-->
+
+  </body>
+</html>
+
+<script>
+  /* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+ </script>
+
+<script>
+  //This script creates the student buttons
+  // class grid buttons 
+  //var temp = document.getElementById("demo");
+  //var list = "";
+  var student = ["Anna", "Sam", "Shwetha", "Mark", "George", "Valerie"];
+  for (i = 0; i < student.length; i++) {
+    var element = document.createElement("a");
+    var nameElement = document.createElement("div");
+    nameElement.innerHTML = student[i];
+    nameElement.className="studentName";
+    element.className="studentIcon";
+    var link = 'Anna.html';
+    //var link = student[i] + '.html';
+    element.href= link;
+    var btnDiv = document.getElementById("demo");
+    //document.getElementById("demo").style.color = black;
+    btnDiv.appendChild(element);
+    element.appendChild(nameElement);
+    console.log(element);
+  }
+</script>

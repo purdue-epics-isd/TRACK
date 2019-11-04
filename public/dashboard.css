@@ -230,35 +230,14 @@ b {
 
 /*middle of the goal page*/
 .class-input {
-  display: grid;
-  grid-gap: 10px;
+  display: flex;
   margin: 20px;
   float: center;
   align-items: center;
-  align-content: space-between;
   justify-content: center;
   padding: 20px;
   background-color: #d3d3;
 }
-
-.description{
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-  padding: 20px;
-  height: 80px;
-  background-color: #e3e4e6;
-
-}
-
-.generic-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-}
-
-
 
 /*bottom of the goal page*/
 .goal-data {
@@ -268,7 +247,7 @@ b {
   align-items: center;
   margin: 20px;
   padding: 20px;
-  
+  height: 150px;
   background-color: #e3e4e6;
   color: slategray;
 }
@@ -277,38 +256,6 @@ b {
 /*Goal Profile Ends*/
 
 
-/*Create Student Page starts*/
-
-.part {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-content: space-around;
-  align-items: baseline;
-
-
-  /*width: 100%;*/
-  background-color: #82bef6;
-  -webkit-column-break-inside: avoid;
-  padding: 20px;
-  /*margin: 20px;*/
-  box-sizing: border-box;
-}
-
-
-.studentOverview { 
-  display: grid; 
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  margin: 20px;
-  /*vertical-align: top;
-  align-items: center;
-  justify-content: space-between; */
-  padding: 20px;
-  background-color: #d3d3;
-}
-
-/*Create Student Page Ends*/
 
 
 

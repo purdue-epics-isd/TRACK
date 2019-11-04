@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/main.css">
+<script type="text/javascript" src="/myScripts.js"></script>
+
+<header style="text-align:center">
+	
+</header>
+
+<body>
+	<div id="nav-placeholder"></div>
+
+	<!--Navigation bar-->
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      	<a href="/">Home</a>
+      	<a href="#">Settings</a>
+      	<a href="#">About</a>
+      	<a href="logout.html">Logout</a>
+	</div>
+
+	<!-- 3 prong button that opens up navigation bar-->
+	<div class="opennav" onclick="openNav()">&#9776; </div>
+	
+	<h1>Create New Goal</h1>
+	<form action="goal/create" method="post">
+		Goal Title: <input type="text" name="name"><br><br>
+		Goal Description: <textarea name="description"></textarea><br><br>
+		Percentage Name: <input type="text" name="percentagename"><br><br>
+		Start Date: <input type="text" name="startdate">
+		End Date: <input type="text" name="enddate"><br><br>
+		Location: <br>
+		<input type="radio" name="location" value="classroom"> Classroom<br>
+		<input type="radio" name="location" value="dorm"> Dorm<br>
+		<input type="radio" name="location" value="other"> Other <input type="text" name="location"><br><br>
+		<!--Method: <br>
+		Checkboxes: <button>-</button> 0 <button>+</button> <br><br>
+		Percentages: <button>-</button> 0 <button>+</button> <br><br>
+		Rubrics: <button>-</button> 0 <button>+</button> <br><br>
+		Counters: <button>-</button> 0 <button>+</button> <br><br>
+		Comments: <button>-</button> 0 <button>+</button> <br><br>
+		<a href="Anna.html" class="submitButton"></a><br><br><br>-->
+		<input type="submit" value="" class="submitButton">
+		<!--<input type="submit" name="Submit" value="" class="submitButton">-->
+	</form>
+	<a href="/classPage" class="backButton"></a>
+</body>
+</html>
