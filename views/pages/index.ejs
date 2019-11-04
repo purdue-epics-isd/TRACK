@@ -113,7 +113,7 @@ function showWelcomeMessage() {
     var divWelcome = document.getElementById('WelcomeMessage');
     divWelcome.innerHTML = 'Welcome ' + myMSALObj.getAccount().userName + "to Microsoft Graph API";
     var loginbutton = document.getElementById('SignIn');
-    loginbutton.innerHTML = 'Sign Out';
+    loginbutton.innerHTML = 'Move on to site';
     loginbutton.setAttribute('onclick', 'signOut();');
 }
 

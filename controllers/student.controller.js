@@ -127,7 +127,7 @@ exports.student_delete = function (req, res) {
 /*first function used when website starts up*/
 exports.run = function(req, res) {
     try {
-        res.render('pages/login');
+        res.render('pages/index');
     } catch(err) {
         console.log(err);
         res.render('./error');
