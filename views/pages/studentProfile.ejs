@@ -13,17 +13,17 @@
 
 <main class="main">
   <div class="class-header">
-    <div class = "nameArea">
-    <h3><%= student.firstname %>'s Profile</h3>
-    <button type="button" class="btn btn-info">Info</button>
+      <div class = "nameArea">
+        <h3><%= student.firstname %>'s Profile</h3>
+        <button type="button" class="btn btn-info">Info</button>
+      </div>
+      
+
+      <a href="/<%= user.id%>/student/<%=student.id%>/createNewGoal">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
+      </a>
+      
   </div>
-    
-
-  <a href="/student/<%=student.id%>/createNewGoal">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
-  </a>
-
-</div>
 
 <div class = "overviewcard">
 

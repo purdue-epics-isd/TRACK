@@ -21,10 +21,12 @@ router.post('/student/:studentid/goal/:goalid/goaldata/create', goaldata_control
 router.post('/signUp/createUser', user_controller.createUser);
 
 //Delete data
-router.get('/student/:studentid/goal/:goalid/delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
+
+router.get('/:userid/student/:studentid/goal/:goalid/goal_delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 //router.delete('/goal/delete',goal_controller.goal_delete);
-//router.post('/goal/:goalid/delete', goal_controller.goal_delete); //TODO: deletes goal from datapoint
-router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
+router.get('/:userid/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
+router.get('/:userid/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
+
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 	  if (err) { return next(err); }

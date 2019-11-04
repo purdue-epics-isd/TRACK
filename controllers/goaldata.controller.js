@@ -8,6 +8,7 @@ exports.goaldata_create = function (req, res) {
             {
                 goalID: req.params.goalid,
                 percentage: req.body.percentage,
+                rubricOption: req.body.optionsRadios,
                 support: req.body.support,
                 comments: req.body.comments,
                 time: Date.now()
@@ -71,13 +72,13 @@ exports.goaldata_create = function (req, res) {
 
 exports.goaldata_delete = function (req, res) {
     try {
-        console.log(req.body.id)
-        Goaldata.findByIdAndRemove(req.body.id, function (err) {
+        //console.log(req.body.id)
+        GoalData.findByIdAndRemove(req.params.goaldataid, function (err) {
             if (err) return next(err);
-            res.send('Deleted successfully!');
+            res.redirect('/' + req.params.userid + '/student/' + req.params.studentid + '/goal/' + req.params.goalid);
         })
     } catch(err) {
         console.log(err);
-        res.render('./error');
+        res.render('/error');
     }
 };
