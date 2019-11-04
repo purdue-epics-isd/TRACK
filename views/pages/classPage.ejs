@@ -34,19 +34,30 @@
         </div>
 
 
-         <div class = "overviewcard">
+         <div class = "overviewcard" id="studentBox">
 
                 <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
+              <script>
+                if(localStorage.getItem("userID") == <%student.userID%>) {
+                  var goalDescription = document.createElement("img");
+                  goalDescription.class = "img-circle";
+                  goalDescription.src = "/img/studentIcon.png";
+                  goalDescription.width = "200";
+                  goalDescription.height = "200";
+                  document.getElementById("studentBox").appendChild(goalDescription);
+                  
+                }
+              </script>
               <!--Write the desired HTML for each student here -->
-              
+              <!--
                 <div class = "cardName">
                   <a href="/student/<%= student.id %>">
                     <img class = "img-circle" src="/img/studentIcon.png" width = "200" height = "200" >
                     <div class = "name"><%= student.firstname %></div> 
                   </a>
                 </div>
-              
+              -->
               <% }); %>
             </div>
 
@@ -125,4 +136,10 @@
 
 
         };
+</script>
+
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  //document.getElementById("userID").value = localStorage.getItem("userID");
+  //console.log("user id: " + localStorage.getItem("userID"));
 </script>

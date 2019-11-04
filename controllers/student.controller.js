@@ -73,7 +73,7 @@ exports.navigate_to_classPage = function (req, res) {
         Student.find({}, {}, function(err, student) {
             student.forEach(function(s) { 
                 //if(s.userid==req.params.userid) {
-                    console.log(s); console.log(s.name); 
+                    //console.log(s); console.log(s.name); 
                     students.push(s);
                 //};
             });
