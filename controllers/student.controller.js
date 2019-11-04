@@ -2,9 +2,12 @@ const Student = require('../models/student.model');
 const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
 
+
 /*creates new student profile in database*/
 exports.student_create = function (req, res) {
     try {
+        console.log("creating new student...");
+        //console.log(localStorage.getItem("userID"));
         let student = new Student(
             {   firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -15,12 +18,16 @@ exports.student_create = function (req, res) {
                 userid: req.body.userID
             }
         );
+        //console.log("userid upon student creation: " + localStorage.getItem("userID"));
+
+
+        console.log(student);
         student.save(function (err) {
             if (err) {
-                console.log(err);
-                //res.send(err);
+                res.send(err);
             } /*else {
                 var goals = [];
+
                 Student.findById(student.id, function(err, student) {
                     res.render('pages/studentProfile', {
                         student: student,
@@ -31,8 +38,8 @@ exports.student_create = function (req, res) {
         })
         res.redirect("/classPage");
     } catch(err) {
-        //console.log(err);
-        res.render('./error');
+        console.log(err);
+        res.render('/error');
     }
 };
 
@@ -69,24 +76,29 @@ exports.navigate_to_studentProfile = function (req, res) {
 exports.navigate_to_classPage = function (req, res) {
     try {
         var students = [];
+        //
+        //var id = User.Identity.GetUserId();
+        //var userId= Session["userId"] ;
+        //console.log(user);
 
         Student.find({}, {}, function(err, student) {
             student.forEach(function(s) { 
-                //if(s.userid==req.params.userid) {
+                
+        //        if(s.userid==req.params.userid) {
                     console.log(s); console.log(s.name); 
                     students.push(s);
-                //};
+       //         };
             });
         });
 
-        User.findById(req.params.userid, function(err, user) {
+        //User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 res.render('pages/classPage', {
                     students: students, 
-                    user: user
+        //            user: user
                 });
             });
-        });
+        //});
     } catch(err) {
         console.log(err);
         res.render('./error');
@@ -127,7 +139,7 @@ exports.student_delete = function (req, res) {
 /*first function used when website starts up*/
 exports.run = function(req, res) {
     try {
-        res.render('pages/login');
+        res.render('pages/index');
     } catch(err) {
         console.log(err);
         res.render('./error');
