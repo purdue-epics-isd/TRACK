@@ -28,7 +28,7 @@ exports.goal_create = function (req, res) {
         });
         let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
         async function init() {
-            await sleep(5000);
+            await sleep(10000);
         }
         init();
         res.redirect('/student/' + req.params.studentid);
