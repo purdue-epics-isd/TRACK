@@ -30,6 +30,8 @@ exports.login_confirm = function (req, res, next) {
     }) (req, res, next);
   });
 }
+
+
 /*
 exports.login_confirm = passport.authenticate("local",{
    successRedirect: "/" + req.user.id + "/classPage",

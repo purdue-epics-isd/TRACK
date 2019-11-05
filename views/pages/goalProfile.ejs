@@ -7,7 +7,6 @@
    </head>
 
 	<style>
-
 		table#t01 {
 			width:80%;
 			margin-left: 10%;
@@ -50,7 +49,7 @@
 		          <h1><%= goal.name %></h1>
 
 		          <button type="button" class="btn btn-primary">
-		            <a href="/<%= user.id%>/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete">Delete Goal</a>
+		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete">Delete Goal</a>
 		          </button>
         	</div>
 
@@ -70,7 +69,6 @@
 
 							<!--<script>
 								console.log("<%= collection %>");
-
 								if("<%= collection %>"=="singlePoint") {
 									var collection = document.createElement("p");
 									collection.text = "single Point";
@@ -86,7 +84,7 @@
 
 
 				<div class = "class-input">
-					<form  action="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
+					<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 
 						<table style="position: center" id="goalInput">
 							
@@ -230,7 +228,7 @@
 										
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 
-										<td><a href="/<%= user.id%>/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
+										<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
 									</tr>
 									<% }); %>
 									</tbody>
@@ -249,7 +247,6 @@
 
 		<footer class="footer">
 			<div class="footer__copyright">&copy; 2019 TRACK</div>
-			<!--<a href="/<%= user.id%>/student/<%= student.id %>/goal/<%= goal.id %>/delete" class="Delete">Delete goal file</a>-->
 		</footer>
 	</div>
 

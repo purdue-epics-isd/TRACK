@@ -7,18 +7,6 @@ const mongoose = require('mongoose');
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
     try {
-        /*console.log("Let's make a goal!");
-        console.log("req.body.name: " + req.body.name);*/
-        //console.log("req.body.singlePoint.checked: " + req.body.singlePoint.checked);
-        console.log("req.body.methodOfCollection: " + req.body.methodOfCollection);
-        //console.log("req.body.singlePoint.name: " + req.body.singlePoint.name);
-        //console.log("req.body.singlePoint.value: " + req.body.singlePoint.value);
-        //console.log("req.body.rubric: " + req.body.rubric);
-        //console.log("req.body.goalType: " + req.body.goalType);
-        /*console.log("req.body.rubric.value: " + req.body.rubric.value);
-        console.log("req.body.comments: " + req.body.comments);
-        console.log("req.body.comments.value: " + req.body.comments.value);*/
-
         let goal = new Goal(
             {
                 name: req.body.name,
@@ -38,7 +26,12 @@ exports.goal_create = function (req, res) {
                 }
             });
         });
-        res.redirect('/' + req.params.userid + '/student/' + req.params.studentid);
+        let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
+        async function init() {
+            await sleep(5000);
+        }
+        init();
+        res.redirect('/student/' + req.params.studentid);
     } catch (err) {
         console.log(err);
         res.render('./error');
@@ -101,7 +94,7 @@ exports.goal_delete = function (req, res) {
             if (err) {
                 console.log(err);
             } else {
-                res.redirect('/' + req.params.userid + '/student/' + req.params.studentid);
+                res.redirect('/student/' + req.params.studentid);
             }
         })
     } catch(err) {

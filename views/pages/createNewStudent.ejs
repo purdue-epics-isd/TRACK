@@ -19,7 +19,7 @@
     </div>
     <div class = "studentOverview">
         <div class = "part">
-          <form action="/<%=user.id%>/student/create" method="post" style="width:100%">
+          <form action="/student/create" method="post">
           
             <label for="First Name">First Name:</label>
             <input type="text" class="form-control" name="firstname" style="width:100%">
@@ -55,8 +55,9 @@
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
+          <input type="hidden" name="userID" id="userID">
         </div>
-        </form>  
+        </form>
       </div>
     </main>
 
@@ -67,3 +68,9 @@
 
 
 </html>
+
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  document.getElementById("userID").value = localStorage.getItem("userID");
+  console.log(localStorage.getItem("userID"));
+</script>

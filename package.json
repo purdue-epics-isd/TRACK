@@ -2,10 +2,13 @@
   "name": "track-web-app",
   "version": "1.0.0",
   "description": "a web app for teachers at isd",
-  "main": "index.js",
+  "main": "track.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "10.15.1"
+    }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/purdue-epics-isd/TRACK.git"
@@ -19,14 +22,17 @@
   "dependencies": {
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
     "ejs": "^2.6.1",
     "express": "^4.17.1",
     "express-session": "^1.15.6",
+    "method-override": "^3.0.0",
     "moment": "^2.22.2",
     "mongoose": "^5.7.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
-    "passport-local-mongoose-email": "^0.1.4"
+    "passport-local-mongoose-email": "^0.1.4",
+    "passport-outlook": "^2.2.0"
   }
 }
