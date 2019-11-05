@@ -29,28 +29,48 @@
           </div>
 
           <button type="button" class="btn btn-primary">
-            <a href="/<%= user.id%>/createNewStudent">Create New Student</a>
+            <a href="/createNewStudent">Create New Student</a>
           </button>
         </div>
 
 
-         
-            <div class = "overviewcard">
-              
+         <div class = "overviewcard" id="studentBox">
+
                 <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
-              <!--Write the desired HTML for each student here -->
-              
-                <div class = "cardName">
-                  <a href="/<%= user.id%>/student/<%= student.id %>" <%= student.period %>" >
-                    <img class = "img-circle" src="/img/studentIcon.png" width = "200" height = "200" >
-                    <div class = "name"><%= student.firstname %></div> 
-                  </a>
-                </div>
-              
+              <h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>
+              <!--<div class = "cardName" id="<%=student.userid%>">-->
+              <script>
+                if(localStorage.getItem("userID") == "<%=student.userid %>") {
+                  var card = document.createElement("div");
+                  card.className = "cardName";
+
+                  var studentLink = document.createElement("a");
+                  studentLink.href = "/student/<%=student.id%>";
+
+                  var studentImg = document.createElement("img");
+                  studentImg.className = "img-circle";
+                  studentImg.src = "/img/studentIcon.png";
+                  studentImg.width = "200";
+                  studentImg.height = "200";
+
+                  var studentLabel = document.createElement("class");
+                  studentLabel.className = "name";
+                  studentLabel.innerHTML = "<%=student.firstname%>";
+
+                  studentLink.appendChild(studentImg);
+                  studentLink.appendChild(studentLabel);
+                  card.appendChild(studentLink);
+
+                  document.getElementById("studentBox").appendChild(card);
+
+                  var toDelete = document.getElementById("uid");
+
+                  toDelete.parentNode.removeChild(toDelete);
+                }
+              </script>
               <% }); %>
             </div>
-         
 
       
 
@@ -63,25 +83,16 @@
 
 </div>
 
-
-
 </html>
-
-
-
-
-
-
-
-
 
 <script>
   /* When the user clicks on the button,
   toggle between hiding and showing the dropdown content */
   function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    //document.getElementById("myDropdown").classList.toggle("show");
+    //document.getElementById("myDropdown").innerHTML = sessionStorage.getItem("userID");
   }
-
+  console.log(localStorage.getItem("userID"));
   // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
@@ -136,4 +147,10 @@
 
 
         };
+</script>
+
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  //document.getElementById("userID").value = localStorage.getItem("userID");
+  //console.log("user id: " + localStorage.getItem("userID"));
 </script>

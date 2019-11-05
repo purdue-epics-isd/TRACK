@@ -48,7 +48,7 @@ exports.goaldata_create = function (req, res) {
                 goals: goals
             });
         });*/
-        res.redirect("/" + req.params.userid + "/student/" + req.params.studentid);
+        res.redirect("/student/" + req.params.studentid);
     } catch(err) {
         console.log(err);
         res.render('./error');
@@ -75,7 +75,7 @@ exports.goaldata_delete = function (req, res) {
         //console.log(req.body.id)
         GoalData.findByIdAndRemove(req.params.goaldataid, function (err) {
             if (err) return next(err);
-            res.redirect('/' + req.params.userid + '/student/' + req.params.studentid + '/goal/' + req.params.goalid);
+            res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
         })
     } catch(err) {
         console.log(err);
