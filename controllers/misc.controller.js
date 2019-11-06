@@ -30,8 +30,11 @@ exports.login = function (req, res) {
 
 /* TODO: actually log out */
 exports.logout = function (req, res) {
+    var logout = true;
     try {
-	   res.render('pages/logout');
+	   res.render('pages/index', {
+        logout: logout
+    });
     } catch(err) {
         console.log(err);
         res.render('./error');

@@ -126,8 +126,11 @@ exports.student_delete = function (req, res) {
 
 /*first function used when website starts up*/
 exports.run = function(req, res) {
+    var logout = false;
     try {
-        res.render('pages/index');
+    res.render('pages/index', {
+        logout: logout
+}); //navigates back to log in menu
     } catch(err) {
         console.log(err);
         res.render('./error');
