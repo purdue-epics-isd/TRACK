@@ -16,6 +16,7 @@ exports.goal_create = function (req, res) {
                 goalType: req.body.goalType,
                 studentID: req.params.studentid,
                 methodOfCollection: req.body.methodOfCollection,
+                occurrencesType: req.body.occurrences,
                 goaldata: []
             })
 

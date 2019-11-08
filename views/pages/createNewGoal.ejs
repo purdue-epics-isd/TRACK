@@ -146,7 +146,16 @@ input.invalid {
 			<div class="tab">
 				<h1>Method of Collection:</h1>
 				
-				<input type="checkbox" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Score/Count <br>
+				<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score"> Score <br>
+
+				<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count"> Count of Occurrences<br>
+
+				<select class="form-control" name = "occurrences" style="width:100%">
+            		<option value="Per hour">Per hour</option>
+            		<option value="Per class">Per class</option>
+            		<option value="Per day">Per day</option>
+            		<option value="Per week">Per week</option>
+          		</select>
 				
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
 				<!--<div style="display: none" id="rubricDiv">
