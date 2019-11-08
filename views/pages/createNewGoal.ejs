@@ -113,15 +113,15 @@ input.invalid {
 			<div class="tab">
 				<h1>Goal Creation</h1>
 				<p><input placeholder="Goal Title..."  class="form-modified-control"  type="text" name="name" id="name"></p>
-				<p><input type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></p>
+				<p><textarea style="height: 100px" type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></textarea></p>
 			</div>
 	<!-- One "tab" for each step in the form: -->
 	
 			<!---Start and End Date-->
 			<div class="tab">
 				<h1>Dates</h1>
-				<p><input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
-				<p><input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
+				<p>Start Date: <input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
+				<p>End Date: <input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
 			</div>
 
 			<!--Goal Type -->
@@ -131,13 +131,13 @@ input.invalid {
 					<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
 
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="academic" checked="true">
+						<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Academic Goal" checked="true">
       					<label class="custom-control-label" for="customRadio2">Academic</label>
 					</div>
 					<!--<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>-->
 					
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="behavioral">
+						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Behavioral Goal">
       					<label class="custom-control-label" for="customRadio3">Behavior</label>
       				</div>
 				</div>
@@ -146,8 +146,16 @@ input.invalid {
 			<div class="tab">
 				<h1>Method of Collection:</h1>
 				
-				<input type="checkbox" style="width: auto" name="methodOfCollection" value="singlePoint" id="singlePoint"> Single Point Percentages <br>
+				<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score"> Score <br>
 
+				<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count"> Count of Occurrences<br>
+
+				<select class="form-control" name = "occurrences" style="width:100%">
+            		<option value="Per hour">Per hour</option>
+            		<option value="Per class">Per class</option>
+            		<option value="Per day">Per day</option>
+            		<option value="Per week">Per week</option>
+          		</select>
 				
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
 				<!--<div style="display: none" id="rubricDiv">

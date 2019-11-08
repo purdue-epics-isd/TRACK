@@ -133,7 +133,10 @@ router.get('/signupSuccess', (req, res) => {
 
 router.get('/login', misc_controller.login); //navigates to login page
 router.get('/logout', (req, res) => {
-	res.render('./pages/logout.ejs')
+	var logout = true;
+	res.render('pages/index', {
+        logout: logout
+    });
 }); //navigates back to log in menu
 
 
