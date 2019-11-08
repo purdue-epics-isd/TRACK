@@ -48,9 +48,6 @@
 			 <div class =  class-header>
 		          <h1><%= goal.name %></h1>
 
-		          <button type="button" class="btn btn-primary">
-		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete">Delete Goal</a>
-				  </button>
 				  <button type="button" class="btn btn-primary">
 		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">Edit Goal</a>
 		          </button>
@@ -250,6 +247,7 @@
 
 		<footer class="footer">
 			<div class="footer__copyright">&copy; 2019 TRACK</div>
+			<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
 		</footer>
 	</div>
 
