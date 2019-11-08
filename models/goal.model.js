@@ -10,6 +10,7 @@ let GoalSchema = new Schema({
     goalType: {type: String, required: false},
     studentID: {type: String, require: false},
     methodOfCollection: [{type: String, require: false}],
+    occurrencesType: {type: String, required: false},
     goaldata: [{type: Schema.ObjectId, ref: 'GoalData'}]
 });
 

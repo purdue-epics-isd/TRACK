@@ -7,7 +7,8 @@ exports.goaldata_create = function (req, res) {
         let goaldata = new GoalData(
             {
                 goalID: req.params.goalid,
-                percentage: req.body.percentage,
+                score: req.body.score,
+                count: req.body.count,
                 rubricOption: req.body.optionsRadios,
                 support: req.body.support,
                 comments: req.body.comments,
