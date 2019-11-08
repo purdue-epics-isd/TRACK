@@ -109,6 +109,41 @@ exports.goal_delete = function (req, res) {
     }
 };
 
+exports.goal_redirect_edit = function (req, res) {
+    try {
+        User.findById(req.params.userid, function(err, user) {
+            Student.findById(req.params.studentid, function(err, student) {
+                res.render('pages/EditGoal', {
+                    student: student, 
+                    user: user,
+                    goalid: req.params.goalid
+                });
+            });
+        });
+ 
+    } catch(err) {
+        console.log(err);
+        res.render('./error');
+    }
+};
+
+exports.goal_edit = function (req, res) {
+    console.log("Goal id: [delete]: " + req.params.goalid);
+    Goal.findByIdAndUpdate(req.params.goalid,
+            { $set: { name: req.body.name,
+                description: req.body.description,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate
+                 } }, function (err) {
+              if (err) {
+                console.log(err);
+              }
+              else {
+                res.redirect('/student/' + req.params.studentid);
+              }
+            });
+}
+
 /*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
 exports.navigate_to_createNewGoal = function (req, res) {
     try {
