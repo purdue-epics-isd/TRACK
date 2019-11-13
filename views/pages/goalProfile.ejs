@@ -48,40 +48,14 @@
 			 <div class =  class-header>
 		          <h1><%= goal.name %></h1>
 
-		          <button type="button" class="btn btn-primary">
-		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete">Delete Goal</a>
+				  <button type="button" class="btn btn-primary">
+		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">Edit Goal</a>
 		          </button>
         	</div>
 
 			<div class = "description">
 				<h5><%= goal.description %></h5>
 			</div>
-		
-		
-				
-				
-
-					
-					
-
-					<!--<% methodOfCollection.forEach(function(collection) { %>
-						<p><%= collection %><p>-->
-
-							<!--<script>
-								console.log("<%= collection %>");
-								if("<%= collection %>"=="singlePoint") {
-									var collection = document.createElement("p");
-									collection.text = "single Point";
-									document.getElementById("goalInput").appendChild(collection);
-								} else if ("<%= collection %>"=="rubric") {
-									var collection = document.createElement("p");
-									collection.text = "Rubric";
-									document.getElementById("goalInput").appendChild(collection);
-								}
-								
-							</script>
-					<% }); %>-->
-
 
 				<div class = "class-input">
 					<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
@@ -89,13 +63,24 @@
 						<table style="position: center" id="goalInput">
 							
 
-							<%if(goal.methodOfCollection[0] == "singlePoint") { %>
+							<%if(goal.methodOfCollection[0] == "score") { %>
 								<!---<tr class = "table-active">
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 								</tr>--->
 								<div class="generic-box">
-      								<label for="percentage">Percentage Completed:</label>
-      								<input type="texts" class="form-control" id="percentage" placeholder="Input Number" name="percentage">
+      								<label for="score">Score:</label>
+      								<input type="texts" class="form-control" id="score" placeholder="Input Number" name="score">
+    							</div>
+
+							<%} %>
+
+							<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
+								<!---<tr class = "table-active">
+									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
+								</tr>--->
+								<div class="generic-box">
+      								<label for="occurrences">Count of occurrences(<%=goal.occurrencesType%>):</label>
+      								<input type="texts" class="form-control" id="count" placeholder="Input Number" name="count">
     							</div>
 
 							<%} %>
@@ -159,7 +144,7 @@
 
 
 
-							<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
+							<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
 								<!--<tr class = "table-active">
 									<td> Additional Comments: </td><td><input type="text" name="comments"></td>
 								</tr>--->
@@ -192,8 +177,12 @@
 								<table class="table table-hover" id="t01">
 								<!--<table style="display: : center" id="t01">-->
 									<tr class="table-active">
-										<%if(goal.methodOfCollection[0] == "singlePoint") { %>
-											<th>Percentage</th>
+										<%if(goal.methodOfCollection[0] == "score") { %>
+											<th>Score</th>
+										<%} %>
+
+										<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
+											<th>Count of Occurrences</th>
 										<%} %>
 							
 										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
@@ -212,8 +201,12 @@
 									</tr>
 									<% goalDatas.forEach(function(goalData) { %>
 									<tr>
-										<%if(goal.methodOfCollection[0] == "singlePoint") { %>
-											<td><%= goalData.percentage %></td>
+										<%if(goal.methodOfCollection[0] == "score") { %>
+											<td><%= goalData.score %></td>
+										<%} %>
+
+										<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count" || goal.methodOfCollection[2] == "count") { %>
+											<td><%= goalData.count %></td>
 										<%} %>
 
 										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
@@ -222,7 +215,7 @@
 										
 										<td><%= goalData.support %></td>
 										
-										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
+										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] || goal.methodOfCollection[3] == "comments") { %>
 											<td><%= goalData.comments %></td>
 										<%} %>
 										
@@ -247,6 +240,7 @@
 
 		<footer class="footer">
 			<div class="footer__copyright">&copy; 2019 TRACK</div>
+			<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
 		</footer>
 	</div>
 
