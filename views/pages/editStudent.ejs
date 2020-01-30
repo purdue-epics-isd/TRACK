@@ -15,31 +15,31 @@
 
   <main class="main">
     <div class =  class-header>
-            <h3>Add New Student</h3>
+            <h3>Edit <%= student.firstname %> <%= student.lastname %></h3>
     </div>
     <div class = "studentOverview">
         <div class = "part">
           <form action="/student/create" method="post">
 
             <label for="First Name">First Name:</label>
-            <input type="text" class="form-control" name="firstname" style="width:150%">
+            <input type="text" class="form-control" name="firstname" value="<%= student.firstname %>"style="width:150%">
 
             <label for="Last Name">Last Name:</label>
-            <input type="text" class="form-control" name="lastname" style="width:150%">
+            <input type="text" class="form-control" name="lastname" value="<%= student.lastname %>"style="width:150%">
             <br>
             <input type="submit" class="btn btn-primary">
             
         </div>
         
         <div class = "part">
-          <label for="Grade Level">Date of Birth:</label>
-          <input type="date" class="form-control" name="dateofbirth" style="width:100%">
+          <label for="Date of Birth">Date of Birth:</label>
+          <input type="date" class="form-control" name="dob" value="<%= student.dob %>" style="width:100%">
 
           <label for="Email">Email:</label>
-          <input type="email" class="form-control" name="studentemail" style="width:100%">
+          <input type="email" class="form-control" name="studentemail" value="<%= student.email %>"style="width:100%">
 
           <label for="Grade Level">Grade Level:</label>
-          <select class="form-control" name = "grade" style="width:100%">
+          <select class="form-control" name="grade" value="<%= student.grade %>"style="width:100%">
             <option value="Pre-K">Pre-K</option>
             <option value="1">1</option>
             <option value="2">2</option>

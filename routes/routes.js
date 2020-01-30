@@ -19,10 +19,8 @@ router.post('/student/create', student_controller.student_create); //adds new st
 router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 router.post('/signUp/createUser', user_controller.createUser); 
-router.post('/student/:studentid/student_edit', student_controller.student_redirect_edit); //edit student information
-router.post('/student/:studentid/student_edit/submit', student_controller.student_edit); //edit student information
-
-//Delete data
+router.get('/student/:studentid/student_edit', student_controller.student_redirect_edit); //edit student information
+router.post('/student/:studentid/student_edit/submit', student_controller.student_edit); //submit final student edits
 
 
 router.get('/student/:studentid/goal/:goalid/goal_delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE

@@ -13,9 +13,11 @@
 
   <main class="main">
     <div class="class-header">
-      <div class = "nameArea">
-        <h3><%= student.firstname %>'s Profile</h3>
-        <!--<button type="button" class="btn btn-info">Info</button>-->
+      <h3><%= student.firstname %>'s Profile</h3>
+      <div class = "nameArea" style="grid-template-columns: repeat(2, 2fr);">
+        
+        <button type="button" class="btn btn-info" onclick="showInfo()" id="infoButton">Show Info</button>
+
         <button type="button" class="btn btn-primary">
           <a href="/student/<%= student.id%>/student_edit">Edit Student</a>
         </button>
@@ -28,7 +30,13 @@
       
     </div>
 
-    <div class = "overviewcard">
+    <div class = "overviewcard" id="studentsInfoBox" style="display: none">
+      Date of Birth: <%= student.dob %> <br>
+      Email: <%= student.email %> <br>
+      Grade Level: <%= student.grade %> <br>
+    </div>
+
+    <div class = "overviewcard" id="goalsBox">
 
       <% goals.forEach(function(goal) { %> 
 
@@ -51,7 +59,6 @@
      <div class="cardName">
       <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
         <a href="/student/<%=student.id%>/createNewGoal">
-          <div class="card-header"></div>
           <div class="card-body">
             <p class="card-text">Create New Goal</p>
             <h4 class="card-title" style="font-size: 400%; text-align: center">+</h4>
@@ -71,3 +78,24 @@
 </div>
 
 </html>
+
+<script>
+  function showInfo() {
+    var infoButton = document.getElementById('infoButton');
+    if(infoButton.innerHTML == "Show Info") {
+      infoButton.innerHTML = "Show Goals";
+
+      var goalsBox = document.getElementById('goalsBox');
+      goalsBox.style.display='none';
+      var studentsInfoBox = document.getElementById('studentsInfoBox');
+      studentsInfoBox.style.display='';
+    } else {
+      infoButton.innerHTML = "Show Info";
+      var goalsBox = document.getElementById('goalsBox');
+      goalsBox.style.display='';
+      var studentsInfoBox = document.getElementById('studentsInfoBox');
+      studentsInfoBox.style.display='none';
+    }
+    
+  }
+</script>

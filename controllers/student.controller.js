@@ -10,7 +10,8 @@ exports.student_create = function (req, res) {
                 lastname: req.body.lastname,
                 period: "period" + req.body.period,
                 grade: req.body.grade,
-                age: req.body.age,
+                dob: req.body.dob,
+                email: req.body.studentemail,
                 goals: [],
                 userid: req.body.userID
             }
@@ -145,8 +146,10 @@ exports.student_edit = function (req, res) {
     Student.findByIdAndUpdate(req.params.studentid,
             { $set: { firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                period: req.body.period,
-                age: req.body.age
+                period: "period" + req.body.period,
+                grade: req.body.grade,
+                dob: req.body.dob,
+                email: req.body.studentemail
                  } }, function (err) {
               if (err) {
                 console.log(err);
