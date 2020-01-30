@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Create New Student</title>
+  <%- include("../partials/head.ejs")%>
+  <!--<link rel="icon" type="image/gif/png" href="img/logo.png">
+  <link rel="stylesheet" href="/main.css">
+  <script type="text/javascript" src="myScripts.js"></script>-->
+</head>
+
+<div class="grid-container">
+  
+  <%- include("../partials/header.ejs")%>
+
+  <main class="main">
+    <div class =  class-header>
+            <h3>Add New Student</h3>
+    </div>
+    <div class = "studentOverview">
+        <div class = "part">
+          <form action="/student/create" method="post">
+
+            <label for="First Name">First Name:</label>
+            <input type="text" class="form-control" name="firstname" style="width:150%">
+
+            <label for="Last Name">Last Name:</label>
+            <input type="text" class="form-control" name="lastname" style="width:150%">
+            <br>
+            <input type="submit" class="btn btn-primary">
+            
+        </div>
+        
+        <div class = "part">
+          <label for="Grade Level">Date of Birth:</label>
+          <input type="date" class="form-control" name="dateofbirth" style="width:100%">
+
+          <label for="Email">Email:</label>
+          <input type="email" class="form-control" name="studentemail" style="width:100%">
+
+          <label for="Grade Level">Grade Level:</label>
+          <select class="form-control" name = "grade" style="width:100%">
+            <option value="Pre-K">Pre-K</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <input type="hidden" name="userID" id="userID">
+        </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__copyright">&copy; 2019 TRACK</div>
+    </footer>
+</div>
+
+
+</html>
+
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  document.getElementById("userID").value = localStorage.getItem("userID");
+  console.log(localStorage.getItem("userID"));
+</script>

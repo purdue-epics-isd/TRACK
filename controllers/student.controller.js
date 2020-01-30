@@ -124,6 +124,39 @@ exports.student_delete = function (req, res) {
     }        
 };
 
+exports.student_redirect_edit = function (req, res) {
+    try {
+        User.findById(req.params.userid, function(err, user) {
+            Student.findById(req.params.studentid, function(err, student) {
+                res.render('pages/editStudent', {
+                    student: student, 
+                    user: user
+                });
+            });
+        });
+ 
+    } catch(err) {
+        console.log(err);
+        res.render('./error');
+    }
+};
+
+exports.student_edit = function (req, res) {
+    Student.findByIdAndUpdate(req.params.studentid,
+            { $set: { firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                period: req.body.period,
+                age: req.body.age
+                 } }, function (err) {
+              if (err) {
+                console.log(err);
+              }
+              else {
+                res.redirect('/student/' + req.params.studentid);
+              }
+            });
+}
+
 /*first function used when website starts up*/
 exports.run = function(req, res) {
     var logout = false;

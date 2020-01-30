@@ -15,7 +15,10 @@
   <div class="class-header">
       <div class = "nameArea">
         <h3><%= student.firstname %>'s Profile</h3>
-        <button type="button" class="btn btn-info">Info</button>
+        <!--<button type="button" class="btn btn-info">Info</button>-->
+        <button type="button" class="btn btn-primary">
+          <a href="/student/<%= student.id%>/student_edit">Edit Student</a>
+        </button>
       </div>
       
 
