@@ -9,10 +9,10 @@
 
 <div class="grid-container">
 
-<%- include("../partials/header.ejs")%>
+  <%- include("../partials/header.ejs")%>
 
-<main class="main">
-  <div class="class-header">
+  <main class="main">
+    <div class="class-header">
       <div class = "nameArea">
         <h3><%= student.firstname %>'s Profile</h3>
         <!--<button type="button" class="btn btn-info">Info</button>-->
@@ -22,34 +22,43 @@
       </div>
       
 
-      <a href="/student/<%=student.id%>/createNewGoal">
+      <!--<a href="/student/<%=student.id%>/createNewGoal">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
-      </a>
+      </a>-->
       
-  </div>
+    </div>
 
-<div class = "overviewcard">
+    <div class = "overviewcard">
 
-  <% goals.forEach(function(goal) { %> 
-    
+      <% goals.forEach(function(goal) { %> 
+
       <div class = "cardName">
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
           <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
-          <div class="card-header"><%=goal.goalType%></div>
-          <div class="card-body">
-            <h4 class="card-title"><%= goal.name %></h4>
-            <p class="card-text">Goal Progress</p>
-            <div class="progress">
-             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+            <div class="card-header"><%=goal.goalType%></div>
+            <div class="card-body">
+              <h4 class="card-title"><%= goal.name %></h4>
+              <p class="card-text">Goal Progress</p>
+              <div class="progress">
+               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+               </div>
              </div>
            </div>
-         </div>
          </a>
        </div>
      </div>
-   <% }); %>
- 
-</div>
+     <% }); %>
+     <div class="cardName">
+      <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
+        <a href="/student/<%=student.id%>/createNewGoal">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <p class="card-text">Create New Goal</p>
+            <h4 class="card-title" style="font-size: 400%; text-align: center">+</h4>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 </main>
