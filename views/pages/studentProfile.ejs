@@ -30,10 +30,11 @@
       
     </div>
 
-    <div class = "overviewcard" id="studentsInfoBox" style="display: none">
-      Date of Birth: <%= student.dob %> <br>
+    <div class = "overviewcard" id="studentsInfoBox" style="display: none; grid-template-columns: auto">
+      Date of Birth: <span id="dob"></span> <br>
       Email: <%= student.email %> <br>
       Grade Level: <%= student.grade %> <br>
+      Class Period: <%= student.period %> 
     </div>
 
     <div class = "overviewcard" id="goalsBox">
@@ -88,7 +89,7 @@
       var goalsBox = document.getElementById('goalsBox');
       goalsBox.style.display='none';
       var studentsInfoBox = document.getElementById('studentsInfoBox');
-      studentsInfoBox.style.display='';
+      studentsInfoBox.style.display='block';
     } else {
       infoButton.innerHTML = "Show Info";
       var goalsBox = document.getElementById('goalsBox');
@@ -97,5 +98,24 @@
       studentsInfoBox.style.display='none';
     }
     
+  }
+
+    convertToYYYYMMDD("<%=student.dob%>");
+  function convertToYYYYMMDD(d) {
+    date = new Date(d);
+    year = date.getFullYear();
+    //console.log("Year: " + year);
+    month = date.getMonth()+1;
+    dt = date.getDate()+1;
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    var format = String(year)+'-' + String(month) + '-'+String(dt);
+    console.log("formatted year: " + format);
+    document.getElementById('dob').innerHTML = format;
   }
 </script>

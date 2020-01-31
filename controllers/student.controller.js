@@ -8,7 +8,7 @@ exports.student_create = function (req, res) {
         let student = new Student(
             {   firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                period: "period" + req.body.period,
+                period: req.body.period,
                 grade: req.body.grade,
                 dob: req.body.dob,
                 email: req.body.studentemail,
@@ -126,6 +126,7 @@ exports.student_delete = function (req, res) {
 };
 
 exports.student_redirect_edit = function (req, res) {
+    console.log("redirecting to edit page");
     try {
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
@@ -143,10 +144,11 @@ exports.student_redirect_edit = function (req, res) {
 };
 
 exports.student_edit = function (req, res) {
+    console.log("Student being edited: " + req.params.studentid);
     Student.findByIdAndUpdate(req.params.studentid,
             { $set: { firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                period: "period" + req.body.period,
+                period: req.body.period,
                 grade: req.body.grade,
                 dob: req.body.dob,
                 email: req.body.studentemail

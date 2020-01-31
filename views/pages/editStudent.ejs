@@ -10,36 +10,50 @@
 </head>
 
 <div class="grid-container">
-  
+
   <%- include("../partials/header.ejs")%>
 
   <main class="main">
     <div class =  class-header>
-            <h3>Edit <%= student.firstname %> <%= student.lastname %></h3>
+      <h3>Edit <%= student.firstname %> <%= student.lastname %></h3>
     </div>
     <div class = "studentOverview">
-        <div class = "part">
-          <form action="/student/create" method="post">
+      <div class = "part">
+        <form action="/student/<%= student.id %>/student_edit/submit" method="post">
 
-            <label for="First Name">First Name:</label>
-            <input type="text" class="form-control" name="firstname" value="<%= student.firstname %>"style="width:150%">
+          <label for="First Name">First Name:</label>
+          <input type="text" class="form-control" name="firstname" value="<%= student.firstname %>"style="width:150%">
 
-            <label for="Last Name">Last Name:</label>
-            <input type="text" class="form-control" name="lastname" value="<%= student.lastname %>"style="width:150%">
-            <br>
-            <input type="submit" class="btn btn-primary">
-            
+          <label for="Last Name">Last Name:</label>
+          <input type="text" class="form-control" name="lastname" value="<%= student.lastname %>"style="width:150%">
+
+          <label for="Class Period">Class Period:</label>
+          <select class="form-control" name="period" style="width:100%" id="period">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+          <br>
+          <input type="submit" class="btn btn-primary">
+
         </div>
         
         <div class = "part">
           <label for="Date of Birth">Date of Birth:</label>
-          <input type="date" class="form-control" name="dob" value="<%= student.dob %>" style="width:100%">
+          <input type="date" class="form-control" name="dob" style="width:100%" id="dob">
 
           <label for="Email">Email:</label>
           <input type="email" class="form-control" name="studentemail" value="<%= student.email %>"style="width:100%">
 
           <label for="Grade Level">Grade Level:</label>
-          <select class="form-control" name="grade" value="<%= student.grade %>"style="width:100%">
+          <select class="form-control" name="grade" value="<%= student.grade %>" id="grade" style="width:100%">
             <option value="Pre-K">Pre-K</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -56,20 +70,39 @@
           </select>
           <input type="hidden" name="userID" id="userID">
         </div>
-        </form>
-      </div>
-    </main>
+      </form>
+    </div>
+  </main>
 
-    <footer class="footer">
-      <div class="footer__copyright">&copy; 2019 TRACK</div>
-    </footer>
+  <footer class="footer">
+    <div class="footer__copyright">&copy; 2019 TRACK</div>
+  </footer>
 </div>
-
-
 </html>
 
 <script>
   //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
   document.getElementById("userID").value = localStorage.getItem("userID");
   console.log(localStorage.getItem("userID"));
+  convertToYYYYMMDD("<%=student.dob%>");
+  document.getElementById("grade").selectedIndex = "<%= student.grade %>";
+  document.getElementById("period").selectedIndex = "<%= student.period %>"-1;
+
+  function convertToYYYYMMDD(d) {
+    date = new Date(d);
+    year = date.getFullYear();
+    //console.log("Year: " + year);
+    month = date.getMonth()+1;
+    dt = date.getDate()+1;
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    var format = String(year)+'-' + String(month) + '-'+String(dt);
+    console.log("formatted year: " + format);
+    document.getElementById('dob').value = format;
+  }
 </script>
