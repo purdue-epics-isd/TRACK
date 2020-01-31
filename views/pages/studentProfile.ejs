@@ -34,7 +34,11 @@
       Date of Birth: <span id="dob"></span> <br>
       Email: <%= student.email %> <br>
       Grade Level: <%= student.grade %> <br>
-      Class Period: <%= student.period %> 
+      Class Period: <%= student.period %> <br> <br>
+      <form action="/action_page.php">
+        Documentation: <input type="file" name="myFile" multiple>
+        <input type="submit">
+      </form>
     </div>
 
     <div class = "overviewcard" id="goalsBox">
