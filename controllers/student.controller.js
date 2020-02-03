@@ -12,15 +12,15 @@ exports.student_create = function (req, res) {
                 grade: req.body.grade,
                 age: req.body.age,
                 goals: [],
-                userid: req.params.userid
+                userid: req.body.userID
             }
         );
         student.save(function (err) {
             if (err) {
-                res.send(err);
+                console.log(err);
+                //res.send(err);
             } /*else {
                 var goals = [];
-
                 Student.findById(student.id, function(err, student) {
                     res.render('pages/studentProfile', {
                         student: student,
@@ -29,7 +29,7 @@ exports.student_create = function (req, res) {
                });
             }*/
         })
-        res.redirect("/" + req.params.userid + "/classPage");
+        res.redirect("/classPage");
     } catch(err) {
         //console.log(err);
         res.render('./error');
@@ -72,10 +72,10 @@ exports.navigate_to_classPage = function (req, res) {
 
         Student.find({}, {}, function(err, student) {
             student.forEach(function(s) { 
-                if(s.userid==req.params.userid) {
-                    console.log(s); console.log(s.name); 
+                //if(s.userid==req.params.userid) {
+                    //console.log(s); console.log(s.name); 
                     students.push(s);
-                };
+                //};
             });
         });
 
@@ -187,8 +187,11 @@ exports.student_edit = function (req, res) {
 
 /*first function used when website starts up*/
 exports.run = function(req, res) {
+    var logout = false;
     try {
-        res.render('pages/login');
+    res.render('pages/index', {
+        logout: logout
+}); //navigates back to log in menu
     } catch(err) {
         console.log(err);
         res.render('./error');

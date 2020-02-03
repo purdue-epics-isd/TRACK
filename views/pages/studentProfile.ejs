@@ -13,17 +13,17 @@
 
 <main class="main">
   <div class="class-header">
-    <div class = "nameArea">
-    <h3><%= student.firstname %>'s Profile</h3>
-    <button type="button" class="btn btn-info">Info</button>
+      <div class = "nameArea">
+        <h3><%= student.firstname %>'s Profile</h3>
+        <button type="button" class="btn btn-info">Info</button>
+      </div>
+      
+
+      <a href="/student/<%=student.id%>/createNewGoal">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
+      </a>
+      
   </div>
-    
-
-  <a href="/<%= user.id%>/student/<%=student.id%>/createNewGoal">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Create Goal</button>
-  </a>
-
-</div>
 
 <div class = "overviewcard">
 
@@ -31,8 +31,8 @@
     
       <div class = "cardName">
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-          <a href="/<%= user.id%>/student/<%=student.id%>/goal/<%=goal.id%>">
-          <div class="card-header">Academic Goal</div>
+          <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
+          <div class="card-header"><%=goal.goalType%></div>
           <div class="card-body">
             <h4 class="card-title"><%= goal.name %></h4>
             <p class="card-text">Goal Progress</p>
@@ -44,7 +44,6 @@
          </a>
        </div>
      </div>
-
    <% }); %>
  
 </div>
@@ -54,8 +53,10 @@
 
 <footer class="footer">
   <div class="footer__copyright">&copy; 2019 TRACK</div>
-  <a href="/<%= user.id%>/student/<%= student.id %>/edit" class="btn btn-info"> <div class="footer__signature">Edit Student</div></a>
-  <a href="/<%= user.id%>/student/<%= student.id %>/delete" class="btn btn-info"> <div class="footer__signature">Delete Student</div></a>
+
+  
+  <a href="/student/<%= student.id %>/delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Student</div></a>
+
 </footer>
 </div>
 

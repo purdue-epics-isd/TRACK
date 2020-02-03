@@ -11,52 +11,80 @@
 
 <div class="grid-container">
   
-<%- include("../partials/header.ejs")%>
+  <%- include("../partials/header.ejs")%>
 
+  <main class="main">
+    <div class =  class-header>
+            <h3>Add New Student</h3>
+    </div>
+    <div class = "studentOverview">
+        <div class = "part">
+          <form action="/student/create" method="post">
 
-<main class="main">
-  <h1>Add New Student</h1>
-  <form action="/<%=user.id%>/student/create" method="post">
-    First Name<font color=red>*</font>: <input type="text" name="firstname"><br><br>
-    Last Name: <input type="text" name="lastname"><br><br>
-    D.O.B.: <input type="date" name="dateofbirth"><br><br>
-    <!--Email: <input type="email" name="studentemail"><br><br>-->
-    Grade Level:  <select name = "grade">
-      <option value="Pre-K">Pre-K</option>
-      <option value="Kindergarten">Kindergarten</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-    </select><br><br>
-    Class Name: <input type="text" name="classname">
-    Class Period:  <select name = "period">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-    </select><br><br>
-    <input type="submit" value="Submit" class="submitButton"><br><br>
-  </form>
-  <a href="/<%=user.id%>/classPage" class="backButton"></a>
-</main>
-<footer class="footer">
-  <div class="footer__copyright">&copy; 2019 TRACK</div>
-</footer>
+            <label for="First Name">First Name <text style="color:red">* </text>: </label>
+            <input type="text" class="form-control" name="firstname" style="width:150%" required>
+
+            <label for="Last Name">Last Name <text style="color:red">* </text>:</label>
+            <input type="text" class="form-control" name="lastname" style="width:150%" required>
+
+            <label for="Class Period">Class Period <text style="color:red">*</text> :</label>
+          <select class="form-control" name = "period" style="width:100%" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+            <br>
+            Required Field <text style="color:red">*</text> <br>
+            <input type="submit" class="btn btn-primary">
+            
+        </div>
+        
+        <div class = "part">
+          <label for="Grade Level">Date of Birth:</label>
+          <input type="date" class="form-control" name="dateofbirth" style="width:100%">
+
+          <label for="Email">Email:</label>
+          <input type="email" class="form-control" name="studentemail" style="width:100%">
+
+          <label for="Grade Level">Grade Level:</label>
+          <select class="form-control" name = "grade" style="width:100%">
+            <option value="Pre-K">Pre-K</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <input type="hidden" name="userID" id="userID">
+        </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__copyright">&copy; 2019 TRACK</div>
+    </footer>
+</div>
 
 
 </html>
+
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  document.getElementById("userID").value = localStorage.getItem("userID");
+  console.log(localStorage.getItem("userID"));
+</script>
