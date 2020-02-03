@@ -73,7 +73,7 @@ input.invalid {
 	width: 15px;
 	margin: 0 2px;
 	background-color: #bbbbbb;
-	border: none; 
+	border: none;
 	border-radius: 50%;
 	display: inline-block;
 	opacity: 0.5;
@@ -110,15 +110,15 @@ input.invalid {
 			<!-- One "tab" for each step in the form: -->
 
 			<!---Goal Title and Descriptoin-->
-			<div class="tab">
+			<div>
 				<h1>Goal Creation</h1>
 				<p><input placeholder="Goal Title..."  class="form-modified-control"  type="text" name="name" id="name"></p>
 				<p><textarea style="height: 100px" type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></textarea></p>
 			</div>
 	<!-- One "tab" for each step in the form: -->
-	
+
 			<!---Start and End Date-->
-			<div class="tab">
+			<div>
 				<h1>Dates</h1>
 				<p>Start Date:<input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
 				<p>End Date:<input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
@@ -126,7 +126,7 @@ input.invalid {
 
 			<!--Goal Type -->
 
-				<div class="tab">
+				<div>
 					<h1>Goal Types</h1>
 					<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
 
@@ -135,7 +135,7 @@ input.invalid {
       					<label class="custom-control-label" for="customRadio2">Academic</label>
 					</div>
 					<!--<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>-->
-					
+
 					<div class="custom-control custom-radio">
 						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Behavioral Goal">
       					<label class="custom-control-label" for="customRadio3">Behavior</label>
@@ -143,9 +143,9 @@ input.invalid {
 				</div>
 
 			<!--Goal Collection Type -->
-			<div class="tab">
+			<div>
 				<h1>Method of Collection:</h1>
-				
+
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score"> Score <br>
 
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count"> Count of Occurrences<br>
@@ -156,7 +156,7 @@ input.invalid {
             		<option value="Per day">Per day</option>
             		<option value="Per week">Per week</option>
           		</select>
-				
+
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
 				<!--<div style="display: none" id="rubricDiv">
 						<div id = "rubricFieldsHolder">
@@ -215,26 +215,11 @@ input.invalid {
 					</script>
 			</div>
 
-			<!--<div class="tab" id="preview">
-				<p>Goal Preview</p>
-			</div>-->
-
 			<div style="overflow:auto;">
 				<div style="float:right;">
-					<button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-					<button type="button"  class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+					<button type="submit"  class="btn btn-primary" id="nextBtn" >Submit</button>
 				</div>
 			</div>
-
-			<!-- Circles which indicates the steps of the form: -->
-			<div style="text-align:center;margin-top:40px;">
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-			</div>
-	
 		</form>
 	</main>
 
@@ -248,130 +233,6 @@ input.invalid {
 </html>
 
 <script>
-var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the current tab
-
-function showTab(n) {
-  // This function will display the specified tab of the form ...
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
-
-  console.log("x.length: " + x.length);
-  console.log("N: " + n);
-  // ... and fix the Previous/Next buttons:
-  if (n == 0) {
-  	document.getElementById("prevBtn").style.display = "none";
-  } else {
-  	document.getElementById("prevBtn").style.display = "inline";
-  }
-  if (n == (x.length - 1)) {
-  	document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-  	document.getElementById("nextBtn").innerHTML = "Next";
-  }
-  // ... and run a function that displays the correct step indicator:
-  fixStepIndicator(n);
-}
-
-function nextPrev(n) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("tab");
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-
-  // if you have reached the end of the form... s
-  if (currentTab >= x.length) {
-    //...the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-}
-
-//show preview of the goal
-  if (x[currentTab].id == "preview") {
-
-  	//clear previous preview
-  	var preview = document.getElementById("preview");
-	while (preview.firstChild) {
-	    preview.removeChild(preview.firstChild);
-	}
-
-	var heading = document.createElement("h1");
-	heading.innerHTML = "Preview";
-	var goalTitle = document.createElement("h2");
-	goalTitle.innerHTML = document.getElementById("name").value;
-	goalTitle.style["margin-left"] = "0%";
-	var goalDescription = document.createElement("p");
-	goalDescription.innerHTML = document.getElementById("description").value;
-	var startDate = document.getElementById("startDate").value;
-	var endDate = document.getElementById("endDate").value;
-	var dates = document.createElement("p");
-	dates.innerHTML = startDate + " - " + endDate;
-
-	document.getElementById("preview").appendChild(heading);
-	document.getElementById("preview").appendChild(goalTitle);
-	document.getElementById("preview").appendChild(goalDescription);
-	document.getElementById("preview").appendChild(dates);
-
-	if (document.getElementById("singlePoint").checked == true) {
-		console.log("single point testing");
-		var txt = document.createElement("p");
-		txt.innerHTML = "Percentage Complete:";
-		var input = document.createElement("input");
-		input.type = "value";
-		input.name = "percentage";
-
-		var percentageElement = document.createElement("div");
-		percentageElement.appendChild(txt);
-		percentageElement.appendChild(input);
-		document.getElementById("preview").appendChild(percentageElement);
-	}
-
-	if (document.getElementById("rubric").checked == true) {
-		console.log("rubric preview testing");
-		var rubricDiv = document.getElementById("rubricFieldsHolder");
-		var rubricElement = document.createElement("div");
-
-		for (var i = 0; i < rubricDiv.children.length; i++) {
-			var radiobtn = document.createElement("input");
-			radiobtn.type = "radio";
-			radiobtn.name = "rubric";
-			radiobtn.style["width"] = "10%";
-			var label = document.createElement("label");
-			label.innerHTML = rubricDiv.children[i].children[0].value + "<br />";
-			radiobtn.value = rubricDiv.children[i].children[0].value;
-
-			rubricElement.appendChild(radiobtn);
-			rubricElement.appendChild(label);
-			//rubricElement.appendChild(txt);
-		}
-
-		document.getElementById("preview").appendChild(rubricElement);
-  
-	}
-
-	if (document.getElementById("comments").checked == true) {
-		console.log("comment testing");
-		var txt = document.createElement("p");
-		txt.innerHTML = "Additional Comments:";
-		var input = document.createElement("input");
-		input.type = "value";
-		input.name = "comments";
-
-		var commentElement = document.createElement("div");
-		commentElement.appendChild(txt);
-		commentElement.appendChild(input);
-		document.getElementById("preview").appendChild(commentElement);
-	}
-
-  }
-
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
-}
 
 function validateForm() {
 	// This function deals with validation of the form fields
@@ -394,7 +255,7 @@ function validateForm() {
 					// and set the current valid status to false:
 					valid = false;
 	      		}
-	  		} else if (x[currentTab].id == "preview") { 
+	  		} else if (x[currentTab].id == "preview") {
 	  			console.log("and a preview page");
 	  			//we good
 	  		} else {
