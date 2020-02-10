@@ -113,11 +113,14 @@ exports.goal_redirect_edit = function (req, res) {
     try {
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
-                res.render('pages/EditGoal', {
-                    student: student, 
-                    user: user,
-                    goalid: req.params.goalid
-                });
+                Goal.findById(req.params.goalid, function(err, goal) {
+                    res.render('pages/EditGoal', {
+                        student: student, 
+                        user: user,
+                        goalid: req.params.goalid,
+                        goal: goal
+                    }); 
+                })
             });
         });
  
