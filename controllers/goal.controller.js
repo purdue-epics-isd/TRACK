@@ -24,20 +24,11 @@ exports.goal_create = function (req, res) {
             goal.save(function (err) { 
                 if (err) {
                     res.send(err);
-                }
-                else 
-                {
+                } else {
                     res.redirect('/student/' + req.params.studentid);
                 }
             });
         });
-       
-        /*let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
-        async function init() {
-            await sleep(10);
-        }
-        init();
-        //res.redirect('/student/' + req.params.studentid);*/
     } catch (err) {
         console.log(err);
         res.render('./error');
@@ -61,13 +52,10 @@ exports.navigate_to_goalProfile = function (req, res) {
 
 
         Student.findById(req.params.studentid, function(err, student) {
-            //console.log(err);
             if (err) {
-                //console.log(err);
                 res.send(err);
                 return;
             }
-
             User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
@@ -84,7 +72,6 @@ exports.navigate_to_goalProfile = function (req, res) {
                 });
             });
         });
-        //console.log("pls workmaybe");
         return;
     } catch(error) {
         console.log("err:" + err);

@@ -16,7 +16,7 @@
       <h3><%= student.firstname %>'s Profile</h3>
       <div class = "nameArea" style="grid-template-columns: repeat(2, 2fr);">
         
-        <button type="button" class="btn btn-info" onclick="showInfo()" id="infoButton">Show Info</button>
+        <button type="button" class="btn btn-info" onclick="toggleInfo()" id="infoButton">Show Info</button>
 
         <button type="button" class="btn btn-primary">
           <a href="/student/<%= student.id%>/student_edit">Edit Student</a>
@@ -35,9 +35,34 @@
       Email: <%= student.email %> <br>
       Grade Level: <%= student.grade %> <br>
       Class Period: <%= student.period %> <br> <br>
-      <form action="/action_page.php">
+      <form action="/student/<%=student.id%>/addDocumentation">
         Documentation: <input type="file" name="myFile" multiple>
         <input type="submit">
+
+        <div class="gallery">
+          <a target="_blank" href="/student/<%= student.id %>/getPicture">
+            <img src="/student/<%= student.id %>/getPicture" alt="Cinque Terre" width="600" height="400">
+          </a>
+          <div class="desc">Add a description of the image here</div>
+        </div>
+          <script type="text/javascript">
+            function launchOneDrivePicker(){
+              var odOptions = { /* ... specify the desired options ... */ };
+              OneDrive.open(odOptions);
+            }
+          </script>
+          <button onClick="launchOneDrivePicker()">Open from OneDrive</button>
+          <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js">
+            var odOptions = {
+              clientId: "f4238741-ebe5-4017-94b5-4de9dc3c20b8",
+              action: "query",
+              multiSelect: true,
+              advanced: {},
+              success: function(files) { /* success handler */ },
+              cancel: function() { /* cancel handler */ },
+              error: function(error) { /* error handler */ }
+            }
+          </script>
       </form>
     </div>
 
@@ -85,16 +110,17 @@
 </html>
 
 <script>
-  function showInfo() {
+  function toggleInfo() {
+    // toggle's between showing all the student goals or showing student profile information
     var infoButton = document.getElementById('infoButton');
-    if(infoButton.innerHTML == "Show Info") {
+    if(infoButton.innerHTML == "Show Info") { //if we are already showing goals, switch to showing info
       infoButton.innerHTML = "Show Goals";
 
       var goalsBox = document.getElementById('goalsBox');
       goalsBox.style.display='none';
       var studentsInfoBox = document.getElementById('studentsInfoBox');
-      studentsInfoBox.style.display='block';
-    } else {
+      studentsInfoBox.style.display='inline-block';
+    } else { // else if we are already showing info, show goals
       infoButton.innerHTML = "Show Info";
       var goalsBox = document.getElementById('goalsBox');
       goalsBox.style.display='';
@@ -104,11 +130,12 @@
     
   }
 
-    convertToYYYYMMDD("<%=student.dob%>");
-  function convertToYYYYMMDD(d) {
+  convertToMMDDYYYY("<%=student.dob%>"); //executes as soon as page is loaded
+
+  function convertToMMDDYYYY(d) {
+    // convert student date of birth stored in MongoDB to readable and displayable form
     date = new Date(d);
     year = date.getFullYear();
-    //console.log("Year: " + year);
     month = date.getMonth()+1;
     dt = date.getDate()+1;
 

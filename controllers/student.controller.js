@@ -13,26 +13,17 @@ exports.student_create = function (req, res) {
                 dob: req.body.dob,
                 email: req.body.studentemail,
                 goals: [],
-                userid: req.body.userID
+                userid: req.body.userID,
+                documentation: []
             }
         );
         student.save(function (err) {
             if (err) {
                 console.log(err);
-                //res.send(err);
-            } /*else {
-                var goals = [];
-                Student.findById(student.id, function(err, student) {
-                    res.render('pages/studentProfile', {
-                        student: student,
-                        goals: goals
-                    });
-               });
-            }*/
+            }
         })
         res.redirect("/classPage");
     } catch(err) {
-        //console.log(err);
         res.render('./error');
     }
 };
@@ -43,9 +34,7 @@ exports.navigate_to_studentProfile = function (req, res) {
         var goals = [];
 
         Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
-            goal.forEach(function(s) { 
-                //console.log("s.studentID: " + s.studentID);
-                //console.log("req.params.studentid: " + req.params.studentid);
+            goal.forEach(function(s) {
                 goals.push(s);
             });
         });
@@ -162,13 +151,37 @@ exports.student_edit = function (req, res) {
             });
 }
 
+exports.student_add_documentation = function (req, res) {
+    var fs = require('fs');
+    let document = req.body.myFile; //TODO: add document parsing
+    Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {documentation: document}}, function (err, student) {
+        student.save(function (err) { 
+            if (err) {
+                res.send(err);
+            } else {
+                res.redirect('/student/' + req.params.studentid);
+            }
+        });
+    });
+}
+
+// Get pictures
+exports.student_get_documentation = function (req, res) {
+    var fs = require('fs');
+    Student.findById(req.params.studentid, function(err, student) {
+      if (err) return next(err);
+      //res.contentType(student.documentation.contentType);
+      //res.send(student.documentation.data);
+  });
+}
+
 /*first function used when website starts up*/
 exports.run = function(req, res) {
     var logout = false;
     try {
-    res.render('pages/index', {
-        logout: logout
-}); //navigates back to log in menu
+        res.render('pages/index', {
+            logout: logout
+        }); //navigates back to log in menu
     } catch(err) {
         console.log(err);
         res.render('./error');
