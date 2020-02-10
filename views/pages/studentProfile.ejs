@@ -145,7 +145,7 @@
     if (month < 10) {
       month = '0' + month;
     }
-    var format = String(year)+'-' + String(month) + '-'+String(dt);
+    var format = String(month) + '-' + String(dt) + '-' + String(year); 
     console.log("formatted year: " + format);
     document.getElementById('dob').innerHTML = format;
   }
