@@ -112,7 +112,7 @@
 				<!---Goal Title and Descriptoin-->
 				<div>
 					<h1>Goal Creation</h1>
-					<p><input placeholder="Goal Title..."  class="form-modified-control"  type="text" name="name" id="name"></p>
+					<p><input value="<%=goal.name%>"  class="form-modified-control"  type="text" name="name" id="name"></p>
 					<p><textarea style="height: 100px" type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></textarea></p>
 				</div>
 		<!-- One "tab" for each step in the form: -->
@@ -120,7 +120,7 @@
 				<!---Start and End Date-->
 				<div>
 					<h1>Dates</h1>
-					<p>Start Date:<input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
+					<p>Start Date:<input value="<%=goal.startDate%>" class="form-modified-control" type="date" name="startDate" id="startDate"></p>
 					<p>End Date:<input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
 				</div>
 
@@ -142,78 +142,6 @@
 	      				</div>
 					</div>
 
-				<!--Goal Collection Type -->
-				<div>
-					<h1>Method of Collection:</h1>
-
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score"> Score <br>
-
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count"> Count of Occurrences<br>
-
-					<select class="form-control" name = "occurrences" style="width:100%">
-	            		<option value="Per hour">Per hour</option>
-	            		<option value="Per class">Per class</option>
-	            		<option value="Per day">Per day</option>
-	            		<option value="Per week">Per week</option>
-	          		</select>
-
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
-					<!--<div style="display: none" id="rubricDiv">
-							<div id = "rubricFieldsHolder">
-								<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
-							</div>
-
-							<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
-							<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
-					</div>-->
-
-
-
-
-						<!--<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>-->
-
-						<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Descriptive Comments <br>
-
-
-						<script>
-							function addRubricField() {
-								var rubricHolder = document.createElement("p");
-								var rubricField = document.createElement("input");        // Create a <input> element
-								rubricField.placeholder = "Rubric Field";
-								rubricField.type = "text";
-								rubricField.name = "rubricField";
-								rubricHolder.appendChild(rubricField);
-								//var n = rubricFieldsHolder.childNodes.length - 6;
-								//console.log(rubricFieldsHolder.childNodes);
-								//console.log(n);
-								document.getElementById("rubricFieldsHolder").insertBefore(rubricHolder, rubricFieldsHolder.childNodes[-1]);      // Append <input> to <body>
-							}
-
-							function deleteRubricField() {
-								var n = rubricFieldsHolder.childNodes.length - 1;
-								console.log(rubricFieldsHolder.childNodes);
-								console.log(rubricFieldsHolder.children[n]);
-								console.log(n);
-								rubricFields = document.getElementById("rubricFieldsHolder");
-								document.getElementById("rubricFieldsHolder").childNodes[n].remove();
-								//rubricFields.children[n-4].remove();
-							}
-
-							function rubricVisibility() {
-								// Get the checkbox
-								var checkBox = document.getElementById("rubric");
-								// Get the output text
-								var rubricDiv = document.getElementById("rubricDiv");
-
-								// If the checkbox is checked, display the output text
-								if (checkBox.checked == true){
-									rubricDiv.style.display = "block";
-								} else {
-									rubricDiv.style.display = "none";
-								}
-							}
-						</script>
-				</div>
 
 				<div style="overflow:auto;">
 					<div style="float:right;">

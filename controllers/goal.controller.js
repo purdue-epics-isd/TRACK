@@ -21,17 +21,17 @@ exports.goal_create = function (req, res) {
             })
 
         Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {
-            goal.save(function (err) { 
+            goal.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
-                else 
+                else
                 {
                     res.redirect('/student/' + req.params.studentid);
                 }
             });
         });
-       
+
         /*let sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); //sleep to make sure that everything loads properly
         async function init() {
             await sleep(10);
@@ -54,7 +54,7 @@ exports.navigate_to_goalProfile = function (req, res) {
                 res.send(err);
                 return;
             }
-            goaldata.forEach(function(s) { 
+            goaldata.forEach(function(s) {
                 goalDatas.push(s);
             });
         });
@@ -113,14 +113,17 @@ exports.goal_redirect_edit = function (req, res) {
     try {
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
+              Goal.findById(req.params.goalid, function(err, goal) {
                 res.render('pages/EditGoal', {
-                    student: student, 
+                    student: student,
                     user: user,
-                    goalid: req.params.goalid
+                    goalid: req.params.goalid,
+                    goal: goal
                 });
             });
+          });
         });
- 
+
     } catch(err) {
         console.log(err);
         res.render('./error');
@@ -150,7 +153,7 @@ exports.navigate_to_createNewGoal = function (req, res) {
             User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 res.render('pages/createNewGoal', {
-                    student: student, 
+                    student: student,
                     user: user
                 });
             });
