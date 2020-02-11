@@ -1,3 +1,36 @@
+:root {
+  --blue: #2C3E50;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #E74C3C;
+  --orange: #fd7e14;
+  --yellow: #F39C12;
+  --green: #18BC9C;
+  --teal: #20c997;
+  --cyan: #3498DB;
+  --white: #fff;
+  --gray: #95a5a6;
+  --gray-dark: #343a40;
+  --primary: #d3d3;
+  --secondary: #95a5a6;
+  --tertiary: #18BC9C;
+  --accent1: #18BC9C;
+  --success: #18BC9C;
+  --info: #3498DB;
+  --warning: #F39C12;
+  --danger: #E74C3C;
+  --light: #ecf0f1;
+  --dark: #7b8a8b;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -252,14 +285,14 @@ b {
 
 .overviewcard { 
   display: grid; 
-  grid-template-columns: repeat(3, 33%);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   margin: 20px;
   /*vertical-align: top;
   align-items: center;
   justify-content: space-between; */
   padding: 20px;
-  background-color: #d3d3;
+  background-color: var(--primary);
 }
 
 .cardName {

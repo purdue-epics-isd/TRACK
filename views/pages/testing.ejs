@@ -11,11 +11,53 @@ input {
 }
 </style>
 <body>
-	
-	<div>
-	    <% users.forEach(function(user) { %>
-	    	<p> <%=user%> </p>
-		<% }); %>
+	<!--https://docs.microsoft.com/en-us/onedrive/developer/controls/file-pickers/js-v72/open-file?view=odsp-graph-online-->
+	<script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+
+	<script type="text/javascript">
+	  function launchSaveToOneDrive(){
+	    var odOptions = { 
+			clientId: "f4238741-ebe5-4017-94b5-4de9dc3c20b8",
+			action: "save",
+			sourceInputElementId: "fileUploadControl",
+			sourceUri: "",
+			fileName: "",
+			openInNewWindow: false,
+			advanced: {},
+			success: function(files) {console.log("success") /* success handler */ },
+			progress: function(percent) { /* progress handler */ },
+			cancel: function() { /* cancel handler */ },
+			error: function(error) { console.log("error")/* error handler */ }
+		};
+		OneDrive.save(odOptions);
+		}
+	</script>
+
+	<input id="fileUploadControl" name="fileUploadControl" type="file" />
+	<button onclick="launchSaveToOneDrive()">Save to OneDrive</button>
+
+	<br><br>
+
+	<script type="text/javascript">
+	  function launchOneDrivePicker(){
+	    var odOptions = { 
+			clientId: "f4238741-ebe5-4017-94b5-4de9dc3c20b8",
+			action: "download", //query to return identifiers that can be used with the Microsoft Graph API or OneDrive API.
+			multiSelect: true,
+			advanced: {
+				loginHint: 1
+			},
+			success: function(files) { /* success handler */ },
+			cancel: function() { /* cancel handler */ },
+			error: function(error) { /* error handler */ }
+		};
+		OneDrive.open(odOptions);
+	  }
+	</script>
+
+	<button onClick="launchOneDrivePicker()">Open from OneDrive</button>
+	<!--<div>
+	    
 	</div>
 
 
@@ -41,7 +83,7 @@ input {
 <input type="button" style="height: 30px; width: 30px" name="Submit" onclick="submit()">Submit!</input>
 		<div id="test">
 		
-		</div>
+		</div>-->
 </body>
 
 <script>

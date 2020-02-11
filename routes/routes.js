@@ -83,6 +83,7 @@ router.get('/signup', (req, res) => {
 
 
 router.get('/testing', (req, res) => {
+	res.render('./pages/testing.ejs')
 	/*
 	async function getFirstUser() {
 	    try {
@@ -103,7 +104,7 @@ router.get('/testing', (req, res) => {
 
 	getFirstUser();*/
 
-	return Promise.try(() => {
+	/*return Promise.try(() => {
         return db("vegetables").limit(3);
     }).map((row) => {
         return row.name;
@@ -111,7 +112,7 @@ router.get('/testing', (req, res) => {
         res.render("testing", {
             vegetables: vegetables
         });
-    });
+    });*/
 
 /*
 	var students = [];
