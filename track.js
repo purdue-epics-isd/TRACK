@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 // navigate to .ejs
 app.get('/', student.run);
 
-//Set up mongoose connection
+//Set up mongoose (database) connection
 const mongoose = require('mongoose');
 let dev_db_url = 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track';
 let mongoDB = process.env.MONGO_URI || dev_db_url;
