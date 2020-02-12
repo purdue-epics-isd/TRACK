@@ -152,7 +152,20 @@ exports.student_edit = function (req, res) {
 }
 
 exports.student_add_documentation = function (req, res) {
-    var fs = require('fs');
+    var Binary = require('mongodb').Binary;
+    var data = fs.readFileSync(file_path);
+    var insert_data = {};
+    insert_data.file_data= Binary(data);
+    var collection = db.collection('files');
+    collection.insert(insert_data, function(err, result){
+    });
+    collection.findOne({}).toArray(function (err, documents) {
+      console.log(documents);
+    });
+    collection.findOne({}).toArray(function (err, documents) {
+      console.log(documents);
+    });
+    /*var fs = require('fs');
     let document = req.body.myFile; //TODO: add document parsing
     Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {documentation: document}}, function (err, student) {
         student.save(function (err) { 
@@ -162,7 +175,7 @@ exports.student_add_documentation = function (req, res) {
                 res.redirect('/student/' + req.params.studentid);
             }
         });
-    });
+    });*/
 }
 
 // Get pictures
