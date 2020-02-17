@@ -5,6 +5,7 @@ const User = require('../models/user.model');
 /*creates new student profile in database*/
 exports.student_create = function (req, res) {
     try {
+        console.log("firstname: " + req.body.firstname);
         let student = new Student(
             {   firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -152,21 +153,26 @@ exports.student_edit = function (req, res) {
 }
 
 exports.student_add_documentation = function (req, res) {
+    var fs = require('file-system');
     var Binary = require('mongodb').Binary;
-    var data = fs.readFileSync(file_path);
-    var insert_data = {};
-    insert_data.file_data= Binary(data);
-    var collection = db.collection('files');
-    collection.insert(insert_data, function(err, result){
+    //var data = fs.readFileSync(req.body.reader);
+    //var insert_data = {};
+    //insert_data.file_data= Binary(data);
+    //var collection = db.collection('files');
+
+
+    //let imgSource = req.body.dob;
+    var document = req.body.fileURL;
+    console.log("req.body: " + req.body);
+    //console.log("fileurl: " + req.body.fileURL);
+    /*collection.insert(insert_data, function(err, result){
     });
     collection.findOne({}).toArray(function (err, documents) {
       console.log(documents);
-    });
-    collection.findOne({}).toArray(function (err, documents) {
-      console.log(documents);
-    });
+    });*/
     /*var fs = require('fs');
     let document = req.body.myFile; //TODO: add document parsing
+    */
     Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {documentation: document}}, function (err, student) {
         student.save(function (err) { 
             if (err) {
@@ -175,7 +181,7 @@ exports.student_add_documentation = function (req, res) {
                 res.redirect('/student/' + req.params.studentid);
             }
         });
-    });*/
+    });
 }
 
 // Get pictures

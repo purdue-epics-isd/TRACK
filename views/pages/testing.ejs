@@ -11,12 +11,34 @@ input {
 }
 </style>
 <body>
+	<input type="file" onchange="previewFile()"><br>
+	<img src="" height="200" alt="Image preview...">
+
+	<script> 
+		function previewFile() {
+		  const preview = document.querySelector('img');
+		  const file = document.querySelector('input[type=file]').files[0];
+		  const reader = new FileReader();
+
+		  reader.addEventListener("load", function () {
+		    // convert image file to base64 string
+		    preview.src = reader.result;
+		    console.log(reader.result);
+		    console.log(preview.src);
+		    console.log("yo");
+		  }, false);
+
+		  if (file) {
+		    reader.readAsDataURL(file);
+		  }
+		}
+	</script>
 	<!--microsoft graph:
 		https://docs.microsoft.com/en-us/onedrive/developer/controls/file-pickers/js-v72/open-file?view=odsp-graph-online-->
 
 	<!--image gallery display:
 		https://www.w3schools.com/css/css_image_gallery.asp-->
-	<script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+	<!--<script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
 
 	<script type="text/javascript">
 	  function launchSaveToOneDrive(){
@@ -59,7 +81,7 @@ input {
 	  }
 	</script>
 
-	<button onClick="launchOneDrivePicker()">Open from OneDrive</button>
+	<button onClick="launchOneDrivePicker()">Open from OneDrive</button>-->
 	<!--<div>
 	    
 	</div>
@@ -91,6 +113,8 @@ input {
 </body>
 
 <script>
+	console.log("heyoo");
+	
 function createRadioElement(name) {
    var radioInput;
    try {

@@ -29,7 +29,7 @@ router.post('/student/:studentid/goal/:goalid/goal_edit/submit', goal_controller
 //router.delete('/goal/delete',goal_controller.goal_delete);
 router.get('/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
 router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
-router.get('/student/:studentid/addDocumentation', student_controller.student_add_documentation); //adds pdfs to student profiles
+router.post('/student/:studentid/addDocumentation', student_controller.student_add_documentation); //adds pdfs to student profiles
 router.get('/student/:studentid/getPicture', student_controller.student_get_documentation); //retrieve specific photos
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {

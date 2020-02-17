@@ -35,10 +35,17 @@
       Email: <%= student.email %> <br>
       Grade Level: <%= student.grade %> <br>
       Class Period: <%= student.period %> <br> <br>
-      <form action="/student/<%=student.id%>/addDocumentation">
-        Documentation: <input type="file" name="myFile" multiple>
+      <form action="/student/<%=student.id%>/addDocumentation" method="post">
+        Documentation: <input type="file" name="myFile" multiple onchange="previewFile()">
         <input type="submit">
 
+      <!--<input type="file" onchange="previewFile()"><br>-->
+      <br>
+      <img src="" height="200" alt="Image preview...">
+      <input type="text" class="form-control" name="fileURL" id="fileURL" style="display: none">
+
+
+      <!--
         <div class="gallery">
           <a target="_blank" href="/student/<%= student.id %>/getPicture">
             <img src="/student/<%= student.id %>/getPicture" alt="Cinque Terre" width="600" height="400">
@@ -63,6 +70,7 @@
               error: function(error) { /* error handler */ }
             }
           </script>
+        -->
       </form>
     </div>
 
@@ -109,7 +117,9 @@
 
 </html>
 
-<script>
+<script>  
+  console.log("heyya");
+  //console.log("bro");
   function toggleInfo() {
     // toggle's between showing all the student goals or showing student profile information
     var infoButton = document.getElementById('infoButton');
@@ -131,6 +141,7 @@
   }
 
   convertToMMDDYYYY("<%=student.dob%>"); //executes as soon as page is loaded
+  //console.log("dude is this joke");
 
   function convertToMMDDYYYY(d) {
     // convert student date of birth stored in MongoDB to readable and displayable form
@@ -149,4 +160,28 @@
     console.log("formatted year: " + format);
     document.getElementById('dob').innerHTML = format;
   }
-</script>
+
+  var fileURL = document.getElementById("fileURL");
+  fileURL.value = "blah";
+  console.log("fileURL: " + fileURL + "\nvalue: " + fileURL.value);
+
+  function previewFile() {
+    //console.log("let's preview")
+    const preview = document.querySelector('img');
+    const file = document.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+    var fileURL = document.getElementById("fileURL");
+
+    reader.addEventListener("load", function () {
+      // convert image file to base64 string
+
+      preview.src = reader.result;
+      
+      fileURL.value = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+</script> 

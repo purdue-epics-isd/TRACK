@@ -11,7 +11,7 @@ let StudentSchema = new Schema({
     email: {type: String, required: false},
     goals: [{type: Schema.ObjectId, ref: 'Goal'}],
     userid: {type: String, required: true}, 
-    documentation: [{ data: Buffer, contentType: String }]
+    documentation: [{type: String}]
 });
 
 
