@@ -136,7 +136,8 @@ exports.goal_edit = function (req, res) {
             { $set: { name: req.body.name,
                 description: req.body.description,
                 startDate: req.body.startDate,
-                endDate: req.body.endDate
+                endDate: req.body.endDate,
+                goalType: req.body.goalType
                  } }, function (err) {
               if (err) {
                 console.log(err);
