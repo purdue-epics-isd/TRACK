@@ -105,29 +105,29 @@ input.invalid {
 
 
 
-		<form id="regForm" action="/student/<%= student.id%>/goal/create" method="post" style="margin-top:0">
+		<form id="regForm" action="/student/<%= student.id%>/goal/create" method="post">
 
 			<!-- One "tab" for each step in the form: -->
 
 			<!---Goal Title and Descriptoin-->
 			<div>
-				<h3>Create New Goal:</h3>
+				<h1>Goal Creation</h1>
 				<p><input placeholder="Goal Title..."  class="form-modified-control"  type="text" name="name" id="name"></p>
 				<p><textarea style="height: 100px" type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></textarea></p>
 			</div>
 	<!-- One "tab" for each step in the form: -->
 
 			<!---Start and End Date-->
-			<div><br>
-				<h3>Dates</h3>
+			<div>
+				<h1>Dates</h1>
 				<p>Start Date:<input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
 				<p>End Date:<input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
 			</div>
 
 			<!--Goal Type -->
 
-				<div><br>
-					<h3>Goal Types</h3>
+				<div>
+					<h1>Goal Types</h1>
 					<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
 
 					<div class="custom-control custom-radio">
@@ -143,8 +143,8 @@ input.invalid {
 				</div>
 
 			<!--Goal Collection Type -->
-			<div><br>
-				<h3>Method of Collection:</h3>
+			<div>
+				<h1>Method of Collection:</h1>
 
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score"> Score <br>
 

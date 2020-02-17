@@ -252,7 +252,7 @@ b {
 
 .overviewcard { 
   display: grid; 
-  grid-template-columns: repeat(3, 33%);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   margin: 20px;
   /*vertical-align: top;
@@ -270,7 +270,7 @@ b {
   display: inline-block;
   align-items: center;
   justify-content: space-between;*/
-  /*padding: 20px;*/
+  padding: 20px;
   background-color: #d3d3;
 }
 

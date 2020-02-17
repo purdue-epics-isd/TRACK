@@ -8,10 +8,9 @@ exports.student_create = function (req, res) {
         let student = new Student(
             {   firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                period: req.body.period,
+                period: "period" + req.body.period,
                 grade: req.body.grade,
-                dob: req.body.dob,
-                email: req.body.studentemail,
+                age: req.body.age,
                 goals: [],
                 userid: req.body.userID
             }
@@ -124,43 +123,6 @@ exports.student_delete = function (req, res) {
         res.render('./error');
     }        
 };
-
-exports.student_redirect_edit = function (req, res) {
-    console.log("redirecting to edit page");
-    try {
-        User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
-                res.render('pages/editStudent', {
-                    student: student, 
-                    user: user
-                });
-            });
-        });
- 
-    } catch(err) {
-        console.log(err);
-        res.render('./error');
-    }
-};
-
-exports.student_edit = function (req, res) {
-    console.log("Student being edited: " + req.params.studentid);
-    Student.findByIdAndUpdate(req.params.studentid,
-            { $set: { firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                period: req.body.period,
-                grade: req.body.grade,
-                dob: req.body.dob,
-                email: req.body.studentemail
-                 } }, function (err) {
-              if (err) {
-                console.log(err);
-              }
-              else {
-                res.redirect('/student/' + req.params.studentid);
-              }
-            });
-}
 
 /*first function used when website starts up*/
 exports.run = function(req, res) {

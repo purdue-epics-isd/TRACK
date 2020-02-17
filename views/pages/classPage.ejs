@@ -3,8 +3,8 @@
 <html>
 
 <head>
-  <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s">
-  <title>Class Page</title>
+  <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s" />
+  <title>Track</title>
   <%- include("../partials/head.ejs")%>
 </head> 
 
@@ -17,16 +17,16 @@
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
-      <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s">
+      <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s" />
     </header>
 
   <%- include("../partials/header.ejs")%>
 
     <main class="main">
         <div class =  class-header>
-         <div class="form-group">
-            <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
-          </div>
+         <!--- <div class="form-group">
+            <select class="custom-select" id="selectNumber" class="dropbtn"></select>
+          </div>-->
           <h3>Class List</h3>
 
           <button type="button" class="btn btn-primary">
@@ -39,13 +39,12 @@
 
                 <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
-              <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
+              <h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>
               <!--<div class = "cardName" id="<%=student.userid%>">-->
               <script>
                 if(localStorage.getItem("userID") == "<%=student.userid %>") {
                   var card = document.createElement("div");
-                  card.className = "cardName <%=student.period%>";
-                  card.id = "<%=student.id%>";
+                  card.className = "cardName";
 
                   var studentLink = document.createElement("a");
                   studentLink.href = "/student/<%=student.id%>";
@@ -66,9 +65,9 @@
 
                   document.getElementById("studentBox").appendChild(card);
 
-                  //var toDelete = document.getElementById("uid");
+                  var toDelete = document.getElementById("uid");
 
-                  //toDelete.parentNode.removeChild(toDelete);
+                  toDelete.parentNode.removeChild(toDelete);
                 }
               </script>
               <% }); %>
@@ -88,10 +87,14 @@
 </html>
 
 <script>
-
-  //console.log(localStorage.getItem("userID"));
+  /* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    //document.getElementById("myDropdown").classList.toggle("show");
+    //document.getElementById("myDropdown").innerHTML = sessionStorage.getItem("userID");
+  }
+  console.log(localStorage.getItem("userID"));
   // Close the dropdown if the user clicks outside of it
-  
   window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -110,29 +113,45 @@
   for(var i = 0; i < options.length; i++) {
     var opt = document.createElement('option');
     opt.innerHTML = options[i];
-    sel.appendChild(opt);
-  };
+        /*if(i==0) {
+          opt.value="/classPage";
+        } else {
+          opt.value="/classPage";
+        }*/
+        sel.onchange = function() {
+          console.log("changing period");
+         //Dropdown1.Selected.Value;
+         var studentContainer = document.getElementById('demo');
+         for(var j = 0; j < studentContainer.children.length; j++) {
+          //console.log("studencontainer.children[0] class: " + studentContainer.children[j].className.split(" ")[1]);
+          //console.log("options[i]: "+ options);
+          //console.log("i:" + sel.options[sel.selectedIndex].value);
+          var studentPeriod = studentContainer.children[j].className.split(" ")[1];
+          var currentPeriod = sel.options[sel.selectedIndex].text;
+          var currentPeriodSimplified = sel.options[sel.selectedIndex].value[0];
+          console.log("studentPeriod: " + studentPeriod);
+          console.log("currentPeriod: " + currentPeriod);
+          console.log("currentPeriodSimplified: " + currentPeriodSimplified);
+          if(currentPeriod != "All students") {
+            if(studentPeriod == currentPeriod || studentPeriod == currentPeriodSimplified){
+              studentContainer.children[j].style.visibility = "visible";
+            } else {
+              studentContainer.children[j].style.visibility = "hidden";
+            }
+          } else {
+            studentContainer.children[j].style.visibility = "visible";
+          }
+         }
 
-  sel.onchange = function() {
-    console.log("changing period");
-    var input, filter, students, studentChildren, a, i, txtValue, period;
-    input = document.getElementById("selectNumber");
-    filter = input.selectedIndex;
-    //filter = input.options[input.selectedIndex].text.toUpperCase();
-    //console.log("filter: " + filter);
-    students = document.getElementsByClassName("cardName");
-    numStudents = students.length;
-    //console.log("numStudents: " + numStudents);
+        };
+          sel.appendChild(opt);
 
-    for (i = 0; i < numStudents; i++) {
-      period = students[i].className[9];
-      //console.log("period: " + period);
-      if (period.toUpperCase().indexOf(filter) > -1 || filter == 0) {
-        students[i].style.display = "";
-      } else {
-        students[i].style.display = "none";
-      }
-    }
 
-  };
+        };
+</script>
+
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  //document.getElementById("userID").value = localStorage.getItem("userID");
+  //console.log("user id: " + localStorage.getItem("userID"));
 </script>
