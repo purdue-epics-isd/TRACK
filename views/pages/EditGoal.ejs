@@ -213,8 +213,7 @@ function nextPrev(n) {
 				<div>
 					<h1>Goal Creation</h1>
 					<p><input value="<%=goal.name%>"  class="form-modified-control"  type="text" name="name" id="name"></p>
-					<p><textarea class="form-modified-control" style="height: 100px" type="textarea" class="form-modified-control" name="description" id="description"><%=goal.description%></textarea></p>
-
+					<p><textarea style="height: 100px" type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></textarea></p>
 				</div>
 		<!-- One "tab" for each step in the form: -->
 
@@ -222,7 +221,7 @@ function nextPrev(n) {
 				<div>
 					<h1>Dates</h1>
 					<p>Start Date:<input value="<%=goal.startDate%>" class="form-modified-control" type="date" name="startDate" id="startDate"></p>
-					<p>End Date:<input value="<%=goal.endDate%>" class="form-modified-control" type="date" name="endDate" id="endDate"></p>
+					<p>End Date:<input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
 				</div>
 
 				<!--Goal Type -->
@@ -230,7 +229,7 @@ function nextPrev(n) {
 					<div>
 						<h1>Goal Types</h1>
 						<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
-						<p>Current goal type: <%=goal.goalType%><p>
+
 						<div class="custom-control custom-radio">
 							<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Academic Goal" checked="true">
 	      					<label class="custom-control-label" for="customRadio2">Academic</label>
