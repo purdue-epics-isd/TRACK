@@ -24,6 +24,12 @@
 
 
         <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+
         $(document).ready(function() {
             $('#bt1').click(function() {
                 $('#fr1').attr('action',

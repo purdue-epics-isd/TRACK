@@ -19,7 +19,19 @@
 
     <main class="main">
 
+<<<<<<< Updated upstream
       <body>
+=======
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+    </script>    
+    
+    <body>
+>>>>>>> Stashed changes
 
         <h1 align="center">About Us</h1>
 

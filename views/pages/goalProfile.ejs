@@ -44,6 +44,13 @@
 
 	<main class="main">
 
+			<script>
+	        const currentTheme = localStorage.getItem('theme');
+	        if (currentTheme) {
+	          document.documentElement.setAttribute('data-theme', currentTheme);
+	          localStorage.setItem('theme', currentTheme);
+	        }
+	   		</script>  
 
 			 <div class =  class-header>
 		          <h1><%= goal.name %></h1>

@@ -28,7 +28,57 @@
 
 <body>
   <div class="middle">
-    <h1>COMING SOON!! :D</h1>
+    <h1>Color Theme</h1>
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="dark" name="darkmode"/>
+        <label for="dark"><img src="img/dark_theme.png" height=200 width=400 /></label>
+    </label>
+    <em>Enable Dark Mode!</em>
+    </div>
+
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="blue" name="bluemode"/>
+        <label for="blue"><img src="img/blue_theme.png" height=200 width=400 /></label>
+    </label>
+    <em>Enable Blue Mode!</em>
+    </div>
+
+    <script type="text/javascript">
+      const toggleSwitch_dark = document.querySelector('.theme-switch input[name="darkmode"]');
+      const toggleSwitch_blue = document.querySelector('.theme-switch input[name="bluemode"]');
+
+      const currentTheme = localStorage.getItem('theme');
+
+      if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+  
+        if (currentTheme === 'dark') {
+          toggleSwitch_dark.checked = true;
+          toggleSwitch_blue.checked = false;
+        }
+
+        if (currentTheme === 'blue') {
+          toggleSwitch_dark.checked = false;
+          toggleSwitch_blue.checked = true;
+        }
+      }
+
+      function switchTheme(e, thememode) {
+        if (e.checked) {
+          document.documentElement.setAttribute('data-theme', thememode);
+          localStorage.setItem('theme', thememode);
+        }
+        else{
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+        }
+      }
+
+      toggleSwitch_dark.addEventListener('change', function(){switchTheme(toggleSwitch_dark, "dark")});
+      toggleSwitch_blue.addEventListener('change', function(){switchTheme(toggleSwitch_blue, "blue")});
+    </script>
     <p id="demo" style="font-size:30px"></p>
   </div>
 </body>

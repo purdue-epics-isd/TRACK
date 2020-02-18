@@ -11,11 +11,32 @@
 
 <%- include("../partials/header.ejs")%>
 
+<<<<<<< Updated upstream
 <main class="main">
   <div class="class-header">
       <div class = "nameArea">
         <h3><%= student.firstname %>'s Profile</h3>
         <button type="button" class="btn btn-info">Info</button>
+=======
+  <main class="main">
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+    </script>  
+
+    <div class="class-header">
+      <h3><%= student.firstname %>'s Profile</h3>
+      <div class = "nameArea" style="grid-template-columns: repeat(2, 2fr);">
+        
+        <button type="button" class="btn btn-info" onclick="showInfo()" id="infoButton">Show Info</button>
+
+        <button type="button" class="btn btn-primary">
+          <a href="/student/<%= student.id%>/student_edit">Edit Student</a>
+        </button>
+>>>>>>> Stashed changes
       </div>
       
 

@@ -1,3 +1,24 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic");
+:root {
+ --maincolor: #d3d3;
+ --secondarycolor: #82bef6;
+ --wordcolor: #fff;
+ --headcolor: #fff;
+ --sidenavcolor: #2C3E50;
+}
+
+[data-theme="dark"] {
+ --maincolor: #00000080;
+ --secondarycolor: #b4bcc2;
+ --headcolor: #424949;
+}
+
+[data-theme="blue"] {
+ --maincolor: #5a9cc594;
+ --secondarycolor: #ecf0f1;
+ --headcolor: #AED6F1;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,6 +26,7 @@ body {
   font-family: 'Open Sans', Helvetica, sans-serif;
   box-sizing: border-box;
 }
+
 
 /* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
 .grid-container {
@@ -104,7 +126,7 @@ body {
 }
 
 a {
-  color: #fff;
+  color: var(--wordcolor);
   text-decoration: none;
   background-color: transparent;
 }
@@ -122,7 +144,7 @@ b {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background-color: #fff;
+  background-color: var(--headcolor);
 }
 
 /* Make room for the menu icon on mobile */
@@ -150,7 +172,7 @@ b {
   transition: all .6s ease-in-out;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   z-index: 2; /* Needs to sit above the hamburger menu icon */
-  background-color:  #2C3E50;
+  background-color:  var(--sidenavcolor);
 }
 
 .sidenav.active {
@@ -216,7 +238,7 @@ b {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  //background-color: #d3d3;
+  background-color: var(--maincolor);
 }
 
 
@@ -259,7 +281,7 @@ b {
   align-items: center;
   justify-content: space-between; */
   padding: 20px;
-  background-color: #d3d3;
+  background-color: var(--maincolor);
 }
 
 .cardName {
@@ -270,8 +292,13 @@ b {
   display: inline-block;
   align-items: center;
   justify-content: space-between;*/
+<<<<<<< Updated upstream
   padding: 20px;
   background-color: #d3d3;
+=======
+  /*padding: 20px;*/
+  background-color: var(--maincolor);
+>>>>>>> Stashed changes
 }
 
 .name {
@@ -309,7 +336,7 @@ b {
   align-content: space-between;
   justify-content: center;
   padding: 20px;
-  background-color: #d3d3;
+  background-color: var(--maincolor);
 }
 
 .description{
@@ -359,7 +386,7 @@ b {
 
 
   /*width: 100%;*/
-  background-color: #82bef6;
+  background-color: var(--secondarycolor);
   -webkit-column-break-inside: avoid;
   padding: 20px;
   /*margin: 20px;*/
@@ -376,7 +403,7 @@ b {
   align-items: center;
   justify-content: space-between; */
   padding: 20px;
-  background-color: #d3d3;
+  background-color: var(--maincolor);
 }
 
 /*Create Student Page Ends*/
@@ -398,7 +425,7 @@ b {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: #82bef6;
+  background-color: var(--secondarycolor);
   margin-bottom: 20px;
   -webkit-column-break-inside: avoid;
   padding: 24px;
@@ -425,7 +452,7 @@ b {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background-color: #fff;
+  background-color: var(--headcolor);
 }
 
 /* Non-mobile styles, 750px breakpoint */

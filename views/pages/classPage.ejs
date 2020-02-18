@@ -23,6 +23,13 @@
   <%- include("../partials/header.ejs")%>
 
     <main class="main">
+        <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+        }
+        </script>
+        
         <div class =  class-header>
          <div class="form-group">
             <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
