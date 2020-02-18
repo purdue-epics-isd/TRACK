@@ -81,28 +81,6 @@ router.get('/settings', (req, res) => {
 router.get('/signup', (req, res) => {
 	res.render('./pages/signup.ejs')
 });
-
-
-
-
 router.get('/testing', (req, res) => {
 	res.render('./pages/testing.ejs')
-	/*
-	async function getFirstUser() {
-	    try {
-	        let users = await getUsers();
-	        return users[0].name;
-	    } catch (err) {
-	        return {
-	            name: 'default user'
-	        };
-	    }
-	}
-
-	function getUsers() {
-		res.render('./pages/testing.ejs', {
-			users: ["user1", "user2"]
-		});
-	}
-
-	getFirstUser();*/
+});
