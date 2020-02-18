@@ -21,7 +21,7 @@ exports.goal_create = function (req, res) {
             })
 
         Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {
-            goal.save(function (err) { 
+            goal.save(function (err) {
                 if (err) {
                     res.send(err);
                 } else {
@@ -45,7 +45,7 @@ exports.navigate_to_goalProfile = function (req, res) {
                 res.send(err);
                 return;
             }
-            goaldata.forEach(function(s) { 
+            goaldata.forEach(function(s) {
                 goalDatas.push(s);
             });
         });
@@ -100,17 +100,17 @@ exports.goal_redirect_edit = function (req, res) {
     try {
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
-                Goal.findById(req.params.goalid, function(err, goal) {
-                    res.render('pages/EditGoal', {
-                        student: student, 
-                        user: user,
-                        goalid: req.params.goalid,
-                        goal: goal
-                    }); 
-                })
+              Goal.findById(req.params.goalid, function(err, goal) {
+                res.render('pages/EditGoal', {
+                    student: student,
+                    user: user,
+                    goalid: req.params.goalid,
+                    goal: goal
+                });
             });
+          });
         });
- 
+
     } catch(err) {
         console.log(err);
         res.render('./error');
@@ -123,7 +123,8 @@ exports.goal_edit = function (req, res) {
             { $set: { name: req.body.name,
                 description: req.body.description,
                 startDate: req.body.startDate,
-                endDate: req.body.endDate
+                endDate: req.body.endDate,
+                goalType: req.body.goalType
                  } }, function (err) {
               if (err) {
                 console.log(err);
@@ -140,7 +141,7 @@ exports.navigate_to_createNewGoal = function (req, res) {
             User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 res.render('pages/createNewGoal', {
-                    student: student, 
+                    student: student,
                     user: user
                 });
             });
