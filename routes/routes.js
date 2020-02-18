@@ -18,7 +18,8 @@ const User = require('../models/user.model');
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
-router.post('/signUp/createUser', user_controller.createUser); 
+router.post('/signUp/createUser', user_controller.createUser);
+router.post('/student/:studentid/goal/edit/:goalid', goal_controller.goal_edit);
 router.get('/student/:studentid/student_edit', student_controller.student_redirect_edit); //edit student information
 router.post('/student/:studentid/student_edit/submit', student_controller.student_edit); //submit final student edits
 
@@ -26,6 +27,8 @@ router.post('/student/:studentid/student_edit/submit', student_controller.studen
 router.get('/student/:studentid/goal/:goalid/goal_delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_redirect_edit); //redirect to goal editing page
 router.post('/student/:studentid/goal/:goalid/goal_edit/submit', goal_controller.goal_edit); //submit final goal edits
+//router.delete('/goal/delete',goal_controller.goal_delete);
+router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_redirect_edit);
 //router.delete('/goal/delete',goal_controller.goal_delete);
 router.get('/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
 router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
@@ -52,30 +55,30 @@ router.get('/classPage', student_controller.navigate_to_classPage);
 router.get('/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
-router.get('/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page 
-router.get('/aboutUs', (req, res) => { 
+router.get('/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page
+router.get('/aboutUs', (req, res) => {
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/aboutUs.ejs', {
 			user: user
-		}) 
+		})
 	});
 });
-router.get('/feedback', (req, res) => { 
+router.get('/feedback', (req, res) => {
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/feedback.ejs', {
 			user: user
 		})
-	}); 
+	});
 });
-router.get('/settings', (req, res) => { 
+router.get('/settings', (req, res) => {
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/settings.ejs', {
 			user: user
-		}) 
+		})
 	});
 });
-router.get('/signup', (req, res) => { 
-	res.render('./pages/signup.ejs') 
+router.get('/signup', (req, res) => {
+	res.render('./pages/signup.ejs')
 });
 
 
@@ -103,7 +106,7 @@ router.get('/testing', (req, res) => {
 	getFirstUser();*/
 	var students = [];
 	Student.find({}, {}, function(err, student) {
-            student.forEach(function(s) { 
+            student.forEach(function(s) {
                 students.push(s);
             });
         });
