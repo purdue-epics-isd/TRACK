@@ -18,6 +18,15 @@
 
   <main class="main">
 
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+    </script>   
+
+
     <body>
 
       <h1 align="center">About Us</h1>
