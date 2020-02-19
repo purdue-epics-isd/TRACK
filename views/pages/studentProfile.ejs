@@ -12,6 +12,15 @@
   <%- include("../partials/header.ejs")%>
 
   <main class="main">
+
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+    </script>   
+
     <div class="class-header">
       <h3><%= student.firstname %>'s Profile</h3>
       <div class = "nameArea" style="grid-template-columns: repeat(2, 2fr);">
