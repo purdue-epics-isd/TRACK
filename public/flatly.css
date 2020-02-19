@@ -38,6 +38,11 @@
  --info: #4d5656de;
 }
 
+[data-theme="pink"] {
+ --creatnewgoalcolor: #2C3E50;
+ --info: #3498DB;
+}
+
 *,
 *::before,
 *::after {

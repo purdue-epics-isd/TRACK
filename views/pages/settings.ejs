@@ -26,6 +26,14 @@
     <h1>Color Theme</h1>
     <div class="theme-switch-wrapper">
       <label class="theme-switch" for="checkbox">
+        <input type="radio" id="pink" name="color-options"/>
+        <label for="pink"><img src="img/original_theme.png" height=200 width=400 /></label>
+    </label>
+    <em>Enable Default Mode!</em>
+    </div>
+
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
         <input type="radio" id="dark" name="color-options"/>
         <label for="dark"><img src="img/dark_theme.png" height=200 width=400 /></label>
     </label>
@@ -41,6 +49,7 @@
     </div>
 
     <script type="text/javascript">
+      const toggleSwitch_pink = document.querySelector('.theme-switch input[id="pink"]');
       const toggleSwitch_dark = document.querySelector('.theme-switch input[id="dark"]');
       const toggleSwitch_blue = document.querySelector('.theme-switch input[id="blue"]');
 
@@ -52,11 +61,19 @@
         if (currentTheme === 'dark') {
           toggleSwitch_dark.checked = true;
           toggleSwitch_blue.checked = false;
+          toggleSwitch_pink.checked = false;
         }
 
         if (currentTheme === 'blue') {
           toggleSwitch_dark.checked = false;
           toggleSwitch_blue.checked = true;
+          toggleSwitch_pink.checked = false;
+        }
+
+        if (currentTheme === 'pink') {
+          toggleSwitch_dark.checked = false;
+          toggleSwitch_blue.checked = false;
+          toggleSwitch_pink.checked = true;
         }
       }
 
@@ -65,12 +82,9 @@
           document.documentElement.setAttribute('data-theme', thememode);
           localStorage.setItem('theme', thememode);
         }
-        else{
-          document.documentElement.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-        }
       }
 
+      toggleSwitch_pink.addEventListener('change', function(){switchTheme(toggleSwitch_pink, "pink")});
       toggleSwitch_dark.addEventListener('change', function(){switchTheme(toggleSwitch_dark, "dark")});
       toggleSwitch_blue.addEventListener('change', function(){switchTheme(toggleSwitch_blue, "blue")});
     </script>
