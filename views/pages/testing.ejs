@@ -11,6 +11,7 @@ input {
 }
 </style>
 <body>
+	<!--
 	<input type="file" onchange="previewFile()"><br>
 	<img src="" height="200" alt="Image preview...">
 
@@ -32,13 +33,19 @@ input {
 		    reader.readAsDataURL(file);
 		  }
 		}
+	</script>-->
+	<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js">
+		$('#fileupload').fileupload();
 	</script>
 	<!--microsoft graph:
 		https://docs.microsoft.com/en-us/onedrive/developer/controls/file-pickers/js-v72/open-file?view=odsp-graph-online-->
 
 	<!--image gallery display:
 		https://www.w3schools.com/css/css_image_gallery.asp-->
-	<!--<script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+	
+		<!--
+	<script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+
 
 	<script type="text/javascript">
 	  function launchSaveToOneDrive(){
@@ -68,10 +75,10 @@ input {
 	  function launchOneDrivePicker(){
 	    var odOptions = { 
 			clientId: "f4238741-ebe5-4017-94b5-4de9dc3c20b8",
-			action: "download", //query to return identifiers that can be used with the Microsoft Graph API or OneDrive API.
+			action: "share", //query to return identifiers that can be used with the Microsoft Graph API or OneDrive API.
 			multiSelect: true,
 			advanced: {
-				loginHint: 1
+				loginHint: true
 			},
 			success: function(files) { /* success handler */ },
 			cancel: function() { /* cancel handler */ },
@@ -81,7 +88,8 @@ input {
 	  }
 	</script>
 
-	<button onClick="launchOneDrivePicker()">Open from OneDrive</button>-->
+	<button onClick="launchOneDrivePicker()">Open from OneDrive</button>
+-->
 	<!--<div>
 	    
 	</div>
@@ -93,7 +101,6 @@ input {
 </script>
 
 
-<!--
 	<p>Select a maintenance drone:</p>
 
 	<div>

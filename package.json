@@ -21,6 +21,7 @@
   "homepage": "https://github.com/purdue-epics-isd/TRACK#readme",
   "dependencies": {
     "bcrypt": "^3.0.4",
+    "blueimp-file-upload": "^10.7.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "ejs": "^2.6.1",
