@@ -26,7 +26,7 @@
     <h1>Color Theme</h1>
     <div class="theme-switch-wrapper">
       <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="dark" name="darkmode"/>
+        <input type="radio" id="dark" name="color-options"/>
         <label for="dark"><img src="img/dark_theme.png" height=200 width=400 /></label>
     </label>
     <em>Enable Dark Mode!</em>
@@ -34,15 +34,15 @@
 
     <div class="theme-switch-wrapper">
       <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="blue" name="bluemode"/>
+        <input type="radio" id="blue" name="color-options"/>
         <label for="blue"><img src="img/blue_theme.png" height=200 width=400 /></label>
     </label>
     <em>Enable Blue Mode!</em>
     </div>
 
     <script type="text/javascript">
-      const toggleSwitch_dark = document.querySelector('.theme-switch input[name="darkmode"]');
-      const toggleSwitch_blue = document.querySelector('.theme-switch input[name="bluemode"]');
+      const toggleSwitch_dark = document.querySelector('.theme-switch input[id="dark"]');
+      const toggleSwitch_blue = document.querySelector('.theme-switch input[id="blue"]');
 
       const currentTheme = localStorage.getItem('theme');
 
