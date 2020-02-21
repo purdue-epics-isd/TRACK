@@ -28,6 +28,7 @@
     <div class = "studentOverview">
         <div class = "part">
           <form action="/student/create" method="post">
+            Required Fields: <text style="color:red">*</text> <br>
 
             <label for="First Name">First Name <text style="color:red">* </text>: </label>
             <input type="text" class="form-control" name="firstname" style="width:150%" required>
@@ -48,13 +49,12 @@
             <option value="9">9</option>
             <option value="10">10</option>
           </select>
-            <br>
-            Required Field <text style="color:red">*</text> <br>
             <input type="submit" class="btn btn-primary">
             
         </div>
         
         <div class = "part">
+          Optional Fields:
           <label for="Date of Birth:">Date of Birth:</label>
           <input type="date" class="form-control" name="dateofbirth" style="width:100%">
 
