@@ -278,31 +278,14 @@ function fnExcelReport()
 
     if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
     {
-        txtArea1.contentDocument.open("xlsx/html","replace");
-        txtArea1.contentDocument.write(tab_text);
-        txtArea1.contentDocument.close();
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
         txtArea1.focus(); 
         sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
     }  
     else                 //other browser not tested on IE 11
-    	/*console.log("tab_text: " + tab_text);
-        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));*/
-        var uri = 'data:application/vnd.ms-excel;base64,';
-       
-            var base64 = function(s) {
-                return window.btoa(unescape(encodeURIComponent(s)))
-            };
-        htmls = "YOUR HTML AS TABLE"
-
-        var ctx = {
-                worksheet : 'Worksheet',
-                table : htmls
-            }
-
-        var link = document.createElement("a");
-            link.download = "export.xls";
-            link.href = uri + base64(format(tab_text, ctx));
-            link.click();
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
 
     return (sa);
 }
