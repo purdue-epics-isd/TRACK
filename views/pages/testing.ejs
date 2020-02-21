@@ -11,22 +11,14 @@ input {
 }
 </style>
 <body>
-	<div id="example" class="k-content">
-    <button type="button"id="btnExport">Export to csv!</button>
-    <div id="grid"></div>
-</div>
-<script>
-$("#btnExport").click(function (e) {
-    var result = "data:application/vnd.ms-excel,";
-
-    window.open(result);
-
-    e.preventDefault();
-});
-</script>
+	
+	<div>
+	    <% users.forEach(function(user) { %>
+	    	<p> <%=user%> </p>
+		<% }); %>
+	</div>
 
 
-<!--
 	<p>Select a maintenance drone:</p>
 
 	<div>
@@ -75,5 +67,5 @@ function createRadioElement(name) {
 function submit() {
 	console.log("radio")
 }
-</script>-->
+</script>
 </html>
