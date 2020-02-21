@@ -19,6 +19,12 @@
  --headcolor: #AED6F1;
 }
 
+[data-theme="pink"] {
+ --maincolor: #d3d3;
+ --secondarycolor: #82bef6;
+ --headcolor: #fff;
+}
+
 body {
   margin: 0;
   padding: 0;
