@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="urn:schemas-microsoft-com:office:excel"> 
+<html xmlns="urn:schemas-microsoft-com:office:excel">
 	<head>
    <title>Goal</title>
 		<%- include("../partials/head.ejs")%>
@@ -49,7 +49,7 @@
           document.documentElement.setAttribute('data-theme', currentTheme);
           localStorage.setItem('theme', currentTheme);
         }
-		    </script>   
+		    </script>
 
 
 			 <div class =  class-header>
@@ -68,7 +68,7 @@
 					<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 
 						<table style="position: center" id="goalInput">
-							
+
 
 							<%if(goal.methodOfCollection[0] == "score") { %>
 								<!---<tr class = "table-active">
@@ -91,7 +91,7 @@
     							</div>
 
 							<%} %>
-							
+
 							<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
 									<div class="generic-box">
 									      <label for="exampleInputPassword1">Rubric</label>
@@ -171,13 +171,13 @@
 							</tr>
 
 
-						</table>				
+						</table>
 						<input type="submit" input class="btn btn-primary">
 					</form>
 
 
 				</div>
-			
+
 
 				<div class = "goal-data">
 								<h2>Progress Monitoring</h2>
@@ -191,13 +191,13 @@
 										<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
 											<th>Count of Occurrences</th>
 										<%} %>
-							
+
 										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
 											<th>Progress</th>
 										<%} %>
 
-										<th>Support</th> 
-										
+										<th>Support</th>
+
 										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
 											<th>Descriptive Comments</th>
 										<%} %>
@@ -219,13 +219,13 @@
 										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
 											<td><%= goalData.rubricOption %></td>
 										<%} %>
-										
+
 										<td><%= goalData.support %></td>
-										
+
 										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] || goal.methodOfCollection[3] == "comments") { %>
 											<td><%= goalData.comments %></td>
 										<%} %>
-										
+
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 
 										<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
@@ -234,15 +234,15 @@
 									</tbody>
 								</table>
 								<button id="btnExport" onclick="fnExcelReport();" type="submit" class="btn btn-primary right" style="position: relative; top: 10px"> Export </button>
-								
+
 					<br><div id="result"></div>
 					<br><div id="delete"></div>
 				</div>
 
-		
-				
+
+
 		</main>
-		
+
 
 
 		<footer class="footer">
@@ -251,19 +251,20 @@
 		</footer>
 	</div>
 
-	
+
 	</html>
 
 <script type="text/javascript">
 
 function fnExcelReport()
 {
+
     var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
     var textRange; var j=0;
-    tab = document.getElementById('t01'); // id of table
-
-    for(j = 0 ; j < tab.rows.length ; j++) 
-    {     
+    var tab = document.getElementById('t01'); // id of table
+    for(j = 0 ; j < tab.rows.length ; j++)
+    {
+			  tab.rows[j].deleteCell(-1); //deleting the delete column
         tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
         //tab_text=tab_text+"</tr>";
     }
@@ -274,19 +275,24 @@ function fnExcelReport()
     tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
 
     var ua = window.navigator.userAgent;
-    var msie = ua.indexOf("MSIE "); 
+    var msie = ua.indexOf("MSIE ");
 
     if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
     {
         txtArea1.document.open("txt/html","replace");
         txtArea1.document.write(tab_text);
         txtArea1.document.close();
-        txtArea1.focus(); 
+        txtArea1.focus();
         sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
-    }  
-    else                 //other browser not tested on IE 11
-        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
-
+    }
+    else
+		{
+		//downloading exel file
+		var link = document.createElement('a');
+    link.download = "DataTableExport.xls";
+    link.href = 'data:application/vnd.ms-excel,' + encodeURIComponent(tab_text);
+    link.click();
+			}
     return (sa);
 }
 </script>
