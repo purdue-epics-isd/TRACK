@@ -27,9 +27,13 @@
         
         <button type="button" class="btn btn-info" onclick="showInfo()" id="infoButton">Show Info</button>
 
-        <button type="button" class="btn btn-primary">
-          <a href="/student/<%= student.id%>/student_edit">Edit Student</a>
+	<a href="/student/<%= student.id%>/student_edit">
+	<button type="button" class="btn btn-primary">
+		<!-- <a href="/student/<%= student.id%>/student_edit"> -->
+		  Edit Student
+		<!-- </a> -->
         </button>
+	</a>
       </div>
       
 
@@ -51,8 +55,9 @@
       <% goals.forEach(function(goal) { %> 
 
       <div class = "cardName">
+	      <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-          <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
+		<!-- <a href="/student/<%=student.id%>/goal/<%=goal.id%>"> -->
             <div class="card-header"><%=goal.goalType%></div>
             <div class="card-body">
               <h4 class="card-title"><%= goal.name %></h4>
@@ -62,13 +67,15 @@
                </div>
              </div>
            </div>
-         </a>
+		<!-- </a> -->
        </div>
+       </a>
      </div>
      <% }); %>
      <div class="cardName">
+	     <a href="/student/<%=student.id%>/createNewGoal">
       <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
-        <a href="/student/<%=student.id%>/createNewGoal">
+	      <!-- <a href="/student/<%=student.id%>/createNewGoal"> -->
           <div class="card-body">
             <p class="card-text">Create New Goal</p>
             <h4 class="card-title" style="font-size: 400%; text-align: center">+</h4>
