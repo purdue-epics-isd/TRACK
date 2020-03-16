@@ -143,7 +143,7 @@ exports.goal_edit = function (req, res) {
             console.log(err);
           }
           else {
-            res.redirect('/goal/' + req.params.goalid);
+            res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
           }
         });
 }
@@ -160,7 +160,7 @@ exports.goal_share = function (req, res) {
             console.log(err);
           }
           else {
-            res.redirect('/goal/' + req.params.goalid);
+            res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
           }
         });
 }
