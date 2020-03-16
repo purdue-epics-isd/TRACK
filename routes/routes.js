@@ -26,6 +26,7 @@ router.post('/student/:studentid/student_edit/submit', student_controller.studen
 
 router.get('/student/:studentid/goal/:goalid/goal_delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_redirect_edit); //redirect to goal editing page
+router.get('/student/:studentid/goal/:goalid/goal_share', goal_controller.goal_share); //redirect to goal sharing page
 router.post('/student/:studentid/goal/:goalid/goal_edit/submit', goal_controller.goal_edit); //submit final goal edits
 //router.delete('/goal/delete',goal_controller.goal_delete);
 router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_redirect_edit);

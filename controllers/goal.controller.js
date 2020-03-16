@@ -131,21 +131,38 @@ exports.goal_redirect_edit = function (req, res) {
 };
 
 exports.goal_edit = function (req, res) {
-    console.log("Goal id: [delete]: " + req.params.goalid);
+    console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
-            { $set: { name: req.body.name,
-                description: req.body.description,
-                startDate: req.body.startDate,
-                endDate: req.body.endDate,
-                goalType: req.body.goalType
-                 } }, function (err) {
-              if (err) {
-                console.log(err);
-              }
-              else {
-                res.redirect('/student/' + req.params.studentid);
-              }
-            });
+        { $set: { name: req.body.name,
+            description: req.body.description,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate,
+            goalType: req.body.goalType
+             } }, function (err) {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            res.redirect('/goal/' + req.params.goalid);
+          }
+        });
+}
+
+exports.goal_share = function (req, res) {
+    Goal.findByIdAndUpdate(req.params.goalid,
+        { $set: { name: req.body.name,
+            description: req.body.description,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate,
+            goalType: req.body.goalType
+             } }, function (err) {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            res.redirect('/goal/' + req.params.goalid);
+          }
+        });
 }
 
 /*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
