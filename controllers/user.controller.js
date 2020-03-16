@@ -31,6 +31,22 @@ exports.login_confirm = function (req, res, next) {
   });
 }
 
+exports.navigate_to_sharedWithMe = function (req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next (err); }
+      return User.findById(req.params.userid, function(err, user) {
+        res.render('/' + req.user.id + '/classPage', {
+          user: user
+        });
+      });
+    }) (req, res, next);
+  });
+}
+
+
 
 /*
 exports.login_confirm = passport.authenticate("local",{
