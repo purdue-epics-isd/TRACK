@@ -150,11 +150,7 @@ exports.goal_edit = function (req, res) {
 
 exports.goal_share = function (req, res) {
     Goal.findByIdAndUpdate(req.params.goalid,
-        { $set: { name: req.body.name,
-            description: req.body.description,
-            startDate: req.body.startDate,
-            endDate: req.body.endDate,
-            goalType: req.body.goalType
+        { $set: { 
              } }, function (err) {
           if (err) {
             console.log(err);
