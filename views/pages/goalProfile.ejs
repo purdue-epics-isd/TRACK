@@ -76,7 +76,7 @@
 								</tr>--->
 								<div class="generic-box">
       								<label for="score">Score:</label>
-      								<input type="texts" class="form-control" id="score" placeholder="Input Number" name="score">
+      								<input type="number" class="form-control" id="score" placeholder="Input Number" name="score">
     							</div>
 
 							<%} %>
@@ -87,7 +87,7 @@
 								</tr>--->
 								<div class="generic-box">
       								<label for="occurrences">Count of occurrences(<%=goal.occurrencesType%>):</label>
-      								<input type="texts" class="form-control" id="count" placeholder="Input Number" name="count">
+      								<input type="number" class="form-control" id="count" placeholder="Input Number" name="count">
     							</div>
 
 							<%} %>
@@ -163,7 +163,7 @@
 
 							<%} %>
 
-														<tr class = "generic-box">
+								<tr class = "generic-box">
 								<!--<td>With how much support:</td><td> <input type="text" name="support"></td>-->
 
 								<label for="exampleInputPassword1">With how much support:</label>
@@ -233,6 +233,73 @@
 									<% }); %>
 									</tbody>
 								</table>
+
+								<div id="data_chart"></div>
+								<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+								<script>
+									google.charts.load('current', {'packages':['line', 'corechart']});
+								    google.charts.setOnLoadCallback(drawChart);
+
+								    function drawChart() {
+								      // console.log(goal.methodOfCollection[0]);
+								      var TrackMethod = ["<%=goal.methodOfCollection[0]%>", "<%=goal.methodOfCollection[1]%>"];
+								      var dataset = [];
+								      var date;
+								      if (TrackMethod[0] == "score"){
+									      <%goalDatas.forEach(function(goalData){%>
+									      	date = new Date("<%=goalData.time%>")
+									      	dataset.push([date, <%=goalData.score%>]);
+									      	<%})%>
+									  }
+									  else if (TrackMethod[0] == "count"){
+									  	  <%goalDatas.forEach(function(goalData){%>
+									      	date = new Date("<%=goalData.time%>")
+									      	dataset.push([date, <%=goalData.count%>]);
+									      	<%})%>
+									  }
+									  else{
+									  	return;
+									  }
+									  if (TrackMethod[1] == "count"){
+									  	<%goalDatas.forEach(function(goalData, index){%>
+									      	dataset[<%=index%>].push(<%=goalData.count%>);
+									      	<%})%>
+									  }
+									  console.log(dataset);
+									  
+									  if (dataset.length == 0){
+									  	return;
+									  }
+						
+								      var data = new google.visualization.DataTable();
+								      data.addColumn('date', "Date");
+								      data.addColumn('number', TrackMethod[0]);
+								      if (TrackMethod[1] == 'count'){
+								      	data.addColumn('number', TrackMethod[1]);
+								      }
+								      data.addRows(dataset);
+
+								      var options = {
+								      	'title': "<%=goal.name%>",
+								      	hAxis: {
+						                  title: 'Date'
+						               	},
+						               	vAxis: {
+						                  title: 'Data'
+						               	},   
+								        width: 1000,
+								        height: 200,
+								        pointsVisible: true,
+								        backgroundColor: '#e3e4e6'						      
+    									};
+
+								      var chart = new google.visualization.LineChart(document.getElementById('data_chart'));
+
+								      chart.draw(data, options);
+        
+								    }
+								</script>
+
 								<button id="btnExport" onclick="fnExcelReport();" type="submit" class="btn btn-primary right" style="position: relative; top: 10px"> Export </button>
 
 					<br><div id="result"></div>
