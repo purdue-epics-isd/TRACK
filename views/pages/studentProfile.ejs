@@ -14,26 +14,26 @@
   <main class="main">
 
     <script>
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme) {
-          document.documentElement.setAttribute('data-theme', currentTheme);
-          localStorage.setItem('theme', currentTheme);
-        }
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('theme', currentTheme);
+      }
     </script>   
 
     <div class="class-header">
       <h3><%= student.firstname %>'s Profile</h3>
       <div class = "nameArea" style="grid-template-columns: repeat(2, 2fr);">
-        
+
         <button type="button" class="btn btn-info" onclick="showInfo()" id="infoButton">Show Info</button>
 
-	<a href="/student/<%= student.id%>/student_edit">
-	<button type="button" class="btn btn-primary">
-		<!-- <a href="/student/<%= student.id%>/student_edit"> -->
-		  Edit Student
-		<!-- </a> -->
-        </button>
-	</a>
+        <a href="/student/<%= student.id%>/student_edit">
+         <button type="button" class="btn btn-primary">
+          <!-- <a href="/student/<%= student.id%>/student_edit"> -->
+            Edit Student
+            <!-- </a> -->
+          </button>
+        </a>
       </div>
       
 
@@ -53,73 +53,71 @@
     <div class = "overviewcard" id="goalsBox">
 
       <% goals.forEach(function(goal) { %> 
-
-      <div class = "cardName">
-	      <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-		<!-- <a href="/student/<%=student.id%>/goal/<%=goal.id%>"> -->
-            <div class="card-header"><%=goal.goalType%></div>
-            <div class="card-body">
-              <h4 class="card-title"><%= goal.name %></h4>
-              <p class="card-text">Goal Progress</p>
-              <div class="progress">
-               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+        <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
+          <div class = "goalCardName">
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+              <!-- <a href="/student/<%=student.id%>/goal/<%=goal.id%>"> -->
+                <div class="card-header"><%=goal.goalType%></div>
+                <div class="card-body">
+                  <h4 class="card-title"><%= goal.name %></h4>
+                  <p class="card-text">Goal Progress</p>
+                  <div class="progress">
+                   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                   </div>
+                 </div>
                </div>
              </div>
            </div>
-		<!-- </a> -->
-       </div>
-       </a>
-     </div>
-     <% }); %>
-     <div class="cardName">
-	     <a href="/student/<%=student.id%>/createNewGoal">
-      <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
-	      <!-- <a href="/student/<%=student.id%>/createNewGoal"> -->
-          <div class="card-body">
-            <p class="card-text">Create New Goal</p>
-            <h4 class="card-title" style="font-size: 400%; text-align: center">+</h4>
+         </a>       
+       <% }); %>
+       <a href="/student/<%=student.id%>/createNewGoal">
+         <div class="goalCardName">
+          <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
+           <!-- <a href="/student/<%=student.id%>/createNewGoal"> -->
+            <div class="card-body">
+              <p class="card-text">Create New Goal</p>
+              <h4 class="card-title" style="font-size: 400%; text-align: center">+</h4>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
 
-</main>
+    </main>
 
-<footer class="footer">
-  <div class="footer__copyright">&copy; 2019 TRACK</div>
-  
-  <a href="/student/<%= student.id %>/delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Student</div></a>
-</footer>
-</div>
+    <footer class="footer">
+      <div class="footer__copyright">&copy; 2019 TRACK</div>
 
-</html>
+      <a href="/student/<%= student.id %>/delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Student</div></a>
+    </footer>
+  </div>
 
-<script>
-  function showInfo() {
-    var infoButton = document.getElementById('infoButton');
-    if(infoButton.innerHTML == "Show Info") {
-      infoButton.innerHTML = "Show Goals";
+  </html>
 
-      var goalsBox = document.getElementById('goalsBox');
-      goalsBox.style.display='none';
-      var studentsInfoBox = document.getElementById('studentsInfoBox');
-      studentsInfoBox.style.display='block';
-    } else {
-      infoButton.innerHTML = "Show Info";
-      var goalsBox = document.getElementById('goalsBox');
-      goalsBox.style.display='';
-      var studentsInfoBox = document.getElementById('studentsInfoBox');
-      studentsInfoBox.style.display='none';
+  <script>
+    function showInfo() {
+      var infoButton = document.getElementById('infoButton');
+      if(infoButton.innerHTML == "Show Info") {
+        infoButton.innerHTML = "Show Goals";
+
+        var goalsBox = document.getElementById('goalsBox');
+        goalsBox.style.display='none';
+        var studentsInfoBox = document.getElementById('studentsInfoBox');
+        studentsInfoBox.style.display='block';
+      } else {
+        infoButton.innerHTML = "Show Info";
+        var goalsBox = document.getElementById('goalsBox');
+        goalsBox.style.display='';
+        var studentsInfoBox = document.getElementById('studentsInfoBox');
+        studentsInfoBox.style.display='none';
+      }
+
     }
-    
-  }
 
     convertToYYYYMMDD("<%=student.dob%>");
-  function convertToYYYYMMDD(d) {
-    date = new Date(d);
-    year = date.getFullYear();
+    function convertToYYYYMMDD(d) {
+      date = new Date(d);
+      year = date.getFullYear();
     //console.log("Year: " + year);
     month = date.getMonth()+1;
     dt = date.getDate()+1;
