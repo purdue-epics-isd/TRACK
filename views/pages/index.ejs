@@ -22,7 +22,7 @@
                 <h1>IEP GOAL TRACKER</h1>
                 <h3>Welcome to ISD IEP Tracker!</h3>
         
-                <button id="SignIn" class="btn btn-primary center" onclick="signIn()">Sign In Here</button>
+                <button id="SignIn" class="btn btn-primary center" onclick="signIn()">Sign In Hereo</button>
             </div>
 
             <div class = "bottom">
@@ -40,7 +40,7 @@
 
 <script>
 
-    var msalConfig = {
+var msalConfig = {
     auth: {
         clientId: "f4238741-ebe5-4017-94b5-4de9dc3c20b8",
         authority: "https://login.microsoftonline.com/organizations",
@@ -81,6 +81,7 @@ function signIn() {
         //Login Success
         //showWelcomeMessage();
         acquireTokenPopupAndCallMSGraph();
+        console.log(myMSALObj.getAccount());
 
         
        //window.location.replace("./classPage");
@@ -122,7 +123,8 @@ function acquireTokenPopupAndCallMSGraph() {
 function graphAPICallback(data) {
     console.log(data.id);
     console.log(typeof data.id);
-    localStorage.setItem("userID",data.id);   
+    localStorage.setItem("userID",data.id);  
+    localStorage.setItem("accountinfo",myMSALObj.getAccount()); 
     console.log(localStorage.getItem("userID"));
     window.location.href = "./classPage";
     //document.getElementById("json").innerHTML = JSON.stringify(data, null, 2);
@@ -131,7 +133,12 @@ function graphAPICallback(data) {
 
 function showWelcomeMessage() {
     var divWelcome = document.getElementById('WelcomeMessage');
-    divWelcome.innerHTML = 'Welcome ' + myMSALObj.getAccount().userName + " to Purdue EPICS ISD IEP Tracker";
+    if(myMSALObj) {
+        console.log("IN");
+        if(myMSALObj.getAccount()) {
+            divWelcome.innerHTML = 'Welcome ' + myMSALObj.getAccount().userName + " to Purdue EPICS ISD IEP Tracker";
+        }
+    }
     var loginbutton = document.getElementById('SignIn');
     loginbutton.innerHTML = 'Move on to site';
     loginbutton.setAttribute('onclick', 'signOut();');

@@ -18,6 +18,7 @@ const User = require('../models/user.model');
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+router.post('/student/:studentid/goal/:goalid/share', goal_controller.goal_share); //shares goal with another teacher
 router.post('/signUp/createUser', user_controller.createUser);
 router.post('/student/:studentid/goal/edit/:goalid', goal_controller.goal_edit);
 router.get('/student/:studentid/student_edit', student_controller.student_redirect_edit); //edit student information
@@ -56,15 +57,25 @@ router.get('/classPage', student_controller.navigate_to_classPage);
 router.get('/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
-router.get('/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page
+router.get('/createNewStudent', student_controller.navigate_to_createNewStudent); //navigates to new student page
 
 router.get('/sharedWithMe', (req, res) => {
+    var students = [];
+
+    Student.find({}, {}, function(err, student) {
+        student.forEach(function(s) { 
+
+                students.push(s);
+        });
+    });
+    console.log(req.params.userid);
 	User.findById(req.params.userid, function(err, user) {
-		res.render('./pages/sharedWithMe.ejs', {
-			user: user
-		})
+			res.render('./pages/sharedWithMe.ejs', {
+				user: user,
+				students: students
+			})
+		});
 	});
-});
 
 router.get('/aboutUs', (req, res) => {
 	User.findById(req.params.userid, function(err, user) {

@@ -73,10 +73,7 @@ exports.navigate_to_classPage = function (req, res) {
 
         Student.find({}, {}, function(err, student) {
             student.forEach(function(s) { 
-                //if(s.userid==req.params.userid) {
-                    //console.log(s); console.log(s.name); 
                     students.push(s);
-                //};
             });
         });
 
@@ -146,20 +143,20 @@ exports.student_redirect_edit = function (req, res) {
 exports.student_edit = function (req, res) {
     console.log("Student being edited: " + req.params.studentid);
     Student.findByIdAndUpdate(req.params.studentid,
-            { $set: { firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                period: req.body.period,
-                grade: req.body.grade,
-                dob: req.body.dob,
-                email: req.body.studentemail
-                 } }, function (err) {
-              if (err) {
-                console.log(err);
-              }
-              else {
-                res.redirect('/student/' + req.params.studentid);
-              }
-            });
+        { $set: { firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            period: req.body.period,
+            grade: req.body.grade,
+            dob: req.body.dob,
+            email: req.body.studentemail
+             } }, function (err) {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            res.redirect('/student/' + req.params.studentid);
+          }
+        });
 }
 
 /*first function used when website starts up*/

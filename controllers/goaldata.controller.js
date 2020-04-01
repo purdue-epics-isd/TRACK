@@ -19,8 +19,6 @@ exports.goaldata_create = function (req, res) {
         console.log("percentage: " + req.body.percentage);
         console.log("support: " + req.body.support);
 
-        //console.log(goaldata);
-
         Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
             console.log("Goal to be updated: " + goal);
             console.log("goaldata to be added: " + goaldata);

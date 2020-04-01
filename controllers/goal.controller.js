@@ -17,6 +17,7 @@ exports.goal_create = function (req, res) {
                 studentID: req.params.studentid,
                 methodOfCollection: req.body.methodOfCollection,
                 occurrencesType: req.body.occurrences,
+                shared: false,
                 goaldata: []
             })
 
@@ -148,14 +149,20 @@ exports.goal_edit = function (req, res) {
         });
 }
 
+/*shares goals with other teachers*/
 exports.goal_share = function (req, res) {
     Goal.findByIdAndUpdate(req.params.goalid,
         { $set: { 
+            shared: true,
+            sharedWith: req.body.email
              } }, function (err) {
           if (err) {
             console.log(err);
           }
           else {
+            console.log("SHARING GOAL...")
+            console.log("Goal id:" + req.params.goalid);
+            console.log("Sharing with:" + req.body.email);
             res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
           }
         });
@@ -177,3 +184,4 @@ exports.navigate_to_createNewGoal = function (req, res) {
         res.render('./error');
     }
 };
+
