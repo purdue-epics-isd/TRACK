@@ -36,55 +36,81 @@
          <div class="form-group">
             <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
           </div>
-          <h3>Class List</h3>
 
-          <button type="button" class="btn btn-primary">
-            <a href="/createNewStudent">Create New Student</a>
-          </button>
+          <h3>Shared with me...</h3>
+          <h3><h3>
         </div>
 
 
          <div class = "overviewcard" id="studentBox">
-
                 <!--Loads the Students and Creates Buttons for them-->
-              <% students.forEach(function(student) { %>
-              <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
-              <!--<div class = "cardName" id="<%=student.userid%>">-->
-              <script>
-                if(localStorage.getItem("userID") == "<%=student.userid %>") {
-                  var card = document.createElement("div");
-                  card.className = "cardName <%=student.period%>";
-                  card.id = "<%=student.id%>";
+                <script>
+                  console.log("YOO");
+                  console.log("username: " + localStorage.getItem("username"));
+                </script>
+             
+              <% goals.forEach(function(goal) { %> 
+                boop  
+              <% }); %>
+              <% goals.forEach(function(goal) { %> 
+                  <script>
+                  if(localStorage.getItem("username") == "goal.sharedWith[0]") {
+                    var card = document.createElement("div");
+                    card.className = "cardName";
 
-                  var studentLink = document.createElement("a");
-                  studentLink.href = "/student/<%=student.id%>";
+                    var card2 = document.createElement("div");
+                    card2.className = "card text-white bg-primary mb-3";
+                    card2.style = "max-width: 20rem;"
 
-                  var studentImg = document.createElement("img");
-                  studentImg.className = "img-circle";
-                  studentImg.src = "/img/studentIcon.png";
-                  studentImg.width = "200";
-                  studentImg.height = "200";
+                    var goalLink = document.createElement("a");
+                    goalLink.href = "/student/<%=goal.studentid%>/goal/<%=goal.id%>";
 
-                  var studentLabel = document.createElement("class");
-                  studentLabel.className = "name";
-                  studentLabel.innerHTML = "<%=student.firstname%>";
+                    var header = document.createElement("div");
+                    header.className = "card-header";
+                    header.innerHTML = "<%=goal.goalType%>";
 
-                  studentLink.appendChild(studentImg);
-                  studentLink.appendChild(studentLabel);
-                  card.appendChild(studentLink);
+                    var body = document.createElement("div");
+                    body.className = "card-body";
 
-                  document.getElementById("studentBox").appendChild(card);
+                    var title = document.createElement("h4");
+                    title.className = "card-title";
+                    title.innerHTML = "<%= goal.name %>";
 
-                  //var toDelete = document.getElementById("uid");
+                    var text = document.createElement("p");
+                    text.className = "card-text";
+                    text.innerHTML = "Goal Progress";
 
-                  //toDelete.parentNode.removeChild(toDelete);
-                }
-              </script>
+                    card.appendChild(card2);
+                    card2.appendChild(goalLink);
+                    goalLink.appendChild(header);
+                    goalLink.appendChild(body);
+                    goalLink.appendChild(title);
+                    goalLink.appendChild(text);
+
+                    document.getElementById("studentBox").appendChild(card);
+                    
+                  }
+                  /*
+                  <div class = "cardName">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                      <a href="/student/<%=goal.studentid%>/goal/<%=goal.id%>">
+                        <div class="card-header"><%=goal.goalType%></div>
+                        <div class="card-body">
+                          <h4 class="card-title"><%= goal.name %></h4>
+                          <p class="card-text">Goal Progress</p>
+                          <div class="progress">
+                           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                           </div>
+                         </div>
+                       </div>
+                     </a>
+                   </div>
+                 </div>
+               <% } %>
+               */
+             </script>
               <% }); %>
             </div>
-
-      
-
     </main>
 
 

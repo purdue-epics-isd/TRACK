@@ -11,6 +11,7 @@ const goaldata_controller = require('../controllers/goaldata.controller');
 const misc_controller = require('../controllers/misc.controller');
 const user_controller = require('../controllers/user.controller')
 const Student = require('../models/student.model');
+const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
 //var userID = sessionStorage.getItem("userID");
 
@@ -57,25 +58,10 @@ router.get('/classPage', student_controller.navigate_to_classPage);
 router.get('/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
+
 router.get('/createNewStudent', student_controller.navigate_to_createNewStudent); //navigates to new student page
 
-router.get('/sharedWithMe', (req, res) => {
-    var students = [];
-
-    Student.find({}, {}, function(err, student) {
-        student.forEach(function(s) { 
-
-                students.push(s);
-        });
-    });
-    console.log(req.params.userid);
-	User.findById(req.params.userid, function(err, user) {
-			res.render('./pages/sharedWithMe.ejs', {
-				user: user,
-				students: students
-			})
-		});
-	});
+router.get('/sharedWithMe', goal_controller.navigate_to_sharedWithMe);
 
 router.get('/aboutUs', (req, res) => {
 	User.findById(req.params.userid, function(err, user) {

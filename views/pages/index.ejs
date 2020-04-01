@@ -76,15 +76,11 @@ myMSALObj.handleRedirectCallback(authRedirectCallBack);
 
 
 function signIn() {
-
+    //localStorage.setItem("username",myMSALObj.getAccount().username);
     myMSALObj.loginPopup(requestObj).then(function (loginResponse) {
         //Login Success
         //showWelcomeMessage();
         acquireTokenPopupAndCallMSGraph();
-        console.log(myMSALObj.getAccount());
-
-        
-       //window.location.replace("./classPage");
     }).catch(function (error) {
         console.log(error);
     });
@@ -124,8 +120,10 @@ function graphAPICallback(data) {
     console.log(data.id);
     console.log(typeof data.id);
     localStorage.setItem("userID",data.id);  
-    localStorage.setItem("accountinfo",myMSALObj.getAccount()); 
-    console.log(localStorage.getItem("userID"));
+    localStorage.setItem("username",myMSALObj.getAccount().userName); 
+    //console.log(myMSALObj.getAccount());
+    console.log("\nJust the name... \n" + myMSALObj.getAccount().userName);
+    //console.log();
     window.location.href = "./classPage";
     //document.getElementById("json").innerHTML = JSON.stringify(data, null, 2);
 }
@@ -133,10 +131,11 @@ function graphAPICallback(data) {
 
 function showWelcomeMessage() {
     var divWelcome = document.getElementById('WelcomeMessage');
+    console.log("YOEY:" + myMSALObj);
     if(myMSALObj) {
         console.log("IN");
         if(myMSALObj.getAccount()) {
-            divWelcome.innerHTML = 'Welcome ' + myMSALObj.getAccount().userName + " to Purdue EPICS ISD IEP Tracker";
+            //divWelcome.innerHTML = 'Welcome ' + myMSALObj.getAccount().userName + " to Purdue EPICS ISD IEP Tracker";
         }
     }
     var loginbutton = document.getElementById('SignIn');

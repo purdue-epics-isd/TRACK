@@ -185,3 +185,19 @@ exports.navigate_to_createNewGoal = function (req, res) {
     }
 };
 
+exports.navigate_to_createNewGoal = function (req, res) {
+    var students = [];
+
+    Student.find({}, {}, function(err, student) {
+        student.forEach(function(s) { 
+                students.push(s);
+        });
+    });
+    console.log(req.params.userid);
+    User.findById(req.params.userid, function(err, user) {
+        res.render('./pages/sharedWithMe.ejs', {
+            user: user,
+            students: students
+        })
+    });
+};
