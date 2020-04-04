@@ -248,7 +248,8 @@ exports.navigate_to_sharedGoalProfile = function (req, res) {
                         goalDatas: goalDatas,
                         student: student,
                         goal: goal,
-                        methodOfCollection: methodsOfCollection
+                        methodOfCollection: methodsOfCollection,
+                        shared: true
                     });
                 });
             });
