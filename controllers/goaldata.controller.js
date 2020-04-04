@@ -12,7 +12,8 @@ exports.goaldata_create = function (req, res) {
                 rubricOption: req.body.optionsRadios,
                 support: req.body.support,
                 comments: req.body.comments,
-                time: Date.now()
+                time: Date.now(),
+                teacherEmail: req.params.email
             }
         );
 
