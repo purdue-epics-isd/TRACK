@@ -76,13 +76,9 @@ exports.navigate_to_classPage = function (req, res) {
                     students.push(s);
             });
         });
-
-        User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
-                res.render('pages/classPage', {
-                    students: students, 
-                    user: user
-                });
+        Student.findById(req.params.studentid, function(err, student) {
+            res.render('pages/classPage', {
+                students: students
             });
         });
     } catch(err) {

@@ -185,19 +185,78 @@ exports.navigate_to_createNewGoal = function (req, res) {
     }
 };
 
-exports.navigate_to_createNewGoal = function (req, res) {
-    var students = [];
+exports.navigate_to_sharedWithMe = function (req, res) {
+    try {
+        var goals = [];
 
-    Student.find({}, {}, function(err, student) {
-        student.forEach(function(s) { 
-                students.push(s);
+        Goal.find({}, {}, function(err, goal) {
+            goal.forEach(function(s) { 
+                //console.log("s.studentID: " + s.studentID);
+                //console.log("req.params.studentid: " + req.params.studentid);
+                goals.push(s);
+            });
         });
-    });
-    console.log(req.params.userid);
-    User.findById(req.params.userid, function(err, user) {
-        res.render('./pages/sharedWithMe.ejs', {
-            user: user,
-            students: students
-        })
-    });
-};
+        User.findById(req.params.userid, function(err, user) {
+            Student.findById(req.params.studentid, function(err, student) {
+                Goal.findById(req.params.goalid, function(err, goal) {
+                    res.render('pages/sharedWithMe', {
+                        goals: goals,
+                        student: student, 
+                        user: user
+                    });
+                });
+            });
+        });
+    } catch(err) {
+        console.log(err);
+        res.render('./error');
+    }
+}
+
+/* renders goal page */
+exports.navigate_to_sharedGoalProfile = function (req, res) {
+    try {
+        goalDatas = [];
+
+        GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
+            if (err) {
+                res.send(err);
+                return;
+            }
+            goaldata.forEach(function(s) {
+                goalDatas.push(s);
+            });
+        });
+
+
+        Student.findById(req.params.studentid, function(err, student) {
+            //console.log(err);
+            if (err) {
+                //console.log(err);
+                res.send(err);
+                return;
+            }
+
+            User.findById(req.params.userid, function(err, user) {
+                Goal.findById(req.params.goalid, function(err, goal) {
+                    var methodsOfCollection = goal.methodOfCollection;
+                    console.log("method:" + goal.methodOfCollection);
+                    console.log("method as var:" + methodsOfCollection);
+                    console.log("goal:" + goal);
+                    res.render('pages/goalProfile', {
+                        user: user,
+                        goalDatas: goalDatas,
+                        student: student,
+                        goal: goal,
+                        methodOfCollection: methodsOfCollection
+                    });
+                });
+            });
+        });
+        //console.log("pls workmaybe");
+        return;
+    } catch(error) {
+        console.log("err:" + err);
+        res.render('./error');
+    }
+}

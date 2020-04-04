@@ -25,7 +25,6 @@ router.post('/student/:studentid/goal/edit/:goalid', goal_controller.goal_edit);
 router.get('/student/:studentid/student_edit', student_controller.student_redirect_edit); //edit student information
 router.post('/student/:studentid/student_edit/submit', student_controller.student_edit); //submit final student edits
 
-
 router.get('/student/:studentid/goal/:goalid/goal_delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_redirect_edit); //redirect to goal editing page
 router.get('/student/:studentid/goal/:goalid/goal_share', goal_controller.goal_share); //redirect to goal sharing page
@@ -35,6 +34,7 @@ router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_re
 //router.delete('/goal/delete',goal_controller.goal_delete);
 router.get('/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
 router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
+
 
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
@@ -58,11 +58,9 @@ router.get('/classPage', student_controller.navigate_to_classPage);
 router.get('/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
-
 router.get('/createNewStudent', student_controller.navigate_to_createNewStudent); //navigates to new student page
-
 router.get('/sharedWithMe', goal_controller.navigate_to_sharedWithMe);
-
+router.get('/sharedGoal/:goalid', goal_controller.navigate_to_sharedGoalProfile);
 router.get('/aboutUs', (req, res) => {
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/aboutUs.ejs', {
