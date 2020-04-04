@@ -55,9 +55,52 @@
 			 <div class =  class-header>
 		          <h1><%= goal.name %></h1>
 
-				  <button type="button" class="btn btn-primary">
-		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">Edit Goal</a>
-		          </button>
+			  <!-- Trigger/Open The Modal -->
+			  <button id="myBtn">Need Helpl?</button>
+
+			  <!-- The Modal -->
+			  <div id="myModal" class="modal">
+
+				    <!-- Modal content -->
+				      <div class="modal-content">
+					          <span class="close">&times;</span>
+						      <p>This is the goal profile.  Here you can further analyze the statistics of your students progress.  If you click export, you can even export the data into a pdf document!</p>
+						        </div>
+
+			  </div>
+
+		  <script>
+		  // Get the modal
+		  var modal = document.getElementById("myModal");
+
+		  // Get the button that opens the modal
+		  var btn = document.getElementById("myBtn");
+
+		  // Get the <span> element that closes the modal
+		  var span = document.getElementsByClassName("close")[0];
+
+		  // When the user clicks the button, open the modal 
+		  btn.onclick = function() {
+	  	    modal.style.display = "block";
+		  }
+
+		  // When the user clicks on <span> (x), close the modal
+		  span.onclick = function() {
+	  	    modal.style.display = "none";
+		  }
+
+		  // When the user clicks anywhere outside of the modal, close it
+		  window.onclick = function(event) {
+	  	    if (event.target == modal) {
+		      modal.style.display = "none";
+		    }
+		  }		
+		</script>
+				
+		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
+			  <button type="button" class="btn btn-primary">
+				  Edit Goal
+			  </button> </a>
         	</div>
 
 			<div class = "description">
