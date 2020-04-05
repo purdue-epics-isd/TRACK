@@ -146,7 +146,7 @@ exports.student_edit = function (req, res) {
         });
 }
 
-exports.navigate_to_sharedWithMeStudents = function (req, res) {
+exports.navigate_to_sharedWithMeClassPage = function (req, res) {
     try {
         var students = [];
 
@@ -158,7 +158,7 @@ exports.navigate_to_sharedWithMeStudents = function (req, res) {
         //console.log("\nParameter student id: " + req.params.studentid);
 
         Student.findById(req.params.studentid, function(err, student) {
-            res.render('pages/sharedWithMeStudents', {
+            res.render('pages/sharedWithMeClassPage', {
                 students: students
             });
         });

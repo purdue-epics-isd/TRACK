@@ -80,7 +80,8 @@ exports.navigate_to_goalProfile = function (req, res) {
                         goalDatas: goalDatas,
                         student: student,
                         goal: goal,
-                        methodOfCollection: methodsOfCollection
+                        methodOfCollection: methodsOfCollection,
+                        shared: false
                     });
                 });
             });
@@ -188,28 +189,21 @@ exports.navigate_to_createNewGoal = function (req, res) {
     }
 };
 
-exports.navigate_to_sharedWithMeGoals = function (req, res) {
+exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
     try {
         var goals = [];
 
-        Goal.find({}, {}, function(err, goal) {
+        Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
             goal.forEach(function(s) { 
-                //console.log("\nlength of shared with: " + s.sharedWith.length);
-                s.sharedWith.forEach(function(email) {
-                    if(email == req.body.useremail) {
-                        goals.push(s);
-                        console.log(s);
-                    }
-                });
+                    goals.push(s);
+                    console.log(s);
             });
         });
-
-        console.log("\nEntering sharewithmegoals!!! Teacher email: " + req.body.useremail);
 
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 Goal.findById(req.params.goalid, function(err, goal) {
-                    res.render('pages/sharedWithMeGoals', {
+                    res.render('pages/sharedWithMeStudentProfile', {
                         goals: goals,
                         student: student, 
                         user: user
@@ -224,7 +218,7 @@ exports.navigate_to_sharedWithMeGoals = function (req, res) {
 }
 
 /* renders goal page */
-exports.navigate_to_sharedGoalProfile = function (req, res) {
+exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
     try {
         goalDatas = [];
 
@@ -240,20 +234,13 @@ exports.navigate_to_sharedGoalProfile = function (req, res) {
 
 
         Student.findById(req.params.studentid, function(err, student) {
-            //console.log(err);
-            if (err) {
-                //console.log(err);
-                res.send(err);
-                return;
-            }
-
             User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
                     console.log("method:" + goal.methodOfCollection);
                     console.log("method as var:" + methodsOfCollection);
                     console.log("goal:" + goal);
-                    res.render('pages/goalProfile', {
+                    res.render('pages/sharedWithMeGoalProfile', {
                         user: user,
                         goalDatas: goalDatas,
                         student: student,

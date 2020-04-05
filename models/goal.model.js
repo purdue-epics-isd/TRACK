@@ -12,7 +12,7 @@ let GoalSchema = new Schema({
     methodOfCollection: [{type: String, require: false}],
     occurrencesType: {type: String, required: false},
     shared: {type: Boolean, required: true},
-    sharedWith: [{}],
+    sharedWith: [{type: String}],
     goaldata: [{type: Schema.ObjectId, ref: 'GoalData'}]
 });
 

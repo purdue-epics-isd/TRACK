@@ -28,46 +28,18 @@ exports.goaldata_create = function (req, res) {
                 }
             });
         });
-
-        /*
-        Student.findById(req.params.studentid, function(err, student) {
-            var goals = [];
-            Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
-                goal.forEach(function(s) { 
-                    console.log("Goal: " + s);
-                    console.log("Student ID: " + s.studentID + "|" + s.name);
-                    console.log("req.params.studentid: " + req.params.studentid + "|" + student.name);
-                    goals.push(s);
-                });
-                //console.log("Here is the final list:" + goals);
-            });
-
-            res.render('pages/studentProfile', {
-                student: student,
-                goals: goals
-            });
-        });*/
-        res.redirect("/student/" + req.params.studentid);
+        //console.log("is shared?: " + req.params.shared);
+        //console.log("evaluate: " + (type(req.params.shared)));
+        if(req.params.shared) {
+            res.redirect("/sharedWithMe/" + req.params.studentid);
+        } else {
+            res.redirect("/student/" + req.params.studentid);
+        }
     } catch(err) {
         console.log(err);
         res.render('./error');
     }
 };
-
-/*exports.goaldata_details = function (req, res) {
-    Goaldata.findById(req.params.studentid, function (err, goal) {
-        if (err) return next(err);
-        res.send(goaldata);
-    })
-};*/
-
-/*exports.goaldata_name = function (req, res) {
-    Student.findById(req.params.studentid, function(err, goal) {
-        res.render('pages/goalProfile', {
-            goaldata: goaldata
-        });
-    });
-}*/
 
 exports.goaldata_delete = function (req, res) {
     try {

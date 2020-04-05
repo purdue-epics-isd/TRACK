@@ -22,7 +22,7 @@
     </script>   
 
     <div class="class-header">
-      <h3>Goals shared with me...</h3>
+      <h3><%=student.firstname%>'s goals shared with me...</h3>
       </div>
  
        <form type ="hidden">
@@ -38,47 +38,49 @@
     <div class = "overviewcard" id="goalsBox">
 
 
-      <% goals.forEach(function(goal) { %> 
-      
-      <script>
-        console.log("username: " + localStorage.getItem("username"));
-        console.log("goal.sharedWith[0]: " + "<%=goal.sharedWith%>");
-        if(localStorage.getItem("username") == "<%=goal.sharedWith[0]%>") {
-          var card = document.createElement("div");
-          card.className = "cardName";
+      <% goals.forEach(function(goal) { %>
+        <% goal.sharedWith.forEach(function(teacher) { %>
+          <script>
+            
+            if(localStorage.getItem("username") == "<%=teacher%>") {
+              console.log("\nteacher: <%=teacher%>");
+            console.log("\nusername: " + localStorage.getItem("username"));
+              var card = document.createElement("div");
+              card.className = "cardName";
 
-          var card2 = document.createElement("div");
-          card2.className = "card text-white bg-primary mb-3";
-          card2.style = "max-width: 20rem;"
+              var card2 = document.createElement("div");
+              card2.className = "card text-white bg-primary mb-3";
+              card2.style = "max-width: 20rem;"
 
-          var goalLink = document.createElement("a");
-          goalLink.href = "/sharedWithMe/<%=goal.studentID%>/<%=goal.id%>";
+              var goalLink = document.createElement("a");
+              goalLink.href = "/sharedWithMe/<%=goal.studentID%>/<%=goal.id%>";
 
-          var header = document.createElement("div");
-          header.className = "card-header";
-          header.innerHTML = "<%=goal.goalType%>";
+              var header = document.createElement("div");
+              header.className = "card-header";
+              header.innerHTML = "<%=goal.goalType%>";
 
-          var body = document.createElement("div");
-          body.className = "card-body";
+              var body = document.createElement("div");
+              body.className = "card-body";
 
-          var title = document.createElement("h4");
-          title.className = "card-title";
-          title.innerHTML = "<%= goal.name %>";
+              var title = document.createElement("h4");
+              title.className = "card-title";
+              title.innerHTML = "<%= goal.name %>";
 
-          var text = document.createElement("p");
-          text.className = "card-text";
-          text.innerHTML = "Goal Progress";
-          card.appendChild(card2);
-          card2.appendChild(goalLink);
-          goalLink.appendChild(header);
-          goalLink.appendChild(body);
-          goalLink.appendChild(title);
-          goalLink.appendChild(text);
+              var text = document.createElement("p");
+              text.className = "card-text";
+              text.innerHTML = "Goal Progress";
+              card.appendChild(card2);
+              card2.appendChild(goalLink);
+              goalLink.appendChild(header);
+              goalLink.appendChild(body);
+              goalLink.appendChild(title);
+              goalLink.appendChild(text);
 
-          document.getElementById("goalsBox").appendChild(card);
-          
-        }
-      </script>
+              document.getElementById("goalsBox").appendChild(card);
+              
+            }
+          </script>
+        <% }) %>
      <% }); %>
 
       <input type="hidden" name="useremail" id="useremail"> </input>
