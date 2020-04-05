@@ -13,16 +13,15 @@ exports.goaldata_create = function (req, res) {
                 support: req.body.support,
                 comments: req.body.comments,
                 time: Date.now(),
-                teacherEmail: req.params.email
+                teacherEmail: req.body.useremail
             }
         );
 
-        console.log("percentage: " + req.body.percentage);
-        console.log("support: " + req.body.support);
-
         Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
-            console.log("Goal to be updated: " + goal);
-            console.log("goaldata to be added: " + goaldata);
+            console.log("\nGoal to be updated: " + goal);
+            console.log("\nGoaldata to be added: " + goaldata);
+            console.log("\nTeacher email: " + req.body.useremail);
+
             goaldata.save(function (err) { 
                 if (err) {
                     res.send(err);

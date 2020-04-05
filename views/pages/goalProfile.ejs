@@ -233,6 +233,12 @@
 									<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support" name="support">
 								</tr>
 
+									<input type="hidden" name="useremail" id="useremail"> </input>
+									<script>
+										var email = document.getElementById('useremail');
+										email.value = localStorage.getItem("username");
+									</script>
+
 
 							</table>
 							<input type="submit" input class="btn btn-primary">
@@ -267,6 +273,10 @@
 
 									<th>Date</th>
 
+									<%if(goal.shared == true) { %>
+										<th>Created by</th>
+									<%} %>
+
 									<th>Delete Goal</th>
 								</tr>
 								<% goalDatas.forEach(function(goalData) { %>
@@ -291,6 +301,10 @@
 
 									<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 
+									<%if(goal.shared == true) { %>
+										<td><%=goalData.teacherEmail%></td>
+									<%} %>
+
 									<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
 								</tr>
 								<% }); %>
@@ -302,6 +316,7 @@
 						<br><div id="delete"></div>
 					</div>
 
+				
 
 
 				</main>
