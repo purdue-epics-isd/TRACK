@@ -46,7 +46,7 @@
               console.log("\nteacher: <%=teacher%>");
             console.log("\nusername: " + localStorage.getItem("username"));
               var card = document.createElement("div");
-              card.className = "cardName";
+              card.className = "goalCardName";
 
               var card2 = document.createElement("div");
               card2.className = "card text-white bg-primary mb-3";
@@ -67,14 +67,29 @@
               title.innerHTML = "<%= goal.name %>";
 
               var text = document.createElement("p");
+
+              var progress = document.createElement("div");
+              progress.className = "progress";
+
+              var bar = document.createElement("div");
+              bar.className = "progress-bar progress-bar-striped progress-bar-animated";
+              bar.role = "progressbar";
+              //bar.aria-valuenow="75";
+              //bar.aria-valuemin="0";
+              //bar.aria-valuemax="100";
+              //^^^figure out how to add these in
+              bar.style="width: 75%";
+
               text.className = "card-text";
               text.innerHTML = "Goal Progress";
               card.appendChild(card2);
               card2.appendChild(goalLink);
               goalLink.appendChild(header);
               goalLink.appendChild(body);
-              goalLink.appendChild(title);
-              goalLink.appendChild(text);
+              body.appendChild(title);
+              body.appendChild(text);
+              body.appendChild(progress);
+              progress.appendChild(bar);
 
               document.getElementById("goalsBox").appendChild(card);
               
