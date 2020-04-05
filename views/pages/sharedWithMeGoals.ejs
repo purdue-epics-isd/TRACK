@@ -25,10 +25,18 @@
       <h3>Goals shared with me...</h3>
       </div>
  
+       <form type ="hidden">
+          <input type="hidden" name="useremail" id="useremail"> </input>
+          <script>
+            var email = document.getElementById('useremail');
+            email.value = localStorage.getItem("username");
+          </script>
+        </form>
 
   
 
     <div class = "overviewcard" id="goalsBox">
+
 
       <% goals.forEach(function(goal) { %> 
       

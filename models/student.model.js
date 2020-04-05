@@ -11,7 +11,7 @@ let StudentSchema = new Schema({
     email: {type: String, required: false},
     goals: [{type: Schema.ObjectId, ref: 'Goal'}],
     shared: {type: Boolean, required: true},
-    sharedWith: [{}],
+    sharedWith: [{type: String}],
     userid: {type: String, required: true}
 });
 

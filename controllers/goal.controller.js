@@ -151,27 +151,24 @@ exports.goal_edit = function (req, res) {
 
 /*shares goals with other teachers*/
 exports.goal_share = function (req, res) {
-    Student.findByIdAndUpdate(req.params.studentid, 
-        { $set: {
-
-        }
-
-        })
-    Goal.findByIdAndUpdate(req.params.goalid,
-        { $set: { 
-            shared: true,
-            sharedWith: req.body.email
-             } }, function (err) {
+    Student.findByIdAndUpdate(req.params.studentid, { $set: {shared:true}, $push: {sharedWith: req.body.email}}, function (err) {
           if (err) {
             console.log(err);
           }
           else {
-            console.log("SHARING GOAL...")
-            console.log("Goal id:" + req.params.goalid);
-            console.log("Sharing with:" + req.body.email);
+          }
+    });
+    Goal.findByIdAndUpdate(req.params.goalid, { $set: {shared:true}, $push: {sharedWith: req.body.email}}, function (err) {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            console.log("\nSHARING GOAL...")
+            console.log("\nGoal id:" + req.params.goalid);
+            console.log("\nSharing with:" + req.body.email);
             res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
           }
-        });
+    });
 }
 
 /*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
@@ -197,9 +194,18 @@ exports.navigate_to_sharedWithMeGoals = function (req, res) {
 
         Goal.find({}, {}, function(err, goal) {
             goal.forEach(function(s) { 
-                goals.push(s);
+                //console.log("\nlength of shared with: " + s.sharedWith.length);
+                s.sharedWith.forEach(function(email) {
+                    if(email == req.body.useremail) {
+                        goals.push(s);
+                        console.log(s);
+                    }
+                });
             });
         });
+
+        console.log("\nEntering sharewithmegoals!!! Teacher email: " + req.body.useremail);
+
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 Goal.findById(req.params.goalid, function(err, goal) {

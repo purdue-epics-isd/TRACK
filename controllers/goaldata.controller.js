@@ -20,7 +20,7 @@ exports.goaldata_create = function (req, res) {
         Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
             console.log("\nGoal to be updated: " + goal);
             console.log("\nGoaldata to be added: " + goaldata);
-            console.log("\nTeacher email: " + req.body.useremail);
+            //console.log("\nTeacher email: " + req.body.useremail);
 
             goaldata.save(function (err) { 
                 if (err) {

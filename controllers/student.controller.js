@@ -36,14 +36,13 @@ exports.navigate_to_studentProfile = function (req, res) {
 
         Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
             goal.forEach(function(s) { 
-                //console.log("s.studentID: " + s.studentID);
-                //console.log("req.params.studentid: " + req.params.studentid);
                 goals.push(s);
             });
         });
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 Goal.findById(req.params.goalid, function(err, goal) {
+                    console.log("\nCurrent student: " + student);
                     res.render('pages/studentProfile', {
                         goals: goals,
                         student: student, 
@@ -156,8 +155,8 @@ exports.navigate_to_sharedWithMeStudents = function (req, res) {
                     students.push(s);
             });
         });
-        console.log("\nParameter student id: " + req.params.studentid);
-        
+        //console.log("\nParameter student id: " + req.params.studentid);
+
         Student.findById(req.params.studentid, function(err, student) {
             res.render('pages/sharedWithMeStudents', {
                 students: students
