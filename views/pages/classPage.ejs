@@ -39,13 +39,14 @@
           </div>
           <h3>Class List</h3>
 
-          <button type="button" class="btn btn-primary">
-            <a href="/createNewStudent">Create New Student</a>
-          </button>
+	  <a href="/createNewStudent"> <button type="button" class="btn btn-primary">
+            Create New Student
+		  </button></a>
         </div>
 
 
          <div class = "overviewcard" id="studentBox">
+
 
                 <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
@@ -54,7 +55,7 @@
               <script>
                 if(localStorage.getItem("userID") == "<%=student.userid %>") {
                   var card = document.createElement("div");
-                  card.className = "cardName <%=student.period%>";
+                  card.className = "studentCardName <%=student.period%>";
                   card.id = "<%=student.id%>";
 
                   var studentLink = document.createElement("a");
@@ -70,11 +71,11 @@
                   studentLabel.className = "name";
                   studentLabel.innerHTML = "<%=student.firstname%>" + " " + "<%=student.lastname%>";
 
-                  studentLink.appendChild(studentImg);
-                  studentLink.appendChild(studentLabel);
-                  card.appendChild(studentLink);
+                  studentLink.appendChild(card);
+                  card.appendChild(studentImg);
+                  card.appendChild(studentLabel);
 
-                  document.getElementById("studentBox").appendChild(card);
+                  document.getElementById("studentBox").appendChild(studentLink);
 
                   //var toDelete = document.getElementById("uid");
 

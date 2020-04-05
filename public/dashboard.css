@@ -289,7 +289,7 @@ b {
   background-color: var(--maincolor);
 }
 
-.cardName {
+.goalCardName {
   display: flex;
   justify-content: center;
 
@@ -301,8 +301,20 @@ b {
   background-color: var(--maincolor);
 }
 
+.studentCardName {
+  /*display: flex;*/
+  justify-content: center;
+
+  /*vertical-align: top;
+  display: inline-block;
+  align-items: center;
+  justify-content: space-between;*/
+  /*padding: 20px;*/
+  background-color: var(--maincolor);
+}
+
 .name {
-  display: flex;
+  /*display: flex;*/
   justify-content: center;
 }
 /*Goal Page ends*/
