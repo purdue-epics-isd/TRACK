@@ -36,7 +36,6 @@
         console.log("username: " + localStorage.getItem("username"));
         console.log("goal.sharedWith[0]: " + "<%=goal.sharedWith%>");
         if(localStorage.getItem("username") == "<%=goal.sharedWith[0]%>") {
-          console.log("boo");
           var card = document.createElement("div");
           card.className = "cardName";
 
@@ -45,7 +44,7 @@
           card2.style = "max-width: 20rem;"
 
           var goalLink = document.createElement("a");
-          goalLink.href = "/sharedGoal/<%=goal.studentID%>/<%=goal.id%>";
+          goalLink.href = "/sharedWithMe/<%=goal.studentID%>/<%=goal.id%>";
 
           var header = document.createElement("div");
           header.className = "card-header";
@@ -73,6 +72,12 @@
         }
       </script>
      <% }); %>
+
+      <input type="hidden" name="useremail" id="useremail"> </input>
+      <script>
+        var email = document.getElementById('useremail');
+        email.value = localStorage.getItem("username");
+      </script>
 </main>
 
 <footer class="footer">

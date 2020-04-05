@@ -32,16 +32,8 @@
         </script>   
 
 
-
         <div class =  class-header>
-         <div class="form-group">
-            <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
-          </div>
-          <h3>Class List</h3>
-
-          <button type="button" class="btn btn-primary">
-            <a href="/createNewStudent">Create New Student</a>
-          </button>
+          <h3>Shared with me...</h3>
         </div>
 
 
@@ -49,8 +41,7 @@
 
                 <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
-              <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
-              <!--<div class = "cardName" id="<%=student.userid%>">-->
+
               <script>
                 if(localStorage.getItem("userID") == "<%=student.userid %>") {
                   var card = document.createElement("div");
@@ -58,7 +49,7 @@
                   card.id = "<%=student.id%>";
 
                   var studentLink = document.createElement("a");
-                  studentLink.href = "/student/<%=student.id%>";
+                  studentLink.href = "/sharedWithMe/<%=student.id%>";
 
                   var studentImg = document.createElement("img");
                   studentImg.className = "img-circle";
@@ -96,53 +87,3 @@
 </div>
 
 </html>
-
-<script>
-
-  //console.log(localStorage.getItem("userID"));
-  // Close the dropdown if the user clicks outside of it
-  
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-    }
-  }
-
-  var sel = document.getElementById('selectNumber');
-  var options = ["All students", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period", "10th Period",]; 
-  for(var i = 0; i < options.length; i++) {
-    var opt = document.createElement('option');
-    opt.innerHTML = options[i];
-    sel.appendChild(opt);
-  };
-
-  sel.onchange = function() {
-    console.log("changing period");
-    var input, filter, students, studentChildren, a, i, txtValue, period;
-    input = document.getElementById("selectNumber");
-    filter = input.selectedIndex;
-    //filter = input.options[input.selectedIndex].text.toUpperCase();
-    //console.log("filter: " + filter);
-    students = document.getElementsByClassName("cardName");
-    numStudents = students.length;
-    //console.log("numStudents: " + numStudents);
-
-    for (i = 0; i < numStudents; i++) {
-      period = students[i].className[9];
-      //console.log("period: " + period);
-      if (period.toUpperCase().indexOf(filter) > -1 || filter == 0) {
-        students[i].style.display = "";
-      } else {
-        students[i].style.display = "none";
-      }
-    }
-
-  };
-</script>

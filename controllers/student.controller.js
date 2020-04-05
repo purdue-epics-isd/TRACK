@@ -13,22 +13,14 @@ exports.student_create = function (req, res) {
                 dob: req.body.dob,
                 email: req.body.studentemail,
                 goals: [],
-                userid: req.body.userID
+                userid: req.body.userID,
+                shared: false
             }
         );
         student.save(function (err) {
             if (err) {
                 console.log(err);
-                //res.send(err);
-            } /*else {
-                var goals = [];
-                Student.findById(student.id, function(err, student) {
-                    res.render('pages/studentProfile', {
-                        student: student,
-                        goals: goals
-                    });
-               });
-            }*/
+            } 
         })
         res.redirect("/classPage");
     } catch(err) {
@@ -153,6 +145,28 @@ exports.student_edit = function (req, res) {
             res.redirect('/student/' + req.params.studentid);
           }
         });
+}
+
+exports.navigate_to_sharedWithMeStudents = function (req, res) {
+    try {
+        var students = [];
+
+        Student.find({}, {}, function(err, student) {
+            student.forEach(function(s) { 
+                    students.push(s);
+            });
+        });
+        console.log("\nParameter student id: " + req.params.studentid);
+        
+        Student.findById(req.params.studentid, function(err, student) {
+            res.render('pages/sharedWithMeStudents', {
+                students: students
+            });
+        });
+    } catch(err) {
+        console.log(err);
+        res.render('./error');
+    }
 }
 
 /*first function used when website starts up*/

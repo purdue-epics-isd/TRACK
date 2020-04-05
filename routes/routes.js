@@ -59,8 +59,9 @@ router.get('/student/:studentid', student_controller.navigate_to_studentProfile)
 router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
 router.get('/createNewStudent', student_controller.navigate_to_createNewStudent); //navigates to new student page
-router.get('/sharedWithMe', goal_controller.navigate_to_sharedWithMe);
-router.get('/sharedGoal/:studentid/:goalid', goal_controller.navigate_to_sharedGoalProfile);
+router.get('/sharedWithMe', student_controller.navigate_to_sharedWithMeStudents);
+router.get('/sharedWithMe/:studentid', goal_controller.navigate_to_sharedWithMeGoals);
+router.get('/sharedWithMe/:studentid/:goalid', goal_controller.navigate_to_sharedGoalProfile);
 router.get('/aboutUs', (req, res) => {
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/aboutUs.ejs', {

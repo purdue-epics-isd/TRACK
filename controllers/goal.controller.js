@@ -151,6 +151,12 @@ exports.goal_edit = function (req, res) {
 
 /*shares goals with other teachers*/
 exports.goal_share = function (req, res) {
+    Student.findByIdAndUpdate(req.params.studentid, 
+        { $set: {
+
+        }
+
+        })
     Goal.findByIdAndUpdate(req.params.goalid,
         { $set: { 
             shared: true,
@@ -185,21 +191,19 @@ exports.navigate_to_createNewGoal = function (req, res) {
     }
 };
 
-exports.navigate_to_sharedWithMe = function (req, res) {
+exports.navigate_to_sharedWithMeGoals = function (req, res) {
     try {
         var goals = [];
 
         Goal.find({}, {}, function(err, goal) {
             goal.forEach(function(s) { 
-                //console.log("s.studentID: " + s.studentID);
-                //console.log("req.params.studentid: " + req.params.studentid);
                 goals.push(s);
             });
         });
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 Goal.findById(req.params.goalid, function(err, goal) {
-                    res.render('pages/sharedWithMe', {
+                    res.render('pages/sharedWithMeGoals', {
                         goals: goals,
                         student: student, 
                         user: user
