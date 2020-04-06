@@ -263,13 +263,13 @@ function topFunction() {
 
 										<td><%= goalData.support %></td>
 
-										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] || goal.methodOfCollection[3] == "comments") { %>
+										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
 											<td><%= goalData.comments %></td>
 										<%} %>
 
 										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 
-										<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
+										<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>" onclick="return confirm('Please confirm to delete this data');"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
 									</tr>
 									<% }); %>
 									</tbody>
@@ -355,7 +355,7 @@ function topFunction() {
 
 		<footer class="footer">
 			<div class="footer__copyright">&copy; 2019 TRACK</div>
-			<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
+			<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" onclick="return confirm('Please confirm to delete this goal');" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
 		</footer>
 	</div>
 
