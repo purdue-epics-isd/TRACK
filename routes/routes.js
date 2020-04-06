@@ -75,6 +75,20 @@ router.post('/student/:studentid/goal/:goalid/goaldata/files/:id', (req, res) =>
     res.redirect("/student/" + req.params.studentid)
   });
 });
+router.post('/student/:studentid/goal/:goalid/goaldata/files/:id/download', (req, res) => {
+
+    var filename = req.params.id;
+
+        gfs.exist({ _id: req.params.id, root: 'uploads'}, (err, file) => {
+            if (err || !file) {
+                res.status(404).send('File Not Found');
+        return
+            }
+
+      var readstream = gfs.createReadStream({ _id: req.params.id });
+      readstream.pipe(res);
+        });
+    });
 
 
 router.get('/login_confirm', function(req, res, next) {

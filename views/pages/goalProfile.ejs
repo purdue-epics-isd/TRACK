@@ -170,7 +170,7 @@
       								<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support" name="support">
 							</tr>
 
-
+							<br>
 						</table>
 						<input type="submit" input class="btn btn-primary">
 					</form>
@@ -190,31 +190,37 @@
 											</span>
 										</label>
 									</div><br>
-									<input class="button is-link" type="submit" value="Submit">
+									<input class="btn btn-primary" type="submit" value="Submit">
 								</form>
 									</div>
 									<%} %>
 
-									<hr>
+
         <% if(files) { %>
           <% files.forEach(function(file) { %>
-            <div class="columns is-mobile">
-              <div class="column is-half is-offset-one-quarter">
             <% if(file.isImage) { %>
-              <figure class="image">
-                <img src="image/<%= file.filename %>" alt="Placeholder image">
-                <figcaption><%= file.filename %></figcaption>
-              </figure><br>
+							<div>
+                <%= file.filename %>
+		              <form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+		                <button style="display: inline-block;" class="btn btn-primary">Delete</button>
+		              </form>
+									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+										<button style="display: inline-block;" class="btn btn-primary">Open</button>
+									</form>
+								</div>
             <% } else { %>
               <%= file.filename %>
+							<div>
+								<%= file.filename %>
+									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+										<button style="display: inline-block;" class="btn btn-primary">Delete</button>
+									</form>
+									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+										<button style="display: inline-block;" class="btn btn-primary">Open</button>
+									</form>
+								</div>
             <% } %>
-              <form method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-                <button class="button is-danger">
-                  <span class="icon is-small"><i class="fas fa-trash-alt"></i></span><span>Delete</span>
-                </button>
-              </form>
-              </div>
-            </div>
+
           <% }); %>
         <% } else { %>
           <p class="content">No files to show</p>

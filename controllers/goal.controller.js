@@ -101,7 +101,7 @@ exports.navigate_to_goalProfile = function (req, res) {
                       } else {
                         files.map((file) => {
                           (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
-                        });
+                        });         
                         res.render('pages/goalProfile', {
                             user: user,
                             goalDatas: goalDatas,
