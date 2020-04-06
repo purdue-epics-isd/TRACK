@@ -92,18 +92,68 @@ input.invalid {
 .test {
 
 }
+
+#topBtn {
+display: none;
+position: fixed;
+bottom: 20px;
+left: 30px;
+z-index: 99;
+font-size: 15px;
+border: none;
+outline: none;
+background-color: #2C3E50;
+color: white;
+cursor: pointer;
+padding: 15px;
+border-radius: 4px;
+}
+
+#topBtn:hover {
+  background-color: #555;
+}
+
 </style>
+
+<button onclick="topFunction()" id="topBtn" title="Go to top">Back to Top</button>
+<script>
+//Get the button
+var mybutton = document.getElementById("topBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
 
 <div class="grid-container">
 
 <%- include("../partials/header.ejs")%>
 
 	<main class="main">
+		<script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+    	</script> 
+    	
 			<div class =  class-header>
 		            <h3>Create Goal</h3>
 		    </div>
-
-
 
 		<form id="regForm" action="/student/<%= student.id%>/goal/create" method="post" style="margin-top:0">
 
@@ -158,6 +208,14 @@ input.invalid {
           		</select>
 
 				<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
+					<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
+					<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"></textarea></p>
+					<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"></textarea></p>
+					<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"></textarea></p>
+					<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"></textarea></p>
+					<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"></textarea></p>
+					<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"></textarea></p>
+
 				<!--<div style="display: none" id="rubricDiv">
 						<div id = "rubricFieldsHolder">
 							<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
@@ -215,9 +273,15 @@ input.invalid {
 					</script>
 			</div>
 
+			<div>
+				<p><strong>WARNING: you can ONLY change the Method of Collection you have selected in the future.</p></strong>
+				<p>Please double check before you submit.</p>
+			</div>
+
 			<div style="overflow:auto;">
 				<div style="float:right;">
 					<button type="submit"  class="btn btn-primary" id="nextBtn" >Submit</button>
+					<a href="javascript:history.back()" class="btn btn-info">Cancel</a>
 				</div>
 			</div>
 		</form>
