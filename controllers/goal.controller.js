@@ -4,6 +4,23 @@ const Student = require('../models/student.model');
 const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
 
+mongoose.set('useFindAndModify', false); // solve findAndModify() warning
+
+// Require packages
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const methodOverride = require('method-override');
+
+let gfs;
+let db = mongoose.connection;
+db.once('open', () => {
+  gfs = Grid(db.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
+
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
     try {
@@ -17,6 +34,8 @@ exports.goal_create = function (req, res) {
                 studentID: req.params.studentid,
                 methodOfCollection: req.body.methodOfCollection,
                 occurrencesType: req.body.occurrences,
+                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
+                // rubricdescription: req.body.Rnotevident,
                 goaldata: []
             })
 
@@ -74,13 +93,31 @@ exports.navigate_to_goalProfile = function (req, res) {
                     console.log("method:" + goal.methodOfCollection);
                     console.log("method as var:" + methodsOfCollection);
                     console.log("goal:" + goal);
-                    res.render('pages/goalProfile', {
-                        user: user,
-                        goalDatas: goalDatas,
-                        student: student,
-                        goal: goal,
-                        methodOfCollection: methodsOfCollection
+                    gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
+                      if (!files || files.length === 0) {
+                        res.render('pages/goalProfile', {
+                            user: user,
+                            goalDatas: goalDatas,
+                            student: student,
+                            goal: goal,
+                            methodOfCollection: methodsOfCollection,
+                            files: false
+                        });
+                      } else {
+                        files.map((file) => {
+                          (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
+                        });         
+                        res.render('pages/goalProfile', {
+                            user: user,
+                            goalDatas: goalDatas,
+                            student: student,
+                            goal: goal,
+                            methodOfCollection: methodsOfCollection,
+                            files: files
+                        });
+                      }
                     });
+
                 });
             });
         });
@@ -131,14 +168,16 @@ exports.goal_redirect_edit = function (req, res) {
 };
 
 exports.goal_edit = function (req, res) {
-    console.log("Goal id: [delete]: " + req.params.goalid);
+    console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
             { $set: { name: req.body.name,
                 description: req.body.description,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
-                goalType: req.body.goalType
-                 } }, function (err) {
+                goalType: req.body.goalType,
+                occurrencesType: req.body.occurrences,
+                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied]
+                } }, function (err) {
               if (err) {
                 console.log(err);
               }
