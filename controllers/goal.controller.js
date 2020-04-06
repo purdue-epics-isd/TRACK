@@ -97,6 +97,7 @@ exports.navigate_to_goalProfile = function (req, res) {
                             student: student,
                             goal: goal,
                             methodOfCollection: methodsOfCollection,
+                            shared: false,
                             files: false
                         });
                       } else {
