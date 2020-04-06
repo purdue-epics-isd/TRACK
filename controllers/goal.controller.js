@@ -3,6 +3,7 @@ const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false); // solve findAndModify() warning
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
@@ -17,6 +18,8 @@ exports.goal_create = function (req, res) {
                 studentID: req.params.studentid,
                 methodOfCollection: req.body.methodOfCollection,
                 occurrencesType: req.body.occurrences,
+                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
+                // rubricdescription: req.body.Rnotevident,
                 goaldata: []
             })
 
@@ -131,14 +134,16 @@ exports.goal_redirect_edit = function (req, res) {
 };
 
 exports.goal_edit = function (req, res) {
-    console.log("Goal id: [delete]: " + req.params.goalid);
+    console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
             { $set: { name: req.body.name,
                 description: req.body.description,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
-                goalType: req.body.goalType
-                 } }, function (err) {
+                goalType: req.body.goalType,
+                occurrencesType: req.body.occurrences,
+                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied]
+                } }, function (err) {
               if (err) {
                 console.log(err);
               }

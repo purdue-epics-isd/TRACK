@@ -143,56 +143,53 @@ function topFunction() {
 									      <div class="form-check">
 									        <label class="form-check-label">
 									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Not evident" checked="">
-									          Not evident
+									          Not evident: <%= goal.rubricdescription[0] %>
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
 									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Introduced">
-									          Introduced
+									          Introduced: <%= goal.rubricdescription[1] %>
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
 									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Emerging">
-									          Emerging
+									          Emerging: <%= goal.rubricdescription[2] %>
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
 									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Developing">
-									          Developing
+									          Developing: <%= goal.rubricdescription[3] %>
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
 									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Ongoing">
-									          Ongoing
+									          Ongoing: <%= goal.rubricdescription[4] %>
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
 									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Demonstrated">
-									          Demonstrated
+									          Demonstrated: <%= goal.rubricdescription[5] %>
 									        </label>
 									      </div>
 
 									      <div class="form-check">
 									      <label class="form-check-label">
 									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Applied">
-									          Applied
+									          Applied: <%= goal.rubricdescription[6] %>
 									        </label>
 									      </div>
 									</div>
 							<%} %>
-
-
-
 
 
 							<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>

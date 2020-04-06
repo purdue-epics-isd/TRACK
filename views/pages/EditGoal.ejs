@@ -183,7 +183,21 @@ function topFunction() {
 					<div>
 						<h1>Goal Types</h1>
 						<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
-						<p>Current goal type: <%=goal.goalType%><p>
+						<!-- <p>Current goal type: <%=goal.goalType%><p> -->
+						<% if (goal.goalType == "Behavioral Goal") { %>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Academic Goal">
+	      					<label class="custom-control-label" for="customRadio2">Academic</label>
+						</div>
+						<!--<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>-->
+
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Behavioral Goal" checked="true">
+	      					<label class="custom-control-label" for="customRadio3">Behavior</label>
+	      				</div>
+	      				<%} %>
+
+	      				<% if (goal.goalType == "Academic Goal") { %>
 						<div class="custom-control custom-radio">
 							<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Academic Goal" checked="true">
 	      					<label class="custom-control-label" for="customRadio2">Academic</label>
@@ -194,8 +208,103 @@ function topFunction() {
 							<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Behavioral Goal">
 	      					<label class="custom-control-label" for="customRadio3">Behavior</label>
 	      				</div>
+	      				<%} %>
 					</div>
 
+				<!--Goal Collection Type -->
+				<div><br>
+					<h3>Method of Collection:</h3>
+
+					<%if(goal.methodOfCollection[0] == "score") { %>
+					<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score" checked="" onclick="return false;"> Score <br>
+					<%} %>
+
+					<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
+					<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count" checked="" onclick="return false;"> Count of Occurrences<br>
+					<select class="form-control" name = "occurrences" style="width:100%">
+	            		<% if (goal.occurrencesType == 'Per hour') { %>
+	            			<option value="Per hour" selected="">Per hour</option>
+	            			<option value="Per class">Per class</option>
+		            		<option value="Per day">Per day</option>
+		            		<option value="Per week">Per week</option>
+	            		<%} %>
+	            		<% if (goal.occurrencesType == 'Per class') { %>
+	            			<option value="Per hour">Per hour</option>
+	            			<option value="Per class" selected="">Per class</option>
+		            		<option value="Per day">Per day</option>
+		            		<option value="Per week">Per week</option>
+	            		<%} %>
+	            		<% if (goal.occurrencesType == 'Per day') { %>
+	            			<option value="Per hour">Per hour</option>
+	            			<option value="Per class">Per class</option>
+		            		<option value="Per day" selected="">Per day</option>
+		            		<option value="Per week">Per week</option>
+	            		<%} %>
+	            		<% if (goal.occurrencesType == 'Per week') { %>
+	            			<option value="Per hour">Per hour</option>
+	            			<option value="Per class">Per class</option>
+		            		<option value="Per day">Per day</option>
+		            		<option value="Per week" selected="">Per week</option>
+	            		<%} %>
+	          		</select>
+					<%} %>
+					
+					<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+					<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" checked="" onclick="return false;"> Rubric <br>
+						<% if (goal.rubricdescription[0] == '') { %>
+						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
+						<%} %>
+						<% if (goal.rubricdescription[0] != '') { %>
+						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"><%= goal.rubricdescription[0] %></textarea></p>
+						<%} %>
+
+						<% if (goal.rubricdescription[1] == '') { %>
+						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"></textarea></p>
+						<%} %>
+						<% if (goal.rubricdescription[1] != '') { %>
+						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"><%= goal.rubricdescription[1] %></textarea></p>
+						<%} %>
+
+						<% if (goal.rubricdescription[2] == '') { %>
+						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"></textarea></p>
+						<%} %>
+						<% if (goal.rubricdescription[2] != '') { %>
+						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"><%= goal.rubricdescription[2] %></textarea></p>
+						<%} %>
+
+						<% if (goal.rubricdescription[3] == '') { %>
+						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"></textarea></p>
+						<%} %>
+						<% if (goal.rubricdescription[3] != '') { %>
+						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"><%= goal.rubricdescription[3] %></textarea></p>
+						<%} %>
+
+						<% if (goal.rubricdescription[4] == '') { %>
+						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"></textarea></p>
+						<%} %>
+						<% if (goal.rubricdescription[4] != '') { %>
+						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"><%= goal.rubricdescription[4] %></textarea></p>
+						<%} %>
+
+						<% if (goal.rubricdescription[5] == '') { %>
+						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"></textarea></p>
+						<%} %>
+						<% if (goal.rubricdescription[5] != '') { %>
+						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"><%= goal.rubricdescription[5] %></textarea></p>
+						<%} %>
+
+						<% if (goal.rubricdescription[6] == '') { %>
+						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"></textarea></p>
+						<%} %>
+						<% if (goal.rubricdescription[6] != '') { %>
+						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"><%= goal.rubricdescription[6] %></textarea></p>
+						<%} %>
+					<%} %>
+
+					<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
+						<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments" checked="" onclick="return false;"> Descriptive Comments <br>
+					<%} %>
+				</div>
 
 				<div style="overflow:auto;">
 					<div style="float:right;">
