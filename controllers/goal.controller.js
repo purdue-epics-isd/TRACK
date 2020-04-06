@@ -3,6 +3,20 @@ const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
+// Require packages
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const methodOverride = require('method-override');
+
+let gfs;
+let db = mongoose.connection;
+db.once('open', () => {
+  gfs = Grid(db.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
@@ -74,13 +88,31 @@ exports.navigate_to_goalProfile = function (req, res) {
                     console.log("method:" + goal.methodOfCollection);
                     console.log("method as var:" + methodsOfCollection);
                     console.log("goal:" + goal);
-                    res.render('pages/goalProfile', {
-                        user: user,
-                        goalDatas: goalDatas,
-                        student: student,
-                        goal: goal,
-                        methodOfCollection: methodsOfCollection
+                    gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
+                      if (!files || files.length === 0) {
+                        res.render('pages/goalProfile', {
+                            user: user,
+                            goalDatas: goalDatas,
+                            student: student,
+                            goal: goal,
+                            methodOfCollection: methodsOfCollection,
+                            files: false
+                        });
+                      } else {
+                        files.map((file) => {
+                          (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
+                        });         
+                        res.render('pages/goalProfile', {
+                            user: user,
+                            goalDatas: goalDatas,
+                            student: student,
+                            goal: goal,
+                            methodOfCollection: methodsOfCollection,
+                            files: files
+                        });
+                      }
                     });
+
                 });
             });
         });
