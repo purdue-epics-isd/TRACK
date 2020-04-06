@@ -175,6 +175,51 @@
 						<input type="submit" input class="btn btn-primary">
 					</form>
 
+					<%if(goal.methodOfCollection[0] == "documentation" || goal.methodOfCollection[1] == "documentation" || goal.methodOfCollection[2] == "documentation" || goal.methodOfCollection[3] == "documentation" || goal.methodOfCollection[4] == "documentation") { %>
+						<!---<tr class = "table-active">
+							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
+						</tr>--->
+						<div class="generic-box">
+									<label for="documentation">Documentation :</label>
+									<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST" enctype="multipart/form-data">
+									<div class="file is-centered">
+										<label class="file-label">
+											<input class="file-input" type="file" name="file" id="file">
+											<span class="file-cta">
+												<span class="file-icon"><i class="fas fa-upload"></i></span>
+											</span>
+										</label>
+									</div><br>
+									<input class="button is-link" type="submit" value="Submit">
+								</form>
+									</div>
+									<%} %>
+
+									<hr>
+        <% if(files) { %>
+          <% files.forEach(function(file) { %>
+            <div class="columns is-mobile">
+              <div class="column is-half is-offset-one-quarter">
+            <% if(file.isImage) { %>
+              <figure class="image">
+                <img src="image/<%= file.filename %>" alt="Placeholder image">
+                <figcaption><%= file.filename %></figcaption>
+              </figure><br>
+            <% } else { %>
+              <%= file.filename %>
+            <% } %>
+              <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                <button class="button is-danger">
+                  <span class="icon is-small"><i class="fas fa-trash-alt"></i></span><span>Delete</span>
+                </button>
+              </form>
+              </div>
+            </div>
+          <% }); %>
+        <% } else { %>
+          <p class="content">No files to show</p>
+        <% } %>
+        
 
 				</div>
 

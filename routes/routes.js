@@ -3,16 +3,45 @@ const router = express.Router();
 var passport = require('passport');
 var LocalStrategy   = require("passport-local");
 var passportLocalMongoose   = require("passport-local-mongoose");
-
+// Require packages
+const path = require('path');
+const crypto = require('crypto');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const methodOverride = require('method-override');
 // Require the controllers
 const goal_controller = require('../controllers/goal.controller');
 const student_controller = require('../controllers/student.controller');
 const goaldata_controller = require('../controllers/goaldata.controller');
 const misc_controller = require('../controllers/misc.controller');
-const user_controller = require('../controllers/user.controller')
+const user_controller = require('../controllers/user.controller');
+
 const Student = require('../models/student.model');
 const User = require('../models/user.model');
 //var userID = sessionStorage.getItem("userID");
+
+const storage = new GridFsStorage({
+	url: 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track',
+	file: (req, file) => {
+		return new Promise((resolve, reject) => {
+			crypto.randomBytes(16, (err, buf) => {
+				if (err) return reject(err);
+				const filename = buf.toString('hex') + path.extname(file.originalname);
+			const fileInfo = {
+				filename: filename,
+				metadata: req.params.goalid,
+				bucketName: 'uploads'
+			};
+			resolve(fileInfo);
+		});
+	});
+	}
+
+});
+
+	const upload = multer({ storage });
 
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
@@ -32,6 +61,7 @@ router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_re
 //router.delete('/goal/delete',goal_controller.goal_delete);
 router.get('/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
 router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
+router.post('/student/:studentid/goal/:goalid/goaldata/upload',upload.single('file'),(req, res) => res.redirect("/student/" + req.params.studentid));
 
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
@@ -110,7 +140,7 @@ router.get('/testing', (req, res) => {
                 students.push(s);
             });
         });
-       
+
 	res.render('./pages/testing.ejs', {
 		students: students,
 		test: ["test1", "test2"]
@@ -132,6 +162,8 @@ router.get('/logout', (req, res) => {
         logout: logout
     });
 }); //navigates back to log in menu
+
+
 
 
 
