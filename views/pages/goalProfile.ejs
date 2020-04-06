@@ -208,7 +208,7 @@
             <% } else { %>
               <%= file.filename %>
             <% } %>
-              <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+              <form method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
                 <button class="button is-danger">
                   <span class="icon is-small"><i class="fas fa-trash-alt"></i></span><span>Delete</span>
                 </button>
@@ -219,7 +219,7 @@
         <% } else { %>
           <p class="content">No files to show</p>
         <% } %>
-        
+
 
 				</div>
 

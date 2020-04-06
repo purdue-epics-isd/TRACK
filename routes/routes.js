@@ -41,7 +41,14 @@ const storage = new GridFsStorage({
 
 });
 
-	const upload = multer({ storage });
+const upload = multer({ storage });
+
+let gfs;
+let db = mongoose.connection;
+db.once('open', () => {
+  gfs = Grid(db.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
 
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
@@ -62,6 +69,13 @@ router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_re
 router.get('/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
 router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
 router.post('/student/:studentid/goal/:goalid/goaldata/upload',upload.single('file'),(req, res) => res.redirect("/student/" + req.params.studentid));
+router.post('/student/:studentid/goal/:goalid/goaldata/files/:id', (req, res) => {
+  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+    if (err) res.status(404).json({ err: err });
+    res.redirect("/student/" + req.params.studentid)
+  });
+});
+
 
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
