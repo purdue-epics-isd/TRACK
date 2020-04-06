@@ -28,7 +28,7 @@ const storage = new GridFsStorage({
 		return new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) return reject(err);
-				const filename = buf.toString('hex') + path.extname(file.originalname);
+				const filename = file.originalname;
 			const fileInfo = {
 				filename: filename,
 				metadata: req.params.goalid,
