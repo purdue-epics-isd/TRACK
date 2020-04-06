@@ -68,11 +68,11 @@ router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_re
 //router.delete('/goal/delete',goal_controller.goal_delete);
 router.get('/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
 router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
-router.post('/student/:studentid/goal/:goalid/goaldata/upload',upload.single('file'),(req, res) => res.redirect("/student/" + req.params.studentid));
+router.post('/student/:studentid/goal/:goalid/goaldata/upload',upload.single('file'),(req, res) => res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid));
 router.post('/student/:studentid/goal/:goalid/goaldata/files/:id', (req, res) => {
   gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
     if (err) res.status(404).json({ err: err });
-    res.redirect("/student/" + req.params.studentid)
+    res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
   });
 });
 router.post('/student/:studentid/goal/:goalid/goaldata/files/:id/download', (req, res) => {

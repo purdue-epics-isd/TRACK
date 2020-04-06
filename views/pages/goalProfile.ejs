@@ -209,7 +209,6 @@
 									</form>
 								</div>
             <% } else { %>
-              <%= file.filename %>
 							<div>
 								<%= file.filename %>
 									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
