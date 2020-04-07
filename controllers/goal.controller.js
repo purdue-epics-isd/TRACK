@@ -185,6 +185,32 @@ exports.goal_edit = function (req, res) {
 
 /*shares goals with other teachers*/
 exports.goal_share = function (req, res) {
+    Student.findById(req.params.studentid, function (err, student) {
+        student.shared = true;
+        var alreadyShared = false;
+        for(var i=0;i<student.sharedWith.length;i++) {
+            if(student.sharedWith[i] == req.body.email) {
+                alreadyShared = true;
+            }
+        }
+        if(!alreadyShared) student.sharedWith.push(req.body.email);
+        student.save();
+    });
+
+    Goal.findById(req.params.goalid, function (err, goal) {
+        goal.shared = true;
+        var alreadyShared = false;
+        for(var i=0;i<goal.sharedWith.length;i++) {
+            if(goal.sharedWith[i] == req.body.email) {
+                alreadyShared = true;
+            }
+        }
+        if(!alreadyShared) goal.sharedWith.push(req.body.email);
+        goal.save();
+    });
+
+    res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
+/*
     Student.findByIdAndUpdate(req.params.studentid, { $set: {shared:true}, $push: {sharedWith: req.body.email}}, function (err) {
           if (err) {
             console.log(err);
@@ -192,6 +218,8 @@ exports.goal_share = function (req, res) {
           else {
           }
     });
+    */
+    /*
     Goal.findByIdAndUpdate(req.params.goalid, { $set: {shared:true}, $push: {sharedWith: req.body.email}}, function (err) {
           if (err) {
             console.log(err);
@@ -203,6 +231,7 @@ exports.goal_share = function (req, res) {
             res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
           }
     });
+    */
 }
 
 /*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
@@ -267,20 +296,46 @@ exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
 
 
         Student.findById(req.params.studentid, function(err, student) {
+            //console.log(err);
+            if (err) {
+                //console.log(err);
+                res.send(err);
+                return;
+            }
+
             User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
                     console.log("method:" + goal.methodOfCollection);
                     console.log("method as var:" + methodsOfCollection);
                     console.log("goal:" + goal);
-                    res.render('pages/sharedWithMeGoalProfile', {
-                        user: user,
-                        goalDatas: goalDatas,
-                        student: student,
-                        goal: goal,
-                        methodOfCollection: methodsOfCollection,
-                        shared: true
+                    gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
+                      if (!files || files.length === 0) {
+                        res.render('pages/sharedWithMeGoalProfile', {
+                            user: user,
+                            goalDatas: goalDatas,
+                            student: student,
+                            goal: goal,
+                            methodOfCollection: methodsOfCollection,
+                            shared: true,
+                            files: false
+                        });
+                      } else {
+                        files.map((file) => {
+                          (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
+                        });         
+                        res.render('pages/sharedWithMeGoalProfile', {
+                            user: user,
+                            goalDatas: goalDatas,
+                            student: student,
+                            goal: goal,
+                            methodOfCollection: methodsOfCollection,
+                            shared: true,
+                            files: files
+                        });
+                      }
                     });
+
                 });
             });
         });

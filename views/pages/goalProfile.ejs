@@ -123,24 +123,24 @@
 			</div>
 		</div>
 
-			<div class = "description">
-				<h5><%= goal.description %></h5>
-			</div>
+		<div class = "description">
+			<h5><%= goal.description %></h5>
+		</div>
 
-			<div class = "class-input">
-				<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm" method="post">
+		<div class = "class-input">
+			<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm" method="post">
 
-					<table style="position: center" id="goalInput">
+				<table style="position: center" id="goalInput">
 
 
-						<%if(goal.methodOfCollection[0] == "score") { %>
+					<%if(goal.methodOfCollection[0] == "score") { %>
 								<!---<tr class = "table-active">
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 								</tr>--->
 								<div class="generic-box">
-      								<label for="score">Score:</label>
-      								<input type="number" class="form-control" id="score" placeholder="Input Number" name="score">
-    							</div>
+									<label for="score">Score:</label>
+									<input type="number" class="form-control" id="score" placeholder="Input Number" name="score">
+								</div>
 
 								<%} %>
 
@@ -227,64 +227,64 @@
 									<label for="exampleInputPassword1">With how much support:</label>
 									<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support" name="support">
 								</tr>
-									<input type="hidden" name="useremail" id="useremail"> </input>
-									<script>
-										var email = document.getElementById('useremail');
-										email.value = localStorage.getItem("username");
-									</script>
+								<input type="hidden" name="useremail" id="useremail"> </input>
+								<script>
+									var email = document.getElementById('useremail');
+									email.value = localStorage.getItem("username");
+								</script>
 
 							</table>
 							<input type="submit" input class="btn btn-primary">
 						</form>
 
-					<%if(goal.methodOfCollection[0] == "documentation" || goal.methodOfCollection[1] == "documentation" || goal.methodOfCollection[2] == "documentation" || goal.methodOfCollection[3] == "documentation" || goal.methodOfCollection[4] == "documentation") { %>
+						<%if(goal.methodOfCollection[0] == "documentation" || goal.methodOfCollection[1] == "documentation" || goal.methodOfCollection[2] == "documentation" || goal.methodOfCollection[3] == "documentation" || goal.methodOfCollection[4] == "documentation") { %>
 						<!---<tr class = "table-active">
 							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 						</tr>--->
 						<div class="generic-box">
-									<label for="documentation">Documentation :</label>
-									<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST" enctype="multipart/form-data">
-									<div class="file is-centered">
-										<label class="file-label">
-											<input class="file-input" type="file" name="file" id="file">
-											<span class="file-cta">
-												<span class="file-icon"><i class="fas fa-upload"></i></span>
-											</span>
-										</label>
-									</div><br>
-									<input class="btn btn-primary" type="submit" value="Submit">
-								</form>
-									</div>
+							<label for="documentation">Documentation :</label>
+							<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST" enctype="multipart/form-data">
+								<div class="file is-centered">
+									<label class="file-label">
+										<input class="file-input" type="file" name="file" id="file">
+										<span class="file-cta">
+											<span class="file-icon"><i class="fas fa-upload"></i></span>
+										</span>
+									</label>
+								</div><br>
+								<input class="btn btn-primary" type="submit" value="Submit">
+							</form>
+						</div>
 
-        <% if(files) { %>
-          <% files.forEach(function(file) { %>
-            <% if(file.isImage) { %>
-							<div>
-                <%= file.filename %>
-		              <form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-		                <button style="display: inline-block;" class="btn btn-primary">Delete</button>
-		              </form>
-									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-										<button style="display: inline-block;" class="btn btn-primary">Open</button>
-									</form>
-								</div>
-            <% } else { %>
-							<div>
-								<%= file.filename %>
-									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-										<button style="display: inline-block;" class="btn btn-primary">Delete</button>
-									</form>
-									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-										<button style="display: inline-block;" class="btn btn-primary">Open</button>
-									</form>
-								</div>
-            <% } %>
+						<% if(files) { %>
+						<% files.forEach(function(file) { %>
+						<% if(file.isImage) { %>
+						<div>
+							<%= file.filename %>
+							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+								<button style="display: inline-block;" class="btn btn-primary">Delete</button>
+							</form>
+							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+								<button style="display: inline-block;" class="btn btn-primary">Open</button>
+							</form>
+						</div>
+						<% } else { %>
+						<div>
+							<%= file.filename %>
+							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+								<button style="display: inline-block;" class="btn btn-primary">Delete</button>
+							</form>
+							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+								<button style="display: inline-block;" class="btn btn-primary">Open</button>
+							</form>
+						</div>
+						<% } %>
 
-          <% }); %>
-        <% } else { %>
-          <p class="content">No files to show</p>
-        <% } %>
-				<%} %>
+						<% }); %>
+						<% } else { %>
+						<p class="content">No files to show</p>
+						<% } %>
+						<%} %>
 
 					</div>
 
@@ -315,7 +315,7 @@
 									<th>Date</th>
 
 									<%if(goal.shared == true) { %>
-										<th>Created by</th>
+									<th>Created by</th>
 									<%} %>
 
 									<th>Delete Goal</th>
@@ -340,49 +340,55 @@
 									<td><%= goalData.comments %></td>
 									<%} %>
 
+									<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 
-										<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
-									</tr>
-									</tbody>
-								</table>
+					              <%if(goal.shared == true) { %>
+					              <td><%=goalData.teacherEmail%></td>
+					              <%} %>
 
-								<div id="data_chart"></div>
-								<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-								<script>
-									google.charts.load('current', {'packages':['line', 'corechart']});
-								    google.charts.setOnLoadCallback(drawChart);
 
-								    function drawChart() {
+									<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div id="data_chart"></div>
+						<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+						<script>
+							google.charts.load('current', {'packages':['line', 'corechart']});
+							google.charts.setOnLoadCallback(drawChart);
+
+							function drawChart() {
 								      // console.log(goal.methodOfCollection[0]);
 								      var TrackMethod = ["<%=goal.methodOfCollection[0]%>", "<%=goal.methodOfCollection[1]%>"];
 								      var dataset = [];
 								      var date;
 								      if (TrackMethod[0] == "score"){
-									      <%goalDatas.forEach(function(goalData){%>
-									      	date = new Date("<%=goalData.time%>")
-									      	dataset.push([date, <%=goalData.score%>]);
-									      	<%})%>
-									  }
-									  else if (TrackMethod[0] == "count"){
-									  	  <%goalDatas.forEach(function(goalData){%>
-									      	date = new Date("<%=goalData.time%>")
-									      	dataset.push([date, <%=goalData.count%>]);
-									      	<%})%>
-									  }
-									  else{
-									  	return;
-									  }
-									  if (TrackMethod[1] == "count"){
-									  	<%goalDatas.forEach(function(goalData, index){%>
-									      	dataset[<%=index%>].push(<%=goalData.count%>);
-									      	<%})%>
-									  }
-									  console.log(dataset);
-									  
-									  if (dataset.length == 0){
-									  	return;
-									  }
-						
+								      	<%goalDatas.forEach(function(goalData){%>
+								      		date = new Date("<%=goalData.time%>")
+								      		dataset.push([date, <%=goalData.score%>]);
+								      		<%})%>
+								      }
+								      else if (TrackMethod[0] == "count"){
+								      	<%goalDatas.forEach(function(goalData){%>
+								      		date = new Date("<%=goalData.time%>")
+								      		dataset.push([date, <%=goalData.count%>]);
+								      		<%})%>
+								      }
+								      else{
+								      	return;
+								      }
+								      if (TrackMethod[1] == "count"){
+								      	<%goalDatas.forEach(function(goalData, index){%>
+								      		dataset[<%=index%>].push(<%=goalData.count%>);
+								      		<%})%>
+								      }
+								      console.log(dataset);
+
+								      if (dataset.length == 0){
+								      	return;
+								      }
+
 								      var data = new google.visualization.DataTable();
 								      data.addColumn('date', "Date");
 								      data.addColumn('number', TrackMethod[0]);
@@ -394,64 +400,58 @@
 								      var options = {
 								      	'title': "<%=goal.name%>",
 								      	hAxis: {
-						                  title: 'Date'
-						               	},
-						               	vAxis: {
-						                  title: 'Data'
-						               	},   
-								        width: 1000,
-								        height: 200,
-								        pointsVisible: true,
-								        backgroundColor: '#e3e4e6'						      
-    									};
+								      		title: 'Date'
+								      	},
+								      	vAxis: {
+								      		title: 'Data'
+								      	},   
+								      	width: 1000,
+								      	height: 200,
+								      	pointsVisible: true,
+								      	backgroundColor: '#e3e4e6'						      
+								      };
 
 								      var chart = new google.visualization.LineChart(document.getElementById('data_chart'));
 
 								      chart.draw(data, options);
-        
-								    }
+
+								  }
 								</script>
 
 								<button id="btnExport" onclick="fnExcelReport();" type="submit" class="btn btn-primary right" style="position: relative; top: 10px"> Export </button>
 
-									<%if(goal.shared == true) { %>
-										<td><%=goalData.teacherEmail%></td>
-									<%} %>
-
-									<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
-								</tr>
-								<% }); %>
-							</tbody>
-						</table>
-						<button id="btnExport" onclick="fnExcelReport();" type="submit" class="btn btn-primary right" style="position: relative; top: 10px"> Export </button>
-
-						<br><div id="result"></div>
-						<br><div id="delete"></div>
-					</div>
+								<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
+							</tr>
+							<% }); %>
+						</tbody>
+					</table>
+					<br><div id="result"></div>
+					<br><div id="delete"></div>
+				</div>
 
 				
 
 
-				</main>
+			</main>
 
 
 
-				<footer class="footer">
-					<div class="footer__copyright">&copy; 2019 TRACK</div>
-					<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
-				</footer>
-			</div>
+			<footer class="footer">
+				<div class="footer__copyright">&copy; 2019 TRACK</div>
+				<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
+			</footer>
+		</div>
 
 
-			</html>
+		</html>
 
-			<script type="text/javascript">
+		<script type="text/javascript">
 
-				function fnExcelReport()
-				{
+			function fnExcelReport()
+			{
 
-					var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
-					var textRange; var j=0;
+				var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+				var textRange; var j=0;
     var tab = document.getElementById('t01'); // id of table
     for(j = 0 ; j < tab.rows.length ; j++)
     {
