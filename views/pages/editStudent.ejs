@@ -14,6 +14,7 @@
   <%- include("../partials/header.ejs")%>
 
   <main class="main">
+
     <script>
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) {
@@ -49,7 +50,8 @@
             <option value="10">10</option>
           </select>
           <br>
-          <input type="submit" class="btn btn-primary">
+            <input type="submit" class="btn btn-primary">
+            <a href="javascript:history.back()" class="btn btn-info">Cancel</a>
 
         </div>
         

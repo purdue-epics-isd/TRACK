@@ -3,6 +3,9 @@ const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
+
+mongoose.set('useFindAndModify', false); // solve findAndModify() warning
+
 // Require packages
 const path = require('path');
 const crypto = require('crypto');
@@ -32,6 +35,7 @@ exports.goal_create = function (req, res) {
                 methodOfCollection: req.body.methodOfCollection,
                 occurrencesType: req.body.occurrences,
                 shared: false,
+                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
                 goaldata: []
             })
 
@@ -168,18 +172,20 @@ exports.goal_redirect_edit = function (req, res) {
 exports.goal_edit = function (req, res) {
     console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
-        { $set: { name: req.body.name,
-            description: req.body.description,
-            startDate: req.body.startDate,
-            endDate: req.body.endDate,
-            goalType: req.body.goalType
-             } }, function (err) {
-          if (err) {
-            console.log(err);
-          }
-          else {
-            res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
-          }
+            { $set: { name: req.body.name,
+                description: req.body.description,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate,
+                goalType: req.body.goalType,
+                occurrencesType: req.body.occurrences,
+                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied]
+                } }, function (err) {
+              if (err) {
+                console.log(err);
+              }
+              else {
+                res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
+              }
         });
 }
 
@@ -210,28 +216,6 @@ exports.goal_share = function (req, res) {
     });
 
     res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
-/*
-    Student.findByIdAndUpdate(req.params.studentid, { $set: {shared:true}, $push: {sharedWith: req.body.email}}, function (err) {
-          if (err) {
-            console.log(err);
-          }
-          else {
-          }
-    });
-    */
-    /*
-    Goal.findByIdAndUpdate(req.params.goalid, { $set: {shared:true}, $push: {sharedWith: req.body.email}}, function (err) {
-          if (err) {
-            console.log(err);
-          }
-          else {
-            console.log("\nSHARING GOAL...")
-            console.log("\nGoal id:" + req.params.goalid);
-            console.log("\nSharing with:" + req.body.email);
-            res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
-          }
-    });
-    */
 }
 
 /*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/

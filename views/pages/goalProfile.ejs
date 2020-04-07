@@ -76,7 +76,51 @@
 		text-decoration: none;
 		cursor: pointer;
 	}
-</style>
+
+		#topBtn {
+			display: none;
+			position: fixed;
+			bottom: 20px;
+			left: 30px;
+			z-index: 99;
+			font-size: 15px;
+			border: none;
+			outline: none;
+			background-color: #2C3E50;
+			color: white;
+			cursor: pointer;
+			padding: 15px;
+			border-radius: 4px;
+		}
+
+		#topBtn:hover {
+	  		background-color: #555;
+		}
+
+	</style>
+
+<button onclick="topFunction()" id="topBtn" title="Go to top">Back to Top</button>
+<script>
+//Get the button
+var mybutton = document.getElementById("topBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
 
 <div class="grid-container">
 
@@ -91,18 +135,63 @@
 			}
 		</script>
 
-		
-
+		    <a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
 		<div class =  class-header>
 			<!-- The Modal -->
-			<div id="myModal" class="modal">
-
+			<div id="sharingModal" class="modal">
 				<!-- Modal content -->
 				<div class="modal-content">
 					<span class="close">&times;</span>
 					<form action="/student/<%= student.id %>/goal/<%= goal.id %>/share" id="shareEmail" method="post"> 
 						<label for="email">Enter the email of the teacher you would like to share with:</label>
 						<input type="email" class="form-control" id="email" placeholder="Input Email" name="email"><br>
+					</form>
+				</div>
+			</div>
+			  <!-- Trigger/Open The Modal -->
+			  <button id="myBtn" class="btn btn-primary">Need Help?</button>
+
+			  <!-- The Modal -->
+			  <div id="myModal" class="modal">
+
+				    <!-- Modal content -->
+				      <div class="modal-content">
+					          <span class="close">&times;</span>
+						      <p>This is the goal profile.  Here you can further analyze the statistics of your students progress.  If you click export, you can even export the data into a pdf document!</p>
+						       
+				      <img src="/img/graphExport.png">
+				      </div>
+
+			  </div>
+
+		  <script>
+		  // Get the modal
+		  var modal = document.getElementById("myModal");
+
+		  // Get the button that opens the modal
+		  var btn = document.getElementById("myBtn");
+
+		  // Get the <span> element that closes the modal
+		  var span = document.getElementsByClassName("close")[0];
+
+		  // When the user clicks the button, open the modal 
+		  btn.onclick = function() {
+	  	    modal.style.display = "block";
+		  }
+
+		  // When the user clicks on <span> (x), close the modal
+		  span.onclick = function() {
+	  	    modal.style.display = "none";
+		  }
+
+		  // When the user clicks anywhere outside of the modal, close it
+		  window.onclick = function(event) {
+	  	    if (event.target == modal) {
+		      modal.style.display = "none";
+		    }
+		  }		
+		</script>
+				
 
 						<input type="submit" input class="btn btn-primary">
 					</form>
@@ -149,68 +238,69 @@
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 								</tr>--->
 								<div class="generic-box">
-									<label for="occurrences">Count of occurrences(<%=goal.occurrencesType%>):</label>
-									<input type="texts" class="form-control" id="count" placeholder="Input Number" name="count">
-								</div>
+      								<label for="occurrences">Count of occurrences(<%=goal.occurrencesType%>):</label>
+      								<input type="number" class="form-control" id="count" placeholder="Input Number" name="count">
+    							</div>
 
-								<%} %>
+							<%} %>
 
-								<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
-								<div class="generic-box">
-									<label for="exampleInputPassword1">Rubric</label>
+							<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+									<div class="generic-box">
+									      <label for="exampleInputPassword1">Rubric</label>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Not evident" checked="">
-											Not evident
-										</label>
-									</div>
+									      <div class="form-check">
+									        <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Not evident" checked="">
+									          Not evident: <%= goal.rubricdescription[0] %>
+									        </label>
+									      </div>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Introduced">
-											Introduced
-										</label>
-									</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Introduced">
+									          Introduced: <%= goal.rubricdescription[1] %>
+									        </label>
+									      </div>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Emerging">
-											Emerging
-										</label>
-									</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Emerging">
+									          Emerging: <%= goal.rubricdescription[2] %>
+									        </label>
+									      </div>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Developing">
-											Developing
-										</label>
-									</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Developing">
+									          Developing: <%= goal.rubricdescription[3] %>
+									        </label>
+									      </div>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Ongoing">
-											Ongoing
-										</label>
-									</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Ongoing">
+									          Ongoing: <%= goal.rubricdescription[4] %>
+									        </label>
+									      </div>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Demonstrated">
-											Demonstrated
-										</label>
-									</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Demonstrated">
+									          Demonstrated: <%= goal.rubricdescription[5] %>
+									        </label>
+									      </div>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Applied">
-											Applied
-										</label>
-									</div>
-								</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Applied">
+									          Applied: <%= goal.rubricdescription[6] %>
+									        </label>
+									      </div>
+
 								<%} %>
 
 								<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
+
 								<!--<tr class = "table-active">
 									<td> Additional Comments: </td><td><input type="text" name="comments"></td>
 								</tr>--->
@@ -242,121 +332,107 @@
 							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 						</tr>--->
 						<div class="generic-box">
-							<label for="documentation">Documentation :</label>
-							<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST" enctype="multipart/form-data">
-								<div class="file is-centered">
-									<label class="file-label">
-										<input class="file-input" type="file" name="file" id="file">
-										<span class="file-cta">
-											<span class="file-icon"><i class="fas fa-upload"></i></span>
-										</span>
-									</label>
-								</div><br>
-								<input class="btn btn-primary" type="submit" value="Submit">
-							</form>
-						</div>
+									<label for="documentation">Documentation :</label>
+									<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST" enctype="multipart/form-data">
+									<div class="file is-centered">
+										<label class="file-label">
+											<input class="file-input" type="file" name="file" id="file">
+											<span class="file-cta">
+												<span class="file-icon"><i class="fas fa-upload"></i></span>
+											</span>
+										</label>
+									</div><br>
+									<input class="btn btn-primary" type="submit" value="Submit">
+								</form>
+									</div>
 
-						<% if(files) { %>
-						<% files.forEach(function(file) { %>
-						<% if(file.isImage) { %>
-						<div>
-							<%= file.filename %>
-							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-								<button style="display: inline-block;" class="btn btn-primary">Delete</button>
-							</form>
-							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-								<button style="display: inline-block;" class="btn btn-primary">Open</button>
-							</form>
-						</div>
-						<% } else { %>
-						<div>
-							<%= file.filename %>
-							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-								<button style="display: inline-block;" class="btn btn-primary">Delete</button>
-							</form>
-							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-								<button style="display: inline-block;" class="btn btn-primary">Open</button>
-							</form>
-						</div>
-						<% } %>
+        <% if(files) { %>
+          <% files.forEach(function(file) { %>
+            <% if(file.isImage) { %>
+							<div>
+                <%= file.filename %>
+		              <form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+		                <button style="display: inline-block;" class="btn btn-primary">Delete</button>
+		              </form>
+									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+										<button style="display: inline-block;" class="btn btn-primary">Open</button>
+									</form>
+								</div>
+            <% } else { %>
+							<div>
+								<%= file.filename %>
+									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+										<button style="display: inline-block;" class="btn btn-primary">Delete</button>
+									</form>
+									<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+										<button style="display: inline-block;" class="btn btn-primary">Open</button>
+									</form>
+								</div>
+            <% } %>
 
-						<% }); %>
-						<% } else { %>
-						<p class="content">No files to show</p>
-						<% } %>
-						<%} %>
+          <% }); %>
+        <% } else { %>
+          <p class="content">No files to show</p>
+        <% } %>
+				<%} %>
 
-					</div>
-
-
-					<div class = "goal-data">
-						<h2>Progress Monitoring</h2>
-						<table class="table table-hover" id="t01">
-							<!--<table style="display: : center" id="t01">-->
-								<tr class="table-active">
-									<%if(goal.methodOfCollection[0] == "score") { %>
-									<th>Score</th>
-									<%} %>
-
-									<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
-									<th>Count of Occurrences</th>
-									<%} %>
-
-									<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
-									<th>Progress</th>
-									<%} %>
-
-									<th>Support</th>
-
-									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
-									<th>Descriptive Comments</th>
-									<%} %>
-
-									<th>Date</th>
-
-									<%if(goal.shared == true) { %>
-									<th>Created by</th>
-									<%} %>
-
-									<th>Delete Goal</th>
-								</tr>
-								<% goalDatas.forEach(function(goalData) { %>
-								<tr>
-									<%if(goal.methodOfCollection[0] == "score") { %>
-									<td><%= goalData.score %></td>
-									<%} %>
-
-									<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count" || goal.methodOfCollection[2] == "count") { %>
-									<td><%= goalData.count %></td>
-									<%} %>
-
-									<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
-									<td><%= goalData.rubricOption %></td>
-									<%} %>
-
-									<td><%= goalData.support %></td>
-
-									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] || goal.methodOfCollection[3] == "comments") { %>
-									<td><%= goalData.comments %></td>
-									<%} %>
-
-									<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
-
-					              <%if(goal.shared == true) { %>
-					              <td><%=goalData.teacherEmail%></td>
-					              <%} %>
+				</div>
 
 
-									<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
-								</tr>
-							</tbody>
-						</table>
+				<div class = "goal-data">
+								<h2>Progress Monitoring</h2>
+								<table class="table table-hover" id="t01">
+								<!--<table style="display: : center" id="t01">-->
+									<tr class="table-active">
+										<%if(goal.methodOfCollection[0] == "score") { %>
+											<th>Score</th>
+										<%} %>
 
-						<div id="data_chart"></div>
-						<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-						<script>
-							google.charts.load('current', {'packages':['line', 'corechart']});
-							google.charts.setOnLoadCallback(drawChart);
+										<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
+											<th>Count of Occurrences</th>
+										<%} %>
+
+										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+											<th>Progress</th>
+										<%} %>
+
+										<th>Support</th>
+
+										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
+											<th>Descriptive Comments</th>
+										<%} %>
+
+										<th>Date</th>
+
+										<th>Delete Goal</th>
+									</tr>
+									<% goalDatas.forEach(function(goalData) { %>
+									<tr>
+										<%if(goal.methodOfCollection[0] == "score") { %>
+											<td><%= goalData.score %></td>
+										<%} %>
+
+										<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count" || goal.methodOfCollection[2] == "count") { %>
+											<td><%= goalData.count %></td>
+										<%} %>
+
+										<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+											<td><%= goalData.rubricOption %></td>
+										<%} %>
+
+										<td><%= goalData.support %></td>
+
+										<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
+											<td><%= goalData.comments %></td>
+										<%} %>
+
+										<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
+
+										<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>" onclick="return confirm('Please confirm to delete this data');"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
+									</tr>
+									<% }); %>
+									</tbody>
+								</table>
 
 							function drawChart() {
 								      // console.log(goal.methodOfCollection[0]);
@@ -435,12 +511,11 @@
 			</main>
 
 
-
-			<footer class="footer">
-				<div class="footer__copyright">&copy; 2019 TRACK</div>
-				<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
-			</footer>
-		</div>
+		<footer class="footer">
+			<div class="footer__copyright">&copy; 2019 TRACK</div>
+			<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" onclick="return confirm('Please confirm to delete this goal');" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
+		</footer>
+	</div>
 
 
 		</html>
@@ -487,7 +562,7 @@
 	return (sa);
 }
 // Get the modal
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("sharingModal");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");

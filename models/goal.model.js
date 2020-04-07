@@ -13,6 +13,7 @@ let GoalSchema = new Schema({
     occurrencesType: {type: String, required: false},
     shared: {type: Boolean, required: true},
     sharedWith: [{type: String}],
+    rubricdescription: [{type: String, required: false}],
     goaldata: [{type: Schema.ObjectId, ref: 'GoalData'}]
 });
 
