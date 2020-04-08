@@ -29,7 +29,13 @@
                 <img src="img/epics_logo.png" style  = "width: 25%">
             </div>
 
-
+<form  style="display: none" id="submitForm" method="post">
+    <input type="hidden" name="useremail" id="useremail"> </input>
+    <script>
+      var email = document.getElementById('useremail');
+      email.value = localStorage.getItem("username");
+    </script>
+  </form>
 
         </div>
     
@@ -40,7 +46,7 @@
 
 <script>
 
-    var msalConfig = {
+var msalConfig = {
     auth: {
         clientId: "f4238741-ebe5-4017-94b5-4de9dc3c20b8",
         authority: "https://login.microsoftonline.com/organizations",
@@ -76,14 +82,11 @@ myMSALObj.handleRedirectCallback(authRedirectCallBack);
 
 
 function signIn() {
-
+    //localStorage.setItem("username",myMSALObj.getAccount().username);
     myMSALObj.loginPopup(requestObj).then(function (loginResponse) {
         //Login Success
         //showWelcomeMessage();
         acquireTokenPopupAndCallMSGraph();
-
-        
-       //window.location.replace("./classPage");
     }).catch(function (error) {
         console.log(error);
     });
@@ -122,8 +125,11 @@ function acquireTokenPopupAndCallMSGraph() {
 function graphAPICallback(data) {
     console.log(data.id);
     console.log(typeof data.id);
-    localStorage.setItem("userID",data.id);   
-    console.log(localStorage.getItem("userID"));
+    localStorage.setItem("userID",data.id);  
+    localStorage.setItem("username",myMSALObj.getAccount().userName); 
+    //console.log(myMSALObj.getAccount());
+    console.log("\nJust the name... \n" + myMSALObj.getAccount().userName);
+    //console.log();
     window.location.href = "./classPage";
     //document.getElementById("json").innerHTML = JSON.stringify(data, null, 2);
 }
@@ -131,7 +137,13 @@ function graphAPICallback(data) {
 
 function showWelcomeMessage() {
     var divWelcome = document.getElementById('WelcomeMessage');
-    divWelcome.innerHTML = 'Welcome ' + myMSALObj.getAccount().userName + " to Purdue EPICS ISD IEP Tracker";
+    console.log("YOEY:" + myMSALObj);
+    if(myMSALObj) {
+        console.log("IN");
+        if(myMSALObj.getAccount()) {
+            //divWelcome.innerHTML = 'Welcome ' + myMSALObj.getAccount().userName + " to Purdue EPICS ISD IEP Tracker";
+        }
+    }
     var loginbutton = document.getElementById('SignIn');
     loginbutton.innerHTML = 'Move on to site';
     loginbutton.setAttribute('onclick', 'signOut();');

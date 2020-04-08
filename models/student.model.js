@@ -10,6 +10,8 @@ let StudentSchema = new Schema({
     dob: {type: Date, required: false},
     email: {type: String, required: false},
     goals: [{type: Schema.ObjectId, ref: 'Goal'}],
+    shared: {type: Boolean, required: true},
+    sharedWith: [{type: String}],
     userid: {type: String, required: true}
 });
 

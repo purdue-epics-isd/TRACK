@@ -77,7 +77,6 @@ function topFunction() {
         }
         </script>   
 
-        
 	 <div class =  class-header>
          <div class="form-group">
             <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
@@ -165,7 +164,7 @@ function topFunction() {
 
                   var studentLabel = document.createElement("class");
                   studentLabel.className = "name";
-                  studentLabel.innerHTML = "<%=student.firstname%>";
+                  studentLabel.innerHTML = "<%=student.firstname%>"; //+ " " + "<%=student.lastname%>";
 
                   studentLink.appendChild(card);
                   card.appendChild(studentImg);

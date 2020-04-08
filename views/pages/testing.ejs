@@ -10,22 +10,16 @@ input {
 	margin: .4rem;
 }
 </style>
+
+
+
 <body>
-	<div id="example" class="k-content">
-    <button type="button"id="btnExport">Export to csv!</button>
-    <div id="grid"></div>
-</div>
-<script>
-$("#btnExport").click(function (e) {
-    var result = "data:application/vnd.ms-excel,";
-
-    window.open(result);
-
-    e.preventDefault();
-});
-</script>
-
-
+	<%- include("../partials/head.ejs")%>
+	<a href="/classPage">
+		<button>
+			Navigate to class page
+		</button>
+	</a>
 <!--
 	<p>Select a maintenance drone:</p>
 

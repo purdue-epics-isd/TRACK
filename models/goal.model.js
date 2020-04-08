@@ -11,6 +11,8 @@ let GoalSchema = new Schema({
     studentID: {type: String, require: false},
     methodOfCollection: [{type: String, require: false}],
     occurrencesType: {type: String, required: false},
+    shared: {type: Boolean, required: true},
+    sharedWith: [{type: String}],
     rubricdescription: [{type: String, required: false}],
     goaldata: [{type: Schema.ObjectId, ref: 'GoalData'}]
 });
