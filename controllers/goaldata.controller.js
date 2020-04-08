@@ -28,9 +28,9 @@ exports.goaldata_create = function (req, res) {
                 }
             });
         });
-        //console.log("is shared?: " + req.params.shared);
+        console.log("is shared?: " + req.params.shared);
         //console.log("evaluate: " + (type(req.params.shared)));
-        if(req.params.shared) {
+        if(req.params.shared == true) {
             res.redirect("/sharedWithMe/" + req.params.studentid);
         } else {
             res.redirect("/student/" + req.params.studentid);

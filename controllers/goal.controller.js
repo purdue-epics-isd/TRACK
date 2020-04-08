@@ -191,6 +191,7 @@ exports.goal_edit = function (req, res) {
 
 /*shares goals with other teachers*/
 exports.goal_share = function (req, res) {
+    console.log("email in body:" + req.body.email);
     Student.findById(req.params.studentid, function (err, student) {
         student.shared = true;
         var alreadyShared = false;

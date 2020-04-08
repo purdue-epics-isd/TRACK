@@ -60,8 +60,10 @@ exports.navigate_to_studentProfile = function (req, res) {
 /*redirects to class page*/
 exports.navigate_to_classPage = function (req, res) {
     try {
+        console.log("email in body:" + req.body.email);
         var students = [];
 
+        
         Student.find({}, {}, function(err, student) {
             student.forEach(function(s) { 
                     students.push(s);

@@ -3,3 +3,11 @@
   <link rel="stylesheet" href="/flatly.css">
   <link rel="stylesheet" href="/dashboard.css">
   <link rel="stylesheet" href="/icons.css">
+
+  <form  style="display: none" id="submitForm" method="post">
+    <input type="hidden" name="useremail" id="useremail"> </input>
+    <script>
+      var email = document.getElementById('useremail');
+      email.value = localStorage.getItem("username");
+    </script>
+  </form>
