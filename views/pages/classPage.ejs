@@ -226,13 +226,14 @@ function topFunction() {
     filter = input.selectedIndex;
     //filter = input.options[input.selectedIndex].text.toUpperCase();
     //console.log("filter: " + filter);
-    students = document.getElementsByClassName("cardName");
+    students = document.getElementsByClassName("studentCardName");
     numStudents = students.length;
-    //console.log("numStudents: " + numStudents);
+    console.log("numStudents: " + numStudents);
 
     for (i = 0; i < numStudents; i++) {
-      period = students[i].className[9];
-      //console.log("period: " + period);
+
+      period = students[i].className[16];
+      console.log("period: " + period);
       if (period.toUpperCase().indexOf(filter) > -1 || filter == 0) {
         students[i].style.display = "";
       } else {
