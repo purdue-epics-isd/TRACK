@@ -111,7 +111,14 @@
     if (month < 10) {
       month = '0' + month;
     }
-    var format = String(year)+'-' + String(month) + '-'+String(dt);
+
+    console.log("look: " + year);
+
+    if(year != NaN) {
+      var format = String(year)+'-' + String(month) + '-'+String(dt);
+    } else {
+      var format = "";
+    }
     console.log("formatted year: " + format);
     document.getElementById('dob').value = format;
   }
