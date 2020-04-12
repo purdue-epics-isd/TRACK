@@ -60,17 +60,6 @@ function topFunction() {
 
     <a href="/classPage" class="btn btn-primary">Go Back to Class Page</a>
     
-    <script>
-      const currentTheme = localStorage.getItem('theme');
-      if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        localStorage.setItem('theme', currentTheme);
-      }
-    </script>   
-
-    <div class="class-header">
-      <h3><%= student.firstname %>'s Profile</h3>
-      
        <!-- Trigger/Open The Modal -->
        <button id="myBtn" class="btn btn-primary">
 	       Need Help?
@@ -113,6 +102,17 @@ function topFunction() {
 						                     }
 					                  }
 					                   </script>
+    <script>
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('theme', currentTheme);
+      }
+    </script>   
+
+    <div class="class-header">
+      <h3><%= student.firstname %>'s Profile</h3>
+      
 
       
       <div class = "nameArea" style="grid-template-columns: repeat(2, 2fr);">

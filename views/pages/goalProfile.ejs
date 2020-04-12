@@ -96,9 +96,6 @@ function topFunction() {
 
 		    <a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
 
-			 <div class =  class-header>
-		          <h1><%= goal.name %></h1>
-
 			  <!-- Trigger/Open The Modal -->
 			  <button id="myBtn" class="btn btn-primary">Need Help?</button>
 
@@ -142,6 +139,9 @@ function topFunction() {
 		    }
 		  }		
 		</script>
+			 <div class =  class-header>
+		          <h1><%= goal.name %></h1>
+
 				
 		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
 			  <button type="button" class="btn btn-primary">
