@@ -134,7 +134,7 @@
 		</script>
 
 
-		<a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
+		<a href="/student/<%=student.id%>" class="btn btn-primary">Go Back to Student Profile</a>
 		<div class = class-header>
 			<h1><%= goal.name %></h1>
 			<!-- The Modal -->
@@ -475,14 +475,12 @@
 
 								var options = {
 									'title': "<%=goal.name%>",
-									hAxis: {
-										title: 'Date'
+									chartArea:{
+										left:150,
+										top:30,
+										width: 650,
+										height: 90
 									},
-									vAxis: {
-										title: 'Data'
-									},   
-									width: 1000,
-									height: 200,
 									pointsVisible: true,
 									backgroundColor: '#e3e4e6'						      
 								};
