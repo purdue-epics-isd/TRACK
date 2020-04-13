@@ -142,7 +142,7 @@
 				<!-- Modal content -->
 				<div class="sharing-modal-content">
 					<span class="sharingclose close">&times;</span>
-					<form action="/student/<%= student.id %>/goal/<%= goal.id %>/share" id="shareEmail" method="post"> 
+					<form action="/student/<%= student.id %>/goal/<%= goal.id %>/share" id="shareEmail" method="post">
 						<label for="email">Enter the email of the teacher you would like to share with:</label>
 						<input type="email" class="form-control" id="email" placeholder="Input Email" name="email"><br>
 						<input type="submit" input class="btn btn-primary">
@@ -175,7 +175,7 @@
 			  // Get the <span> element that closes the modal
 			  var span = document.getElementsByClassName("helpclose")[0];
 
-			  // When the user clicks the button, open the modal 
+			  // When the user clicks the button, open the modal
 			  btn.onclick = function() {
 			  	helpmodal.style.display = "block";
 			  }
@@ -190,11 +190,11 @@
 			  	if (event.target == helpmodal) {
 			  		helpmodal.style.display = "none";
 			  	}
-			  }		
+			  }
 			</script>
-		
 
-		
+
+
 		<div>
 			<!--triggers the modal opening-->
 			<button id="sharingBtn" type="button" class="btn btn-primary">
@@ -394,7 +394,7 @@
 
 									<th>Support</th>
 
-									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
+									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments" ) { %>
 									<th>Descriptive Comments</th>
 									<%} %>
 
@@ -434,7 +434,7 @@
 								<script>
 									google.charts.load('current', {'packages':['line', 'corechart']});
 								    google.charts.setOnLoadCallback(drawChart);
-								    
+
 							function drawChart() {
 								var TrackMethod = ["<%=goal.methodOfCollection[0]%>", "<%=goal.methodOfCollection[1]%>"];
 								var dataset = [];
@@ -480,11 +480,11 @@
 									},
 									vAxis: {
 										title: 'Data'
-									},   
+									},
 									width: 1000,
 									height: 200,
 									pointsVisible: true,
-									backgroundColor: '#e3e4e6'						      
+									backgroundColor: '#e3e4e6'
 								};
 
 								var chart = new google.visualization.LineChart(document.getElementById('data_chart'));
@@ -557,7 +557,7 @@ var btn = document.getElementById("sharingBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("sharingclose")[0];
 
-// When the user clicks the button, open the modal 
+// When the user clicks the button, open the modal
 btn.onclick = function() {
 	sharingmodal.style.display = "block";
 }
