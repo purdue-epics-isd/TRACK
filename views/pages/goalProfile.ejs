@@ -278,6 +278,11 @@
 							</tr>
 
 							<br>
+							<input type="hidden" name="useremail" id="useremail"> </input>
+								<script>
+									var email = document.getElementById('useremail');
+									email.value = localStorage.getItem("username");
+								</script>
 						</table>
 						<input type="submit" input class="btn btn-primary">
 					</form>
