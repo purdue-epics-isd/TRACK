@@ -19,6 +19,7 @@ const misc_controller = require('../controllers/misc.controller');
 const user_controller = require('../controllers/user.controller');
 
 const Student = require('../models/student.model');
+const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
 //var userID = sessionStorage.getItem("userID");
 
@@ -53,15 +54,16 @@ db.once('open', () => {
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
-router.post('/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+router.post('/student/:studentid/goal/:goalid/goaldata/create/:shared', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+router.post('/student/:studentid/goal/:goalid/share', goal_controller.goal_share); //shares goal with another teacher
 router.post('/signUp/createUser', user_controller.createUser);
 router.post('/student/:studentid/goal/edit/:goalid', goal_controller.goal_edit);
 router.get('/student/:studentid/student_edit', student_controller.student_redirect_edit); //edit student information
 router.post('/student/:studentid/student_edit/submit', student_controller.student_edit); //submit final student edits
 
-
 router.get('/student/:studentid/goal/:goalid/goal_delete', goal_controller.goal_delete);//WHY CAN'T I USE ROUTER.DELETE
 router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_redirect_edit); //redirect to goal editing page
+router.get('/student/:studentid/goal/:goalid/goal_share', goal_controller.goal_share); //redirect to goal sharing page
 router.post('/student/:studentid/goal/:goalid/goal_edit/submit', goal_controller.goal_edit); //submit final goal edits
 //router.delete('/goal/delete',goal_controller.goal_delete);
 router.get('/student/:studentid/goal/:goalid/goal_edit', goal_controller.goal_redirect_edit);
@@ -91,6 +93,7 @@ router.post('/student/:studentid/goal/:goalid/goaldata/files/:id/download', (req
     });
 
 
+
 router.get('/login_confirm', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 	  if (err) { return next(err); }
@@ -113,7 +116,10 @@ router.get('/classPage', student_controller.navigate_to_classPage);
 router.get('/student/:studentid', student_controller.navigate_to_studentProfile); //navigates to a student profile
 router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
-router.get('/createNewStudent',student_controller.navigate_to_createNewStudent); //navigates to new student page
+router.get('/createNewStudent', student_controller.navigate_to_createNewStudent); //navigates to new student page
+router.get('/sharedWithMe', student_controller.navigate_to_sharedWithMeClassPage);
+router.get('/sharedWithMe/:studentid', goal_controller.navigate_to_sharedWithMeStudentProfile);
+router.get('/sharedWithMe/:studentid/:goalid', goal_controller.navigate_to_sharedWithMeGoalProfile);
 router.get('/aboutUs', (req, res) => {
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/aboutUs.ejs', {

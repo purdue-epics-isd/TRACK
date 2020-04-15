@@ -215,11 +215,11 @@ function topFunction() {
 				<div><br>
 					<h3>Method of Collection:</h3>
 
-					<%if(goal.methodOfCollection[0] == "score") { %>
+					<%if(goal.methodOfCollection.includes("score")) { %>
 					<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score" checked="" onclick="return false;"> Score <br>
 					<%} %>
 
-					<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
+					<%if(goal.methodOfCollection.includes("count")) { %>
 					<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count" checked="" onclick="return false;"> Count of Occurrences<br>
 					<select class="form-control" name = "occurrences" style="width:100%">
 	            		<% if (goal.occurrencesType == 'Per hour') { %>
@@ -249,7 +249,7 @@ function topFunction() {
 	          		</select>
 					<%} %>
 					
-					<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+					<%if(goal.methodOfCollection.includes("rubric")) { %>
 					<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" checked="" onclick="return false;"> Rubric <br>
 						<% if (goal.rubricdescription[0] == '') { %>
 						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
@@ -301,9 +301,13 @@ function topFunction() {
 						<%} %>
 					<%} %>
 
-					<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
+					<%if(goal.methodOfCollection.includes("comments")) { %>
 						<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments" checked="" onclick="return false;"> Descriptive Comments <br>
 					<%} %>
+
+					<%if(goal.methodOfCollection.includes("documentation")) { %>
+						<input type="checkbox" style="width: auto" name="methodOfCollection" value="documentation" id="documentation" checked="" onclick="return false;"> File/Image documentation <br>
+					<%} %>					
 				</div>
 
 				<div style="overflow:auto;">

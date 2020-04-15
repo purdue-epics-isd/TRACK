@@ -220,7 +220,15 @@ function topFunction() {
     if (month < 10) {
       month = '0' + month;
     }
-    var format = String(month) + '-' + String(dt) + '-' + String(year); 
+
+    if(String(year) != "NaN") {
+      console.log("good");
+      var format = String(month) + '-'+ String(dt) +'-' + String(year);
+    } else {
+      console.log("bad");
+      var format = "";
+    }
+
     console.log("formatted year: " + format);
     document.getElementById('dob').innerHTML = format;
   }
