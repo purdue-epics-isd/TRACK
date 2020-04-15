@@ -125,18 +125,22 @@
 	<%- include("../partials/header.ejs")%>
 
 	<main class="main">
-		<script>
-			const currentTheme = localStorage.getItem('theme');
-			if (currentTheme) {
-				document.documentElement.setAttribute('data-theme', currentTheme);
-				localStorage.setItem('theme', currentTheme);
-			}
-		</script>
+			<script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+		    </script>
 
+		    <a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
 
-		<a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
-		<div class = class-header>
-			<h1><%= goal.name %></h1>
+			  <!-- Trigger/Open The Modal -->
+			  <button id="myBtn" class="btn btn-primary">Need Help?</button>
+
+			
+			 <div class =  class-header>
+		          <h1><%= goal.name %></h1>
 			<!-- The Modal -->
 			<div id="sharingModal" class="sharing-modal">
 				<!-- Modal content -->
@@ -149,76 +153,36 @@
 					</form>
 				</div>
 			</div>
-			<!-- Trigger/Open The Modal -->
-			<button id="helpBtn" class="btn btn-primary">Need Help?</button>
-
-			<!-- The Modal -->
-			<div id="helpModal" class="modal">
-
-				<!-- Modal content -->
-				<div class="modal-content">
-					<span class="helpclose close">&times;</span>
-					<p>This is the goal profile.  Here you can further analyze the statistics of your students progress.  If you click export, you can even export the data into a pdf document!</p>
-
-					<img src="/img/graphExport.png">
-				</div>
-
-			</div>
-
-			<script>
-			  // Get the modal
-			  var helpmodal = document.getElementById("helpModal");
-
-			  // Get the button that opens the modal
-			  var btn = document.getElementById("helpBtn");
-
-			  // Get the <span> element that closes the modal
-			  var span = document.getElementsByClassName("helpclose")[0];
-
-			  // When the user clicks the button, open the modal
-			  btn.onclick = function() {
-			  	helpmodal.style.display = "block";
-			  }
-
-			  // When the user clicks on <span> (x), close the modal
-			  span.onclick = function() {
-			  	helpmodal.style.display = "none";
-			  }
-
-			  // When the user clicks anywhere outside of the modal, close it
-			  window.onclick = function(event) {
-			  	if (event.target == helpmodal) {
-			  		helpmodal.style.display = "none";
-			  	}
-			  }
-			</script>
-
-
-
-		<div>
-			<!--triggers the modal opening-->
+			<div>
+				<!--triggers the modal opening-->
 			<button id="sharingBtn" type="button" class="btn btn-primary">
 				Share Goal
 			</button>
-			<!--</a>-->
-			<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
-				<button type="button" class="btn btn-primary">
-					Edit Goal
-				</button>
-			</a>
-		</div>
-</div>
-	<div class = "description">
-		<h5><%= goal.description %></h5>
-	</div>
+		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
+
+			  <button type="button" class="btn btn-primary">
+				  Edit Goal
+			  </button> </a>
+        	</div>
+        </div>
+
+			<div class = "description">
+				<h5><%= goal.description %></h5>
+			</div>
+		<script>
+			const currentTheme = localStorage.getItem('theme');
+			if (currentTheme) {
+				document.documentElement.setAttribute('data-theme', currentTheme);
+				localStorage.setItem('theme', currentTheme);
+			}
+		</script>
 
 	<div class = "class-input">
 		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm" method="post">
 
 			<table style="position: center" id="goalInput">
 
-
-				<%if(goal.methodOfCollection[0] == "score") { %>
+							<%if(goal.methodOfCollection.includes("score")) { %>
 								<!---<tr class = "table-active">
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 								</tr>--->
@@ -229,101 +193,93 @@
 
 								<%} %>
 
-								<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
+							<%if(goal.methodOfCollection.includes("count")) { %>
 								<!---<tr class = "table-active">
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 								</tr>--->
 								<div class="generic-box">
-									<label for="occurrences">Count of occurrences(<%=goal.occurrencesType%>):</label>
-									<input type="number" class="form-control" id="count" placeholder="Input Number" name="count">
-								</div>
+      								<label for="occurrences">Count of occurrences(<%=goal.occurrencesType%>):</label>
+      								<input type="number" class="form-control" id="count" placeholder="Input Number" name="count">
+    							</div>
 
-								<%} %>
+							<%} %>
 
-								<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
-								<div class="generic-box">
-									<label for="exampleInputPassword1">Rubric</label>
+							<%if(goal.methodOfCollection.includes("rubric")) { %>
+									<div class="generic-box">
+									      <label for="exampleInputPassword1">Rubric</label>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Not evident" checked="">
-											Not evident: <%= goal.rubricdescription[0] %>
-										</label>
+									      <div class="form-check">
+									        <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Not evident" checked="">
+									          Not evident: <%= goal.rubricdescription[0] %>
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Introduced">
+									          Introduced: <%= goal.rubricdescription[1] %>
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Emerging">
+									          Emerging: <%= goal.rubricdescription[2] %>
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Developing">
+									          Developing: <%= goal.rubricdescription[3] %>
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Ongoing">
+									          Ongoing: <%= goal.rubricdescription[4] %>
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Demonstrated">
+									          Demonstrated: <%= goal.rubricdescription[5] %>
+									        </label>
+									      </div>
+
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Applied">
+									          Applied: <%= goal.rubricdescription[6] %>
+									        </label>
+									      </div>
 									</div>
+							<%} %>
 
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Introduced">
-											Introduced: <%= goal.rubricdescription[1] %>
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Emerging">
-											Emerging: <%= goal.rubricdescription[2] %>
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Developing">
-											Developing: <%= goal.rubricdescription[3] %>
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Ongoing">
-											Ongoing: <%= goal.rubricdescription[4] %>
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Demonstrated">
-											Demonstrated: <%= goal.rubricdescription[5] %>
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Applied">
-											Applied: <%= goal.rubricdescription[6] %>
-										</label>
-									</div>
-
-									<%} %>
-
-									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
-
+							<%if(goal.methodOfCollection.includes("comments")) { %>
 								<!--<tr class = "table-active">
 									<td> Additional Comments: </td><td><input type="text" name="comments"></td>
 								</tr>--->
-
 								<div class="generic-box">
 									<label for="exampleTextarea">Descriptive Comments</label>
 									<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type Comment" name="comments"></textarea>
 								</div>
+							<%} %>
 
-								<%} %>
+								<div class="generic-box">
+								<label for="exampleInputPassword1">With how much support:</label>
+      								<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support" name="support">
+							</tr>
 
-								<tr class = "generic-box">
+							<br>
+						</table>
+						<input type="submit" input class="btn btn-primary">
+					</form>
 
-									<label for="exampleInputPassword1">With how much support:</label>
-									<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support" name="support">
-								</tr>
-								<input type="hidden" name="useremail" id="useremail"> </input>
-								<script>
-									var email = document.getElementById('useremail');
-									email.value = localStorage.getItem("username");
-								</script>
-
-							</table>
-							<input type="submit" input class="btn btn-primary">
-						</form>
-
-						<%if(goal.methodOfCollection[0] == "documentation" || goal.methodOfCollection[1] == "documentation" || goal.methodOfCollection[2] == "documentation" || goal.methodOfCollection[3] == "documentation" || goal.methodOfCollection[4] == "documentation") { %>
+					<%if(goal.methodOfCollection.includes("documentation")) { %>
 						<!---<tr class = "table-active">
 							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 						</tr>--->
@@ -341,7 +297,6 @@
 								<input class="btn btn-primary" type="submit" value="Submit">
 							</form>
 						</div>
-
 						<% if(files) { %>
 						<% files.forEach(function(file) { %>
 						<% if(file.isImage) { %>
@@ -365,7 +320,6 @@
 							</form>
 						</div>
 						<% } %>
-
 						<% }); %>
 						<% } else { %>
 						<p class="content">No files to show</p>
@@ -400,6 +354,10 @@
 
 									<th>Date</th>
 
+									<%if(goal.shared == true) { %>
+						            <th>Created by</th>
+						            <%} %>
+
 									<th>Delete Goal</th>
 								</tr>
 								<% goalDatas.forEach(function(goalData) { %>
@@ -423,6 +381,10 @@
 									<%} %>
 
 									<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
+
+									<%if(goal.shared == true) { %>
+						            <td><%=goalData.teacherEmail%></td>
+						            <%} %>
 
 									<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>" onclick="return confirm('Please confirm to delete this data');"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
 								</tr>
@@ -475,8 +437,11 @@
 
 								var options = {
 									'title': "<%=goal.name%>",
-									hAxis: {
-										title: 'Date'
+									chartArea:{
+										left:140,
+										top:30,
+										width:670,
+										height:100
 									},
 									vAxis: {
 										title: 'Data'
@@ -575,3 +540,31 @@ window.onclick = function(event) {
 }
 
 </script>
+
+<script>
+			  // Get the modal
+			  var helpmodal = document.getElementById("helpModal");
+
+			  // Get the button that opens the modal
+			  var btn = document.getElementById("helpBtn");
+
+			  // Get the <span> element that closes the modal
+			  var span = document.getElementsByClassName("helpclose")[0];
+
+			  // When the user clicks the button, open the modal 
+			  btn.onclick = function() {
+			  	helpmodal.style.display = "block";
+			  }
+
+			  // When the user clicks on <span> (x), close the modal
+			  span.onclick = function() {
+			  	helpmodal.style.display = "none";
+			  }
+
+			  // When the user clicks anywhere outside of the modal, close it
+			  window.onclick = function(event) {
+			  	if (event.target == helpmodal) {
+			  		helpmodal.style.display = "none";
+			  	}
+			  }		
+			</script>

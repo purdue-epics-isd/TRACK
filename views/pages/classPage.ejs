@@ -75,17 +75,8 @@ function topFunction() {
           document.documentElement.setAttribute('data-theme', currentTheme);
           localStorage.setItem('theme', currentTheme);
         }
-        </script>   
-
-	 <div class =  class-header>
-         <div class="form-group">
-            <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
-          </div>
-	  
+        </script>  
           
-
-	  <h3>Class List</h3>
-	  
 
 	  <!-- Trigger/Open The Modal -->
 	  <button id="myBtn" class= "btn btn-info">
@@ -133,6 +124,17 @@ function topFunction() {
 	    }
 	  }
 	  </script>
+        
+	 <div class =  class-header>
+         <div class="form-group">
+            <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
+          </div>
+	  
+          
+
+	  <h3>Class List</h3>
+	  
+
 	  <a href="/createNewStudent"> <button type="button" class="btn btn-primary">
             Create New Student
 		  </button></a>
@@ -143,7 +145,7 @@ function topFunction() {
 	 <div class = "overviewcard" id="studentBox">
 
 
-                <!--Loads the Students and Creates Buttons for them-->
+              <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
               <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
               <!--<div class = "cardName" id="<%=student.userid%>">-->
@@ -226,17 +228,18 @@ function topFunction() {
     filter = input.selectedIndex;
     //filter = input.options[input.selectedIndex].text.toUpperCase();
     //console.log("filter: " + filter);
-    students = document.getElementsByClassName("cardName");
+    students = document.getElementsByClassName("studentCardName");
     numStudents = students.length;
-    //console.log("numStudents: " + numStudents);
+    console.log("numStudents: " + numStudents);
 
     for (i = 0; i < numStudents; i++) {
-      period = students[i].className[9];
-      //console.log("period: " + period);
+
+      period = students[i].className[16];
+      console.log("period: " + period);
       if (period.toUpperCase().indexOf(filter) > -1 || filter == 0) {
-        students[i].style.display = "";
+        students[i].parentNode.style.display = "";
       } else {
-        students[i].style.display = "none";
+        students[i].parentNode.style.display = "none";
       }
     }
 

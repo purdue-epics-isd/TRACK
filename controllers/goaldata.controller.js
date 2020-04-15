@@ -30,9 +30,11 @@ exports.goaldata_create = function (req, res) {
         });
         console.log("is shared?: " + req.params.shared);
         //console.log("evaluate: " + (type(req.params.shared)));
-        if(req.params.shared == true) {
+        if(req.params.shared == "true") {
+            console.log("navigating to shared student profile...");
             res.redirect("/sharedWithMe/" + req.params.studentid);
         } else {
+            console.log("navigating to personal student profile...");
             res.redirect("/student/" + req.params.studentid);
         }
     } catch(err) {

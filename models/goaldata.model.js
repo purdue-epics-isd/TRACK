@@ -9,7 +9,7 @@ let goalDataSchema = new Schema({
     rubricOption: {type: String, require: false},
     support: {type: String, required: false},
     comments: {type: String, required:false},
-    teacherEmail: {type: String, require:true},
+    teacherEmail: {type: String, required:true},
     time: {type: Date}
 });
 
