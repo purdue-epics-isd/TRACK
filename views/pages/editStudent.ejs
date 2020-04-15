@@ -64,6 +64,7 @@
 
           <label for="Grade Level">Grade Level:</label>
           <select class="form-control" name="grade" value="<%= student.grade %>" id="grade" style="width:100%">
+            <option value=""></option>
             <option value="Pre-K">Pre-K</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -111,7 +112,12 @@
     if (month < 10) {
       month = '0' + month;
     }
-    var format = String(year)+'-' + String(month) + '-'+String(dt);
+
+    if(year != NaN) {
+      var format = String(year)+'-' + String(month) + '-'+String(dt);
+    } else {
+      var format = "";
+    }
     console.log("formatted year: " + format);
     document.getElementById('dob').value = format;
   }

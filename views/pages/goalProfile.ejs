@@ -389,6 +389,10 @@
 
 									<th>Date</th>
 
+									<%if(goal.shared == true) { %>
+						            <th>Created by</th>
+						            <%} %>
+
 									<th>Delete Goal</th>
 								</tr>
 								<% goalDatas.forEach(function(goalData) { %>
@@ -412,6 +416,10 @@
 									<%} %>
 
 									<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
+
+									<%if(goal.shared == true) { %>
+						            <td><%=goalData.teacherEmail%></td>
+						            <%} %>
 
 									<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>" onclick="return confirm('Please confirm to delete this data');"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
 								</tr>
