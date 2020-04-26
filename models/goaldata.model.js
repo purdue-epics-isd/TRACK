@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 let goalDataSchema = new Schema({   
     goalID: {type: String, required:true},
-    //test: {type: String, required:false},
     score: {type: Number, required:false, max: 100},
     count: {type: Number, required:false, max: 100},
     rubricOption: {type: String, require: false},
