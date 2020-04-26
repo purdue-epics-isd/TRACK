@@ -1,4 +1,5 @@
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE.txt in the project root for license information.
+/*below is code that I copied and pasted from somewhere else to make Microsoft OAuth work*/
 const credentials = {
   client: {
     id: process.env.APP_ID,

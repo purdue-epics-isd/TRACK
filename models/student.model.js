@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-//const goal = require('/controllers/goal.controller');
 
 let StudentSchema = new Schema({
     firstname: {type: String, required: true},
@@ -14,7 +13,6 @@ let StudentSchema = new Schema({
     sharedWith: [{type: String}],
     userid: {type: String, required: true}
 });
-
 
 // Export the model
 module.exports = mongoose.model('Student', StudentSchema);
