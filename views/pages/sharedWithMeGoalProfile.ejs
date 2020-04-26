@@ -436,20 +436,17 @@
 
   <script type="text/javascript">
 
-    function fnExcelReport()
-    {
-
-      var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
-      var textRange; var j=0;
+    function fnExcelReport() {
+    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
     var tab = document.getElementById('t01'); // id of table
-    for(j = 0 ; j < tab.rows.length ; j++)
-    {
-        tab.rows[j].deleteCell(-1); //deleting the delete column
-        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+    //tab.rows[j].deleteCell(-1); //deleting the delete column
+    for(j = 0 ; j < tab.rows.length ; j++) {
+    tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
         //tab_text=tab_text+"</tr>";
-      }
+    }
 
-      tab_text=tab_text+"</table>";
+    tab_text=tab_text+"</table>";
     tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
     tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
     tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params

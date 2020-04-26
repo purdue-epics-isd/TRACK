@@ -181,18 +181,19 @@ exports.goal_edit = function (req, res) {
 
 /*shares goals with other teachers*/
 exports.goal_share = function (req, res) {
-    console.log("email in body:" + req.body.email); //testing to see if the user email is correctly being updated
+    var sharingemail = req.body.email.toLowerCase()
+    console.log("email in body:" + sharingemail); //testing to see if the user email is correctly being updated
 
     /*update the list of teacher's that current student is shared with*/
     Student.findById(req.params.studentid, function (err, student) {
         student.shared = true;
         var alreadyShared = false;
         for(var i=0;i<student.sharedWith.length;i++) {
-            if(student.sharedWith[i] == req.body.email) {
+            if(student.sharedWith[i] == sharingemail) {
                 alreadyShared = true;
             }
         }
-        if(!alreadyShared) student.sharedWith.push(req.body.email);
+        if(!alreadyShared) student.sharedWith.push(sharingemail);
         student.save();
     });
 
@@ -201,11 +202,11 @@ exports.goal_share = function (req, res) {
         goal.shared = true;
         var alreadyShared = false;
         for(var i=0;i<goal.sharedWith.length;i++) {
-            if(goal.sharedWith[i] == req.body.email) {
+            if(goal.sharedWith[i] == sharingemail) {
                 alreadyShared = true;
             }
         }
-        if(!alreadyShared) goal.sharedWith.push(req.body.email);
+        if(!alreadyShared) goal.sharedWith.push(sharingemail);
         goal.save();
     });
 
