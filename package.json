@@ -4,7 +4,7 @@
   "description": "a web app for teachers at isd",
   "main": "track.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/cucumber-js"
   },
   "engines": {
     "node": "10.15.1"
@@ -22,6 +22,8 @@
   "dependencies": {
     "bcrypt": "^4.0.1",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chromedriver": "^85.0.1",
     "cookie-parser": "^1.4.4",
     "ejs": "^2.6.1",
     "express": "^4.17.1",
@@ -38,9 +40,12 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
     "passport-local-mongoose-email": "^0.1.4",
-    "passport-outlook": "^2.2.0"
+    "passport-outlook": "^2.2.0",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^7.0.0-rc.0",
+    "cucumber": "^7.0.0-rc.0",
     "exports-loader": "^0.7.0"
   }
 }
