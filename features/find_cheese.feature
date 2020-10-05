@@ -1,9 +1,9 @@
-Feature: Selenium tutorial
-Scenario Outline: Finding some cheese
-   Given I am on the Google search page
-   When I search for "<string>"
-   Then the page title should start with "<string>"
+Feature: Starting testing
+Scenario Outline: login to website
+   Given I am on the TRACK login page
+   When I click login
+   Then the page title should be "<string>"
 
     Examples:
     | string           | answer |
-    | cheese         | TGIF   |
+    | Login         | TGIF   |

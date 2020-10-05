@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/purdue-epics-isd/TRACK#readme",
   "dependencies": {
+    "asserts": "^4.0.2",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
