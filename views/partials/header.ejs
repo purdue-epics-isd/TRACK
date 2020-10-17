@@ -1,23 +1,40 @@
  <!-- views/partials/header.ejs -->
 
 <header class="header">
-  <div class="header__menu">
-     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Header</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body style="height:1500px">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/classPage">Home</a></li>
+      <li><a href="/settings">Settings</a></li>
+      <li><a href="/feedback">Feedback</a></li>
+      <li><a href="/aboutUs">About</a></li>
+      <li><a href="/logout">Logout</a></li>
+
+    </ul>
   </div>
+</nav>
+</body>
+</html>
+
 </header>
 
  <aside class="sidenav">
- <div class="sidenav__close-icon">
- </div>
- <ul class="sidenav__list" position=fixed>
- <li class="sidenav__list-item"><a style="display: list-item; list-style-type: none;" href="/classPage"><i class="material-icons">home</i> Home</a></li>
- <li class="sidenav__list-item"><a style="display: list-item; list-style-type: none;" href="/sharedWithMe"><i class="material-icons">folder_shared</i> Shared With Me</a></li>
- <li class="sidenav__list-item"><a style="display: list-item; list-style-type: none;" href="/settings"><i class="material-icons">settings</i> Settings</a></li>
- <li class="sidenav__list-item"><a style="display: list-item; list-style-type: none;" href="/feedback"><i class="material-icons">feedback</i> Feedback</a></li>
- <li class="sidenav__list-item"><a style="display: list-item; list-style-type: none;" href="/aboutUs"><i class="material-icons">info</i> About</a></li>
- <li class="sidenav__list-item"><a style="display: list-item; list-style-type: none;" href="/logout">Logout</a></li>
- </ul>
+
  </aside>
+

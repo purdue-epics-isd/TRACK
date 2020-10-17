@@ -458,3 +458,21 @@ form input[type="submit"] {
 
   .dropdown a:hover {background-color: #ddd;}
   .show {display: block;}
+
+  .navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    position: relative;
+  }
+
+  .a {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    position: relative;
+  }
