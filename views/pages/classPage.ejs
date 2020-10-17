@@ -143,17 +143,24 @@ function topFunction() {
 
         
 	 <div class = "overviewcard" id="studentBox">
-
+              <script>
+                console.log("jfjff");
+                console.log(localStorage);
+                console.log("post jfjfjf");
+              </script>
 
               <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
               <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
               <!--<div class = "cardName" id="<%=student.userid%>">-->
               <script>
+                console.log("hey");
+                console.log(localStorage.getItem("userID"));
                 if(localStorage.getItem("userID") == "<%=student.userid %>") {
                   var card = document.createElement("div");
                   card.className = "studentCardName <%=student.period%>";
                   card.id = "<%=student.id%>";
+                  console.log("<%=student.id%>");
 
                   var studentLink = document.createElement("a");
                   studentLink.href = "/student/<%=student.id%>";
