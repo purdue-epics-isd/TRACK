@@ -4656,7 +4656,7 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-sm .navbar-nav .nav-link {
-    padding-right: 0.5rem;
+    padding-right: 17rem;
     padding-left: 0.5rem;
   }
   .navbar-expand-sm > .container,
@@ -4704,7 +4704,7 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-md .navbar-nav .nav-link {
-    padding-right: 0.5rem;
+    padding-right: 17rem;
     padding-left: 0.5rem;
   }
   .navbar-expand-md > .container,
@@ -4752,7 +4752,7 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: 0.5rem;
+    padding-right: 17rem;
     padding-left: 0.5rem;
   }
   .navbar-expand-lg > .container,
@@ -4800,7 +4800,7 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-xl .navbar-nav .nav-link {
-    padding-right: 0.5rem;
+    padding-right: 17rem;
     padding-left: 0.5rem;
   }
   .navbar-expand-xl > .container,
@@ -4848,7 +4848,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-expand .navbar-nav .nav-link {
-  padding-right: 0.5rem;
+  padding-right: 17rem;
   padding-left: 0.5rem;
 }
 
@@ -4879,7 +4879,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
 
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
@@ -5275,7 +5275,7 @@ input[type="button"].btn-block {
 
 .breadcrumb-item + .breadcrumb-item::before {
   display: inline-block;
-  padding-right: 0.5rem;
+  padding-right: 17rem;
   color: #95a5a6;
   content: "/";
 }
