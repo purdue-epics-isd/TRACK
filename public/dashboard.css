@@ -469,13 +469,7 @@ b {
 /* Non-mobile styles, 750px breakpoint */
 @media only screen and (min-width: 46.875em) {
   /* Show the sidenav */
-  .grid-container {
-    grid-template-columns: 240px 1fr;
-    grid-template-areas:
-      "sidenav header"
-      "sidenav main"
-      "sidenav footer";
-  }
+ 
 
   .header__search {
     margin-left: 0;
