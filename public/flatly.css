@@ -4656,7 +4656,7 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-sm .navbar-nav .nav-link {
-    padding-right: 17rem;
+    padding-right: 10%;
     padding-left: 0.5rem;
   }
   .navbar-expand-sm > .container,
