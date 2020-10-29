@@ -1,3 +1,6 @@
+//add encryption tool:
+var aesjs = require('aes-js');
+var CryptoJS = require("crypto-js");
 const User = require('../models/user.model');
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
@@ -6,6 +9,13 @@ const mongoose = require('mongoose');
 
 mongoose.set('useFindAndModify', false); // solve findAndModify() warning
 
+function encryption(string) {
+    return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123').toString();
+}
+function decryption(ciphertext) {
+    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    return originalText = bytes.toString(CryptoJS.enc.Utf8);
+}
 // Require packages
 const path = require('path');
 const crypto = require('crypto');
@@ -21,14 +31,32 @@ db.once('open', () => {
   gfs.collection('uploads');
 });
 
+
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
+
+    //encrytion ends here
+    var CryptoJS = require("crypto-js");
+    // Encrypt
+    var ciphertext = CryptoJS.AES.encrypt(req.body.name, 'secret key 123').toString();
+    // Decrypt
+    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
     try {
+        //for name:
         let goal = new Goal(
             {
-                name: req.body.name,
-                description: req.body.description,
-                startDate: req.body.startDate,
+                // name: encryption(req.body.name),
+                // description: encryption(req.description),
+                // startDate: encryption(req.startDate),
+                // endDate: encryption(req.body.endDate),
+                // goalType: encryption(req.body.goalType),
+                // studentID: encryption(req.params.studentid),
+                // methodOfCollection: encryption(req.body.methodOfCollection),
+                name: encryption(req.body.name),
+                description: req.description,
+                startDate: req.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
                 studentID: req.params.studentid,
@@ -83,6 +111,13 @@ exports.navigate_to_goalProfile = function (req, res) {
             User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
+                    goal.name = decryption(goal.name)
+                    // goal.description = decryption(goal.description)
+                    // goal.startDate = decryption(goal.startDate)
+                    // goal.endDate = decryption(goal.endDate)
+                    // goal.goalType = decryption(goal.goalType)
+                    // goal.studentID = decryption(goal.studentID)
+                    // goal.methodOfCollection = decryption(goal.methodOfCollection)
                     console.log("method:" + goal.methodOfCollection);
                     console.log("method as var:" + methodsOfCollection);
                     console.log("goal:" + goal);
@@ -146,6 +181,7 @@ exports.goal_redirect_edit = function (req, res) {
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
               Goal.findById(req.params.goalid, function(err, goal) {
+                  goal.name = decryption(goal.name);
                 res.render('pages/EditGoal', {
                     student: student,
                     user: user,
@@ -234,6 +270,7 @@ exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
         var goals = [];
 
         Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
+            goal.name = decryption(goal.name);
             goal.forEach(function(s) { 
                     goals.push(s);
                     console.log(s);
