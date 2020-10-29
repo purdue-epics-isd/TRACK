@@ -125,6 +125,50 @@
 	<%- include("../partials/header.ejs")%>
 
 	<main class="main">
+			<script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+		    </script>
+
+		    <a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
+
+			  <!-- Trigger/Open The Modal -->
+			  <button id="myBtn" class="btn btn-primary">Need Help?</button>
+
+			
+			 <div class =  class-header>
+		          <h1><%= goal.name %></h1>
+			<!-- The Modal -->
+			<div id="sharingModal" class="sharing-modal">
+				<!-- Modal content -->
+				<div class="sharing-modal-content">
+					<span class="sharingclose close">&times;</span>
+					<form action="/student/<%= student.id %>/goal/<%= goal.id %>/share" id="shareEmail" method="post">
+						<label for="email">Enter the email of the teacher you would like to share with:</label>
+						<input type="email" class="form-control" id="email" placeholder="Input Email" name="email"><br>
+						<input type="submit" input class="btn btn-primary">
+					</form>
+				</div>
+			</div>
+			<div>
+				<!--triggers the modal opening-->
+			<button id="sharingBtn" type="button" class="btn btn-primary">
+				Share Goal
+			</button>
+		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
+
+			  <button type="button" class="btn btn-primary">
+				  Edit Goal
+			  </button> </a>
+        	</div>
+        </div>
+
+			<div class = "description">
+				<h5><%= goal.description %></h5>
+			</div>
 		<script>
 			const currentTheme = localStorage.getItem('theme');
 			if (currentTheme) {
@@ -132,85 +176,6 @@
 				localStorage.setItem('theme', currentTheme);
 			}
 		</script>
-
-
-		<a href="/student/<%=student.id%>" class="btn btn-primary">Go Back to Student Profile</a>
-		<div class = class-header>
-			<h1><%= goal.name %></h1>
-			<!-- The Modal -->
-			<div id="sharingModal" class="sharing-modal">
-				<!-- Modal content -->
-				<div class="sharing-modal-content">
-					<span class="sharingclose close">&times;</span>
-					<form action="/student/<%= student.id %>/goal/<%= goal.id %>/share" id="shareEmail" method="post"> 
-						<label for="email">Enter the email of the teacher you would like to share with:</label>
-						<input type="email" class="form-control" id="email" placeholder="Input Email" name="email"><br>
-						<input type="submit" input class="btn btn-primary">
-					</form>
-				</div>
-			</div>
-			<!-- Trigger/Open The Modal -->
-			<button id="helpBtn" class="btn btn-primary">Need Help?</button>
-
-			<!-- The Modal -->
-			<div id="helpModal" class="modal">
-
-				<!-- Modal content -->
-				<div class="modal-content">
-					<span class="helpclose close">&times;</span>
-					<p>This is the goal profile.  Here you can further analyze the statistics of your students progress.  If you click export, you can even export the data into a pdf document!</p>
-
-					<img src="/img/graphExport.png">
-				</div>
-
-			</div>
-
-			<script>
-			  // Get the modal
-			  var helpmodal = document.getElementById("helpModal");
-
-			  // Get the button that opens the modal
-			  var btn = document.getElementById("helpBtn");
-
-			  // Get the <span> element that closes the modal
-			  var span = document.getElementsByClassName("helpclose")[0];
-
-			  // When the user clicks the button, open the modal 
-			  btn.onclick = function() {
-			  	helpmodal.style.display = "block";
-			  }
-
-			  // When the user clicks on <span> (x), close the modal
-			  span.onclick = function() {
-			  	helpmodal.style.display = "none";
-			  }
-
-			  // When the user clicks anywhere outside of the modal, close it
-			  window.onclick = function(event) {
-			  	if (event.target == helpmodal) {
-			  		helpmodal.style.display = "none";
-			  	}
-			  }		
-			</script>
-		
-
-		
-		<div>
-			<!--triggers the modal opening-->
-			<button id="sharingBtn" type="button" class="btn btn-primary">
-				Share Goal
-			</button>
-			<!--</a>-->
-			<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
-				<button type="button" class="btn btn-primary">
-					Edit Goal
-				</button>
-			</a>
-		</div>
-</div>
-	<div class = "description">
-		<h5><%= goal.description %></h5>
-	</div>
 
 	<div class = "class-input">
 		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm" method="post">
@@ -310,6 +275,11 @@
 							</tr>
 
 							<br>
+							<input type="hidden" name="useremail" id="useremail"> </input>
+								<script>
+									var email = document.getElementById('useremail');
+									email.value = localStorage.getItem("username");
+								</script>
 						</table>
 						<input type="submit" input class="btn btn-primary">
 					</form>
@@ -383,7 +353,7 @@
 
 									<th>Support</th>
 
-									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments") { %>
+									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
 									<th>Descriptive Comments</th>
 									<%} %>
 
@@ -431,7 +401,7 @@
 								<script>
 									google.charts.load('current', {'packages':['line', 'corechart']});
 								    google.charts.setOnLoadCallback(drawChart);
-								    
+
 							function drawChart() {
 								var TrackMethod = ["<%=goal.methodOfCollection[0]%>", "<%=goal.methodOfCollection[1]%>"];
 								var dataset = [];
@@ -478,8 +448,13 @@
 										width:670,
 										height:100
 									},
+									vAxis: {
+										title: 'Data'
+									},
+									width: 1000,
+									height: 200,
 									pointsVisible: true,
-									backgroundColor: '#e3e4e6'						      
+									backgroundColor: '#e3e4e6'
 								};
 
 								var chart = new google.visualization.LineChart(document.getElementById('data_chart'));
@@ -511,8 +486,8 @@
 		var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
 		var textRange; var j=0;
     var tab = document.getElementById('t01'); // id of table
+		//tab.rows[j].deleteCell(-1); //deleting the delete column
     for(j = 0 ; j < tab.rows.length ; j++) {
-		tab.rows[j].deleteCell(-1); //deleting the delete column
 		tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
         //tab_text=tab_text+"</tr>";
     }
@@ -552,7 +527,7 @@ var btn = document.getElementById("sharingBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("sharingclose")[0];
 
-// When the user clicks the button, open the modal 
+// When the user clicks the button, open the modal
 btn.onclick = function() {
 	sharingmodal.style.display = "block";
 }
@@ -570,3 +545,31 @@ window.onclick = function(event) {
 }
 
 </script>
+
+<script>
+			  // Get the modal
+			  var helpmodal = document.getElementById("helpModal");
+
+			  // Get the button that opens the modal
+			  var btn = document.getElementById("helpBtn");
+
+			  // Get the <span> element that closes the modal
+			  var span = document.getElementsByClassName("helpclose")[0];
+
+			  // When the user clicks the button, open the modal 
+			  btn.onclick = function() {
+			  	helpmodal.style.display = "block";
+			  }
+
+			  // When the user clicks on <span> (x), close the modal
+			  span.onclick = function() {
+			  	helpmodal.style.display = "none";
+			  }
+
+			  // When the user clicks anywhere outside of the modal, close it
+			  window.onclick = function(event) {
+			  	if (event.target == helpmodal) {
+			  		helpmodal.style.display = "none";
+			  	}
+			  }		
+			</script>

@@ -75,17 +75,8 @@ function topFunction() {
           document.documentElement.setAttribute('data-theme', currentTheme);
           localStorage.setItem('theme', currentTheme);
         }
-        </script>   
-
-	 <div class =  class-header>
-         <div class="form-group">
-            <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
-          </div>
-	  
+        </script>  
           
-
-	  <h3>Class List</h3>
-	  
 
 	  <!-- Trigger/Open The Modal -->
 	  <button id="myBtn" class= "btn btn-info">
@@ -133,6 +124,17 @@ function topFunction() {
 	    }
 	  }
 	  </script>
+        
+	 <div class =  class-header>
+         <div class="form-group">
+            <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
+          </div>
+	  
+          
+
+	  <h3>Class List</h3>
+	  
+
 	  <a href="/createNewStudent"> <button type="button" class="btn btn-primary">
             Create New Student
 		  </button></a>
@@ -141,17 +143,24 @@ function topFunction() {
 
         
 	 <div class = "overviewcard" id="studentBox">
-
+              <script>
+                console.log("jfjff");
+                console.log(localStorage);
+                console.log("post jfjfjf");
+              </script>
 
               <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
               <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
               <!--<div class = "cardName" id="<%=student.userid%>">-->
               <script>
+                console.log("hey");
+                console.log(localStorage.getItem("userID"));
                 if(localStorage.getItem("userID") == "<%=student.userid %>") {
                   var card = document.createElement("div");
                   card.className = "studentCardName <%=student.period%>";
                   card.id = "<%=student.id%>";
+                  console.log("<%=student.id%>");
 
                   var studentLink = document.createElement("a");
                   studentLink.href = "/student/<%=student.id%>";
@@ -212,7 +221,7 @@ function topFunction() {
   }
 
   var sel = document.getElementById('selectNumber');
-  var options = ["All students", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period", "10th Period",]; 
+  var options = ["All students", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period"]; 
   for(var i = 0; i < options.length; i++) {
     var opt = document.createElement('option');
     opt.innerHTML = options[i];

@@ -47,7 +47,6 @@
             <option value="7">7</option>
             <option value="8">8</option>
             <option value="9">9</option>
-            <option value="10">10</option>
           </select>
           <br>
             <input type="submit" class="btn btn-primary">
@@ -63,7 +62,7 @@
           <input type="email" class="form-control" name="studentemail" value="<%= student.email %>"style="width:100%">
 
           <label for="Grade Level">Grade Level:</label>
-          <select class="form-control" name="grade" value="<%= student.grade %>" id="grade" style="width:100%">
+          <select class="form-control" name="grade" id="grade" style="width:100%">
             <option value=""></option>
             <option value="Pre-K">Pre-K</option>
             <option value="1">1</option>
@@ -96,7 +95,15 @@
   document.getElementById("userID").value = localStorage.getItem("userID");
   console.log(localStorage.getItem("userID"));
   convertToYYYYMMDD("<%=student.dob%>");
-  document.getElementById("grade").selectedIndex = "<%= student.grade %>";
+  var grade = parseInt("<%= student.grade %>",10);
+  console.log("grade: " + grade);
+  if(grade == NaN) {
+    document.getElementById("grade").selectedIndex = 2;
+    console.log("is not number");
+  } else {
+    document.getElementById("grade").selectedIndex = parseInt("<%= student.grade %>",10)+1;
+    console.log("is number?? confused");
+  }
   document.getElementById("period").selectedIndex = "<%= student.period %>"-1;
 
   function convertToYYYYMMDD(d) {

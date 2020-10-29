@@ -72,8 +72,7 @@ exports.goal_create = function (req, res) {
                 if (err) {
                     res.send(err);
                 }
-                else
-                {
+                else {
                     res.redirect('/student/' + req.params.studentid);
                 }
             });
@@ -101,9 +100,7 @@ exports.navigate_to_goalProfile = function (req, res) {
 
 
         Student.findById(req.params.studentid, function(err, student) {
-            //console.log(err);
             if (err) {
-                //console.log(err);
                 res.send(err);
                 return;
             }
@@ -111,6 +108,7 @@ exports.navigate_to_goalProfile = function (req, res) {
             User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
+
                     goal.name = decryption(goal.name)
                     // goal.description = decryption(goal.description)
                     // goal.startDate = decryption(goal.startDate)
@@ -120,6 +118,7 @@ exports.navigate_to_goalProfile = function (req, res) {
                     // goal.methodOfCollection = decryption(goal.methodOfCollection)
                     console.log("method:" + goal.methodOfCollection);
                     console.log("method as var:" + methodsOfCollection);
+
                     console.log("goal:" + goal);
                     gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
                       if (!files || files.length === 0) {
@@ -151,7 +150,6 @@ exports.navigate_to_goalProfile = function (req, res) {
                 });
             });
         });
-        //console.log("pls workmaybe");
         return;
     } catch(error) {
         console.log("err:" + err);
@@ -160,6 +158,7 @@ exports.navigate_to_goalProfile = function (req, res) {
 }
 
 /*deletes goal from database*/
+//TODO: make sure to delete any corresponding goaldata as well
 exports.goal_delete = function (req, res) {
     try {
         console.log("Goal id: [delete]: " + req.params.goalid);
@@ -176,6 +175,7 @@ exports.goal_delete = function (req, res) {
     }
 };
 
+/*navigates user to EditGoal.ejs page */
 exports.goal_redirect_edit = function (req, res) {
     try {
         User.findById(req.params.userid, function(err, user) {
@@ -198,6 +198,7 @@ exports.goal_redirect_edit = function (req, res) {
     }
 };
 
+/*submits and updates any edits made to goal profile*/
 exports.goal_edit = function (req, res) {
     console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
@@ -220,35 +221,39 @@ exports.goal_edit = function (req, res) {
 
 /*shares goals with other teachers*/
 exports.goal_share = function (req, res) {
-    console.log("email in body:" + req.body.email);
+    var sharingemail = req.body.email.toLowerCase()
+    console.log("goal.controller email in body:" + sharingemail); //testing to see if the user email is correctly being updated
+
+    /*update the list of teacher's that current student is shared with*/
     Student.findById(req.params.studentid, function (err, student) {
         student.shared = true;
         var alreadyShared = false;
         for(var i=0;i<student.sharedWith.length;i++) {
-            if(student.sharedWith[i] == req.body.email) {
+            if(student.sharedWith[i] == sharingemail) {
                 alreadyShared = true;
             }
         }
-        if(!alreadyShared) student.sharedWith.push(req.body.email);
+        if(!alreadyShared) student.sharedWith.push(sharingemail);
         student.save();
     });
 
+    /*update the list of teacher's that current goal is shared with*/
     Goal.findById(req.params.goalid, function (err, goal) {
         goal.shared = true;
         var alreadyShared = false;
         for(var i=0;i<goal.sharedWith.length;i++) {
-            if(goal.sharedWith[i] == req.body.email) {
+            if(goal.sharedWith[i] == sharingemail) {
                 alreadyShared = true;
             }
         }
-        if(!alreadyShared) goal.sharedWith.push(req.body.email);
+        if(!alreadyShared) goal.sharedWith.push(sharingemail);
         goal.save();
     });
 
     res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
 }
 
-/*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
+/*redirects page to the "create new goal" page*/
 exports.navigate_to_createNewGoal = function (req, res) {
     try {
             User.findById(req.params.userid, function(err, user) {
@@ -265,10 +270,14 @@ exports.navigate_to_createNewGoal = function (req, res) {
     }
 };
 
+/*redirects page to the student profile page, specifically for said students that are shared with a specified user*/
 exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
     try {
         var goals = [];
 
+        /*load all the goals that match the student id*/
+        //TODO: we may need to add filtering (i.e. an if statement) to make sure that the goals are actually shared goals
+        //Just because the student is shared, doesn't necessarily mean all of their goals should be shared
         Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
             goal.name = decryption(goal.name);
             goal.forEach(function(s) { 
@@ -277,6 +286,8 @@ exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
             });
         });
 
+        /*load the actual page*/
+        goals.name = decryption(goals.name);
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 Goal.findById(req.params.goalid, function(err, goal) {
@@ -294,11 +305,12 @@ exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
     }
 }
 
-/* renders goal page */
+/* renders shared goal page */
 exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
     try {
         goalDatas = [];
 
+        /*go through database to find all of the goal data that matches this specific goal*/
         GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
             if (err) {
                 res.send(err);
@@ -311,13 +323,6 @@ exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
 
 
         Student.findById(req.params.studentid, function(err, student) {
-            //console.log(err);
-            if (err) {
-                //console.log(err);
-                res.send(err);
-                return;
-            }
-
             User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
@@ -325,6 +330,8 @@ exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
                     console.log("method as var:" + methodsOfCollection);
                     console.log("goal:" + goal);
                     gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
+                        goal.name = encryption(goal.name);
+
                       if (!files || files.length === 0) {
                         res.render('pages/sharedWithMeGoalProfile', {
                             user: user,

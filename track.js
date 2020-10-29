@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
+var forceSsl = require('force-ssl-heroku');
 const app = express();
 
+app.use(forceSsl);
 app.set('views', './views');
 app.set('view engine', 'ejs');
 

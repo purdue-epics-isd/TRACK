@@ -21,7 +21,7 @@
   "homepage": "https://github.com/purdue-epics-isd/TRACK#readme",
   "dependencies": {
     "aes-js": "^3.1.2",
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^4.0.1",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "crypto-js": "^4.0.0",
@@ -29,6 +29,7 @@
     "ejs": "^2.6.1",
     "express": "^4.17.1",
     "express-session": "^1.15.6",
+    "force-ssl-heroku": "^1.0.2",
     "gridfs-stream": "^1.1.1",
     "method-override": "^3.0.0",
     "moment": "^2.22.2",
