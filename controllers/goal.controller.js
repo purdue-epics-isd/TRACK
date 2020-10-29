@@ -23,6 +23,7 @@ db.once('open', () => {
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
+    console.log(req.body.methodOfCollection);
     try {
         let goal = new Goal(
             {
