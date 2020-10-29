@@ -8,7 +8,6 @@ exports.student_create = function (req, res) {
         let student = new Student(
             {   firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                period: req.body.period,
                 grade: req.body.grade,
                 dob: req.body.dob,
                 email: req.body.studentemail,
@@ -25,6 +24,7 @@ exports.student_create = function (req, res) {
         res.redirect("/classPage");
     } catch(err) {
         //console.log(err);
+        console.log("exports.student_create");
         res.render('./error');
     }
 };
@@ -52,31 +52,35 @@ exports.navigate_to_studentProfile = function (req, res) {
             });
         });
     } catch(err) {
+        console.log("exports.navigate_to_studentProfile");
         console.log(err);
         res.render('./error');
     }
 }
 
 /*redirects to class page*/
-exports.navigate_to_classPage = function (req, res) {
+exports.navigate_to_classPage = async function (req, res) {
     try {
-        console.log("email in body:" + req.body.email);
+        await console.log("student.controller email in body:" + req.body.email);
         var students = [];
 
         
-        Student.find({}, {}, function(err, student) {
-            student.forEach(function(s) { 
-                    students.push(s);
+        await Student.find({}, {}, function(err, student) {
+            student.forEach(async function(s) { 
+                    await console.log("pushing student", s);
+                    await students.push(s);
             });
         });
-        Student.findById(req.params.studentid, function(err, student) {
-            res.render('pages/classPage', {
+        await console.log("\n\n\n\n\n\n\n\n\nstudents in students", students);
+        await Student.findById(req.params.studentid, async function(err, student) {
+            await res.render('pages/classPage', {
                 students: students
             });
         });
     } catch(err) {
-        console.log(err);
-        res.render('./error');
+        await console.log("exports.navigate_to_classPage");
+        await console.log(err);
+        await res.render('./error');
     }
 }
 
@@ -91,6 +95,7 @@ exports.navigate_to_createNewStudent = function (req, res) {
             });
         });
     } catch(err) {
+        console.log("exports.navigate_to_createNewStudent");
         console.log(err);
         res.render('./error');
     }
@@ -106,6 +111,7 @@ exports.student_delete = function (req, res) {
             }
         })
     } catch(err) {
+        console.log("exports.student_delete");
         console.log(err);
         res.render('./error');
     }        
@@ -124,6 +130,7 @@ exports.student_redirect_edit = function (req, res) {
         });
  
     } catch(err) {
+        console.log("exports.student_redirect_edit");
         console.log(err);
         res.render('./error');
     }
@@ -134,12 +141,12 @@ exports.student_edit = function (req, res) {
     Student.findByIdAndUpdate(req.params.studentid,
         { $set: { firstname: req.body.firstname,
             lastname: req.body.lastname,
-            period: req.body.period,
             grade: req.body.grade,
             dob: req.body.dob,
             email: req.body.studentemail
              } }, function (err) {
           if (err) {
+            console.log("exports.student_edit");
             console.log(err);
           }
           else {
@@ -148,25 +155,26 @@ exports.student_edit = function (req, res) {
         });
 }
 
-exports.navigate_to_sharedWithMeClassPage = function (req, res) {
+exports.navigate_to_sharedWithMeClassPage = async function (req, res) {
     try {
         var students = [];
 
-        Student.find({}, {}, function(err, student) {
-            student.forEach(function(s) { 
-                    students.push(s);
+        await Student.find({}, {}, async function(err, student) {
+            student.forEach(async function(s) { 
+                    await students.push(s);
             });
         });
         //console.log("\nParameter student id: " + req.params.studentid);
 
-        Student.findById(req.params.studentid, function(err, student) {
-            res.render('pages/sharedWithMeClassPage', {
+        await Student.findById(req.params.studentid, async function(err, student) {
+            await res.render('pages/sharedWithMeClassPage', {
                 students: students
             });
         });
     } catch(err) {
-        console.log(err);
-        res.render('./error');
+        await console.log("exports.navigate_to_sharedWithMeClassPage");
+        await console.log(err);
+        await res.render('./error');
     }
 }
 
@@ -178,6 +186,7 @@ exports.run = function(req, res) {
         logout: logout
 }); //navigates back to log in menu
     } catch(err) {
+        console.log("exports.run");
         console.log(err);
         res.render('./error');
     }

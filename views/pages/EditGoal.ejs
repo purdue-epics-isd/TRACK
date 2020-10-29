@@ -172,45 +172,73 @@ function topFunction() {
 		<!-- One "tab" for each step in the form: -->
 
 				<!---Start and End Date-->
+
 				<div>
 					<h1>Dates</h1>
 					<p>Start Date:<input value="<%=goal.startDate%>" class="form-modified-control" type="date" name="startDate" id="startDate"></p>
 					<p>End Date:<input value="<%=goal.endDate%>" class="form-modified-control" type="date" name="endDate" id="endDate"></p>
 				</div>
 
+				
 				<!--Goal Type -->
-
-					<div>
-						<h1>Goal Types</h1>
-						<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
-						<!-- <p>Current goal type: <%=goal.goalType%><p> -->
-						<% if (goal.goalType == "Behavioral Goal") { %>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Academic Goal">
-	      					<label class="custom-control-label" for="customRadio2">Academic</label>
-						</div>
-						<!--<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>-->
-
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Behavioral Goal" checked="true">
-	      					<label class="custom-control-label" for="customRadio3">Behavior</label>
-	      				</div>
-	      				<%} %>
-
-	      				<% if (goal.goalType == "Academic Goal") { %>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Academic Goal" checked="true">
-	      					<label class="custom-control-label" for="customRadio2">Academic</label>
-						</div>
-						<!--<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>-->
-
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Behavioral Goal">
-	      					<label class="custom-control-label" for="customRadio3">Behavior</label>
-	      				</div>
-	      				<%} %>
+				<div>
+					<h1>Goal Type</h1>
+					
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio1" name="goalType" class="custom-control-input" value="STEM Goal">
+      					<label class="custom-control-label" for="customRadio1">STEM</label>
 					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Language Goal">
+      					<label class="custom-control-label" for="customRadio2">Language Arts</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Health Goal" >
+      					<label class="custom-control-label" for="customRadio3">Health and Wellness</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio4" name="goalType" class="custom-control-input" value="History Goal">
+      					<label class="custom-control-label" for="customRadio4">History</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio5" name="goalType" class="custom-control-input" value="Behavioral Goal">
+      					<label class="custom-control-label" for="customRadio5">Behavior</label>
+					  </div>
+					  <div class="custom-control custom-radio">
+						<input type="radio" id="customRadio6" name="goalType" class="custom-control-input" value="Others Goal" >
+      					<label class="custom-control-label" for="customRadio6">Others</label>
+					</div>
+					<% console.log(goal.goalType) %>
+					<script>
+					var goalType = "<%=goal.goalType  %>"
 
+					if (goalType == "STEM Goal") 
+						{ 
+						document.getElementById("customRadio1").checked = true;
+						}
+						else if (goalType == "Launguage Goal") 
+						{ 
+						document.getElementById("customRadio2").checked = true;
+						}
+						else if (goalType == "Health Goal") 
+						{ 
+						document.getElementById("customRadio3").checked = true;
+						}
+						else if (goalType == "History Goal") 
+						{ 
+						document.getElementById("customRadio4").checked = true;
+						}
+						else if (goalType == "Behavioral Goal") 
+						{ 
+						document.getElementById("customRadio5").checked = true;
+						}
+						else 
+						{ 
+						document.getElementById("customRadio6").checked = true;
+						}
+					</script>
+					
+				</div>
 				<!--Goal Collection Type -->
 				<div><br>
 					<h3>Method of Collection:</h3>

@@ -183,7 +183,7 @@ exports.goal_edit = function (req, res) {
 /*shares goals with other teachers*/
 exports.goal_share = function (req, res) {
     var sharingemail = req.body.email.toLowerCase()
-    console.log("email in body:" + sharingemail); //testing to see if the user email is correctly being updated
+    console.log("goal.controller email in body:" + sharingemail); //testing to see if the user email is correctly being updated
 
     /*update the list of teacher's that current student is shared with*/
     Student.findById(req.params.studentid, function (err, student) {
