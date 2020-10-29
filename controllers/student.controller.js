@@ -30,7 +30,7 @@ exports.student_create = function (req, res) {
 };
 
 
-function decryption(ciphertext) {
+async function decryption(ciphertext) {
     var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
@@ -40,14 +40,15 @@ exports.navigate_to_studentProfile = async function (req, res) {
     try {
         var goals = [];
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
-            goal.name = decryption(goal.name);
+            //goal.name = await decryption(goal.name);
             await  goal.forEach(function(s) {
+                s.name =  decryption(s.name);
                  goals.push(s);
             });
         });
         await User.findById(req.params.userid,  async function(err, user) {
             await  Student.findById(req.params.studentid,async function(err, student) {
-                await     Goal.findById(req.params.goalid,async function(err, goal) {
+                await  Goal.findById(req.params.goalid,async function(err, goal) {
                     await console.log("\nCurrent student: " + student);
                     await  res.render('pages/studentProfile', {
                         goals: goals,
