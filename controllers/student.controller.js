@@ -30,7 +30,7 @@ exports.student_create = function (req, res) {
 };
 
 
-async function decryption(ciphertext) {
+function decryption(ciphertext) {
     var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
@@ -41,7 +41,7 @@ exports.navigate_to_studentProfile = async function (req, res) {
         var goals = [];
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
             //goal.name = await decryption(goal.name);
-            await  goal.forEach(function(s) {
+            await goal.forEach(function(s) {
                 s.name =  decryption(s.name);
                  goals.push(s);
             });
