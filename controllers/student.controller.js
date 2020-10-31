@@ -40,11 +40,14 @@ exports.navigate_to_studentProfile = async function (req, res) {
     try {
         var goals = [];
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
-            //goal.name = await decryption(goal.name);
-            await goal.forEach(function(s) {
-                s.name =  decryption(s.name);
-                 goals.push(s);
+            await goal.forEach(async function(s) {
+                s.name =  await decryption(s.name);
+                s.description = await decryption(s.description);//error happens here.
+                s.studentID = await decryption(s.studentID);
+
+                await goals.push(s);
             });
+
         });
         await User.findById(req.params.userid,  async function(err, user) {
             await  Student.findById(req.params.studentid,async function(err, student) {
