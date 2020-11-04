@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html xmlns="urn:schemas-microsoft-com:office:excel">
-
 <head>
 	<title>Goal</title>
 	<%- include("../partials/head.ejs")%>
@@ -9,65 +8,47 @@
 
 <style>
 	table#t01 {
-		width: 80%;
+		width:80%;
 		margin-left: 10%;
 		color: black;
 	}
-
-	table#t01,
-	th#t01,
-	td#t01 {
+	table#t01, th#t01, td#t01 {
 		border: 1px solid black;
 		border-collapse: collapse;
 	}
-
-	th#t01,
-	td#t01 {
+	th#t01, td#t01 {
 		padding: 15px;
 		text-align: left;
 	}
-
 	table#t01 tr:nth-child(even) {
 		background-color: #eee;
 	}
-
 	table#t01 tr:nth-child(odd) {
 		background-color: #fff;
 	}
-
 	table#t01 th {
 		background-color: black;
 		color: white;
 	}
-
 	button#btnExport {
-		position: absolute;
+		position:absolute;
 		bottom: 38%;
 		left: 90%;
 	}
 
 	/* The Modal (background) */
 	.sharing-modal {
-		display: none;
-		/* Hidden by default */
-		position: fixed;
-		/* Stay in place */
-		z-index: 3;
-		/* Sit on top */
-		padding-top: 100px;
-		/* Location of the box */
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 3; /* Sit on top */
+		padding-top: 100px; /* Location of the box */
 		left: 0;
 		top: 0;
-		width: 100%;
-		/* Full width */
-		height: 100%;
-		/* Full height */
-		overflow: auto;
-		/* Enable scroll if needed */
-		background-color: rgb(0, 0, 0);
-		/* Fallback color */
-		background-color: rgba(0, 0, 0, 0.4);
-		/* Black w/ opacity */
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 	}
 
 	/* Modal Content */
@@ -77,8 +58,8 @@
 		padding: 20px;
 		border: 1px solid #888;
 		width: 50%;
-		top: 10%;
-		left: 10%;
+		top:10%;
+		left:10%;
 	}
 
 	/* The Close Button */
@@ -88,14 +69,12 @@
 		font-size: 28px;
 		font-weight: bold;
 	}
-
 	.close:hover,
 	.close:focus {
 		color: #000;
 		text-decoration: none;
 		cursor: pointer;
 	}
-
 	#topBtn {
 		display: none;
 		position: fixed;
@@ -115,6 +94,7 @@
 	#topBtn:hover {
 		background-color: #555;
 	}
+
 </style>
 
 <button onclick="topFunction()" id="topBtn" title="Go to top">Back to Top</button>
@@ -123,20 +103,20 @@
 	var mybutton = document.getElementById("topBtn");
 
 	// When the user scrolls down 20px from the top of the document, show the button
-	window.onscroll = function () { scrollFunction() };
+	window.onscroll = function() {scrollFunction()};
 
 	function scrollFunction() {
-		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-			mybutton.style.display = "block";
-		} else {
-			mybutton.style.display = "none";
-		}
+	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+		mybutton.style.display = "block";
+	} else {
+		mybutton.style.display = "none";
+	}
 	}
 
 	// When the user clicks on the button, scroll to the top of the document
 	function topFunction() {
-		document.body.scrollTop = 0;
-		document.documentElement.scrollTop = 0;
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
 	}
 </script>
 
@@ -145,22 +125,22 @@
 	<%- include("../partials/header.ejs")%>
 
 	<main class="main">
-		<script>
-			const currentTheme = localStorage.getItem('theme');
-			if (currentTheme) {
-				document.documentElement.setAttribute('data-theme', currentTheme);
-				localStorage.setItem('theme', currentTheme);
-			}
-		</script>
+			<script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+		    </script>
 
-		<a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
+		    <a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
 
-		<!-- Trigger/Open The Modal -->
-		<button id="myBtn" class="btn btn-primary">Need Help?</button>
+			  <!-- Trigger/Open The Modal -->
+			  <button id="myBtn" class="btn btn-primary">Need Help?</button>
 
-
-		<div class=class-header>
-			<h1><%= goal.name %></h1>
+			
+			 <div class =  class-header>
+		          <h1><%= goal.name %></h1>
 			<!-- The Modal -->
 			<div id="sharingModal" class="sharing-modal">
 				<!-- Modal content -->
@@ -175,20 +155,20 @@
 			</div>
 			<div>
 				<!--triggers the modal opening-->
-				<button id="sharingBtn" type="button" class="btn btn-primary">
-					Share Goal
-				</button>
-				<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
+			<button id="sharingBtn" type="button" class="btn btn-primary">
+				Share Goal
+			</button>
+		            <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
 
-					<button type="button" class="btn btn-primary">
-						Edit Goal
-					</button> </a>
+			  <button type="button" class="btn btn-primary">
+				  Edit Goal
+			  </button> </a>
+        	</div>
+        </div>
+
+			<div class = "description">
+				<h5><%= goal.description %></h5>
 			</div>
-		</div>
-
-		<div class="description">
-			<h5><%= goal.description %></h5>
-		</div>
 		<script>
 			const currentTheme = localStorage.getItem('theme');
 			if (currentTheme) {
@@ -197,224 +177,150 @@
 			}
 		</script>
 
-		<div class="class-input">
-			<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm"
-				method="post">
+	<div class = "class-input">
+		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm" method="post">
 
-				<table style="position: center" id="goalInput">
+			<table style="position: center" id="goalInput">
 
-					<%if(goal.methodOfCollection.includes("score")) { %>
-					<!---<tr class = "table-active">
+							<%if(goal.methodOfCollection.includes("score")) { %>
+								<!---<tr class = "table-active">
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 								</tr>--->
-					<div class="generic-box">
-						<label for="score">Score:</label>
-						<input type="number" class="form-control" id="score" placeholder="Input Number" name="score">
-					</div>
+								<div class="generic-box">
+									<label for="score">Score:</label>
+									<input type="number" class="form-control" id="score" placeholder="Input Number" name="score">
+								</div>
 
-					<%} %>
+								<%} %>
 
-					<%if(goal.methodOfCollection.includes("count")) { %>
-					<!---<tr class = "table-active">
+							<%if(goal.methodOfCollection.includes("count")) { %>
+								<!---<tr class = "table-active">
 									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 								</tr>--->
-					<div class="generic-box">
-						<label for="occurrences">Count of occurrences(<%=goal.occurrencesType%>):</label>
-						<input type="number" class="form-control" id="count" placeholder="Input Number" name="count">
-					</div>
+								<div class="generic-box">
+      								<label for="occurrences">Count of occurrences(<%=goal.occurrencesType%>):</label>
+      								<input type="number" class="form-control" id="count" placeholder="Input Number" name="count">
+    							</div>
 
-					<%} %>
+							<%} %>
 
-					<%if(goal.methodOfCollection.includes("rubric")) { %>
-					<div class="generic-box">
-						<label for="exampleInputPassword1">Rubric</label>
+							<%if(goal.methodOfCollection.includes("rubric")) { %>
+									<div class="generic-box">
+									      <label for="exampleInputPassword1">Rubric</label>
 
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1"
-									value="Not evident" checked="">
-								Not evident: <%= goal.rubricdescription[0] %>
-							</label>
-						</div>
+									      <div class="form-check">
+									        <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Not evident" checked="">
+									          Not evident: <%= goal.rubricdescription[0] %>
+									        </label>
+									      </div>
 
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Introduced">
-								Introduced: <%= goal.rubricdescription[1] %>
-							</label>
-						</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Introduced">
+									          Introduced: <%= goal.rubricdescription[1] %>
+									        </label>
+									      </div>
 
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Emerging">
-								Emerging: <%= goal.rubricdescription[2] %>
-							</label>
-						</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Emerging">
+									          Emerging: <%= goal.rubricdescription[2] %>
+									        </label>
+									      </div>
 
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Developing">
-								Developing: <%= goal.rubricdescription[3] %>
-							</label>
-						</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Developing">
+									          Developing: <%= goal.rubricdescription[3] %>
+									        </label>
+									      </div>
 
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Ongoing">
-								Ongoing: <%= goal.rubricdescription[4] %>
-							</label>
-						</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Ongoing">
+									          Ongoing: <%= goal.rubricdescription[4] %>
+									        </label>
+									      </div>
 
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Demonstrated">
-								Demonstrated: <%= goal.rubricdescription[5] %>
-							</label>
-						</div>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Demonstrated">
+									          Demonstrated: <%= goal.rubricdescription[5] %>
+									        </label>
+									      </div>
 
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Applied">
-								Applied: <%= goal.rubricdescription[6] %>
-							</label>
-						</div>
-					</div>
-					<%} %>
+									      <div class="form-check">
+									      <label class="form-check-label">
+									          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Applied">
+									          Applied: <%= goal.rubricdescription[6] %>
+									        </label>
+									      </div>
+									</div>
+							<%} %>
 
-					<%if(goal.methodOfCollection.includes("comments")) { %>
-					<!--<tr class = "table-active">
+							<%if(goal.methodOfCollection.includes("comments")) { %>
+								<!--<tr class = "table-active">
 									<td> Additional Comments: </td><td><input type="text" name="comments"></td>
 								</tr>--->
-					<div class="generic-box">
-						<label for="exampleTextarea">Descriptive Comments</label>
-						<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type Comment"
-							name="comments"></textarea>
-					</div>
-					<%} %>
+								<div class="generic-box">
+									<label for="exampleTextarea">Descriptive Comments</label>
+									<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type Comment" name="comments"></textarea>
+								</div>
+							<%} %>
+
+								<div class="generic-box">
+								<label for="exampleInputPassword1">With how much support:</label>
+      								<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support" name="support">
+							</tr>
+
+							<br>
+							<input type="hidden" name="useremail" id="useremail"> </input>
+								<script>
+									var email = document.getElementById('useremail');
+									email.value = localStorage.getItem("username");
+								</script>
+						</table>
+						<input type="submit" input class="btn btn-primary">
+					</form>
 
 					<%if(goal.methodOfCollection.includes("documentation")) { %>
-					<!---<tr class = "table-active">
-									<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
-								</tr>--->
-					<div class="generic-box">
-						<label for="documentation">Documentation :</label>
-						<div class="file is-centered">
-							<label class="file-label">
-								<input class="file-input" type="file" name="file" id="file">
-								<span class="file-cta">
-									<span class="file-icon"><i class="fas fa-upload"></i></span>
-								</span>
-							</label>
+						<!---<tr class = "table-active">
+							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
+						</tr>--->
+						<div class="generic-box">
+							<label for="documentation">Documentation :</label>
+							<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST" enctype="multipart/form-data">
+								<div class="file is-centered">
+									<label class="file-label">
+										<input class="file-input" type="file" name="file" id="file">
+										<span class="file-cta">
+											<span class="file-icon"><i class="fas fa-upload"></i></span>
+										</span>
+									</label>
+								</div><br>
+								<input class="btn btn-primary" type="submit" value="Submit">
+							</form>
 						</div>
-					</div>
-					<%} %>
-
-					<div class="generic-box">
-						<label for="exampleInputPassword1">With how much support:</label>
-						<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support"
-							name="support">
-						</tr>
-
-						<br>
-						<input type="hidden" name="useremail" id="useremail"> </input>
-						<script>
-							var email = document.getElementById('useremail');
-							email.value = localStorage.getItem("username");
-						</script>
-				</table>
-				<input type="submit" input class="btn btn-primary">
-			</form>
-
-
-
-		</div>
-
-
-		<div class="goal-data">
-			<h2>Progress Monitoring</h2>
-			<table class="table table-hover" id="t01">
-				<!--<table style="display: : center" id="t01">-->
-				<tr class="table-active">
-					<%if(goal.methodOfCollection[0] == "score") { %>
-					<th>Score</th>
-					<%} %>
-
-					<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
-					<th>Count of Occurrences</th>
-					<%} %>
-
-					<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
-					<th>Progress</th>
-					<%} %>
-
-					<th>Support</th>
-
-					<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
-					<th>Descriptive Comments</th>
-					<%} %>
-
-					<th>Date</th>
-
-					<%if(goal.shared == true) { %>
-					<th>Created by</th>
-					<%} %>
-
-					<th>Delete Goal</th>
-				</tr>
-				<% goalDatas.forEach(function(goalData) { %>
-				<tr>
-					<%if(goal.methodOfCollection[0] == "score") { %>
-					<td><%= goalData.score %></td>
-					<%} %>
-
-					<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count" || goal.methodOfCollection[2] == "count") { %>
-					<td><%= goalData.count %></td>
-					<%} %>
-
-					<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
-					<td><%= goalData.rubricOption %></td>
-					<%} %>
-
-					<td><%= goalData.support %></td>
-
-					<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
-					<td><%= goalData.comments %></td>
-					<%} %>
-
-					<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
-					<td><%= goalData.comments %></td>
-					<%} %>
-
-					<%if(goal.methodOfCollection[0] == "documentation" || goal.methodOfCollection[1] == "documentation" || goal.methodOfCollection[2] == "documentation" || goal.methodOfCollection[3] == "documentation" || goal.methodOfCollection[4] == "documentation") { %>
-					<td><% if(files) { %>
+						<% if(files) { %>
 						<% files.forEach(function(file) { %>
 						<% if(file.isImage) { %>
 						<div>
 							<%= file.filename %>
-							<form style="display: inline-block;" method="POST"
-								action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
 								<button style="display: inline-block;" class="btn btn-primary">Delete</button>
 							</form>
-							<form style="display: inline-block;" method="POST"
-								action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
 								<button style="display: inline-block;" class="btn btn-primary">Open</button>
 							</form>
 						</div>
 						<% } else { %>
 						<div>
 							<%= file.filename %>
-							<form style="display: inline-block;" method="POST"
-								action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
 								<button style="display: inline-block;" class="btn btn-primary">Delete</button>
 							</form>
-							<form style="display: inline-block;" method="POST"
-								action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
 								<button style="display: inline-block;" class="btn btn-primary">Open</button>
 							</form>
 						</div>
@@ -423,109 +329,153 @@
 						<% } else { %>
 						<p class="content">No files to show</p>
 						<% } %>
-						<%} %></td>
-					<%} %>
+						<%} %>
 
-					<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %>
-					</td>
+					</div>
 
-					<%if(goal.shared == true) { %>
-					<td><%=goalData.teacherEmail%></td>
-					<%} %>
 
-					<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"
-							onclick="return confirm('Please confirm to delete this data');"> <i class="material-icons"
-								style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
-				</tr>
-				<% }); %>
-				</tbody>
-			</table>
-			<div id="data_chart"></div>
-			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-			<script>
-				google.charts.load('current', { 'packages': ['line', 'corechart'] });
-				google.charts.setOnLoadCallback(drawChart);
+					<div class = "goal-data">
+						<h2>Progress Monitoring</h2>
+						<table class="table table-hover" id="t01">
+							<!--<table style="display: : center" id="t01">-->
+								<tr class="table-active">
+									<%if(goal.methodOfCollection[0] == "score") { %>
+									<th>Score</th>
+									<%} %>
 
-				function drawChart() {
-					var TrackMethod = ["<%=goal.methodOfCollection[0]%>", "<%=goal.methodOfCollection[1]%>"];
-					var dataset = [];
-					var date;
-					if (TrackMethod[0] == "score") {
-									<% goalDatas.forEach(function (goalData) {%>
-						date = new Date("<%=goalData.time%>")
-						dataset.push([date, <%=goalData.score %>]);
-										<%}) %>
+									<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count") { %>
+									<th>Count of Occurrences</th>
+									<%} %>
+
+									<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+									<th>Progress</th>
+									<%} %>
+
+									<th>Support</th>
+
+									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
+									<th>Descriptive Comments</th>
+									<%} %>
+
+									<th>Date</th>
+
+									<%if(goal.shared == true) { %>
+						            <th>Created by</th>
+						            <%} %>
+
+									<th>Delete Goal</th>
+								</tr>
+								<% goalDatas.forEach(function(goalData) { %>
+								<tr>
+									<%if(goal.methodOfCollection[0] == "score") { %>
+									<td><%= goalData.score %></td>
+									<%} %>
+
+									<%if(goal.methodOfCollection[0] == "count" || goal.methodOfCollection[1] == "count" || goal.methodOfCollection[2] == "count") { %>
+									<td><%= goalData.count %></td>
+									<%} %>
+
+									<%if(goal.methodOfCollection[0] == "rubric" || goal.methodOfCollection[1] == "rubric" || goal.methodOfCollection[2] == "rubric") { %>
+									<td><%= goalData.rubricOption %></td>
+									<%} %>
+
+									<td><%= goalData.support %></td>
+
+									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
+									<td><%= goalData.comments %></td>
+									<%} %>
+
+									<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
+
+									<%if(goal.shared == true) { %>
+						            <td><%=goalData.teacherEmail%></td>
+						            <%} %>
+
+									<td><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>" onclick="return confirm('Please confirm to delete this data');"> <i class="material-icons" style="color:#000" onclick="deleteGoalData()">delete</i></a></td>
+								</tr>
+								<% }); %>
+							</tbody>
+						</table>
+						<div id="data_chart"></div>
+								<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+								<script>
+									google.charts.load('current', {'packages':['line', 'corechart']});
+								    google.charts.setOnLoadCallback(drawChart);
+
+							function drawChart() {
+								var TrackMethod = ["<%=goal.methodOfCollection[0]%>", "<%=goal.methodOfCollection[1]%>"];
+								var dataset = [];
+								var date;
+								if (TrackMethod[0] == "score"){
+									<%goalDatas.forEach(function(goalData){%>
+										date = new Date("<%=goalData.time%>")
+										dataset.push([date, <%=goalData.score%>]);
+										<%})%>
 								}
-					else if (TrackMethod[0] == "count") {
-									<% goalDatas.forEach(function (goalData) {%>
-						date = new Date("<%=goalData.time%>")
-						dataset.push([date, <%=goalData.count %>]);
-										<%}) %>
+								else if (TrackMethod[0] == "count"){
+									<%goalDatas.forEach(function(goalData){%>
+										date = new Date("<%=goalData.time%>")
+										dataset.push([date, <%=goalData.count%>]);
+										<%})%>
 								}
-					else {
-						return;
-					}
-					if (TrackMethod[1] == "count") {
-									<% goalDatas.forEach(function (goalData, index) {%>
-						dataset[<%=index %>].push(<%=goalData.count %>);
-										<%}) %>
+								else{
+									return;
 								}
-					console.log(dataset);
+								if (TrackMethod[1] == "count"){
+									<%goalDatas.forEach(function(goalData, index){%>
+										dataset[<%=index%>].push(<%=goalData.count%>);
+										<%})%>
+								}
+								console.log(dataset);
 
-					if (dataset.length == 0) {
-						return;
-					}
+								if (dataset.length == 0){
+									return;
+								}
 
-					var data = new google.visualization.DataTable();
-					data.addColumn('date', "Date");
-					data.addColumn('number', TrackMethod[0]);
-					if (TrackMethod[1] == 'count') {
-						data.addColumn('number', TrackMethod[1]);
-					}
-					data.addRows(dataset);
+								var data = new google.visualization.DataTable();
+								data.addColumn('date', "Date");
+								data.addColumn('number', TrackMethod[0]);
+								if (TrackMethod[1] == 'count'){
+									data.addColumn('number', TrackMethod[1]);
+								}
+								data.addRows(dataset);
 
-					var options = {
-						'title': "<%=goal.name%>",
-						chartArea: {
-							left: 140,
-							top: 30,
-							width: 670,
-							height: 100
-						},
-						vAxis: {
-							title: 'Data'
-						},
-						width: 1000,
-						height: 200,
-						pointsVisible: true,
-						backgroundColor: '#e3e4e6'
-					};
+								var options = {
+									'title': "<%=goal.name%>",
+									chartArea:{
+										left:140,
+										top:30,
+										width:670,
+										height:100
+									},
+									vAxis: {
+										title: 'Data'
+									},
+									width: 1000,
+									height: 200,
+									pointsVisible: true,
+									backgroundColor: '#e3e4e6'
+								};
 
-					var chart = new google.visualization.LineChart(document.getElementById('data_chart'));
+								var chart = new google.visualization.LineChart(document.getElementById('data_chart'));
 
-					chart.draw(data, options);
-				}
-			</script>
-			<button id="btnExport" onclick="fnExcelReport();" type="submit" class="btn btn-primary right"
-				style="position: relative; top: 10px"> Export </button>
+								chart.draw(data, options);
+							}
+						</script>
+				<button id="btnExport" onclick="fnExcelReport();" type="submit" class="btn btn-primary right" style="position: relative; top: 10px"> Export </button>
 			</tr>
-			</tbody>
-			</table>
-			<br>
-			<div id="result"></div>
-			<br>
-			<div id="delete"></div>
-		</div>
+		</tbody>
+	</table>
+	<br><div id="result"></div>
+	<br><div id="delete"></div>
+</div>
 
-	</main>
+</main>
 
-	<footer class="footer">
-		<div class="footer__copyright">&copy; 2019 TRACK</div>
-		<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete"
-			onclick="return confirm('Please confirm to delete this goal');" class="Delete" style="color: black">
-			<div class="footer__signature">Delete Goal</div>
-		</a>
-	</footer>
+<footer class="footer">
+	<div class="footer__copyright">&copy; 2019 TRACK</div>
+	<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete" onclick="return confirm('Please confirm to delete this goal');" class="Delete" style="color: black"> <div class="footer__signature">Delete Goal</div></a>
+</footer>
 </div>
 
 </html>
@@ -533,92 +483,93 @@
 <script type="text/javascript">
 
 	function fnExcelReport() {
-		var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
-		var textRange; var j = 0;
-		var tab = document.getElementById('t01'); // id of table
+		var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+		var textRange; var j=0;
+    var tab = document.getElementById('t01'); // id of table
 		//tab.rows[j].deleteCell(-1); //deleting the delete column
-		for (j = 0; j < tab.rows.length; j++) {
-			tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
-			//tab_text=tab_text+"</tr>";
-		}
+    for(j = 0 ; j < tab.rows.length ; j++) {
+		tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
 
-		tab_text = tab_text + "</table>";
-		tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
-		tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
-		tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
 
-		var ua = window.navigator.userAgent;
-		var msie = ua.indexOf("MSIE ");
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
 
-		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
-		{
-			txtArea1.document.open("txt/html", "replace");
-			txtArea1.document.write(tab_text);
-			txtArea1.document.close();
-			txtArea1.focus();
-			sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
-		}
-		else {
-			//downloading exel file
-			var link = document.createElement('a');
-			link.download = "DataTableExport.xls";
-			link.href = 'data:application/vnd.ms-excel,' + encodeURIComponent(tab_text);
-			link.click();
-		}
-		return (sa);
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+    	txtArea1.document.open("txt/html","replace");
+    	txtArea1.document.write(tab_text);
+    	txtArea1.document.close();
+    	txtArea1.focus();
+    	sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }
+    else
+    {
+		//downloading exel file
+		var link = document.createElement('a');
+		link.download = "DataTableExport.xls";
+		link.href = 'data:application/vnd.ms-excel,' + encodeURIComponent(tab_text);
+		link.click();
 	}
-	// Get the modal
-	var sharingmodal = document.getElementById("sharingModal");
+	return (sa);
+}
+// Get the modal
+var sharingmodal = document.getElementById("sharingModal");
 
-	// Get the button that opens the modal
-	var btn = document.getElementById("sharingBtn");
+// Get the button that opens the modal
+var btn = document.getElementById("sharingBtn");
 
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("sharingclose")[0];
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("sharingclose")[0];
 
-	// When the user clicks the button, open the modal
-	btn.onclick = function () {
-		sharingmodal.style.display = "block";
-	}
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+	sharingmodal.style.display = "block";
+}
 
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function () {
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+	sharingmodal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+	if (event.target == sharingmodal) {
 		sharingmodal.style.display = "none";
 	}
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function (event) {
-		if (event.target == sharingmodal) {
-			sharingmodal.style.display = "none";
-		}
-	}
+}
 
 </script>
 
 <script>
-	// Get the modal
-	var helpmodal = document.getElementById("helpModal");
+			  // Get the modal
+			  var helpmodal = document.getElementById("helpModal");
 
-	// Get the button that opens the modal
-	var btn = document.getElementById("helpBtn");
+			  // Get the button that opens the modal
+			  var btn = document.getElementById("helpBtn");
 
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("helpclose")[0];
+			  // Get the <span> element that closes the modal
+			  var span = document.getElementsByClassName("helpclose")[0];
 
-	// When the user clicks the button, open the modal 
-	btn.onclick = function () {
-		helpmodal.style.display = "block";
-	}
+			  // When the user clicks the button, open the modal 
+			  btn.onclick = function() {
+			  	helpmodal.style.display = "block";
+			  }
 
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function () {
-		helpmodal.style.display = "none";
-	}
+			  // When the user clicks on <span> (x), close the modal
+			  span.onclick = function() {
+			  	helpmodal.style.display = "none";
+			  }
 
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function (event) {
-		if (event.target == helpmodal) {
-			helpmodal.style.display = "none";
-		}
-	}		
-</script>
+			  // When the user clicks anywhere outside of the modal, close it
+			  window.onclick = function(event) {
+			  	if (event.target == helpmodal) {
+			  		helpmodal.style.display = "none";
+			  	}
+			  }		
+			</script>
