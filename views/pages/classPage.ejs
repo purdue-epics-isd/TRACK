@@ -66,17 +66,72 @@ function topFunction() {
           localStorage.setItem('theme', currentTheme);
         }
         </script>  
-          
+    
+    <!-- Tutorial -->
+    <!-- Inital Popup -->
+    <button id="tutorialBtn" class="btn btn-info">Tutorial</button>
+    <div id="tutorial" class="tutorial">
+      <div style="text-align: center" class="tutorialContent">
+        <p style="text-align: center;font-size: 35px;">These popup boxes will guide you 
+              thorugh the website. Click "Next" to continue.</p>
+        <span style="margin-left: 27%;font-size: 30px;" class="exit">Exit</span>
+        <span style="margin-left: 27%;font-size: 30px;" class="next">Next</span>
+      </div>
+    </div>
+    <!-- Second Popup: Create New Student -->
+    <div id="tutorial1" class="tutorial1">
+      <div class="tutorial1Content">
+        <p style="text-align: center;font-size: 28px;">Click on this button to create a new student. ---></p> 
+        <span class="exit">Exit</span>
+        <span class="previous">Previous</span>
+        <span class="next">Next</span>
+      </div>
+    </div>
+    <!-- Tutorial Script -->
+    <script>
+      var tutorial = document.getElementById("tutorial");
+      var tutorial1 = document.getElementById("tutorial1");
+      var btn = document.getElementById("tutorialBtn");
+      var exit = document.getElementsByClassName("exit")[0];
+      var next = document.getElementsByClassName("next")[0];
+      var exit1 = document.getElementsByClassName("exit")[1];
+      var previous = document.getElementsByClassName("previous")[0];
+      var next1 = document.getElementsByClassName("next")[1];
 
-	  <!-- Trigger/Open The Modal -->
-	  <button id="myBtn" class= "btn btn-info">
+      btn.onclick = function() {
+	      tutorial.style.display = "block";
+      }
+      exit.onclick = function() {
+	      tutorial.style.display = "none";
+      }
+      next.onclick = function() {
+        tutorial.style.display = "none";
+        tutorial1.style.display = "block"
+      }
+      exit1.onclick = function() {
+	      tutorial1.style.display = "none";
+      }
+      previous.onclick = function() {
+        tutorial1.style.display = "none";
+        tutorial.style.display = "block";
+      }
+      next1.onclick = function() {
+        tutorial1.style.display = "none";
+        // tutorial2.style.display = "block";
+      }
+    </script>
+
+    <!-- End Tutorial -->
+
+	  <!-- Trigger/Open The Modal 
+	   <button id="myBtn" class= "btn btn-info">
 		  Need Help?	  
-	  </button>
+	  </button> 
 
-	  <!-- The Modal -->
+	  
 	  <div id="myModal" class="modal">
 
-		    <!-- Modal content -->
+		    
 		      <div class="modal-content">
 			          <span class="close">&times;</span>
 				      <p>Welcome back to TRACK, your one stop shop for creating and managing your students goals.</p>
@@ -113,13 +168,13 @@ function topFunction() {
 	      modal.style.display = "none";
 	    }
 	  }
-	  </script>
+	  </script> -->
         
 	 <div class =  class-header>
          <div class="form-group">
             <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
           </div>
-	  
+        
           
 
 	  <h3>Class List</h3>
