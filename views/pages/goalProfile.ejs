@@ -215,24 +215,26 @@
 					<%} %>
 
 					<%if(goal.methodOfCollection.includes("count")) { %>
-						<div>
-							<p style="font-size: x-large; font-weight: bold; text-align: center;">Click to Add Occurrence</p>
-							<button type="button" class="occurrencesButton" id="occurrencesButton" onclick="addOccurrence()"></button>
-							<input type="hidden" class="form-control" name="count" id="input" value="0"></input>
-						</div>
-						<script type="text/javascript">
-							var numOccurrences = 0;
-							var button = document.getElementById("occurrencesButton");
-							var input = document.getElementById("input");
+					<div>
+						<p style="font-size: x-large; font-weight: bold; text-align: center;">Click to Add Occurrence
+						</p>
+						<button type="button" class="occurrencesButton" id="occurrencesButton"
+							onclick="addOccurrence()"></button>
+						<input type="hidden" class="form-control" name="count" id="input" value="0"></input>
+					</div>
+					<script type="text/javascript">
+						var numOccurrences = 0;
+						var button = document.getElementById("occurrencesButton");
+						var input = document.getElementById("input");
+						button.innerHTML = numOccurrences;
+
+						function addOccurrence() {
+							numOccurrences++;
 							button.innerHTML = numOccurrences;
-		
-							function addOccurrence() {
-								numOccurrences++;
-								button.innerHTML = numOccurrences;
-								input.value = numOccurrences;
-							}
-						</script>
-						<%} %>
+							input.value = numOccurrences;
+						}
+					</script>
+					<%} %>
 
 					<%if(goal.methodOfCollection.includes("rubric")) { %>
 					<div class="generic-box">
@@ -297,12 +299,12 @@
 					<%} %>
 
 					<%if(goal.methodOfCollection.includes("comments")) { %>
-						<div class="generic-box">
-							<br>
-							<label for="exampleTextarea">Descriptive Comments</label>
-							<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type Comment"
-								name="comments"></textarea>
-						</div>
+					<div class="generic-box">
+						<br>
+						<label for="exampleTextarea">Descriptive Comments</label>
+						<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type Comment"
+							name="comments"></textarea>
+					</div>
 					<%} %>
 
 					<br>
@@ -313,41 +315,9 @@
 					</script>
 				</table>
 				<input type="submit" class="btn btn-primary"></input>
-				<!-- <%if(!goal.methodOfCollection.includes("count")) { %>
-				<input type="submit" input class="btn btn-primary"></input>
-				<%} %> -->
 			</form>
-
-			<!-- <%if(goal.methodOfCollection.includes("count")) { %>
-			<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" method="POST">
-				<div>
-					<button type="button" class="occurrencesButton" onclick="addOccurrence()">0</button>
-					<input type="submit" class="btn btn-primary"></input>
-				</div>
-				<script type="text/javascript">
-					// <% goalDatas.forEach(function (goalData) {%>
-					// 	var occurrences = <%= goalData.count %>;
-					// <%}) %>
-					// if(occurrences == null) {
-					// 	occurrences = 0;
-					// }
-					// var numOccurrences = occurrences;
-					var numOccurrences = "0";
-					var button = document.getElementsByClassName("occurrencesButton");
-					button.innerHTML = numOccurrences;
-
-					function addOccurrence() {
-						numOccurrences++;
-						button.innerHTML = numOccurrences;
-					}
-				</script>
-			</form>
-			<%} %> -->
 
 			<%if(goal.methodOfCollection.includes("documentation")) { %>
-			<!---<tr class = "table-active">
-							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
-						</tr>--->
 			<div class="generic-box">
 				<label for="documentation">Documentation :</label>
 				<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST"
