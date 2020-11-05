@@ -4,6 +4,8 @@
 <head>
   <title>Settings</title>
   <%- include("../partials/head.ejs")%>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
 </head>
 
 <div class="grid-container">
@@ -24,7 +26,52 @@
 <body>
   <div class="middle">
     <h1>Color Theme</h1>
-    <div class="theme-switch-wrapper">
+
+    <form>
+      <label>upload excel sheet here</label>
+      <input type="file" id="excelInput" accept=".xlsx">
+      <button onClick="submitFile()">submit</button>
+
+    </form>
+
+    <script>
+      function submitFile() {
+          console.log("working");
+          this.parseExcel = function(file) {
+          var reader = new FileReader();
+
+          reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {
+              type: 'binary'
+            });
+
+            workbook.SheetNames.forEach(function(sheetName) {
+              // Here is your object
+              var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+              var json_object = JSON.stringify(XL_row_object);
+              console.log(json_object);
+
+            })
+
+          };
+
+          reader.onerror = function(ex) {
+            console.log(ex);
+          };
+
+          reader.readAsBinaryString(file);
+        };
+        
+      }
+
+    </script>
+    
+
+
+
+
+    <!-- <div class="theme-switch-wrapper">
       <label class="theme-switch" for="checkbox">
         <input type="radio" id="pink" name="color-options"/>
         <label for="pink"><img src="img/original_theme.png" height=200 width=400 /></label>
@@ -46,9 +93,9 @@
         <label for="blue"><img src="img/blue_theme.png" height=200 width=400 /></label>
     </label>
     <em>Enable Blue Mode!</em>
-    </div>
+    </div> -->
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       const toggleSwitch_pink = document.querySelector('.theme-switch input[id="pink"]');
       const toggleSwitch_dark = document.querySelector('.theme-switch input[id="dark"]');
       const toggleSwitch_blue = document.querySelector('.theme-switch input[id="blue"]');
@@ -87,7 +134,7 @@
       toggleSwitch_pink.addEventListener('change', function(){switchTheme(toggleSwitch_pink, "pink")});
       toggleSwitch_dark.addEventListener('change', function(){switchTheme(toggleSwitch_dark, "dark")});
       toggleSwitch_blue.addEventListener('change', function(){switchTheme(toggleSwitch_blue, "blue")});
-    </script>
+    </script> -->
   </div>
 </body>
 
