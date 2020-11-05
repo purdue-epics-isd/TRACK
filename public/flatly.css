@@ -199,17 +199,17 @@
 }
 
 /* Tap Occurrences Button */
-.tapOccurrencesButton {
+.occurrencesButton {
   background-color: #9381ff;
   border-radius: 20px;
   color: white;
-  font-size: 25px;
+  font-size: 50px;
   font-weight: bold;
   width: 300px;
   height: 100px;
 }
-.tapOccurrencesButton:hover,
-.tapOccurrencesButton:focus {
+.occurrencesButton:hover,
+.occurrencesButton:focus {
   background-color: #826dff;
   cursor: pointer;
 }
