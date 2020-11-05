@@ -8,6 +8,7 @@ let goalDataSchema = new Schema({
     rubricOption: {type: String, require: false},
     support: {type: String, required: false},
     comments: {type: String, required:false},
+    file_ids: [{type: String, require: false}],
     teacherEmail: {type: String, required:true},
     time: {type: Date}
 });

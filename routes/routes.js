@@ -40,9 +40,7 @@ const storage = new GridFsStorage({
 	}
 
 });
-
 const upload = multer({ storage });
-
 let gfs;
 let db = mongoose.connection;
 db.once('open', () => {
@@ -53,7 +51,7 @@ db.once('open', () => {
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
-router.post('/student/:studentid/goal/:goalid/goaldata/create/:shared', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+router.get('/student/:studentid/goal/:goalid/goaldata/create/:shared', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 router.post('/student/:studentid/goal/:goalid/share', goal_controller.goal_share); //shares goal with another teacher
 
 router.get('/student/:studentid/student_edit', student_controller.student_redirect_edit); //edit student information
@@ -66,7 +64,7 @@ router.get('/student/:studentid/goal/:goalid/goal_share', goal_controller.goal_s
 
 router.get('/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
 router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
-router.post('/student/:studentid/goal/:goalid/goaldata/upload',upload.single('file'),(req, res) => res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid));
+router.post('/student/:studentid/goal/:goalid/goaldata/upload/:shared',upload.single('file'),(req, res) => res.redirect('/student/'+req.params.goalid+'/goal/'+req.params.goalid+'/goaldata/create/'+req.params.shared));
 router.post('/student/:studentid/goal/:goalid/goaldata/files/:id', (req, res) => {
   gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
     if (err) res.status(404).json({ err: err });

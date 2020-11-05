@@ -120,6 +120,8 @@
 	}
 </script>
 
+
+
 <div class="grid-container">
 
 	<%- include("../partials/header.ejs")%>
@@ -178,7 +180,7 @@
 		</script>
 
 	<div class = "class-input">
-		<form  action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm" method="post">
+		<form  name="goal_data" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm" method="post">
 
 			<table style="position: center" id="goalInput">
 
@@ -269,6 +271,8 @@
 								</div>
 							<%} %>
 
+							
+
 								<div class="generic-box">
 								<label for="exampleInputPassword1">With how much support:</label>
       								<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Input Support" name="support">
@@ -281,16 +285,15 @@
 									email.value = localStorage.getItem("username");
 								</script>
 						</table>
-						<input type="submit" input class="btn btn-primary">
+						
 					</form>
-
-					<%if(goal.methodOfCollection.includes("documentation")) { %>
+			
 						<!---<tr class = "table-active">
 							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
 						</tr>--->
 						<div class="generic-box">
 							<label for="documentation">Documentation :</label>
-							<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST" enctype="multipart/form-data">
+							<form name="file_data" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload/<%=shared%>" method="POST" enctype="multipart/form-data">
 								<div class="file is-centered">
 									<label class="file-label">
 										<input class="file-input" type="file" name="file" id="file">
@@ -299,38 +302,11 @@
 										</span>
 									</label>
 								</div><br>
-								<input class="btn btn-primary" type="submit" value="Submit">
+								<input class="btn btn-primary" type="button" value="Submit" onclick="submit_both()"/>
+								
 							</form>
 						</div>
-						<% if(files) { %>
-						<% files.forEach(function(file) { %>
-						<% if(file.isImage) { %>
-						<div>
-							<%= file.filename %>
-							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-								<button style="display: inline-block;" class="btn btn-primary">Delete</button>
-							</form>
-							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-								<button style="display: inline-block;" class="btn btn-primary">Open</button>
-							</form>
-						</div>
-						<% } else { %>
-						<div>
-							<%= file.filename %>
-							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-								<button style="display: inline-block;" class="btn btn-primary">Delete</button>
-							</form>
-							<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-								<button style="display: inline-block;" class="btn btn-primary">Open</button>
-							</form>
-						</div>
-						<% } %>
-						<% }); %>
-						<% } else { %>
-						<p class="content">No files to show</p>
-						<% } %>
-						<%} %>
-
+						
 					</div>
 
 
@@ -356,7 +332,9 @@
 									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
 									<th>Descriptive Comments</th>
 									<%} %>
-
+									<%if(goal.methodOfCollection.includes("documentation")) { %>
+										<th>Documentation</th>
+									<%} %>	
 									<th>Date</th>
 
 									<%if(goal.shared == true) { %>
@@ -384,6 +362,38 @@
 									<%if(goal.methodOfCollection[0] == "comments" || goal.methodOfCollection[1] == "comments" || goal.methodOfCollection[2] == "comments" || goal.methodOfCollection[3] == "comments") { %>
 									<td><%= goalData.comments %></td>
 									<%} %>
+
+									<%if(goal.methodOfCollection.includes("documentation")) { %>
+										<td>
+											<% if(files) { %>
+												<% files.forEach(function(file) { %>
+												<% if(file.isImage) { %>
+												<div>
+													<%= file.filename %>
+													<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+														<button style="display: inline-block;" class="btn btn-primary">Delete</button>
+													</form>
+													<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+														<button style="display: inline-block;" class="btn btn-primary">Open</button>
+													</form>
+												</div>
+												<% } else { %>
+												<div>
+													<%= file.filename %>
+													<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
+														<button style="display: inline-block;" class="btn btn-primary">Delete</button>
+													</form>
+													<form style="display: inline-block;" method="POST" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
+														<button style="display: inline-block;" class="btn btn-primary">Open</button>
+													</form>
+												</div>
+												<% } %>
+												<% }); %>
+												<% } else { %>
+												<p class="content">No files to show</p>
+												<% } %>
+										</td>
+									<%} %>	
 
 									<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %></td>
 
@@ -573,3 +583,11 @@ window.onclick = function(event) {
 			  	}
 			  }		
 			</script>
+
+<script>
+		function submit_both(){ 
+		document.forms.goal_data.submit();
+		document.forms.file_data.submit();
+	
+	}
+	</script>
