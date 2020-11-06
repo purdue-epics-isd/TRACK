@@ -56,7 +56,7 @@ exports.goal_create = function (req, res) {
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
-                studentID: encryption(req.params.studentid),
+                studentID: req.params.studentid,
                 methodOfCollection: req.body.methodOfCollection,
                 occurrencesType: req.body.occurrences,
                 shared: false,

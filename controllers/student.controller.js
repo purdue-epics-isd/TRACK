@@ -30,25 +30,45 @@ exports.student_create = function (req, res) {
 };
 
 
-function decryption(ciphertext) {
-    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
-    return originalText = bytes.toString(CryptoJS.enc.Utf8);
+async function decryption(ciphertext) {
+    await console.log("decryption")
+    var bytes  = await CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    // await console.log("bytes:", bytes);
+    var originalText = await bytes.toString(CryptoJS.enc.Utf8);
+    // await console.log("originalText", originalText);
+    return originalText;
 }
 
 /*redirects to student Page*/
 exports.navigate_to_studentProfile = async function (req, res) {
     try {
+        console.log("navigate_to_studentProfile");
         var goals = [];
+        console.log("pre Goal.find");
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
+            console.log("in Goal.find");
             await goal.forEach(async function(s) {
+                await console.log("pre log statements");
+                await console.log("name", s.name);
+                await console.log("description", s.description);
+                await console.log("ID", s.studentID);
+                await console.log("post log statements");
+
                 s.name =  await decryption(s.name);
                 s.description = await decryption(s.description);//error happens here.
-                s.studentID = await decryption(s.studentID);
+                
+
+                await console.log("pre log statements");
+                await console.log("name", s.name);
+                await console.log("description", s.description);
+                await console.log("ID", s.studentID);
+                await console.log("post log statements");
 
                 await goals.push(s);
             });
 
         });
+        console.log("post Goal.find");
         await User.findById(req.params.userid,  async function(err, user) {
             await  Student.findById(req.params.studentid,async function(err, student) {
                 await  Goal.findById(req.params.goalid,async function(err, goal) {
