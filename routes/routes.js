@@ -23,7 +23,7 @@ const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
 
 const storage = new GridFsStorage({
-	url: 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track',
+	url: 'mongodb+srv://purdue.epics.isd.track@gmail.com:Woofwoof7!!!!@track-dev.4dk1e.mongodb.net/TRACK-dev?retryWrites=true&w=majority',
 	file: (req, file) => {
 		return new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
@@ -51,7 +51,7 @@ db.once('open', () => {
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
-router.get('/student/:studentid/goal/:goalid/goaldata/create/:shared', goaldata_controller.goaldata_create); //adds new goal datapoint to database
+router.post('/student/:studentid/goal/:goalid/goaldata/create', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 router.post('/student/:studentid/goal/:goalid/share', goal_controller.goal_share); //shares goal with another teacher
 
 router.get('/student/:studentid/student_edit', student_controller.student_redirect_edit); //edit student information

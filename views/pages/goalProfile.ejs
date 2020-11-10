@@ -180,7 +180,7 @@
 		</script>
 
 	<div class = "class-input">
-		<form  name="goal_data" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm" method="post">
+		<form  name="goal_data" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create" id="submitForm" method="post">
 
 			<table style="position: center" id="goalInput">
 
@@ -270,7 +270,21 @@
 									<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type Comment" name="comments"></textarea>
 								</div>
 							<%} %>
-
+								
+							<!---<tr class = "table-active">
+							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
+						</tr>--->
+						<div class="generic-box">
+							<label for="documentation">Documentation :</label>
+								<div class="file is-centered">
+									<label class="file-label">
+										<input class="file-input" type="file" name="file" id="file">
+										<span class="file-cta">
+											<span class="file-icon"><i class="fas fa-upload"></i></span>
+										</span>
+									</label>
+								</div><br>
+						</div>
 							
 
 								<div class="generic-box">
@@ -283,29 +297,11 @@
 								<script>
 									var email = document.getElementById('useremail');
 									email.value = localStorage.getItem("username");
+									console.log(email);
 								</script>
 						</table>
-						
+						<input class="btn btn-primary" type="button" value="Submit" onclick="document.forms.goal_data.submit()"/>
 					</form>
-			
-						<!---<tr class = "table-active">
-							<td>Percentage Completed:</td><td> <input type="text" name="percentage"></td>
-						</tr>--->
-						<div class="generic-box">
-							<label for="documentation">Documentation :</label>
-							<form name="file_data" action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload/<%=shared%>" method="POST" enctype="multipart/form-data">
-								<div class="file is-centered">
-									<label class="file-label">
-										<input class="file-input" type="file" name="file" id="file">
-										<span class="file-cta">
-											<span class="file-icon"><i class="fas fa-upload"></i></span>
-										</span>
-									</label>
-								</div><br>
-								<input class="btn btn-primary" type="button" value="Submit" onclick="submit_both()"/>
-								
-							</form>
-						</div>
 						
 					</div>
 
@@ -585,9 +581,4 @@ window.onclick = function(event) {
 			</script>
 
 <script>
-		function submit_both(){ 
-		document.forms.goal_data.submit();
-		document.forms.file_data.submit();
-	
-	}
-	</script>
+</script>
