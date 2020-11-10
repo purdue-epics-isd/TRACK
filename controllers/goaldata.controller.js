@@ -23,7 +23,7 @@ const user_controller = require('../controllers/user.controller');
 const User = require('../models/user.model');
 
 const storage = new GridFsStorage({
-	url: 'mongodb+srv://purdue.epics.isd.track@gmail.com:Woofwoof7!!!!@track-dev.4dk1e.mongodb.net/TRACK-dev?retryWrites=true&w=majority',
+	url: 'mongodb://track:Woofwoof@track-dev-shard-00-00.4dk1e.mongodb.net:27017,track-dev-shard-00-01.4dk1e.mongodb.net:27017,track-dev-shard-00-02.4dk1e.mongodb.net:27017/TRACK-dev?ssl=true&replicaSet=atlas-1467wp-shard-0&authSource=admin&retryWrites=true&w=majority',
 	file: (req, file) => {
 		return new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
@@ -62,8 +62,12 @@ exports.goaldata_create = function (req, res) {
             }
         );
 
-        console.log(req.file);
-
+        console.log(req.body.file);
+        upload.single(req.body.file), function (req, res) {
+            // req.file is the name of your file in the form above, here 'uploaded_file'
+            // req.body will hold the text fields, if there were any 
+            console.log("Uploaded file")
+         };
         Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
             console.log("\nGoal to be updated: " + goal);
             console.log("\nGoaldata to be added: " + goaldata);
@@ -76,11 +80,7 @@ exports.goaldata_create = function (req, res) {
             });
         });
 
-        upload.single(req.body.file), function (req, res) {
-            // req.file is the name of your file in the form above, here 'uploaded_file'
-            // req.body will hold the text fields, if there were any 
-            console.log(req.file, req.body)
-         };
+        
         console.log("is shared?: " + req.params.shared);
         //console.log("evaluate: " + (type(req.params.shared)));
         if(req.params.shared == "true") {
