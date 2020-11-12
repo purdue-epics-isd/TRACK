@@ -29,43 +29,127 @@
 
     <form>
       <label>upload excel sheet here</label>
-      <input type="file" id="excelInput" accept=".xlsx">
-      <button onClick="submitFile()">submit</button>
+      <input type="file" id="fileUpload" accept=".xlsx">
+      <button onClick="upload()">submit</button>
+      <div id="dvExcel"></div>
 
     </form>
 
-    <script>
-      function submitFile() {
-          console.log("working");
-          this.parseExcel = function(file) {
-          var reader = new FileReader();
+    <script type="text/javascript">
+    function upload() {
+        //Reference the FileUpload element.
+        console.log("upload");
+        var fileUpload = document.getElementById("fileUpload");
+ 
+        //Validate whether File is valid Excel file.
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+        if (regex.test(fileUpload.value.toLowerCase())) {
+            if (typeof (FileReader) != "undefined") {
+                console.log("is real excel file");
+                var reader = new FileReader();
+ 
+                //For Browsers other than IE.
+                if (reader.readAsBinaryString) {
+                    console.log("is not IE");
+                    reader.onload = function (e) {
+                        ProcessExcel(e.target.result);
+                    };
+                    reader.readAsBinaryString(fileUpload.files[0]);
+                } else {
+                    //For IE Browser.
+                    console.log("is IE");
+                    reader.onload = function (e) {
+                        var data = "";
+                        var bytes = new Uint8Array(e.target.result);
+                        for (var i = 0; i < bytes.byteLength; i++) {
+                            data += String.fromCharCode(bytes[i]);
+                        }
+                        ProcessExcel(data);
+                    };
+                    reader.readAsArrayBuffer(fileUpload.files[0]);
+                }
+            } else {
+                alert("This browser does not support HTML5.");
+            }
+        } else {
+            alert("Please upload a valid Excel file.");
+        }
+    };
+    function ProcessExcel(data) {
+        console.log("ProcessExcel");
+        //Read the Excel File data.
+        var workbook = XLSX.read(data, {
+            type: 'binary'
+        });
+ 
+        //Fetch the name of First Sheet.
+        var firstSheet = workbook.SheetNames[0];
+ 
+        //Read all rows from First Sheet into an JSON array.
+        var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[firstSheet]);
+        console.log(excelRows);
+        let adder = 0;
+        for (let i = 0; i < 10000000000; i++) {
+          adder++;
+        }
+ 
+        //Create a HTML Table element.
+        var table = document.createElement("table");
+        table.border = "1";
+ 
+        //Add the header row.
+        var row = table.insertRow(-1);
+ 
+        //Add the header cells.
+        var headerCell = document.createElement("TH");
+        headerCell.innerHTML = "First Name";
+        row.appendChild(headerCell);
+ 
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "Last Name";
+        row.appendChild(headerCell);
+ 
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "Email";
+        row.appendChild(headerCell);
 
-          reader.onload = function(e) {
-            var data = e.target.result;
-            var workbook = XLSX.read(data, {
-              type: 'binary'
-            });
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "DOB";
+        row.appendChild(headerCell);
 
-            workbook.SheetNames.forEach(function(sheetName) {
-              // Here is your object
-              var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-              var json_object = JSON.stringify(XL_row_object);
-              console.log(json_object);
+        headerCell = document.createElement("TH");
+        headerCell.innerHTML = "Teacher Email";
+        row.appendChild(headerCell);
+ 
+        //Add the data rows from Excel file.
+        for (var i = 0; i < excelRows.length; i++) {
+            //Add the data row.
+            var row = table.insertRow(-1);
+ 
+            //Add the data cells.
+            var cell = row.insertCell(-1);
+            cell.innerHTML = excelRows[i].FirstName;
+ 
+            cell = row.insertCell(-1);
+            cell.innerHTML = excelRows[i].LastName;
+ 
+            cell = row.insertCell(-1);
+            cell.innerHTML = excelRows[i].Email;
 
-            })
+            cell = row.insertCell(-1);
+            cell.innerHTML = excelRows[i].DOB;
 
-          };
+            cell = row.insertCell(-1);
+            cell.innerHTML = excelRows[i].TeacherEmail;
+        }
+        console.log(table);
 
-          reader.onerror = function(ex) {
-            console.log(ex);
-          };
-
-          reader.readAsBinaryString(file);
-        };
-        
-      }
-
-    </script>
+ 
+        var dvExcel = document.getElementById("dvExcel");
+        dvExcel.innerHTML = "";
+        dvExcel.appendChild(table);
+    };
+</script>
     
 
 

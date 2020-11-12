@@ -18,7 +18,7 @@ app.get('/', student.run);
 
 //Set up mongoose connection
 const mongoose = require('mongoose');
-let dev_db_url = 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track';
+let dev_db_url = 'mongodb+srv://purdue.epics.isd.track@gmail.com:Woofwoof7!!!!@track-dev.4dk1e.mongodb.net/TRACK-dev?retryWrites=true&w=majority';
 let mongoDB = process.env.MONGO_URI || dev_db_url;
 mongoose.connect(mongoDB, ({
 	useNewUrlParser: true,
