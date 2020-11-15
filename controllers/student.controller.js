@@ -3,11 +3,12 @@ const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
 var CryptoJS = require("crypto-js");
 /*creates new student profile in database*/
-exports.student_create = function (req, res) {
+exports.student_create = async function (req, res) {
     try {
+        console.log("pre break")
         let student = new Student(
-            {   firstname: req.body.firstname,
-                lastname: req.body.lastname,
+            {   firstname: await encryption(req.body.firstname),
+                lastname: await encryption(req.body.lastname),
                 grade: req.body.grade,
                 dob: req.body.dob,
                 email: req.body.studentemail,
@@ -16,6 +17,7 @@ exports.student_create = function (req, res) {
                 shared: false
             }
         );
+        console.log("post break");
         student.save(function (err) {
             if (err) {
                 console.log(err);
@@ -29,9 +31,13 @@ exports.student_create = function (req, res) {
     }
 };
 
+async function encryption(string) {
+    let ciphertext = await CryptoJS.AES.encrypt(string, 'secret key 123').toString();
+    return ciphertext;
+}
 
 async function decryption(ciphertext) {
-    await console.log("decryption")
+    // await console.log("decryption")
     var bytes  = await CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     // await console.log("bytes:", bytes);
     var originalText = await bytes.toString(CryptoJS.enc.Utf8);
@@ -73,6 +79,8 @@ exports.navigate_to_studentProfile = async function (req, res) {
             await  Student.findById(req.params.studentid,async function(err, student) {
                 await  Goal.findById(req.params.goalid,async function(err, goal) {
                     await console.log("\nCurrent student: " + student);
+                    student.firstname = await decryption(student.firstname);
+                    student.lastname = await decryption(student.lastname);
                     await  res.render('pages/studentProfile', {
                         goals: goals,
                         student: student, 
@@ -95,9 +103,17 @@ exports.navigate_to_classPage = async function (req, res) {
         var students = [];
 
         
-        await Student.find({}, {}, function(err, student) {
-            student.forEach(async function(s) { 
+        await Student.find({}, {}, async function(err, student) {
+            await student.forEach(async function(s) { 
+                
+                    // s.firstname =  await decryption(s.name);
+
+                    // s.lastname = await decryption(s.description);
                     await console.log("pushing student", s);
+                    await console.log("s.name", await decryption(s.firstname));
+                    s.firstname = await decryption(s.firstname);
+                    s.lastname = await decryption(s.lastname);
+                    
                     await students.push(s);
             });
         });
@@ -147,11 +163,13 @@ exports.student_delete = function (req, res) {
     }        
 };
 
-exports.student_redirect_edit = function (req, res) {
+exports.student_redirect_edit = async function (req, res) {
     console.log("redirecting to edit page");
     try {
-        User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
+        User.findById(req.params.userid, async function(err, user) {
+            Student.findById(req.params.studentid, async function(err, student) {
+                student.firstname = await decryption(student.firstname);
+                student.lastname = await decryption(student.lastname);
                 res.render('pages/editStudent', {
                     student: student, 
                     user: user
@@ -191,6 +209,8 @@ exports.navigate_to_sharedWithMeClassPage = async function (req, res) {
 
         await Student.find({}, {}, async function(err, student) {
             student.forEach(async function(s) { 
+                    s.firstname = await decryption(s.firstname);
+                    s.lastname = await decryption(s.lastname);
                     await students.push(s);
             });
         });
