@@ -1,3 +1,6 @@
+//add encryption tool:
+var aesjs = require('aes-js');
+var CryptoJS = require("crypto-js");
 const User = require('../models/user.model');
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
@@ -5,6 +8,17 @@ const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
 
 mongoose.set('useFindAndModify', false); // solve findAndModify() warning
+
+function encryption(string) {
+    return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123').toString();
+}
+function decryption(ciphertext) {
+    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    return originalText = bytes.toString(CryptoJS.enc.Utf8);
+}
+function decryptAllGoalData() {
+
+}
 
 // Require packages
 const path = require('path');
@@ -21,14 +35,23 @@ db.once('open', () => {
   gfs.collection('uploads');
 });
 
+
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
+    //encrytion ends here
+    var CryptoJS = require("crypto-js");
+    // Encrypt
+    var ciphertext = CryptoJS.AES.encrypt(req.body.name, 'secret key 123').toString();
+    // Decrypt
+    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
     console.log(req.body.methodOfCollection);
     try {
+        //for name:
         let goal = new Goal(
             {
-                name: req.body.name,
-                description: req.body.description,
+                name: encryption(req.body.name),
+                description: encryption(req.body.description),
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
@@ -81,6 +104,13 @@ exports.navigate_to_goalProfile = function (req, res) {
             User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
+
+                    goal.name = decryption(goal.name);
+                    goal.description = decryption(goal.description);
+                    goal.studentID = decryption(goal.studentID);
+                    console.log("method:" + goal.methodOfCollection);
+                    console.log("method as var:" + methodsOfCollection);
+
                     console.log("goal:" + goal);
                     gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
                       if (!files || files.length === 0) {
@@ -143,7 +173,10 @@ exports.goal_redirect_edit = function (req, res) {
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
               Goal.findById(req.params.goalid, function(err, goal) {
-                res.render('pages/editGoal', {
+                  goal.name = decryption(goal.name);
+                  goal.description =decryption(goal.description);
+                  goal.studentID = decryption(goal.studentID);
+                res.render('pages/EditGoal', {
                     student: student,
                     user: user,
                     goalid: req.params.goalid,
@@ -240,6 +273,9 @@ exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
         //TODO: we may need to add filtering (i.e. an if statement) to make sure that the goals are actually shared goals
         //Just because the student is shared, doesn't necessarily mean all of their goals should be shared
         Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
+            goal.name = decryption(goal.name);
+            goal.description = decryption(goal.description);
+            goal.studentID = decryption(goal.studentID);
             goal.forEach(function(s) { 
                     goals.push(s);
                     console.log(s);
@@ -247,6 +283,9 @@ exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
         });
 
         /*load the actual page*/
+        goals.name = decryption(goals.name);
+        goals.description = decryption(goals.description);
+        goals.studentID = decryption(goals.studentID);
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
                 Goal.findById(req.params.goalid, function(err, goal) {
@@ -289,6 +328,8 @@ exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
                     console.log("method as var:" + methodsOfCollection);
                     console.log("goal:" + goal);
                     gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
+                        goal.name = encryption(goal.name);
+                        goal.description = encryption(goal.description);
                       if (!files || files.length === 0) {
                         res.render('pages/sharedWithMeGoalProfile', {
                             user: user,
