@@ -82,7 +82,7 @@ exports.navigate_to_goalProfile = function (req, res) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
                     console.log("goal:" + goal);
-                    gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
+                    gfs.files.find( { metadata: req.params.goaldataid } ).toArray((err, files) => {
                       if (!files || files.length === 0) {
                         res.render('pages/goalProfile', {
                             user: user,

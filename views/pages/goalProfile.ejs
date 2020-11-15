@@ -317,55 +317,6 @@
 				<input type="submit" class="btn btn-primary"></input>
 			</form>
 
-			<%if(goal.methodOfCollection.includes("documentation")) { %>
-			<div class="generic-box">
-				<label for="documentation">Documentation :</label>
-				<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST"
-					enctype="multipart/form-data">
-					<div class="file is-centered">
-						<label class="file-label">
-							<input class="file-input" type="file" name="file" id="file">
-							<span class="file-cta">
-								<span class="file-icon"><i class="fas fa-upload"></i></span>
-							</span>
-						</label>
-					</div><br>
-					<input class="btn btn-primary" type="submit" value="Submit">
-				</form>
-			</div>
-			<% if(files) { %>
-			<% files.forEach(function(file) { %>
-			<% if(file.isImage) { %>
-			<div>
-				<%= file.filename %>
-				<form style="display: inline-block;" method="POST"
-					action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-					<button style="display: inline-block;" class="btn btn-primary">Delete</button>
-				</form>
-				<form style="display: inline-block;" method="POST"
-					action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-					<button style="display: inline-block;" class="btn btn-primary">Open</button>
-				</form>
-			</div>
-			<% } else { %>
-			<div>
-				<%= file.filename %>
-				<form style="display: inline-block;" method="POST"
-					action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-					<button style="display: inline-block;" class="btn btn-primary">Delete</button>
-				</form>
-				<form style="display: inline-block;" method="POST"
-					action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-					<button style="display: inline-block;" class="btn btn-primary">Open</button>
-				</form>
-			</div>
-			<% } %>
-			<% }); %>
-			<% } else { %>
-			<p class="content">No files to show</p>
-			<% } %>
-			<%} %>
-
 		</div>
 
 
@@ -392,6 +343,7 @@
 					<%} %>
 
 					<th>Date</th>
+					<th>Documentation</th>
 
 					<%if(goal.shared == true) { %>
 					<th>Created by</th>
@@ -418,6 +370,36 @@
 					<%} %>
 
 					<td><%= goalData.time.getMonth()+1 %>/<%= goalData.time.getDate() %>/<%= goalData.time.getFullYear() %>
+					</td>
+					<td>
+							
+								<div class="generic-box">
+									
+									<form action="/student/<%= student.id %>/goal/<%= goal.id %>/<%= goalData.id %>/upload" method="POST"
+										enctype="multipart/form-data">
+										<div class="file is-centered">
+											<label class="file-label">
+												<input class="file-input" type="file" name="file" id="file">
+												<span class="file-cta">
+													<span class="file-icon"><i class="fas fa-upload"></i></span>
+												</span>
+											</label>
+										</div><br>
+										<input class="btn btn-primary" type="submit" value="Submit">
+									</form>
+								</div>
+			
+									<form style="display: inline-block;" method="POST"
+										action="/student/<%= student.id %>/goal/<%= goal.id %>/<%= goalData.id %>/delete_file?_method=DELETE">
+										<button style="display: inline-block;" class="btn btn-primary">Delete</button>
+									</form>
+									<form style="display: inline-block;" method="POST"
+										action="/student/<%= student.id %>/goal/<%= goal.id %>/<%= goalData.id %>/download">
+										<button style="display: inline-block;" class="btn btn-primary">Open</button>
+									</form>
+								</div>
+								
+								
 					</td>
 
 					<%if(goal.shared == true) { %>

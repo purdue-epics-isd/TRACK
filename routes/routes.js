@@ -23,7 +23,7 @@ const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
 
 const storage = new GridFsStorage({
-	url: 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track',
+	url: 'mongodb://track:Woofwoof@track-dev-shard-00-00.4dk1e.mongodb.net:27017,track-dev-shard-00-01.4dk1e.mongodb.net:27017,track-dev-shard-00-02.4dk1e.mongodb.net:27017/TRACK-dev?ssl=true&replicaSet=atlas-1467wp-shard-0&authSource=admin&retryWrites=true&w=majority',
 	file: (req, file) => {
 		return new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
@@ -31,7 +31,7 @@ const storage = new GridFsStorage({
 				const filename = file.originalname;
 			const fileInfo = {
 				filename: filename,
-				metadata: req.params.goalid,
+				metadata: req.params.goaldataid,
 				bucketName: 'uploads'
 			};
 			resolve(fileInfo);
@@ -66,24 +66,24 @@ router.get('/student/:studentid/goal/:goalid/goal_share', goal_controller.goal_s
 
 router.get('/student/:studentid/goal/:goalid/goaldata_delete/:goaldataid', goaldata_controller.goaldata_delete); //TODO: deletes goal from datapoint
 router.get('/student/:studentid/delete', student_controller.student_delete); //TODO: deletes goal from datapoint
-router.post('/student/:studentid/goal/:goalid/goaldata/upload',upload.single('file'),(req, res) => res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid));
-router.post('/student/:studentid/goal/:goalid/goaldata/files/:id', (req, res) => {
-  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+router.post('/student/:studentid/goal/:goalid/:goaldataid/upload',upload.single('file'),(req, res) => res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid));
+router.post('/student/:studentid/goal/:goalid/:goaldataid/delete_file', (req, res) => {
+  gfs.remove({ metadata: req.params.goaldataid, root: 'uploads' }, (err, gridStore) => {
     if (err) res.status(404).json({ err: err });
     res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
   });
 });
-router.post('/student/:studentid/goal/:goalid/goaldata/files/:id/download', (req, res) => {
+router.post('/student/:studentid/goal/:goalid/:goaldataid/download', (req, res) => {
 
     var filename = req.params.id;
 
-        gfs.exist({ _id: req.params.id, root: 'uploads'}, (err, file) => {
+        gfs.exist({ metadata: req.params.goaldataid, root: 'uploads'}, (err, file) => {
             if (err || !file) {
                 res.status(404).send('File Not Found');
         return
             }
 
-      var readstream = gfs.createReadStream({ _id: req.params.id });
+      var readstream = gfs.createReadStream({ metadata: req.params.goaldataid });
       readstream.pipe(res);
         });
     });
