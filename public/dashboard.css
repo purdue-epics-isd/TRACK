@@ -4,7 +4,7 @@
  --secondarycolor: #82bef6;
  --wordcolor: #fff;
  --headcolor: #fff;
- --sidenavcolor: #333333;
+ --sidenavcolor: #2C3E50;
 }
 
 [data-theme="dark"] {
@@ -176,7 +176,7 @@ b {
   transition: all .6s ease-in-out;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   z-index: 2; /* Needs to sit above the hamburger menu icon */
-  background-color:  #333333;
+  background-color:  #2C3E50;
 }
 
 .sidenav.active {

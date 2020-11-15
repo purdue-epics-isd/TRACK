@@ -178,7 +178,7 @@ function topFunction() {
 
 				<div><br>
 					<h3>Goal Types</h3>
-					<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
+					<!-- <input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>
 
 					<div class="custom-control custom-radio">
 						<input type="radio" id="customRadio1" name="goalType" class="custom-control-input" value="STEM Goal">
@@ -195,18 +195,18 @@ function topFunction() {
 					<div class="custom-control custom-radio">
 						<input type="radio" id="customRadio4" name="goalType" class="custom-control-input" value="History Goal">
       					<label class="custom-control-label" for="customRadio4">History</label>
-					</div>
+					</div> -->
 					
 
-					<!--<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>-->
+					<!-- <input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br> -->
 
 					<div class="custom-control custom-radio">
 						<input type="radio" id="customRadio5" name="goalType" class="custom-control-input" value="Behavioral Goal">
       					<label class="custom-control-label" for="customRadio5">Behavior</label>
 					  </div>
 					  <div class="custom-control custom-radio">
-						<input type="radio" id="customRadio6" name="goalType" class="custom-control-input" value="Others Goal" >
-      					<label class="custom-control-label" for="customRadio6">Others</label>
+						<input type="radio" id="customRadio6" name="goalType" class="custom-control-input" value="Academic" >
+      					<label class="custom-control-label" for="customRadio6">Academic</label>
 					</div>
 				</div>
 
@@ -214,43 +214,51 @@ function topFunction() {
 			<div><br>
 				<h3>Method of Collection:</h3>
 
-				<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score"> Score <br>
+				<input type="radio" style="width: auto" name="methodOfCollection" value="score" id="score" onclick="rubricVisibility()"> Score <br>
 
-				<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count"> Count of Occurrences<br>
+				<input type="radio" style="width: auto" name="methodOfCollection" value="count" id="count" onclick="rubricVisibility()">Occurrences<br>
+				<input type="radio" style="width: auto" name="methodOfCollection" value="description" id="description" onclick="rubricVisibility()"> Description<br>
+				<input type="hidden" name="methodOfCollection" value="comments" id="comments"></input>
 
-				<select class="form-control" name = "occurrences" style="width:100%">
+
+				<!-- <select class="form-control" name = "occurrences" style="width:100%">
             		<option value="Per hour">Per hour</option>
             		<option value="Per class">Per class</option>
             		<option value="Per day">Per day</option>
             		<option value="Per week">Per week</option>
-          		</select>
+          		</select> -->
 
-				<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
-					<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
-					<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"></textarea></p>
-					<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"></textarea></p>
-					<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"></textarea></p>
-					<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"></textarea></p>
-					<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"></textarea></p>
-					<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"></textarea></p>
+				<input type="radio" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
+					
 
-				<!--<div style="display: none" id="rubricDiv">
+				<div style="display: none" id="rubricDiv">
 						<div id = "rubricFieldsHolder">
 							<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
 						</div>
 
+						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
+						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"></textarea></p>
+						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"></textarea></p>
+						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"></textarea></p>
+						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"></textarea></p>
+						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"></textarea></p>
+						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"></textarea></p>
+
 						<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
 						<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
-				</div>-->
+				</div>
 
 
 
 
 					<!--<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>-->
 
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Descriptive Comments <br>
+					<!-- <input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Descriptive Comments <br> -->
 
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="documentation" id="documentation"> File/Image documentation <br>
+					<!-- d -->
+
+					
+					
 
 
 					<script>
@@ -278,15 +286,18 @@ function topFunction() {
 						}
 
 						function rubricVisibility() {
+							console.log("rubricVisibility")
 							// Get the checkbox
-							var checkBox = document.getElementById("rubric");
+							var radio = document.getElementById("rubric");
 							// Get the output text
 							var rubricDiv = document.getElementById("rubricDiv");
 
 							// If the checkbox is checked, display the output text
-							if (checkBox.checked == true){
+							if (radio.checked == true){
+								console.log("radio is checked");
 								rubricDiv.style.display = "block";
 							} else {
+								console.log("radio isnt checked");
 								rubricDiv.style.display = "none";
 							}
 						}
