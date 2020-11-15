@@ -38,7 +38,6 @@ db.once('open', () => {
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
-
     //encrytion ends here
     var CryptoJS = require("crypto-js");
     // Encrypt
@@ -46,7 +45,7 @@ exports.goal_create = function (req, res) {
     // Decrypt
     var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
+    console.log(req.body.methodOfCollection);
     try {
         //for name:
         let goal = new Goal(
