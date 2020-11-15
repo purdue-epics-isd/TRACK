@@ -492,3 +492,7 @@ b {
     column-count: 2;
   }
 }
+
+.btn {
+  padding: 103px 30px;
+}
