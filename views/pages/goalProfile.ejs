@@ -117,7 +117,6 @@
 	}
 </style>
 
-<button onclick="topFunction()" id="topBtn" title="Go to top">Back to Top</button>
 <script>
 	//Get the button
 	var mybutton = document.getElementById("topBtn");
@@ -183,6 +182,12 @@
 					<button type="button" class="btn btn-primary">
 						Edit Goal
 					</button> </a>
+					<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete"
+						onclick="return confirm('Please confirm to delete this goal');" class="Delete" style="color: black">
+						<button type="button" class="btn btn-primary">
+								Delete Goal
+							</button> </a>
+					</a>
 			</div>
 		</div>
 
@@ -509,16 +514,8 @@
 		</div>
 
 	</main>
-
-	<footer class="footer">
-		<div class="footer__copyright">&copy; 2019 TRACK</div>
-		<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete"
-			onclick="return confirm('Please confirm to delete this goal');" class="Delete" style="color: black">
-			<div class="footer__signature">Delete Goal</div>
-		</a>
-	</footer>
+	<%- include("../partials/footer.ejs")%>
 </div>
-
 </html>
 
 <script type="text/javascript">

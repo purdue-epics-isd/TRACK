@@ -8,13 +8,11 @@
 <style>
 /* Style the form */
 #regForm {
-	background-color: white;
-	color: black;
-	margin: 100px auto;
-	padding: 40px;
-	width: 70%;
-	min-width: 300px;
-}
+		background-color: white;
+		color: black;
+		width: 50%;
+		min-width: 300px;
+	}
 p {
 	margin: 10px;
 }
@@ -115,7 +113,6 @@ border-radius: 4px;
 
 </style>
 
-<button onclick="topFunction()" id="topBtn" title="Go to top">Back to Top</button>
 <script>
 //Get the button
 var mybutton = document.getElementById("topBtn");
@@ -141,7 +138,7 @@ function topFunction() {
 <div>
 
 <%- include("../partials/header.ejs")%>
-<div class="container">
+<div>
 	<main class="main">
 		<script>
         const currentTheme = localStorage.getItem('theme');
@@ -154,7 +151,7 @@ function topFunction() {
 			<div class =  class-header>
 		            <h3>Create Goal</h3>
 		    </div>
-
+		<div class="container d-flex justify-content-center">
 		<form id="regForm" action="/student/<%= student.id%>/goal/create" method="post" style="margin-top:0">
 
 			<!-- One "tab" for each step in the form: -->
@@ -316,15 +313,11 @@ function topFunction() {
 				</div>
 			</div>
 		</form>
+	</div>
 	</main>
 
-
- <footer class="footer">
-      <div class="footer__copyright">&copy; 2019 TRACK</div>
-  </footer>
-
 </div>
-
+<%- include("../partials/footer.ejs")%>
 </html>
 
 <script>
