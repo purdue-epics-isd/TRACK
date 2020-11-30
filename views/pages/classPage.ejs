@@ -30,8 +30,6 @@
   }
 
 </style>
-
-<button onclick="topFunction()" id="topBtn" title="Go to top">Back to Top</button>
 <script>
 //Get the button
 var mybutton = document.getElementById("topBtn");
@@ -53,11 +51,11 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 </script>
-
+<body>
 <div>
 
   <%- include("../partials/header.ejs")%>
-<div class="container">
+<div>
     <main class="main">
         <script>
         const currentTheme = localStorage.getItem('theme');
@@ -69,7 +67,7 @@ function topFunction() {
     
     <!-- Tutorial -->
     <!-- Inital Popup -->
-    <button id="tutorialBtn" class="btn btn-info">Tutorial</button>
+    
     <div id="tutorial" class="tutorial">
       <div style="text-align: center" class="tutorialContent">
         <p style="text-align: center;font-size: 35px;">These popup boxes will guide you 
@@ -169,9 +167,8 @@ function topFunction() {
 	    }
 	  }
 	  </script> -->
-        
-	 <div class =  class-header>
-         <div class="form-group">
+    <div class="class-header">
+<div class="form-group">
             <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
           </div>
         
@@ -179,13 +176,13 @@ function topFunction() {
 
 	  <h3>Class List</h3>
 	  
-
+    <div>
 	  <a href="/createNewStudent"> <button type="button" class="btn btn-primary">
             Create New Student
-		  </button></a>
-        </div>
-
-
+      </button></a>
+      <button id="tutorialBtn" class="btn btn-info">Tutorial</button>
+      </div>
+    </div>
         
 	 <div class = "overviewcard" id="studentBox">
               <script>
@@ -233,20 +230,12 @@ function topFunction() {
               </script>
               <% }); %>
             </div>
-
-      
-
     </main>
-
-
-  <footer class="footer">
-      <div class="footer__copyright">&copy; 2019 TRACK</div>
-  </footer>
-
 </div>
 </div>
-</div>
-</html>
+
+</body>
+
 
 <script>
 
@@ -299,3 +288,5 @@ function topFunction() {
   };
 
 </script>
+<%- include("../partials/footer.ejs")%>
+</html>
