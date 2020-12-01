@@ -55,6 +55,22 @@ function topFunction() {
 <div>
 
   <%- include("../partials/header.ejs")%>
+  <div class="class-header">
+      <div class="form-group ">
+          <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
+        </div>
+      
+        
+
+  <p style="font-size: 24px;">Class List</p>
+  
+  <div>
+  <a href="/createNewStudent"> <button type="button" class="btn btn-primary">
+          Create New Student
+    </button></a>
+    <button id="tutorialBtn" class="btn btn-info">Tutorial</button>
+    </div>
+  </div>
 <div>
     <main class="main">
         <script>
@@ -167,22 +183,6 @@ function topFunction() {
 	    }
 	  }
 	  </script> -->
-    <div class="class-header">
-<div class="form-group">
-            <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
-          </div>
-        
-          
-
-	  <h3>Class List</h3>
-	  
-    <div>
-	  <a href="/createNewStudent"> <button type="button" class="btn btn-primary">
-            Create New Student
-      </button></a>
-      <button id="tutorialBtn" class="btn btn-info">Tutorial</button>
-      </div>
-    </div>
         
 	 <div class = "overviewcard" id="studentBox">
               <script>
@@ -256,7 +256,7 @@ function topFunction() {
   }
 
   var sel = document.getElementById('selectNumber');
-  var options = ["All students", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period"]; 
+  var options = ["All students &nbsp;", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period"]; 
   for(var i = 0; i < options.length; i++) {
     var opt = document.createElement('option');
     opt.innerHTML = options[i];

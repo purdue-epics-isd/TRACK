@@ -275,12 +275,12 @@ b {
   padding: 20px;
   height: 80px;
   background-color: #e3e4e6;
-  /*color: slategray;*/
+  /*color: slategray;*/ 
 }
 
 .overviewcard { 
   display: grid; 
-  grid-template-columns: repeat(3, 3fr);
+  grid-template-columns: repeat(4, 4fr);
   grid-gap: 20px;
   margin: 20px;
 }
@@ -294,24 +294,29 @@ b {
   align-items: center;
   justify-content: space-between;*/
   /*padding: 20px;*/
-  background-color: var(--maincolor);
+  background-color: #DDD7FF;
 }
 
 .studentCardName {
   /*display: flex;*/
   justify-content: center;
-
+  text-align: center;
   /*vertical-align: top;
   display: inline-block;
   align-items: center;
   justify-content: space-between;*/
   /*padding: 20px;*/
-  background-color: var(--maincolor);
+  border-radius: 5%;
+  background-color: #DDD7FF;
 }
 
 .name {
-  /*display: flex;*/
+  display: flex;
   justify-content: center;
+  color: white;
+  font-size: 24px;
+  text-transform: capitalize;
+  font-weight: bold;
 }
 /*Goal Page ends*/
 
