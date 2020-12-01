@@ -29,7 +29,6 @@
 
 </style>
 
-<button onclick="topFunction()" id="topBtn" title="Go to top">Back to Top</button>
 <script>
 //Get the button
 var mybutton = document.getElementById("topBtn");
@@ -57,13 +56,14 @@ function topFunction() {
   <%- include("../partials/header.ejs")%>
 
   <main class="main">
-
+      <div style="margin: 20px;">
     <a href="/classPage" class="btn btn-primary">Go Back to Class Page</a>
     
        <!-- Trigger/Open The Modal -->
        <button id="myBtn" class="btn btn-primary">
 	       Need Help?
-       </button> 
+       </button>
+      </div> 
        <!-- The Modal -->
        <div id="myModal" class="modal"> 
        <!-- Modal content -->
@@ -111,20 +111,21 @@ function topFunction() {
     </script>   
 
     <div class="class-header">
-      <h3><%= student.firstname %>'s Profile</h3>
-      
-
-      
-      <div class = "nameArea" style="grid-template-columns: repeat(2, 2fr);">
+      <p class="font-weight-bold" style="font-size: 24px;text-transform: capitalize;"><%= student.firstname %>'s Profile</p>
+      <div >
 
         <button type="button" class="btn btn-info" onclick="showInfo()" id="infoButton">Show Info</button>
-
         <a href="/student/<%= student.id%>/student_edit">
          <button type="button" class="btn btn-primary">
           <!-- <a href="/student/<%= student.id%>/student_edit"> -->
             Edit Student
             <!-- </a> -->
           </button>
+        </a> 
+        <a href="/student/<%= student.id %>/delete" onclick="return confirm('Please confirm to delete this student')" class="Delete" style="color: black"> 
+          <button type="button" class="btn btn-primary">            
+                Delete Student
+              </button>
         </a>
       </div>
       
@@ -178,18 +179,15 @@ function topFunction() {
             </div>
           </div>
         </div>
+      </a>
       </div>
+    
 
 
     </main>
-
-    <footer class="footer">
-      <div class="footer__copyright">&copy; 2019 TRACK</div>
-
-      <a href="/student/<%= student.id %>/delete" onclick="return confirm('Please confirm to delete this student')" class="Delete" style="color: black"> <div class="footer__signature">Delete Student</div></a>
-    </footer>
+    <%- include("../partials/footer.ejs")%>
   </div>
-
+  
   </html>
 
   <script>

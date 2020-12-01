@@ -117,7 +117,6 @@
 	}
 </style>
 
-<button onclick="topFunction()" id="topBtn" title="Go to top">Back to Top</button>
 <script>
 	//Get the button
 	var mybutton = document.getElementById("topBtn");
@@ -152,15 +151,15 @@
 				localStorage.setItem('theme', currentTheme);
 			}
 		</script>
-
+		<div style="margin: 20px;">
 		<a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
-
-		    <a href="javascript:history.back()" class="btn btn-primary">Go </a>
 		<!-- Trigger/Open The Modal -->
 		<button id="myBtn" class="btn btn-primary">Need Help?</button>
-
+		</div>
+		<div>
 		<div class=class-header>
-			<h1><%= goal.name %></h1>
+
+			<p class="font-weight-bold" style="font-size: 24px;text-transform: capitalize;"><%= goal.name %></p>
 			<!-- The Modal -->
 			<div id="sharingModal" class="sharing-modal">
 				<!-- Modal content -->
@@ -183,12 +182,20 @@
 					<button type="button" class="btn btn-primary">
 						Edit Goal
 					</button> </a>
+					<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete"
+						onclick="return confirm('Please confirm to delete this goal');" class="Delete" style="color: black">
+						<button type="button" class="btn btn-primary">
+								Delete Goal
+							</button> </a>
+					</a>
+			</div>
+			
+		</div>
+		<div class="description">
+				<h4>Description: <%= goal.description %></h4>
 			</div>
 		</div>
-
-		<div class="description">
-			<h5><%= goal.description %></h5>
-		</div>
+		
 		<script>
 			const currentTheme = localStorage.getItem('theme');
 			if (currentTheme) {
@@ -196,8 +203,11 @@
 				localStorage.setItem('theme', currentTheme);
 			}
 		</script>
-
+		<div>
+				
 		<div class="class-input">
+
+				
 			<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm"
 				method="post">
 
@@ -243,7 +253,7 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1"
-									value="Not evident" checked="">
+									value="Not evident" checked="">&nbsp; &nbsp; &nbsp; 
 								Not evident: <%= goal.rubricdescription[0] %>
 							</label>
 						</div>
@@ -251,7 +261,7 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Introduced">
+									value="Introduced">&nbsp; &nbsp; &nbsp;
 								Introduced: <%= goal.rubricdescription[1] %>
 							</label>
 						</div>
@@ -259,7 +269,7 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Emerging">
+									value="Emerging">&nbsp; &nbsp; &nbsp;
 								Emerging: <%= goal.rubricdescription[2] %>
 							</label>
 						</div>
@@ -267,7 +277,7 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Developing">
+									value="Developing">&nbsp; &nbsp; &nbsp;
 								Developing: <%= goal.rubricdescription[3] %>
 							</label>
 						</div>
@@ -275,7 +285,7 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Ongoing">
+									value="Ongoing">&nbsp; &nbsp; &nbsp;
 								Ongoing: <%= goal.rubricdescription[4] %>
 							</label>
 						</div>
@@ -283,7 +293,7 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Demonstrated">
+									value="Demonstrated">&nbsp; &nbsp; &nbsp;
 								Demonstrated: <%= goal.rubricdescription[5] %>
 							</label>
 						</div>
@@ -291,7 +301,7 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-									value="Applied">
+									value="Applied">&nbsp; &nbsp; &nbsp;
 								Applied: <%= goal.rubricdescription[6] %>
 							</label>
 						</div>
@@ -366,6 +376,7 @@
 			<% } %>
 			<%} %>
 
+		</div>
 		</div>
 
 
@@ -509,16 +520,8 @@
 		</div>
 
 	</main>
-
-	<footer class="footer">
-		<div class="footer__copyright">&copy; 2019 TRACK</div>
-		<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete"
-			onclick="return confirm('Please confirm to delete this goal');" class="Delete" style="color: black">
-			<div class="footer__signature">Delete Goal</div>
-		</a>
-	</footer>
+	<%- include("../partials/footer.ejs")%>
 </div>
-
 </html>
 
 <script type="text/javascript">
