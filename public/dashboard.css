@@ -32,6 +32,10 @@ body {
   font-family: 'Open Sans', Helvetica, sans-serif;
   box-sizing: border-box;
 }
+
+label {
+  font-weight: normal !important;
+}
 .navbar{
   border-radius: 0px !important;
 }
