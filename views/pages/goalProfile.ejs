@@ -151,15 +151,17 @@
 				localStorage.setItem('theme', currentTheme);
 			}
 		</script>
-
+		<div style="margin: 20px;">
 		<a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
 
 		    <a href="javascript:history.back()" class="btn btn-primary">Go </a>
 		<!-- Trigger/Open The Modal -->
 		<button id="myBtn" class="btn btn-primary">Need Help?</button>
-
+		</div>
+		<div>
 		<div class=class-header>
-			<h1><%= goal.name %></h1>
+
+			<p class="font-weight-bold" style="font-size: 24px;text-transform: capitalize;"><%= goal.name %></p>
 			<!-- The Modal -->
 			<div id="sharingModal" class="sharing-modal">
 				<!-- Modal content -->
@@ -189,11 +191,13 @@
 							</button> </a>
 					</a>
 			</div>
+			
 		</div>
-
 		<div class="description">
-			<h5><%= goal.description %></h5>
+				<h4>Description: <%= goal.description %></h4>
+			</div>
 		</div>
+		
 		<script>
 			const currentTheme = localStorage.getItem('theme');
 			if (currentTheme) {
@@ -201,8 +205,11 @@
 				localStorage.setItem('theme', currentTheme);
 			}
 		</script>
-
+		<div>
+				
 		<div class="class-input">
+
+				
 			<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm"
 				method="post">
 
@@ -371,6 +378,7 @@
 			<% } %>
 			<%} %>
 
+		</div>
 		</div>
 
 

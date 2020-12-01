@@ -275,10 +275,11 @@ b {
 .class-header {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
   padding: 20px;
   height: 80px;
   background-color: #e3e4e6;
+  margin-right: 20px;
+  margin-left: 20px;
   /*color: slategray;*/ 
 }
 
@@ -353,17 +354,17 @@ b {
   align-content: space-between;
   justify-content: center;
   padding: 20px;
-  background-color: var(--maincolor);
+  background-color: #DDD7FF;
 }
 
 .description{
   display: flex;
   justify-content: space-between;
-  margin: 20px;
-  padding: 20px;
-  height: 80px;
-  background-color: #e3e4e6;
-
+  background-color:  #e3e4e6;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .generic-box {

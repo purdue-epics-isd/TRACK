@@ -56,13 +56,14 @@ function topFunction() {
   <%- include("../partials/header.ejs")%>
 
   <main class="main">
-
+      <div style="margin: 20px;">
     <a href="/classPage" class="btn btn-primary">Go Back to Class Page</a>
     
        <!-- Trigger/Open The Modal -->
        <button id="myBtn" class="btn btn-primary">
 	       Need Help?
-       </button> 
+       </button>
+      </div> 
        <!-- The Modal -->
        <div id="myModal" class="modal"> 
        <!-- Modal content -->
@@ -110,10 +111,7 @@ function topFunction() {
     </script>   
 
     <div class="class-header">
-      <h3><%= student.firstname %>'s Profile</h3>
-      
-
-      
+      <p class="font-weight-bold" style="font-size: 24px;text-transform: capitalize;"><%= student.firstname %>'s Profile</p>
       <div >
 
         <button type="button" class="btn btn-info" onclick="showInfo()" id="infoButton">Show Info</button>
