@@ -60,7 +60,8 @@ exports.goal_create = function (req, res) {
                 occurrencesType: req.body.occurrences,
                 shared: false,
                 rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
-                goaldata: []
+                goaldata: [],
+                userid: req.body.userID
             })
 
         Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {

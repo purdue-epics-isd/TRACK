@@ -198,7 +198,7 @@ function topFunction() {
               <script>
                 console.log("hey");
                 console.log(localStorage.getItem("userID"));
-                if(localStorage.getItem("userID") == "<%=student.userid %>") {
+                if(localStorage.getItem("username") == "<%=student.userid %>") {
                   var card = document.createElement("div");
                   card.className = "studentCardName <%=student.period%>";
                   card.id = "<%=student.id%>";

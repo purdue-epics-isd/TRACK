@@ -1,11 +1,23 @@
 const Student = require('../models/student.model');
 const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
+const Teacher = require('../models/teacher.model');
 var CryptoJS = require("crypto-js");
-/*creates new student profile in database*/
+/*creates new student profile in database and ensures their is a teacher profile for them*/
 exports.student_create = async function (req, res) {
     try {
-        console.log("pre break")
+        await console.log("pre break");
+        await console.log(req.body);
+        // need to ensure that duplicate teacher and student objects are not created twice, this will be done
+        // by ensuring that no two teacher have the same userid and that no two students have the same email
+        let teacher = new Teacher(
+            {
+                students: [],
+                shared: false,
+                sharedwith: false,
+                userid: req.body.userID
+            }
+        );
         let student = new Student(
             {   firstname: await encryption(req.body.firstname),
                 lastname: await encryption(req.body.lastname),
@@ -17,13 +29,29 @@ exports.student_create = async function (req, res) {
                 shared: false
             }
         );
-        console.log("post break");
-        student.save(function (err) {
+        // console.log("post break");
+        teacher.save(function(err) {
             if (err) {
                 console.log(err);
-            } 
+            }
         })
-        res.redirect("/classPage");
+        Teacher.findOneAndUpdate({userid: req.body.userID}, {$push: {students: student}}, function (err, teacher) {
+            student.save(function (err) {
+                if (err) {
+                    res.send(err);
+                }
+                else {
+                    res.redirect("/classPage");
+                }
+            });
+        });
+        
+        // student.save(function (err) {
+        //     if (err) {
+        //         console.log(err);
+        //     } 
+        // })
+        // res.redirect("/classPage");
     } catch(err) {
         //console.log(err);
         console.log("exports.student_create");
@@ -50,25 +78,25 @@ exports.navigate_to_studentProfile = async function (req, res) {
     try {
         console.log("navigate_to_studentProfile");
         var goals = [];
-        console.log("pre Goal.find");
+        // console.log("pre Goal.find");
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
-            console.log("in Goal.find");
+            // console.log("in Goal.find");
             await goal.forEach(async function(s) {
-                await console.log("pre log statements");
-                await console.log("name", s.name);
-                await console.log("description", s.description);
-                await console.log("ID", s.studentID);
-                await console.log("post log statements");
+                // await console.log("pre log statements");
+                // await console.log("name", s.name);
+                // await console.log("description", s.description);
+                // await console.log("ID", s.studentID);
+                // await console.log("post log statements");
 
                 s.name =  await decryption(s.name);
                 s.description = await decryption(s.description);//error happens here.
                 
 
-                await console.log("pre log statements");
-                await console.log("name", s.name);
-                await console.log("description", s.description);
-                await console.log("ID", s.studentID);
-                await console.log("post log statements");
+                // await console.log("pre log statements");
+                // await console.log("name", s.name);
+                // await console.log("description", s.description);
+                // await console.log("ID", s.studentID);
+                // await console.log("post log statements");
 
                 await goals.push(s);
             });
@@ -78,7 +106,7 @@ exports.navigate_to_studentProfile = async function (req, res) {
         await User.findById(req.params.userid,  async function(err, user) {
             await  Student.findById(req.params.studentid,async function(err, student) {
                 await  Goal.findById(req.params.goalid,async function(err, goal) {
-                    await console.log("\nCurrent student: " + student);
+                    // await console.log("\nCurrent student: " + student);
                     student.firstname = await decryption(student.firstname);
                     student.lastname = await decryption(student.lastname);
                     await  res.render('pages/studentProfile', {
@@ -90,8 +118,8 @@ exports.navigate_to_studentProfile = async function (req, res) {
             });
         });
     } catch(err) {
-        await  console.log("exports.navigate_to_studentProfile");
-        await  console.log(err);
+        // await  console.log("exports.navigate_to_studentProfile");
+        // await  console.log(err);
         await res.render('./error');
     }
 }
@@ -109,8 +137,8 @@ exports.navigate_to_classPage = async function (req, res) {
                     // s.firstname =  await decryption(s.name);
 
                     // s.lastname = await decryption(s.description);
-                    await console.log("pushing student", s);
-                    await console.log("s.name", await decryption(s.firstname));
+                    // await console.log("pushing student", s);
+                    // await console.log("s.name", await decryption(s.firstname));
                     s.firstname = await decryption(s.firstname);
                     s.lastname = await decryption(s.lastname);
                     

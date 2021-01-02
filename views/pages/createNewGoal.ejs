@@ -312,6 +312,7 @@ function topFunction() {
 					<a href="/student/<%=student.id%>" class="btn btn-info">Cancel</a>
 				</div>
 			</div>
+			<input type="hidden" name="userID" id="userID">
 		</form>
 	</div>
 	</main>
@@ -319,6 +320,11 @@ function topFunction() {
 </div>
 <%- include("../partials/footer.ejs")%>
 </html>
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  document.getElementById("userID").value = localStorage.getItem("username");
+  console.log(localStorage.getItem("userID"));
+</script>
 
 <script>
 
