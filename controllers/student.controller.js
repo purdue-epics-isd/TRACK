@@ -3,6 +3,7 @@ const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
 const Teacher = require('../models/teacher.model');
 var CryptoJS = require("crypto-js");
+const mongoose = require('mongoose');
 /*creates new student profile in database and ensures their is a teacher profile for them*/
 exports.student_create = async function (req, res) {
     try {
@@ -30,28 +31,96 @@ exports.student_create = async function (req, res) {
             }
         );
         // console.log("post break");
-        teacher.save(function(err) {
-            if (err) {
-                console.log(err);
+        // console.log("req.body.userID", req.bosy.userID);
+        // console.log("Student.exists({userID: req.body.userID})", Teaccher.exists({email: req.body.studentemail}));
+
+        // new
+        Teacher.count({userid: req.body.userID}, function(err, count) {
+            if (count==0) {
+                console.log("teacher count", count);
+                teacher.save(function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
             }
         })
-        Teacher.findOneAndUpdate({userid: req.body.userID}, {$push: {students: student}}, function (err, teacher) {
-            student.save(function (err) {
-                if (err) {
-                    res.send(err);
-                }
-                else {
-                    res.redirect("/classPage");
-                }
-            });
+        
+
+        // new
+        Student.count({email: req.body.studentemail}, function(err, count) {
+
+            if (count==0) {
+                // this accounts for when a student is created for the first time
+                console.log("student count", count);
+                Teacher.findOneAndUpdate({userid: req.body.userID}, {$push: {students: student}}, function (err, teacher) {
+                    student.save(function (err) {
+                        if (err) {
+                            res.send(err);
+                        }
+                        else {
+                            res.redirect("/classPage");
+                        }
+                    });
+                })   
+            }
+            else {
+                // If count > 0, then there are 2 situations.  Either a teacher is trying to create
+                // a student they have already created, or a teacher is trying to create a student that
+                // another teacher has created.  If it is the first situation, nothing should happen.
+                // however if the second situation happens, a student should not be created, but the student
+                // that has already been created should be appended to that teachers list of students
+                Teacher.findOne({userid: req.body.userID}, async function(err, result) {
+                    if (err) {
+                        console.log("err", err)
+                    }
+                    else {
+                        Student.findOne({email: req.body.studentemail}, async function(err1, result1) {
+                            if (err1) {
+                                console.log("err1", err1)
+                            }
+                            else {
+                                console.log("result1", result1)
+                                console.log("result", result)
+                                console.log(result1._id)
+                                let studentid = result1._id
+                                console.log("no errors")
+                                let studentArr = result.students
+                                console.log("looking for id #", studentid);
+                                console.log("studentArr", studentArr)
+                                let inTeachersStudArr = false
+                                for (let i = 0; i < studentArr.length; i++) {
+                                    console.log(studentArr[i])
+                                    if (studentArr[i].toString() == studentid) {
+                                        inTeachersStudArr = true
+                                    }
+                                }
+                                console.log("result", result)
+                                console.log("inTeachersStudArr", inTeachersStudArr)
+                                if (!inTeachersStudArr) {
+                                    // if the id is not in the list of students append the id to the user
+                                    Teacher.updateOne({userid: req.body.userID}, {$push: {students: student}}, function(err, docs) {
+                                        if (err) {
+                                            console.log("err", err)
+                                        }
+                                        else {
+                                            console.log("docs", docs)
+                                        }
+                                    })
+                                }
+                                // else do nothing
+                            }
+                        })
+                         
+                    }        
+                })
+                    
+            
+                res.redirect("/classPage");
+            }
+            
         });
         
-        // student.save(function (err) {
-        //     if (err) {
-        //         console.log(err);
-        //     } 
-        // })
-        // res.redirect("/classPage");
     } catch(err) {
         //console.log(err);
         console.log("exports.student_create");
@@ -145,7 +214,7 @@ exports.navigate_to_classPage = async function (req, res) {
                     await students.push(s);
             });
         });
-        await console.log("\n\n\n\n\n\n\n\n\nstudents in students", students);
+        // await console.log("\n\n\n\n\n\n\n\n\nstudents in students", students);
         await Student.findById(req.params.studentid, async function(err, student) {
             await res.render('pages/classPage', {
                 students: students
