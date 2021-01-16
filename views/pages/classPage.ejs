@@ -193,42 +193,46 @@ function topFunction() {
 
               <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
-              <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
-              <!--<div class = "cardName" id="<%=student.userid%>">-->
-              <script>
-                console.log("hey");
-                console.log(localStorage.getItem("userID"));
-                if(localStorage.getItem("username") == "<%=student.userid %>") {
-                  var card = document.createElement("div");
-                  card.className = "studentCardName <%=student.period%>";
-                  card.id = "<%=student.id%>";
-                  // console.log("<%=student.id%>");
+                <% student.userid.forEach(function(id) { %>
 
-                  var studentLink = document.createElement("a");
-                  studentLink.href = "/student/<%=student.id%>";
+                  <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
+                  <!--<div class = "cardName" id="<%=student.userid%>">-->
+                  <script>
+                    console.log("hey");
+                    console.log(localStorage.getItem("username"));
+                    console.log("student email", "<%=student.email%>")
+                    console.log("teacher email", "<%=id%>")
 
-                  var studentImg = document.createElement("img");
-                  studentImg.className = "img-circle";
-                  studentImg.src = "/img/studentIcon.png";
-                  studentImg.width = "200";
-                  studentImg.height = "200";
-
-                  var studentLabel = document.createElement("class");
-                  studentLabel.className = "name";
-                  studentLabel.innerHTML = "<%=student.firstname%>"; //+ " " + "<%=student.lastname%>";
-
-                  studentLink.appendChild(card);
-                  card.appendChild(studentImg);
-                  card.appendChild(studentLabel);
-
-                  document.getElementById("studentBox").appendChild(studentLink);
-
-                  //var toDelete = document.getElementById("uid");
-
-                  //toDelete.parentNode.removeChild(toDelete);
-                }
-              </script>
+                    
+                    if(localStorage.getItem("username") == "<%=id%>") {
+                      var card = document.createElement("div");
+                      card.className = "studentCardName <%=student.period%>";
+                      card.id = "<%=student.id%>";
+                      console.log("<%=student.id%>");
+                      var studentLink = document.createElement("a");
+                      studentLink.href = "/student/<%=student.id%>";
+                      var studentImg = document.createElement("img");
+                      studentImg.className = "img-circle";
+                      studentImg.src = "/img/studentIcon.png";
+                      studentImg.width = "200";
+                      studentImg.height = "200";
+                      var studentLabel = document.createElement("class");
+                      studentLabel.className = "name";
+                      studentLabel.innerHTML = "<%=student.firstname%>"; //+ " " + "<%=student.lastname%>";
+                      studentLink.appendChild(card);
+                      card.appendChild(studentImg);
+                      card.appendChild(studentLabel);
+                      document.getElementById("studentBox").appendChild(studentLink);
+                      //var toDelete = document.getElementById("uid");
+                      //toDelete.parentNode.removeChild(toDelete);
+                    }
+                  </script>
+                <% }); %>
               <% }); %>
+
+              
+
+
             </div>
     </main>
 </div>
@@ -288,4 +292,7 @@ function topFunction() {
   };
 
 </script>
+
 </html>
+
+

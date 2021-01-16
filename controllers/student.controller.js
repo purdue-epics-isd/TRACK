@@ -69,7 +69,9 @@ exports.student_create = async function (req, res) {
                 // a student they have already created, or a teacher is trying to create a student that
                 // another teacher has created.  If it is the first situation, nothing should happen.
                 // however if the second situation happens, a student should not be created, but the student
-                // that has already been created should be appended to that teachers list of students
+                // that has already been created should be appended to that teachers list of students.  In 
+                // addition to this, the teacher should be appended to the list of teachers on a student
+                // object.
                 Teacher.findOne({userid: req.body.userID}, async function(err, result) {
                     if (err) {
                         console.log("err", err)
@@ -100,6 +102,14 @@ exports.student_create = async function (req, res) {
                                 if (!inTeachersStudArr) {
                                     // if the id is not in the list of students append the id to the user
                                     Teacher.updateOne({userid: req.body.userID}, {$push: {students: student}}, function(err, docs) {
+                                        if (err) {
+                                            console.log("err", err)
+                                        }
+                                        else {
+                                            console.log("docs", docs)
+                                        }
+                                    })
+                                    Student.updateOne({email: req.body.studentemail}, {$push: {userid: req.body.userID}}, function(err, docs) {
                                         if (err) {
                                             console.log("err", err)
                                         }
@@ -198,6 +208,11 @@ exports.navigate_to_classPage = async function (req, res) {
     try {
         await console.log("student.controller email in body:" + req.body.email);
         var students = [];
+        // var classes = [];
+        // var teachers = [];
+
+        // await console.log("localStorage", localStorage)
+
 
         
         await Student.find({}, {}, async function(err, student) {
@@ -214,8 +229,41 @@ exports.navigate_to_classPage = async function (req, res) {
                     await students.push(s);
             });
         });
+
+        // await Teacher.find({}, {}, async function(err, teacher) {
+
+        //     await teacher.forEach(async function(t) {
+        //         await teachers.push(t)
+        //         let students = t.students;
+        //         await console.log(students)
+        //         let studentArr = []
+        //         await students.forEach(async function(s) {
+        //             await console.log("s", s);
+        //             await Student.find({_id: s}, async function(err, student) {
+        //                 // await console.log("student", student)
+        //                 await studentArr.push(student);
+        //                 // await console.log("studentArr", studentArr);
+        //             })
+        //             await console.log("adding this to classes", studentArr)
+        //             await classes.push(studentArr)
+        //             await console.log("classes", classes[0])
+        //         })
+        //         // await console.log("studentArr now!?", studentArr)
+        //         // await classes.push(studentArr);
+        //         // await console.log("classes", classes);
+        //     })
+
+        // })
+
+        // await console.log("req.params", req.params)
+        // await console.log("req.body.userID", req.body.userID)
+        // await console.log("req.body.studentemail", req.body.studentemail)
+
+        // await console.log("classes now", classes)
+
         // await console.log("\n\n\n\n\n\n\n\n\nstudents in students", students);
         await Student.findById(req.params.studentid, async function(err, student) {
+            await console.log("req.params.studentid", req.params.studentid)
             await res.render('pages/classPage', {
                 students: students
             });

@@ -10,7 +10,7 @@ let StudentSchema = new Schema({
     goals: [{type: Schema.ObjectId, ref: 'Goal'}],
     shared: {type: Boolean, required: true},
     sharedWith: [{type: String}],
-    userid: {type: String, required: true}
+    userid: [{type: String, required: true}]
 });
 
 // Export the model
