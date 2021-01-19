@@ -36,7 +36,7 @@ exports.student_create = async function (req, res) {
 
         // new
         Teacher.count({userid: req.body.userID}, function(err, count) {
-            if (count==0) {
+            if (count == 0) {
                 console.log("teacher count", count);
                 teacher.save(function(err) {
                     if (err) {
@@ -50,7 +50,7 @@ exports.student_create = async function (req, res) {
         // new
         Student.count({email: req.body.studentemail}, function(err, count) {
 
-            if (count==0) {
+            if (count == 0) {
                 // this accounts for when a student is created for the first time
                 console.log("student count", count);
                 Teacher.findOneAndUpdate({userid: req.body.userID}, {$push: {students: student}}, function (err, teacher) {
@@ -101,7 +101,7 @@ exports.student_create = async function (req, res) {
                                 console.log("inTeachersStudArr", inTeachersStudArr)
                                 if (!inTeachersStudArr) {
                                     // if the id is not in the list of students append the id to the user
-                                    Teacher.updateOne({userid: req.body.userID}, {$push: {students: student}}, function(err, docs) {
+                                    Teacher.updateOne({userid: req.body.userID}, {$push: {students: result1}}, function(err, docs) {
                                         if (err) {
                                             console.log("err", err)
                                         }
@@ -138,6 +138,122 @@ exports.student_create = async function (req, res) {
     }
 };
 
+function csvToArr(s) {
+    var table = []
+    console.log(s)
+    var rows = s.split(',,')
+    console.log("rows", rows)
+    for (let i = 0; i < rows.length - 1; i++) {
+        var splitRow = rows[i].split(',');
+        console.log("splitRow", splitRow)
+        table.push(splitRow)
+    }
+    console.log("table", table)
+    return table
+}
+
+
+async function create(teacherEmail, studentFirstName, studentLastName, studentEmail) {
+    await console.log("teacherEmail", teacherEmail)
+    await console.log("studentEmail", studentEmail)
+    
+
+    let teacher = new Teacher(
+        {
+            students: [],
+            shared: false,
+            sharedwith: false,
+            userid: teacherEmail
+        }
+    );
+
+    let student = new Student(
+        {   firstname: await encryption(studentFirstName),
+            lastname: await encryption(studentLastName),
+            grade: null,
+            dob: null,
+            email: studentEmail,
+            goals: [],
+            userid: teacherEmail,
+            shared: false
+        }
+    );
+
+    
+
+    await Student.countDocuments({email: studentEmail}, async function(err, count) {
+        if (count == 0) {
+            // create the student object
+            await console.log("student count == 0")
+            
+            await student.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        }   
+    })
+
+    await Student.updateOne({email: studentEmail}, {$push: {userid: teacherEmail}}, async function(err, docs) {
+        if (err) {
+            await console.log("err", err)
+        }
+        else {
+            // console.log("docs", docs)
+        }
+    })
+
+    await Teacher.countDocuments({userid: teacherEmail}, async function(err, count) {
+        if (count == 0) {
+            // create the teacher object
+            await console.log("teacher count == 0")
+            
+            await teacher.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            // await Teacher.updateOne({userid: teacherEmail}, {$push: {students: student}}, async function(err, docs) {
+            //     if (err) {
+            //         await console.log("err", err)
+            //     }
+            //     else {
+            //         // console.log("docs", docs)
+            //     }
+            // })
+        }
+        
+        await Student.findOne({email: studentEmail}, async function(err, result) {
+            await Teacher.updateOne({userid: teacherEmail}, {$push: {students: result}}, async function(err, docs) {
+                if (err) {
+                    await console.log("err", err)
+                }
+                else {
+                    // console.log("docs", docs)
+                }
+            })
+        })
+          
+    })
+
+
+}
+
+
+exports.bulk_add = async function(req, res) {
+    console.log("req.body", req.body)
+    var file = req.body.excel
+    console.log(file)
+    var table = csvToArr(req.body.arr)
+    for (let i = 1; i < table.length; i++) {
+        await create(table[i][5], table[i][0], table[i][1], table[i][2])
+        await setTimeout(() => {  console.log("resting"); }, 1000);
+    }
+
+    res.redirect("/classPage");
+
+}
+
 async function encryption(string) {
     let ciphertext = await CryptoJS.AES.encrypt(string, 'secret key 123').toString();
     return ciphertext;
@@ -156,6 +272,7 @@ async function decryption(ciphertext) {
 exports.navigate_to_studentProfile = async function (req, res) {
     try {
         console.log("navigate_to_studentProfile");
+
         var goals = [];
         // console.log("pre Goal.find");
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
@@ -176,7 +293,7 @@ exports.navigate_to_studentProfile = async function (req, res) {
                 // await console.log("description", s.description);
                 // await console.log("ID", s.studentID);
                 // await console.log("post log statements");
-
+                // if (s.userid == req.params.studnetid)
                 await goals.push(s);
             });
 

@@ -147,9 +147,17 @@ function topFunction() {
 
       
       <% goals.forEach(function(goal) { %> 
+
       <script>
         console.log("hello");
         console.log("<%=student.id%>/goal/<%=goal.id%>");
+        console.log("<%=goal.userid%>")
+        console.log("<%=student%>")
+        console.log(localStorage.getItem("username"))
+        if ("<%=goal.userid%>" == localStorage.getItem("username")) {
+          console.log("goal is made by user")
+          "<%console.log("ejs statement within script tag")%>"
+        }
 
       </script>
         <a href="/student/<%=student.id%>/goal/<%=goal.id%>">

@@ -52,6 +52,7 @@ db.once('open', () => {
 
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
+router.post('/bulkadd', student_controller.bulk_add); // runs the bulkadd function
 router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database
 router.post('/student/:studentid/goal/:goalid/goaldata/create/:shared', goaldata_controller.goaldata_create); //adds new goal datapoint to database
 router.post('/student/:studentid/goal/:goalid/share', goal_controller.goal_share); //shares goal with another teacher
@@ -114,6 +115,14 @@ router.get('/feedback', (req, res) => { //navigate to feedback page
 router.get('/settings', (req, res) => { //navigate to settings page
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/settings.ejs', {
+			user: user
+		})
+	});
+});
+
+router.get('/bulkadd', (req, res) => { //navigate to bulkadd page
+	User.findById(req.params.userid, function(err, user) {
+		res.render('./pages/bulkAdd.ejs', {
 			user: user
 		})
 	});

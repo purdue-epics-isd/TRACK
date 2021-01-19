@@ -193,7 +193,9 @@ function topFunction() {
 
               <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
+                <% let shouldBreak = false %>
                 <% student.userid.forEach(function(id) { %>
+                  <% if (!shouldBreak) { %>
 
                   <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
                   <!--<div class = "cardName" id="<%=student.userid%>">-->
@@ -225,9 +227,12 @@ function topFunction() {
                       document.getElementById("studentBox").appendChild(studentLink);
                       //var toDelete = document.getElementById("uid");
                       //toDelete.parentNode.removeChild(toDelete);
+                      "<% shouldBreak = true %>"
                     }
+                    
                   </script>
-                <% }); %>
+                <% } %>
+                <% } ); %>
               <% }); %>
 
               
