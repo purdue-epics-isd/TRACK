@@ -275,6 +275,7 @@ exports.navigate_to_studentProfile = async function (req, res) {
 
         var goals = [];
         // console.log("pre Goal.find");
+        console.log(req.params)
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
             // console.log("in Goal.find");
             await goal.forEach(async function(s) {
