@@ -118,6 +118,14 @@ router.get('/settings', (req, res) => { //navigate to settings page
 		})
 	});
 });
+router.get('/admin', (req, res) => { //navigate to admin page
+	User.findById(req.params.userid, function(err, user) {
+		res.render('./pages/admin.ejs', {
+			user: user
+		})
+	});
+});
+
 
 
 router.get('/testing', (req, res) => { //navigate to testing page - purely used for testing and not accessible by users
