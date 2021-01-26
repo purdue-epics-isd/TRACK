@@ -149,9 +149,9 @@ function topFunction() {
     <div class = "overviewcard" id="goalsBox">
 
       
-      <% goals.forEach(function(goal) { %> 
-      <div id="goalBox" className="changeable"> 
-      <script>
+      <% goals.forEach(async function(goal) { %> 
+      <div id="<%=goal.id%>" className="changeable"> 
+      <script async>
         console.log("hello");
         console.log("<%=student.id%>/goal/<%=goal.id%>");
         console.log("<%=goal.userid%>")
@@ -178,7 +178,8 @@ function topFunction() {
           cardText.appendChild(cardBody);
           card.appendChild(cardText);
           anchor.appendChild(card);
-          document.getElementById("goalBox").appendChild(anchor);
+          document.getElementById("<%=goal.id%>").appendChild(anchor);
+          document.getElementById("<%=goal.id%>").style = "display: "
 
         }
         else {
@@ -202,8 +203,8 @@ function topFunction() {
           cardText.appendChild(cardBody);
           card.appendChild(cardText);
           anchor.appendChild(card);
-          document.getElementById("goalBox").appendChild(anchor);
-          document.getElementById("goalBox").style.display = "none"
+          document.getElementById("<%=goal.id%>").appendChild(anchor);
+          document.getElementById("<%=goal.id%>").style = "display: none"
         }
 
       
@@ -260,6 +261,7 @@ function topFunction() {
       console.log(goalsBox)
       console.log(goalsBox.children)
       var goals = goalsBox.children
+      console.log(goals)
       for (let i = 0; i < goals.length - 1; i++) {
 
         if (goals[i].style.display == "none") {
