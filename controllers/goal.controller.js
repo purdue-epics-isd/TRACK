@@ -16,9 +16,7 @@ function decryption(ciphertext) {
     var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
-function decryptAllGoalData() {
 
-}
 
 // Require packages
 const path = require('path');
@@ -108,7 +106,7 @@ exports.navigate_to_goalProfile = function (req, res) {
 
                     goal.name = decryption(goal.name);
                     goal.description = decryption(goal.description);
-                    goal.studentID = decryption(goal.studentID);
+                    // goal.studentID = decryption(goal.studentID);
                     console.log("method:" + goal.methodOfCollection);
                     console.log("method as var:" + methodsOfCollection);
 
