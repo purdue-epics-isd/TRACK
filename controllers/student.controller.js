@@ -380,12 +380,12 @@ exports.navigate_to_classPage = async function (req, res) {
         // await console.log("classes now", classes)
 
         // await console.log("\n\n\n\n\n\n\n\n\nstudents in students", students);
-        await Student.findById(req.params.studentid, async function(err, student) {
-            await console.log("req.params.studentid", req.params.studentid)
-            await res.render('pages/classPage', {
-                students: students
-            });
+        // console.log("req", req)
+        
+        await res.render('pages/classPage', {
+            students: students
         });
+        
     } catch(err) {
         await console.log("exports.navigate_to_classPage");
         await console.log(err);

@@ -193,6 +193,9 @@ function topFunction() {
 
               <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
+                <script>
+                  // console.log("<%=student%>")
+                </script>
                 <% let shouldBreak = false %>
                 <% student.userid.forEach(function(id) { %>
                   <% if (!shouldBreak) { %>
@@ -207,7 +210,7 @@ function topFunction() {
                     console.log("student grade", "<%=student.grade%>")
 
                     
-                    if(localStorage.getItem("username") == "<%=id%>") {
+                    if(localStorage.getItem("username") === "<%=id%>") {
                       var card = document.createElement("div");
                       card.className = "studentCardName";
                       card.id = "<%=student.id%>";
@@ -229,7 +232,7 @@ function topFunction() {
                       document.getElementById("studentBox").appendChild(studentLink);
                       //var toDelete = document.getElementById("uid");
                       //toDelete.parentNode.removeChild(toDelete);
-                      "<% shouldBreak = true %>"
+                      
                     }
                     
                   </script>
