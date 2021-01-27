@@ -1,11 +1,24 @@
 const Student = require('../models/student.model');
 const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
+const Teacher = require('../models/teacher.model');
 var CryptoJS = require("crypto-js");
-/*creates new student profile in database*/
+const mongoose = require('mongoose');
+/*creates new student profile in database and ensures their is a teacher profile for them*/
 exports.student_create = async function (req, res) {
     try {
-        console.log("pre break")
+        await console.log("pre break");
+        await console.log(req.body);
+        // need to ensure that duplicate teacher and student objects are not created twice, this will be done
+        // by ensuring that no two teacher have the same userid and that no two students have the same email
+        let teacher = new Teacher(
+            {
+                students: [],
+                shared: false,
+                sharedwith: false,
+                userid: req.body.userID
+            }
+        );
         let student = new Student(
             {   firstname: await encryption(req.body.firstname),
                 lastname: await encryption(req.body.lastname),
@@ -17,19 +30,263 @@ exports.student_create = async function (req, res) {
                 shared: false
             }
         );
-        console.log("post break");
-        student.save(function (err) {
-            if (err) {
-                console.log(err);
-            } 
+        // console.log("post break");
+        // console.log("req.body.userID", req.bosy.userID);
+        // console.log("Student.exists({userID: req.body.userID})", Teaccher.exists({email: req.body.studentemail}));
+
+        // new
+        Teacher.count({userid: req.body.userID}, function(err, count) {
+            if (count == 0) {
+                console.log("teacher count", count);
+                teacher.save(function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
         })
-        res.redirect("/classPage");
+        
+
+        // new
+        Student.count({email: req.body.studentemail}, function(err, count) {
+
+            if (count == 0) {
+                // this accounts for when a student is created for the first time
+                console.log("student count", count);
+                Teacher.findOneAndUpdate({userid: req.body.userID}, {$push: {students: student}}, function (err, teacher) {
+                    student.save(function (err) {
+                        if (err) {
+                            res.send(err);
+                        }
+                        else {
+                            res.redirect("/classPage");
+                        }
+                    });
+                })   
+            }
+            else {
+                // If count > 0, then there are 2 situations.  Either a teacher is trying to create
+                // a student they have already created, or a teacher is trying to create a student that
+                // another teacher has created.  If it is the first situation, nothing should happen.
+                // however if the second situation happens, a student should not be created, but the student
+                // that has already been created should be appended to that teachers list of students.  In 
+                // addition to this, the teacher should be appended to the list of teachers on a student
+                // object.
+                Teacher.findOne({userid: req.body.userID}, async function(err, result) {
+                    if (err) {
+                        console.log("err", err)
+                    }
+                    else {
+                        Student.findOne({email: req.body.studentemail}, async function(err1, result1) {
+                            if (err1) {
+                                console.log("err1", err1)
+                            }
+                            else {
+                                console.log("result1", result1)
+                                console.log("result", result)
+                                console.log(result1._id)
+                                let studentid = result1._id
+                                console.log("no errors")
+                                let studentArr = result.students
+                                console.log("looking for id #", studentid);
+                                console.log("studentArr", studentArr)
+                                let inTeachersStudArr = false
+                                for (let i = 0; i < studentArr.length; i++) {
+                                    console.log(studentArr[i])
+                                    if (studentArr[i].toString() == studentid) {
+                                        inTeachersStudArr = true
+                                    }
+                                }
+                                console.log("result", result)
+                                console.log("inTeachersStudArr", inTeachersStudArr)
+                                if (!inTeachersStudArr) {
+                                    // if the id is not in the list of students append the id to the user
+                                    Teacher.updateOne({userid: req.body.userID}, {$push: {students: result1}}, function(err, docs) {
+                                        if (err) {
+                                            console.log("err", err)
+                                        }
+                                        else {
+                                            console.log("docs", docs)
+                                        }
+                                    })
+                                    Student.updateOne({email: req.body.studentemail}, {$push: {userid: req.body.userID}}, function(err, docs) {
+                                        if (err) {
+                                            console.log("err", err)
+                                        }
+                                        else {
+                                            console.log("docs", docs)
+                                        }
+                                    })
+                                }
+                                // else do nothing
+                            }
+                        })
+                         
+                    }        
+                })
+                    
+            
+                res.redirect("/classPage");
+            }
+            
+        });
+        
     } catch(err) {
         //console.log(err);
         console.log("exports.student_create");
         res.render('./error');
     }
 };
+
+function csvToArr(s) {
+    var table = []
+    console.log(s)
+    var rows = s.split(',,')
+    console.log("rows", rows)
+    for (let i = 0; i < rows.length - 1; i++) {
+        var splitRow = rows[i].split(',');
+        console.log("splitRow", splitRow)
+        table.push(splitRow)
+    }
+    console.log("table", table)
+    return table
+}
+
+
+async function create(teacherEmail, studentFirstName, studentLastName, studentEmail) {
+    await console.log("teacherEmail", teacherEmail)
+    await console.log("studentEmail", studentEmail)
+    
+
+    let teacher = new Teacher(
+        {
+            students: [],
+            shared: false,
+            sharedwith: false,
+            userid: teacherEmail
+        }
+    );
+
+    let student = new Student(
+        {   firstname: await encryption(studentFirstName),
+            lastname: await encryption(studentLastName),
+            grade: null,
+            dob: null,
+            email: studentEmail,
+            goals: [],
+            userid: teacherEmail,
+            shared: false
+        }
+    );
+
+    
+
+    await Student.countDocuments({email: studentEmail}, async function(err, count) {
+        if (count == 0) {
+            // create the student object
+            await console.log("student count == 0")
+            
+            await student.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        }   
+    })
+    let updateUserID = true
+    await Student.findOne({email: studentEmail}, async function(err, result) {
+        for (let i = 0; i < result.userid.length; i++) {
+            await console.log("result.userid[i]", result.userid[i]);
+            if (result.userid[i] == teacherEmail) {
+                await console.log("setting updateUserID to false")
+                updateUserID = false
+            }
+        }
+    })
+
+    
+    if (updateUserID) {
+        await Student.updateOne({email: studentEmail}, {$push: {userid: teacherEmail}}, async function(err, docs) {
+            if (err) {
+                await console.log("err", err)
+            }
+            else {
+                // console.log("docs", docs)
+            }
+        })
+    }
+    
+
+    await Teacher.countDocuments({userid: teacherEmail}, async function(err, count) {
+        if (count == 0) {
+            // create the teacher object
+            await console.log("teacher count == 0")
+            
+            await teacher.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            // await Teacher.updateOne({userid: teacherEmail}, {$push: {students: student}}, async function(err, docs) {
+            //     if (err) {
+            //         await console.log("err", err)
+            //     }
+            //     else {
+            //         // console.log("docs", docs)
+            //     }
+            // })
+        }
+        let updateStudents = true
+        await Student.findOne({email: studentEmail}, async function(err, result) {
+            await Teacher.findOne({userid: teacherEmail}, async function(err, result1) {
+                for (let i = 0; i < result1.students.length; i++) {
+                    await console.log("result1.students[i]", result1.students[i])
+                    await console.log("result._id", result._id)
+                    if (result._id == result1.students[i]) {
+                        await console.log("setting updateStudents false")
+                        updateStudents = false
+                    }
+                }
+            })
+        })
+
+
+
+        if (updateStudents) {
+            await Student.findOne({email: studentEmail}, async function(err, result) {
+                await Teacher.updateOne({userid: teacherEmail}, {$push: {students: result}}, async function(err, docs) {
+                    if (err) {
+                        await console.log("err", err)
+                    }
+                    else {
+                        // console.log("docs", docs)
+                    }
+                })
+            })
+        }
+        
+          
+    })
+
+
+}
+
+
+exports.bulk_add = async function(req, res) {
+    console.log("req.body", req.body)
+    var file = req.body.excel
+    console.log(file)
+    var table = csvToArr(req.body.arr)
+    console.log("table", table)
+    for (let i = 1; i < table.length; i++) {
+        console.log("table[i]", table[i])
+        await create(table[i][5], table[i][0], table[i][1], table[i][2])
+        // await setTimeout(() => {  console.log("resting"); }, 1000);
+    }
+
+    res.redirect("/classPage");
+
+}
 
 async function encryption(string) {
     let ciphertext = await CryptoJS.AES.encrypt(string, 'secret key 123').toString();
@@ -49,27 +306,29 @@ async function decryption(ciphertext) {
 exports.navigate_to_studentProfile = async function (req, res) {
     try {
         console.log("navigate_to_studentProfile");
+
         var goals = [];
-        console.log("pre Goal.find");
+        // console.log("pre Goal.find");
+        console.log(req.params)
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
-            console.log("in Goal.find");
+            // console.log("in Goal.find");
             await goal.forEach(async function(s) {
-                await console.log("pre log statements");
-                await console.log("name", s.name);
-                await console.log("description", s.description);
-                await console.log("ID", s.studentID);
-                await console.log("post log statements");
+                // await console.log("pre log statements");
+                // await console.log("name", s.name);
+                // await console.log("description", s.description);
+                // await console.log("ID", s.studentID);
+                // await console.log("post log statements");
 
                 s.name =  await decryption(s.name);
                 s.description = await decryption(s.description);//error happens here.
                 
 
-                await console.log("pre log statements");
-                await console.log("name", s.name);
-                await console.log("description", s.description);
-                await console.log("ID", s.studentID);
-                await console.log("post log statements");
-
+                // await console.log("pre log statements");
+                // await console.log("name", s.name);
+                // await console.log("description", s.description);
+                // await console.log("ID", s.studentID);
+                // await console.log("post log statements");
+                // if (s.userid == req.params.studnetid)
                 await goals.push(s);
             });
 
@@ -78,7 +337,7 @@ exports.navigate_to_studentProfile = async function (req, res) {
         await User.findById(req.params.userid,  async function(err, user) {
             await  Student.findById(req.params.studentid,async function(err, student) {
                 await  Goal.findById(req.params.goalid,async function(err, goal) {
-                    await console.log("\nCurrent student: " + student);
+                    // await console.log("\nCurrent student: " + student);
                     student.firstname = await decryption(student.firstname);
                     student.lastname = await decryption(student.lastname);
                     await  res.render('pages/studentProfile', {
@@ -90,8 +349,8 @@ exports.navigate_to_studentProfile = async function (req, res) {
             });
         });
     } catch(err) {
-        await  console.log("exports.navigate_to_studentProfile");
-        await  console.log(err);
+        // await  console.log("exports.navigate_to_studentProfile");
+        // await  console.log(err);
         await res.render('./error');
     }
 }
@@ -101,6 +360,11 @@ exports.navigate_to_classPage = async function (req, res) {
     try {
         await console.log("student.controller email in body:" + req.body.email);
         var students = [];
+        // var classes = [];
+        // var teachers = [];
+
+        // await console.log("localStorage", localStorage)
+
 
         
         await Student.find({}, {}, async function(err, student) {
@@ -109,20 +373,53 @@ exports.navigate_to_classPage = async function (req, res) {
                     // s.firstname =  await decryption(s.name);
 
                     // s.lastname = await decryption(s.description);
-                    await console.log("pushing student", s);
-                    await console.log("s.name", await decryption(s.firstname));
+                    // await console.log("pushing student", s);
+                    // await console.log("s.name", await decryption(s.firstname));
                     s.firstname = await decryption(s.firstname);
                     s.lastname = await decryption(s.lastname);
                     
                     await students.push(s);
             });
         });
-        await console.log("\n\n\n\n\n\n\n\n\nstudents in students", students);
-        await Student.findById(req.params.studentid, async function(err, student) {
-            await res.render('pages/classPage', {
-                students: students
-            });
+
+        // await Teacher.find({}, {}, async function(err, teacher) {
+
+        //     await teacher.forEach(async function(t) {
+        //         await teachers.push(t)
+        //         let students = t.students;
+        //         await console.log(students)
+        //         let studentArr = []
+        //         await students.forEach(async function(s) {
+        //             await console.log("s", s);
+        //             await Student.find({_id: s}, async function(err, student) {
+        //                 // await console.log("student", student)
+        //                 await studentArr.push(student);
+        //                 // await console.log("studentArr", studentArr);
+        //             })
+        //             await console.log("adding this to classes", studentArr)
+        //             await classes.push(studentArr)
+        //             await console.log("classes", classes[0])
+        //         })
+        //         // await console.log("studentArr now!?", studentArr)
+        //         // await classes.push(studentArr);
+        //         // await console.log("classes", classes);
+        //     })
+
+        // })
+
+        // await console.log("req.params", req.params)
+        // await console.log("req.body.userID", req.body.userID)
+        // await console.log("req.body.studentemail", req.body.studentemail)
+
+        // await console.log("classes now", classes)
+
+        // await console.log("\n\n\n\n\n\n\n\n\nstudents in students", students);
+        // console.log("req", req)
+        
+        await res.render('pages/classPage', {
+            students: students
         });
+        
     } catch(err) {
         await console.log("exports.navigate_to_classPage");
         await console.log(err);

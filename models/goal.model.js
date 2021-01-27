@@ -13,7 +13,8 @@ let GoalSchema = new Schema({
     shared: {type: Boolean, required: true},
     sharedWith: [{type: String}],
     rubricdescription: [{type: String, required: false}],
-    goaldata: [{type: Schema.ObjectId, ref: 'GoalData'}]
+    goaldata: [{type: Schema.ObjectId, ref: 'GoalData'}],
+    userid: {type: String, required: false}
 });
 
 // Export the model

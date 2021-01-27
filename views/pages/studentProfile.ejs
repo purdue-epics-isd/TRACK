@@ -127,6 +127,9 @@ function topFunction() {
                 Delete Student
               </button>
         </a>
+        <button id="toggle" onClick="toggle()">
+          Toggle Creator
+        </button>
       </div>
       
 
@@ -146,16 +149,73 @@ function topFunction() {
     <div class = "overviewcard" id="goalsBox">
 
       
-      <% goals.forEach(function(goal) { %> 
-      <script>
+      <% goals.forEach(async function(goal) { %> 
+      <div id="<%=goal.id%>" className="changeable"> 
+      <script async>
         console.log("hello");
         console.log("<%=student.id%>/goal/<%=goal.id%>");
+        console.log("<%=goal.userid%>")
+        
+        console.log(localStorage.getItem("username"))
+        if ("<%=goal.userid%>" == localStorage.getItem("username")) {
+          console.log("goal is made by user")
+          var anchor = document.createElement("a");
+          anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
+          anchor.id = "goalCard";
+          var card = document.createElement("div");
+          card.className = "goalCardName";
+          var cardText = document.createElement("div");
+          cardText.className = "card text-white bg-primary mb-3";
+          cardText.style = "max-width: 20rem;";
+          var cardHeader = document.createElement("div");
+          cardHeader.innerHTML = "<%=goal.goalType%>";
+          var cardBody = document.createElement("div");
+          var cardTitle = document.createElement("h4");
+          cardTitle.className = "card-title";
+          cardTitle.innerHTML = "<%= goal.name %>";
+          cardBody.appendChild(cardTitle);
+          cardText.appendChild(cardHeader);
+          cardText.appendChild(cardBody);
+          card.appendChild(cardText);
+          anchor.appendChild(card);
+          document.getElementById("<%=goal.id%>").appendChild(anchor);
+          document.getElementById("<%=goal.id%>").style = "display: "
+
+        }
+        else {
+          console.log("goal is not made by user")
+          var anchor = document.createElement("a");
+          anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
+          anchor.id = "goalCard";
+          var card = document.createElement("div");
+          card.className = "goalCardName";
+          var cardText = document.createElement("div");
+          cardText.className = "card text-white bg-primary mb-3";
+          cardText.style = "max-width: 20rem;";
+          var cardHeader = document.createElement("div");
+          cardHeader.innerHTML = "<%=goal.goalType%>";
+          var cardBody = document.createElement("div");
+          var cardTitle = document.createElement("h4");
+          cardTitle.className = "card-title";
+          cardTitle.innerHTML = "<%= goal.name %>";
+          cardBody.appendChild(cardTitle);
+          cardText.appendChild(cardHeader);
+          cardText.appendChild(cardBody);
+          card.appendChild(cardText);
+          anchor.appendChild(card);
+          document.getElementById("<%=goal.id%>").appendChild(anchor);
+          document.getElementById("<%=goal.id%>").style = "display: none"
+        }
+
+      
 
       </script>
-        <a href="/student/<%=student.id%>/goal/<%=goal.id%>">
+      </div>
+
+        <!-- <a id="goalCard" href="/student/<%=student.id%>/goal/<%=goal.id%>">
           <div class = "goalCardName">
             <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-              <!-- <a href="/student/<%=student.id%>/goal/<%=goal.id%>"> -->
+              
                 <div class="card-header"><%=goal.goalType%></div>
                 <div class="card-body">
                   <h4 class="card-title"><%= goal.name %></h4>
@@ -167,8 +227,10 @@ function topFunction() {
                </div>
              </div>
            </div>
-         </a>       
+         </a>   -->   
+          
        <% }); %>
+       
        <a href="/student/<%=student.id%>/createNewGoal">
          <div class="goalCardName">
           <div class="card text-white bg-primary mb-3" style="max-width: 20rem">
@@ -180,6 +242,7 @@ function topFunction() {
           </div>
         </div>
       </a>
+      
       </div>
     
 
@@ -191,6 +254,26 @@ function topFunction() {
   </html>
 
   <script>
+
+    function toggle() {
+      console.log("toggle")
+      var goalsBox = document.getElementById("goalsBox");
+      console.log(goalsBox)
+      console.log(goalsBox.children)
+      var goals = goalsBox.children
+      console.log(goals)
+      for (let i = 0; i < goals.length - 1; i++) {
+
+        if (goals[i].style.display == "none") {
+          goals[i].style.display = ""
+        }
+        else {
+          goals[i].style.display = "none"
+        }
+      }
+    }
+
+
     function showInfo() {
       var infoButton = document.getElementById('infoButton');
       if(infoButton.innerHTML == "Show Info") {

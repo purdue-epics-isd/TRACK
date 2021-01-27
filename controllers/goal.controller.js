@@ -16,9 +16,7 @@ function decryption(ciphertext) {
     var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
-function decryptAllGoalData() {
 
-}
 
 // Require packages
 const path = require('path');
@@ -60,7 +58,8 @@ exports.goal_create = function (req, res) {
                 occurrencesType: req.body.occurrences,
                 shared: false,
                 rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
-                goaldata: []
+                goaldata: [],
+                userid: req.body.userID
             })
 
         Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {
@@ -107,7 +106,7 @@ exports.navigate_to_goalProfile = function (req, res) {
 
                     goal.name = decryption(goal.name);
                     goal.description = decryption(goal.description);
-                    goal.studentID = decryption(goal.studentID);
+                    // goal.studentID = decryption(goal.studentID);
                     console.log("method:" + goal.methodOfCollection);
                     console.log("method as var:" + methodsOfCollection);
 
