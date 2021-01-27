@@ -193,15 +193,29 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
             });
         }   
     })
-
-    await Student.updateOne({email: studentEmail}, {$push: {userid: teacherEmail}}, async function(err, docs) {
-        if (err) {
-            await console.log("err", err)
-        }
-        else {
-            // console.log("docs", docs)
+    let updateUserID = true
+    await Student.findOne({email: studentEmail}, async function(err, result) {
+        for (let i = 0; i < result.userid.length; i++) {
+            await console.log("result.userid[i]", result.userid[i]);
+            if (result.userid[i] == teacherEmail) {
+                await console.log("setting updateUserID to false")
+                updateUserID = false
+            }
         }
     })
+
+    
+    if (updateUserID) {
+        await Student.updateOne({email: studentEmail}, {$push: {userid: teacherEmail}}, async function(err, docs) {
+            if (err) {
+                await console.log("err", err)
+            }
+            else {
+                // console.log("docs", docs)
+            }
+        })
+    }
+    
 
     await Teacher.countDocuments({userid: teacherEmail}, async function(err, count) {
         if (count == 0) {
@@ -222,17 +236,35 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
             //     }
             // })
         }
-        
+        let updateStudents = true
         await Student.findOne({email: studentEmail}, async function(err, result) {
-            await Teacher.updateOne({userid: teacherEmail}, {$push: {students: result}}, async function(err, docs) {
-                if (err) {
-                    await console.log("err", err)
-                }
-                else {
-                    // console.log("docs", docs)
+            await Teacher.findOne({userid: teacherEmail}, async function(err, result1) {
+                for (let i = 0; i < result1.students.length; i++) {
+                    await console.log("result1.students[i]", result1.students[i])
+                    await console.log("result._id", result._id)
+                    if (result._id == result1.students[i]) {
+                        await console.log("setting updateStudents false")
+                        updateStudents = false
+                    }
                 }
             })
         })
+
+
+
+        if (updateStudents) {
+            await Student.findOne({email: studentEmail}, async function(err, result) {
+                await Teacher.updateOne({userid: teacherEmail}, {$push: {students: result}}, async function(err, docs) {
+                    if (err) {
+                        await console.log("err", err)
+                    }
+                    else {
+                        // console.log("docs", docs)
+                    }
+                })
+            })
+        }
+        
           
     })
 
@@ -245,9 +277,11 @@ exports.bulk_add = async function(req, res) {
     var file = req.body.excel
     console.log(file)
     var table = csvToArr(req.body.arr)
+    console.log("table", table)
     for (let i = 1; i < table.length; i++) {
+        console.log("table[i]", table[i])
         await create(table[i][5], table[i][0], table[i][1], table[i][2])
-        await setTimeout(() => {  console.log("resting"); }, 1000);
+        // await setTimeout(() => {  console.log("resting"); }, 1000);
     }
 
     res.redirect("/classPage");
