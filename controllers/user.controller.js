@@ -1,53 +1,53 @@
 const User = require('../models/user.model');
 var passport = require('passport');
-var LocalStrategy   = require("passport-local");
-var passportLocalMongoose   = require("passport-local-mongoose");
+var LocalStrategy = require("passport-local");
+var passportLocalMongoose = require("passport-local-mongoose");
 
 
 exports.createUser = function (req, res) {
   console.log("createUser");
   console.log("printing User", User);
   console.log("printing User name", User.username);
-  User.register(new User({username:req.body.username}),req.body.password, function(err, user){
-       if(err){
-            console.log(err);
-            return res.render('pages/signupSuccess');
-        } //user stragety
-        passport.authenticate("local")(req, res, function(){
-            res.render("pages/signupSuccess"); //once the user sign up
-       }); 
+  User.register(new User({ username: req.body.username }), req.body.password, function (err, user) {
+    if (err) {
+      console.log(err);
+      return res.render('pages/signupSuccess');
+    } //user stragety
+    passport.authenticate("local")(req, res, function () {
+      res.render("pages/signupSuccess"); //once the user sign up
+    });
   });
 };
 
 exports.login_confirm = function (req, res, next) {
   console.log("createUser");
   console.log("printing out user", user);
-    passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', function (err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/login'); }
-    req.logIn(user, function(err) {
-      if (err) { return next (err); }
-      return User.findById(req.params.userid, function(err, user) {
+    req.logIn(user, function (err) {
+      if (err) { return next(err); }
+      return User.findById(req.params.userid, function (err, user) {
         res.render('/' + req.user.id + '/classPage', {
           user: user
         });
       });
-    }) (req, res, next);
+    })(req, res, next);
   });
 }
 
 exports.navigate_to_sharedWithMe = function (req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', function (err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/login'); }
-    req.logIn(user, function(err) {
-      if (err) { return next (err); }
-      return User.findById(req.params.userid, function(err, user) {
+    req.logIn(user, function (err) {
+      if (err) { return next(err); }
+      return User.findById(req.params.userid, function (err, user) {
         res.render('/' + req.user.id + '/classPage', {
           user: user
         });
       });
-    }) (req, res, next);
+    })(req, res, next);
   });
 }
 

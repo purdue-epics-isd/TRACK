@@ -20,12 +20,12 @@ exports.goaldata_create = function (req, res) {
         );
 
         //Saves the goaldata to the database
-        Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
+        Goal.findOneAndUpdate({ _id: req.params.goalid }, { $push: { goaldata: goaldata } }, function (err, goal) {
             console.log("\nGoal to be updated: " + goal);
             console.log("\nGoaldata to be added: " + goaldata);
             //console.log("\nTeacher email: " + req.body.useremail);
 
-            goaldata.save(function (err) { 
+            goaldata.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
@@ -35,14 +35,14 @@ exports.goaldata_create = function (req, res) {
         //console.log("evaluate: " + (type(req.params.shared)));
 
         //Reroutes to student profile
-        if(req.params.shared == "true") {
+        if (req.params.shared == "true") {
             console.log("navigating to shared student profile...");
             res.redirect("/sharedWithMe/" + req.params.studentid);
         } else {
             console.log("navigating to personal student profile...");
             res.redirect("/student/" + req.params.studentid);
         }
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.render('./error');
     }
@@ -56,7 +56,7 @@ exports.goaldata_delete = function (req, res) {
             if (err) return next(err);
             res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
         })
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.render('/error');
     }

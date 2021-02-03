@@ -2,8 +2,8 @@
 const express = require('express');
 const router = express.Router();
 var passport = require('passport');
-var LocalStrategy   = require("passport-local");
-var passportLocalMongoose   = require("passport-local-mongoose");
+var LocalStrategy = require("passport-local");
+var passportLocalMongoose = require("passport-local-mongoose");
 const path = require('path');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
@@ -33,14 +33,14 @@ const storage = new GridFsStorage({
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) return reject(err);
 				const filename = file.originalname;
-			const fileInfo = {
-				filename: filename,
-				metadata: req.params.goalid,
-				bucketName: 'uploads'
-			};
-			resolve(fileInfo);
+				const fileInfo = {
+					filename: filename,
+					metadata: req.params.goalid,
+					bucketName: 'uploads'
+				};
+				resolve(fileInfo);
+			});
 		});
-	});
 	}
 
 });
@@ -50,8 +50,8 @@ const upload = multer({ storage });
 let gfs;
 let db = mongoose.connection;
 db.once('open', () => {
-  gfs = Grid(db.db, mongoose.mongo);
-  gfs.collection('uploads');
+	gfs = Grid(db.db, mongoose.mongo);
+	gfs.collection('uploads');
 });
 
 /*Functions used to create goals, goaldata and students*/
@@ -76,27 +76,27 @@ router.post('/student/:studentid/goal/edit/:goalid', goal_controller.goal_edit);
 router.get('/student/:studentid/goal/:goalid/goal_share', goal_controller.goal_share); //redirect to goal sharing page
 
 /*Functions used to upload documnets in goals*/
-router.post('/student/:studentid/goal/:goalid/goaldata/upload',upload.single('file'),(req, res) => res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid));
+router.post('/student/:studentid/goal/:goalid/goaldata/upload', upload.single('file'), (req, res) => res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid));
 router.post('/student/:studentid/goal/:goalid/goaldata/files/:id', (req, res) => {
-  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
-    if (err) res.status(404).json({ err: err });
-    res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
-  });
+	gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+		if (err) res.status(404).json({ err: err });
+		res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
+	});
 });
 router.post('/student/:studentid/goal/:goalid/goaldata/files/:id/download', (req, res) => {
 
-    var filename = req.params.id;
+	var filename = req.params.id;
 
-        gfs.exist({ _id: req.params.id, root: 'uploads'}, (err, file) => {
-            if (err || !file) {
-                res.status(404).send('File Not Found');
-        return
-            }
+	gfs.exist({ _id: req.params.id, root: 'uploads' }, (err, file) => {
+		if (err || !file) {
+			res.status(404).send('File Not Found');
+			return
+		}
 
-      var readstream = gfs.createReadStream({ _id: req.params.id });
-      readstream.pipe(res);
-        });
-    });
+		var readstream = gfs.createReadStream({ _id: req.params.id });
+		readstream.pipe(res);
+	});
+});
 
 /*Basic functions used to navigate to different URLs*/
 router.get('/classPage', student_controller.navigate_to_classPage); //navigates to class page
@@ -108,21 +108,21 @@ router.get('/sharedWithMe', student_controller.navigate_to_sharedWithMeClassPage
 router.get('/sharedWithMe/:studentid', goal_controller.navigate_to_sharedWithMeStudentProfile); //navigate to student profile of shared student
 router.get('/sharedWithMe/:studentid/:goalid', goal_controller.navigate_to_sharedWithMeGoalProfile); //navigate to goal profile of shared goal
 router.get('/aboutUs', (req, res) => { //navigate to about us page
-	User.findById(req.params.userid, function(err, user) {
+	User.findById(req.params.userid, function (err, user) {
 		res.render('./pages/aboutUs.ejs', {
 			user: user
 		})
 	});
 });
 router.get('/feedback', (req, res) => { //navigate to feedback page
-	User.findById(req.params.userid, function(err, user) {
+	User.findById(req.params.userid, function (err, user) {
 		res.render('./pages/feedback.ejs', {
 			user: user
 		})
 	});
 });
 router.get('/settings', (req, res) => { //navigate to settings page
-	User.findById(req.params.userid, function(err, user) {
+	User.findById(req.params.userid, function (err, user) {
 		res.render('./pages/settings.ejs', {
 			user: user
 		})
@@ -130,7 +130,7 @@ router.get('/settings', (req, res) => { //navigate to settings page
 });
 
 router.get('/bulkadd', (req, res) => { //navigate to bulkadd page
-	User.findById(req.params.userid, function(err, user) {
+	User.findById(req.params.userid, function (err, user) {
 		res.render('./pages/bulkAdd.ejs', {
 			user: user
 		})
@@ -159,11 +159,11 @@ router.get('/testing', (req, res) => { //navigate to testing page - purely used 
 
 	getFirstUser();*/
 	var students = [];
-	Student.find({}, {}, function(err, student) {
-            student.forEach(function(s) {
-                students.push(s);
-            });
-        });
+	Student.find({}, {}, function (err, student) {
+		student.forEach(function (s) {
+			students.push(s);
+		});
+	});
 
 	res.render('./pages/testing.ejs', {
 		students: students,
@@ -174,8 +174,8 @@ router.get('/testing', (req, res) => { //navigate to testing page - purely used 
 router.get('/logout', (req, res) => { // logs out of microsoft account and navigates back to log in menu
 	var logout = true;
 	res.render('pages/index', {
-        logout: logout
-    });
-}); 
+		logout: logout
+	});
+});
 
 module.exports = router;
