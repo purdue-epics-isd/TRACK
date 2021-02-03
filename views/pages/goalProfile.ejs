@@ -151,12 +151,14 @@
 					localStorage.setItem('theme', currentTheme);
 				}
 			</script>
+			<!-- button that goes back to student profile and a button that launches a tutorial -->
 			<div style="margin: 20px;">
 				<a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
 				<!-- Trigger/Open The Modal -->
 				<button id="myBtn" class="btn btn-primary">Need Help?</button>
 			</div>
 			<div>
+				<!-- header that lists goalname -->
 				<div class=class-header>
 
 					<p class="font-weight-bold" style="font-size: 24px;text-transform: capitalize;">
@@ -210,12 +212,13 @@
 				}
 			</script>
 			<div>
-
+				<!-- div that allows user to input goaldata -->
 				<div class="class-input">
 
 
 					<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>"
 						id="submitForm" method="post">
+						<!-- input changes depending on what type of goal is being made -->
 
 						<table style="position: center" id="goalInput">
 
@@ -360,6 +363,7 @@
 								<input class="btn btn-primary" type="submit" value="Submit">
 							</form>
 						</div>
+						<!-- ejs for showing documentation -->
 						<% if(files) { %>
 							<% files.forEach(function(file) { %>
 								<% if(file.isImage) { %>
@@ -402,7 +406,7 @@
 
 
 
-
+			<!-- div that allows you to view past goaldata, view line graph(for specific goal types), and export results -->
 			<div class="goal-data">
 				<h2>Progress Monitoring</h2>
 				<table class="table table-hover" id="t01">
@@ -489,6 +493,7 @@
 						<% }); %>
 							</tbody>
 				</table>
+				<!-- linegraph that will appear depending on what the type of goal is being displayed -->
 				<div id="data_chart"></div>
 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 				<script>
@@ -572,7 +577,7 @@
 
 </html>
 
-
+<!-- functions for exporting to excel -->
 <script type="text/javascript">
 	function exportTableToExcel() {
 		alert("When opening the exported Excel file, you will receive the follwing alert:\n       " + 

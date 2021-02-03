@@ -3,7 +3,7 @@ var passport = require('passport');
 var LocalStrategy   = require("passport-local");
 var passportLocalMongoose   = require("passport-local-mongoose");
 
-
+// will be ran when a user logins for the first time
 exports.createUser = function (req, res) {
   console.log("createUser");
   console.log("printing User", User);
@@ -19,6 +19,7 @@ exports.createUser = function (req, res) {
   });
 };
 
+// idk this is weird microsoft authentication stuff
 exports.login_confirm = function (req, res, next) {
   console.log("createUser");
   console.log("printing out user", user);
@@ -36,6 +37,7 @@ exports.login_confirm = function (req, res, next) {
   });
 }
 
+// isnt used anymore
 exports.navigate_to_sharedWithMe = function (req, res, next) {
     passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
