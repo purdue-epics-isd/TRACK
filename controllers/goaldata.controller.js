@@ -2,6 +2,8 @@ const GoalData = require('../models/goaldata.model');
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 
+
+/*This method saves goal data and returns to the student profile page*/
 exports.goaldata_create = function (req, res) {
     try {
         let goaldata = new GoalData(
@@ -17,6 +19,7 @@ exports.goaldata_create = function (req, res) {
             }
         );
 
+        //Saves the goaldata to the database
         Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
             console.log("\nGoal to be updated: " + goal);
             console.log("\nGoaldata to be added: " + goaldata);
@@ -30,6 +33,8 @@ exports.goaldata_create = function (req, res) {
         });
         console.log("is shared?: " + req.params.shared);
         //console.log("evaluate: " + (type(req.params.shared)));
+
+        //Reroutes to student profile
         if(req.params.shared == "true") {
             console.log("navigating to shared student profile...");
             res.redirect("/sharedWithMe/" + req.params.studentid);
@@ -43,6 +48,7 @@ exports.goaldata_create = function (req, res) {
     }
 };
 
+/*This method deletes goal data and returns to the student profile page*/
 exports.goaldata_delete = function (req, res) {
     try {
         //console.log(req.body.id)

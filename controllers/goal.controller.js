@@ -6,9 +6,10 @@ const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
-
 mongoose.set('useFindAndModify', false); // solve findAndModify() warning
 
+
+/*Encryption and decryption method*/
 function encryption(string) {
     return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123').toString();
 }
@@ -34,7 +35,7 @@ db.once('open', () => {
 });
 
 
-/*creates a new goal in database*/
+/*Creates a new goal in database*/
 exports.goal_create = function (req, res) {
     //encrytion ends here
     var CryptoJS = require("crypto-js");
@@ -78,11 +79,12 @@ exports.goal_create = function (req, res) {
     };
 };
 
-/* renders goal page */
+/*Renders goal page*/
 exports.navigate_to_goalProfile = function (req, res) {
     try {
         goalDatas = [];
 
+        //Gets all the goal data using a goalid
         GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
             if (err) {
                 res.send(err);
@@ -148,7 +150,7 @@ exports.navigate_to_goalProfile = function (req, res) {
     }
 }
 
-/*deletes goal from database*/
+/*Deletes goal from database*/
 //TODO: make sure to delete any corresponding goaldata as well
 exports.goal_delete = function (req, res) {
     try {
@@ -166,7 +168,7 @@ exports.goal_delete = function (req, res) {
     }
 };
 
-/*navigates user to EditGoal.ejs page */
+/*Navigates user to EditGoal.ejs page */
 exports.goal_redirect_edit = function (req, res) {
     try {
         User.findById(req.params.userid, function(err, user) {
@@ -191,7 +193,7 @@ exports.goal_redirect_edit = function (req, res) {
     }
 };
 
-/*submits and updates any edits made to goal profile*/
+/*Submits and updates any edits made to goal profile*/
 exports.goal_edit = function (req, res) {
     console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
@@ -212,7 +214,7 @@ exports.goal_edit = function (req, res) {
         });
 }
 
-/*shares goals with other teachers*/
+/*Shares goals with other teachers*/
 exports.goal_share = function (req, res) {
     var sharingemail = req.body.email.toLowerCase()
     console.log("goal.controller email in body:" + sharingemail); //testing to see if the user email is correctly being updated
@@ -246,7 +248,7 @@ exports.goal_share = function (req, res) {
     res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
 }
 
-/*redirects page to the "create new goal" page*/
+/*Redirects page to the "create new goal" page*/
 exports.navigate_to_createNewGoal = function (req, res) {
     try {
             User.findById(req.params.userid, function(err, user) {
@@ -263,7 +265,7 @@ exports.navigate_to_createNewGoal = function (req, res) {
     }
 };
 
-/*redirects page to the student profile page, specifically for said students that are shared with a specified user*/
+/*Redirects page to the student profile page, specifically for said students that are shared with a specified user*/
 exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
     try {
         var goals = [];
@@ -302,7 +304,7 @@ exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
     }
 }
 
-/* renders shared goal page */
+/*Renders shared goal page */
 exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
     try {
         goalDatas = [];
