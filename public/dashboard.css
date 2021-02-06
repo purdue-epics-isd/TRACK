@@ -1,28 +1,28 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic");
 :root {
- --maincolor: #d3d3;
- --secondarycolor: #82bef6;
- --wordcolor: #fff;
- --headcolor: #fff;
- --sidenavcolor: #2C3E50;
+  --maincolor: #d3d3;
+  --secondarycolor: #82bef6;
+  --wordcolor: #fff;
+  --headcolor: #fff;
+  --sidenavcolor: #2C3E50;
 }
 
 [data-theme="dark"] {
- --maincolor: #00000080;
- --secondarycolor: #b4bcc2;
- --headcolor: #424949;
+  --maincolor: #00000080;
+  --secondarycolor: #b4bcc2;
+  --headcolor: #424949;
 }
 
 [data-theme="blue"] {
- --maincolor: #5a9cc594;
- --secondarycolor: #ecf0f1;
- --headcolor: #AED6F1;
+  --maincolor: #5a9cc594;
+  --secondarycolor: #ecf0f1;
+  --headcolor: #AED6F1;
 }
 
 [data-theme="pink"] {
- --maincolor: #d3d3;
- --secondarycolor: #82bef6;
- --headcolor: #fff;
+  --maincolor: #d3d3;
+  --secondarycolor: #82bef6;
+  --headcolor: #fff;
 }
 
 body {
@@ -36,74 +36,61 @@ body {
 label {
   font-weight: normal !important;
 }
-.navbar{
+
+.navbar {
   border-radius: 0px !important;
 }
+
 /* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr 50px;
-  grid-template-areas:
-    'header'
-    'main'
-    'footer';
+  grid-template-areas: 'header' 'main' 'footer';
   height: 100vh;
 }
-
 
 /* login page */
 
 .item-a {
-
   grid-column: 2;
   grid-row: 2;
-  
   /*background-color: #8ca0ff;*/
   align-self: center;
   position: relative;
-
   padding-top: 5px;
   padding-bottom: 33px;
-
   display: flex;
   flex-direction: column;
-  align-items:center;
-  justify-content:center;
-
+  align-items: center;
+  justify-content: center;
 }
 
 .bottom {
   grid-column: 2;
   grid-row: 3;
-
   align-self: center;
   position: relative;
-
   padding-top: 5px;
   padding-bottom: 33px;
-
   display: flex;
   flex-direction: column;
-  align-items:center;
-  justify-content:center;
-
+  align-items: center;
+  justify-content: center;
 }
 
 .top {
   grid-column: 2;
   grid-row: 1;
-
   align-self: center;
   position: relative;
-
   padding-top: 5px;
   padding-bottom: 33px;
-
   display: flex;
   flex-direction: column;
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
 }
 
 .grid-master {
@@ -112,18 +99,13 @@ label {
   grid-template-rows: 150px 1fr auto;
   width: 100%;
   height: 100vh;
-  
 }
 
 /* login page ends */
 
-
-
-
-
-
 .menu-icon {
-  position: fixed; /* Needs to stay visible for all mobile scrolling */
+  position: fixed;
+  /* Needs to stay visible for all mobile scrolling */
   display: flex;
   top: 5px;
   left: 10px;
@@ -149,6 +131,7 @@ b {
 }
 
 /* Give every child element its grid name */
+
 .header {
   grid-area: header;
   align-items: center;
@@ -157,6 +140,7 @@ b {
 }
 
 /* Make room for the menu icon on mobile */
+
 .header__search {
   margin-left: 42px;
 }
@@ -180,8 +164,9 @@ b {
   transform: translateX(-245px);
   transition: all .6s ease-in-out;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  z-index: 2; /* Needs to sit above the hamburger menu icon */
-  background-color:  #2C3E50;
+  z-index: 2;
+  /* Needs to sit above the hamburger menu icon */
+  background-color: #2C3E50;
 }
 
 .sidenav.active {
@@ -231,10 +216,8 @@ b {
   color: slategray;
 }
 
-
-
 .main-overview {
-  display: grid; 
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   /*grid-auto-rows: 94px;*/
   grid-gap: 20px;
@@ -242,17 +225,14 @@ b {
 }
 
 /*for the goal page*/
+
 .name-header {
   display: flex;
   /*float: left;*/
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  //background-color: var(--maincolor);
+  padding: 20px; //background-color: var(--maincolor);
 }
-
-
-
 
 /*.name-extra {
   display: flex;
@@ -261,14 +241,12 @@ b {
   position: relative;
 }*/
 
-
 /*part of the name-header*/
+
 /*.name-overview {
   padding-right: 30px;
 
 }*/
-
-
 
 /*Goal Page starts*/
 
@@ -280,11 +258,11 @@ b {
   background-color: #e3e4e6;
   margin-right: 20px;
   margin-left: 20px;
-  /*color: slategray;*/ 
+  /*color: slategray;*/
 }
 
-.overviewcard { 
-  display: grid; 
+.overviewcard {
+  display: grid;
   grid-template-columns: repeat(4, 4fr);
   grid-gap: 20px;
   margin: 20px;
@@ -293,7 +271,6 @@ b {
 .goalCardName {
   display: flex;
   justify-content: center;
-
   /*vertical-align: top;
   display: inline-block;
   align-items: center;
@@ -323,9 +300,8 @@ b {
   text-transform: capitalize;
   font-weight: bold;
 }
+
 /*Goal Page ends*/
-
-
 
 /*Student Page Starts*/
 
@@ -335,16 +311,14 @@ b {
   grid-gap: 15px;
   justify-content: space-around;
   justify-items: start;
-
 }
 
-
 /*Student Page Ends*/
-
 
 /*Goal Profile starts*/
 
 /*middle of the goal page*/
+
 .class-input {
   display: grid;
   grid-gap: 10px;
@@ -357,10 +331,10 @@ b {
   background-color: #DDD7FF;
 }
 
-.description{
+.description {
   display: flex;
   justify-content: space-between;
-  background-color:  #e3e4e6;
+  background-color: #e3e4e6;
   margin-right: 20px;
   margin-left: 20px;
   padding-right: 20px;
@@ -371,27 +345,21 @@ b {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
 }
 
-
-
 /*bottom of the goal page*/
+
 .goal-data {
- 
   justify-content: space-between;
   float: center;
   align-items: center;
   margin: 20px;
   padding: 20px;
-  
   background-color: #e3e4e6;
   color: slategray;
 }
 
-
 /*Goal Profile Ends*/
-
 
 /*Create Student Page starts*/
 
@@ -401,8 +369,6 @@ b {
   justify-content: space-around;
   align-content: space-around;
   align-items: baseline;
-
-
   /*width: 100%;*/
   background-color: #DDD7FF;
   -webkit-column-break-inside: avoid;
@@ -410,9 +376,8 @@ b {
   box-sizing: border-box;
 }
 
-
-.studentOverview { 
-  display: grid; 
+.studentOverview {
+  display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
   /*vertical-align: top;
@@ -423,17 +388,11 @@ b {
 
 /*Create Student Page Ends*/
 
-
-
-
-
 .main-cards {
   column-count: 1;
   column-gap: 20px;
   margin: 20px
 }
-
-
 
 .card {
   display: flex;
@@ -449,6 +408,7 @@ b {
 }
 
 /* Force varying heights to simulate dynamic content */
+
 .card:first-child {
   height: 225px;
 }
@@ -471,29 +431,26 @@ b {
 }
 
 /* Non-mobile styles, 750px breakpoint */
+
 @media only screen and (min-width: 46.875em) {
   /* Show the sidenav */
- 
-
   .header__search {
     margin-left: 0;
   }
-
   .sidenav {
     position: relative;
     transform: translateX(0);
   }
-
   .sidenav__close-icon {
     visibility: hidden;
   }
 }
 
 /* Medium screens breakpoint (1050px) */
+
 @media only screen and (min-width: 65.625em) {
   /* Break out main cards into two columns */
   .main-cards {
     column-count: 2;
   }
 }
-
