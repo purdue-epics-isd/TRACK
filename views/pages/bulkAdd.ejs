@@ -7,7 +7,7 @@
   <!--<link rel="icon" type="image/gif/png" href="img/logo.png">
   <link rel="stylesheet" href="/main.css">
   <script type="text/javascript" src="myScripts.js"></script>-->
-
+  
   <script src="./studentCreator.js" type="module"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 </head>
@@ -19,16 +19,16 @@
   <main class="main">
 
     <script>
-      const currentTheme = localStorage.getItem('theme');
-      if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        localStorage.setItem('theme', currentTheme);
-      }
-    </script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+    </script>   
     <form action="/bulkadd" method="post">
-      <input type="file" name="excel" id="excel" accept=".csv" onChange="changeArr()">
-      <input type="hidden" name="arr" id="arr">
-      <input type="submit" name="submit">
+        <input type="file" name="excel" id="excel" accept=".csv" onChange="changeArr()">
+        <input type="hidden" name="arr" id="arr">
+        <input type="submit" name="submit">
     </form>
 
     <script>
@@ -38,7 +38,7 @@
         var file = document.getElementById("excel").files[0];
         console.log(file)
         var reader = new FileReader();
-        reader.onload = function (file) {
+        reader.onload = function(file) {
           var content = file.target.result;
           var rows = file.target.result.split(/[\r\n|\n]+/);
           console.log(rows)
@@ -53,10 +53,10 @@
       }
 
     </script>
-
+    
   </main>
 
 </div>
 <%- include("../partials/footer.ejs")%>
-
 </html>
+

@@ -13,7 +13,7 @@ const credentials = {
 };
 const oauth2 = require('simple-oauth2').create(credentials);
 const jwt = require('jsonwebtoken');
-
+    
 function getAuthUrl() {
   const returnVal = oauth2.authorizationCode.authorizeURL({
     redirect_uri: process.env.REDIRECT_URI,
@@ -57,7 +57,7 @@ async function getAccessToken(cookies, res) {
   // refresh token?
   const refresh_token = cookies.graph_refresh_token;
   if (refresh_token) {
-    const newToken = await oauth2.accessToken.create({ refresh_token: refresh_token }).refresh();
+    const newToken = await oauth2.accessToken.create({refresh_token: refresh_token}).refresh();
     saveValuesToCookie(newToken, res);
     return newToken.token.access_token;
   }
@@ -71,21 +71,21 @@ function saveValuesToCookie(token, res) {
   const user = jwt.decode(token.token.id_token);
 
   // Save the access token in a cookie
-  res.cookie('graph_access_token', token.token.access_token, { maxAge: 3600000, httpOnly: true });
+  res.cookie('graph_access_token', token.token.access_token, {maxAge: 3600000, httpOnly: true});
   // Save the user's name in a cookie
-  res.cookie('graph_user_name', user.name, { maxAge: 3600000, httpOnly: true });
+  res.cookie('graph_user_name', user.name, {maxAge: 3600000, httpOnly: true});
   // Save the refresh token in a cookie
-  res.cookie('graph_refresh_token', token.token.refresh_token, { maxAge: 7200000, httpOnly: true });
+  res.cookie('graph_refresh_token', token.token.refresh_token, {maxAge: 7200000, httpOnly: true});
   // Save the token expiration tiem in a cookie
-  res.cookie('graph_token_expires', token.token.expires_at.getTime(), { maxAge: 3600000, httpOnly: true });
+  res.cookie('graph_token_expires', token.token.expires_at.getTime(), {maxAge: 3600000, httpOnly: true});
 }
 
 function clearCookies(res) {
   // Clear cookies
-  res.clearCookie('graph_access_token', { maxAge: 3600000, httpOnly: true });
-  res.clearCookie('graph_user_name', { maxAge: 3600000, httpOnly: true });
-  res.clearCookie('graph_refresh_token', { maxAge: 7200000, httpOnly: true });
-  res.clearCookie('graph_token_expires', { maxAge: 3600000, httpOnly: true });
+  res.clearCookie('graph_access_token', {maxAge: 3600000, httpOnly: true});
+  res.clearCookie('graph_user_name', {maxAge: 3600000, httpOnly: true});
+  res.clearCookie('graph_refresh_token', {maxAge: 7200000, httpOnly: true});
+  res.clearCookie('graph_token_expires', {maxAge: 3600000, httpOnly: true});
 }
 
 exports.getAuthUrl = getAuthUrl;
