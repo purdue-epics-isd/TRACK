@@ -1,97 +1,99 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
   <title>Settings</title>
   <%- include("../partials/head.ejs")%>
 </head>
 
 <div class="grid-container">
-  
+
   <header class="header">
     <div class="header__menu">
-       <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
   </header>
 
-<%- include("../partials/header.ejs")%>
+  <%- include("../partials/header.ejs")%>
 
-<div class="main">
+  <div class="main">
 
-<body>
-  <div class="middle">
-    <h1>Color Theme</h1>
-    <div class="theme-switch-wrapper">
-      <label class="theme-switch" for="checkbox">
-        <input type="radio" id="pink" name="color-options"/>
-        <label for="pink"><img src="img/original_theme.png" height=200 width=400 /></label>
-    </label>
-    <em>Enable Default Mode!</em>
-    </div>
+    <body>
+      <div class="middle">
+        <h1>Color Theme</h1>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="radio" id="pink" name="color-options" />
+            <label for="pink"><img src="img/original_theme.png" height=200 width=400 /></label>
+          </label>
+          <em>Enable Default Mode!</em>
+        </div>
 
-    <div class="theme-switch-wrapper">
-      <label class="theme-switch" for="checkbox">
-        <input type="radio" id="dark" name="color-options"/>
-        <label for="dark"><img src="img/dark_theme.png" height=200 width=400 /></label>
-    </label>
-    <em>Enable Dark Mode!</em>
-    </div>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="radio" id="dark" name="color-options" />
+            <label for="dark"><img src="img/dark_theme.png" height=200 width=400 /></label>
+          </label>
+          <em>Enable Dark Mode!</em>
+        </div>
 
-    <div class="theme-switch-wrapper">
-      <label class="theme-switch" for="checkbox">
-        <input type="radio" id="blue" name="color-options"/>
-        <label for="blue"><img src="img/blue_theme.png" height=200 width=400 /></label>
-    </label>
-    <em>Enable Blue Mode!</em>
-    </div>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="radio" id="blue" name="color-options" />
+            <label for="blue"><img src="img/blue_theme.png" height=200 width=400 /></label>
+          </label>
+          <em>Enable Blue Mode!</em>
+        </div>
 
-    <script type="text/javascript">
-      const toggleSwitch_pink = document.querySelector('.theme-switch input[id="pink"]');
-      const toggleSwitch_dark = document.querySelector('.theme-switch input[id="dark"]');
-      const toggleSwitch_blue = document.querySelector('.theme-switch input[id="blue"]');
+        <script type="text/javascript">
+          const toggleSwitch_pink = document.querySelector('.theme-switch input[id="pink"]');
+          const toggleSwitch_dark = document.querySelector('.theme-switch input[id="dark"]');
+          const toggleSwitch_blue = document.querySelector('.theme-switch input[id="blue"]');
 
-      const currentTheme = localStorage.getItem('theme');
+          const currentTheme = localStorage.getItem('theme');
 
-      if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
-  
-        if (currentTheme === 'dark') {
-          toggleSwitch_dark.checked = true;
-          toggleSwitch_blue.checked = false;
-          toggleSwitch_pink.checked = false;
-        }
+          if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
 
-        if (currentTheme === 'blue') {
-          toggleSwitch_dark.checked = false;
-          toggleSwitch_blue.checked = true;
-          toggleSwitch_pink.checked = false;
-        }
+            if (currentTheme === 'dark') {
+              toggleSwitch_dark.checked = true;
+              toggleSwitch_blue.checked = false;
+              toggleSwitch_pink.checked = false;
+            }
 
-        if (currentTheme === 'pink') {
-          toggleSwitch_dark.checked = false;
-          toggleSwitch_blue.checked = false;
-          toggleSwitch_pink.checked = true;
-        }
-      }
+            if (currentTheme === 'blue') {
+              toggleSwitch_dark.checked = false;
+              toggleSwitch_blue.checked = true;
+              toggleSwitch_pink.checked = false;
+            }
 
-      function switchTheme(e, thememode) {
-        if (e.checked) {
-          document.documentElement.setAttribute('data-theme', thememode);
-          localStorage.setItem('theme', thememode);
-        }
-      }
+            if (currentTheme === 'pink') {
+              toggleSwitch_dark.checked = false;
+              toggleSwitch_blue.checked = false;
+              toggleSwitch_pink.checked = true;
+            }
+          }
 
-      toggleSwitch_pink.addEventListener('change', function(){switchTheme(toggleSwitch_pink, "pink")});
-      toggleSwitch_dark.addEventListener('change', function(){switchTheme(toggleSwitch_dark, "dark")});
-      toggleSwitch_blue.addEventListener('change', function(){switchTheme(toggleSwitch_blue, "blue")});
-    </script>
+          function switchTheme(e, thememode) {
+            if (e.checked) {
+              document.documentElement.setAttribute('data-theme', thememode);
+              localStorage.setItem('theme', thememode);
+            }
+          }
+
+          toggleSwitch_pink.addEventListener('change', function () { switchTheme(toggleSwitch_pink, "pink") });
+          toggleSwitch_dark.addEventListener('change', function () { switchTheme(toggleSwitch_dark, "dark") });
+          toggleSwitch_blue.addEventListener('change', function () { switchTheme(toggleSwitch_blue, "blue") });
+        </script>
+      </div>
+    </body>
+
   </div>
-</body>
-
-</div>
 </div>
 <%- include("../partials/footer.ejs")%>
+
 </html>

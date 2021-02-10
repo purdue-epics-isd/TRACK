@@ -2,6 +2,8 @@ const GoalData = require('../models/goaldata.model');
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 
+
+/*This method saves goal data and returns to the student profile page*/
 exports.goaldata_create = function (req, res) {
     try {
         let goaldata = new GoalData(
@@ -17,12 +19,13 @@ exports.goaldata_create = function (req, res) {
             }
         );
 
-        Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
+        //Saves the goaldata to the database
+        Goal.findOneAndUpdate({ _id: req.params.goalid }, { $push: { goaldata: goaldata } }, function (err, goal) {
             console.log("\nGoal to be updated: " + goal);
             console.log("\nGoaldata to be added: " + goaldata);
             //console.log("\nTeacher email: " + req.body.useremail);
 
-            goaldata.save(function (err) { 
+            goaldata.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
@@ -30,19 +33,22 @@ exports.goaldata_create = function (req, res) {
         });
         console.log("is shared?: " + req.params.shared);
         //console.log("evaluate: " + (type(req.params.shared)));
-        if(req.params.shared == "true") {
+
+        //Reroutes to student profile
+        if (req.params.shared == "true") {
             console.log("navigating to shared student profile...");
             res.redirect("/sharedWithMe/" + req.params.studentid);
         } else {
             console.log("navigating to personal student profile...");
             res.redirect("/student/" + req.params.studentid);
         }
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.render('./error');
     }
 };
 
+/*This method deletes goal data and returns to the student profile page*/
 exports.goaldata_delete = function (req, res) {
     try {
         //console.log(req.body.id)
@@ -50,7 +56,7 @@ exports.goaldata_delete = function (req, res) {
             if (err) return next(err);
             res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
         })
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.render('/error');
     }
