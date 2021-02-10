@@ -1,50 +1,47 @@
-<!-- views/partials/header.ejs -->
+ <!-- views/partials/header.ejs -->
 
 <header class="header">
-    <!DOCTYPE html>
-    <html lang="en">
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Header</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body >
 
-    <head>
-        <title>Header</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    </head>
+<nav class="navbar navbar-expand-lg fixed-top navbar-light" style="background-color: #333333;">
+  <a href="/classPage"><img src="../../../img/trackLogoWhiteText.png" height="60" 
+          style="padding: 10px;padding-left:60px;padding-right:60px"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <body>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent"> <font-size: 40px>
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item px-5">
+              <a class="nav-link nav-link-ltr" href="/classPage">Home</a>
+          </li>
+        
+          <li class="nav-item px-5">
+              <a class="nav-link nav-link-ltr" href="/feedback">Feedback</a>
+          </li>
+          <li class="nav-item px-5">
+              <a class="nav-link nav-link-ltr" href="/aboutUs">About</a>
+          </li>
+          <li class="nav-item  px-5">
+              <a class="nav-link nav-link-ltr" href="/logout">Logout</a>
+          </li>
+      </ul>
 
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light" style="background-color: #333333;">
-            <a href="/classPage"><img src="../../../img/trackLogoWhiteText.png" height="60"
-                    style="padding: 10px;padding-left:60px;padding-right:60px"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <font-size: 40px>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item px-5">
-                            <a class="nav-link nav-link-ltr" href="/classPage">Home</a>
-                        </li>
-
-                        <li class="nav-item px-5">
-                            <a class="nav-link nav-link-ltr" href="/feedback">Feedback</a>
-                        </li>
-                        <li class="nav-item px-5">
-                            <a class="nav-link nav-link-ltr" href="/aboutUs">About</a>
-                        </li>
-                        <li class="nav-item  px-5">
-                            <a class="nav-link nav-link-ltr" href="/logout">Logout</a>
-                        </li>
-                    </ul>
-
-            </div>
-        </nav>
-    </body>
-
-    </html>
+  </div>
+</nav>
+</body>
+</html>
 
 </header>
+

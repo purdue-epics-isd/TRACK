@@ -4,41 +4,29 @@ const Student = require('../models/student.model');
 exports.login = async function (req, res) {
     try {
         var students = [];
-<<<<<<< HEAD
         // searches through the User collection in mongodb and will find all of the users who's _id attribute matches req.params.userid
         await User.findById(req.params.userid, async function(err, user) {
             // runs an asyc function on every user in the db
             await Student.find({}, 'name', async function(err, student) {
                 await student.forEach(async function(s) { 
                     if(student.userid==req.params.userid) {
-=======
-        await User.findById(req.params.userid, async function (err, user) {
-            await Student.find({}, 'name', async function (err, student) {
-                await student.forEach(async function (s) {
-                    if (student.userid == req.params.userid) {
->>>>>>> 7d0578eab27e42fcf1e12e8eb6360711d9d5f253
                         await console.log(s);
-                        await console.log(s.name);
+                        await console.log(s.name); 
                         await students.push(s);
                     }
                 });
             });
         });
-<<<<<<< HEAD
         await User.findById(req.params.userid, async function(err, user) {
             await Student.findById(req.params.studentid, async function(err, student) {
                 // res.render will display the webpage as the classpage, also saving students and user in req.body
-=======
-        await User.findById(req.params.userid, async function (err, user) {
-            await Student.findById(req.params.studentid, async function (err, student) {
->>>>>>> 7d0578eab27e42fcf1e12e8eb6360711d9d5f253
                 await res.render('pages/classPage', {
                     students: students,
                     user: user
                 });
             });
         });
-    } catch (err) {
+    } catch(err) {
         console.log("exports.login");
         console.log(err);
         res.render('./error');
@@ -49,10 +37,10 @@ exports.login = async function (req, res) {
 exports.logout = function (req, res) {
     var logout = true;
     try {
-        res.render('pages/index', {
-            logout: logout
-        });
-    } catch (err) {
+	   res.render('pages/index', {
+        logout: logout
+    });
+    } catch(err) {
         console.log("exports.logout");
         console.log(err);
         res.render('./error');

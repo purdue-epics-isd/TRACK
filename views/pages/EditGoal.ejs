@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+	<html>
+	<head>
+		<title> Create New Goal </title>
+	  <%- include("../partials/head.ejs")%>
+	</head>
 
-<head>
-	<title> Create New Goal </title>
-	<%- include("../partials/head.ejs")%>
-</head>
-
-<style>
+	<style>
 	/* Style the form */
 	#regForm {
 		background-color: white;
@@ -14,30 +13,29 @@
 		width: 50%;
 		min-width: 300px;
 	}
-
 	p {
 		margin: 10px;
 	}
 
 	.form-modified-control {
-		display: block;
-		/*align-items: center;*/
-		/*width: 500px;*/
-		height: calc(2.15625rem + 2px);
-		padding: 0.375rem 0.75rem;
-		font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-		font-size: 15px;
-		font-weight: 400;
-		line-height: 1.5;
-		color: #7b8a8b;
-		background-color: #fff;
-		background-clip: padding-box;
-		border: 1px solid #ced4da;
-		border-radius: 0.25rem;
-		-webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-		transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+	  display: block;
+	  /*align-items: center;*/
+	  /*width: 500px;*/
+	  height: calc(2.15625rem + 2px);
+	  padding: 0.375rem 0.75rem;
+	  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	  font-size: 15px;
+	  font-weight: 400;
+	  line-height: 1.5;
+	  color: #7b8a8b;
+	  background-color: #fff;
+	  background-clip: padding-box;
+	  border: 1px solid #ced4da;
+	  border-radius: 0.25rem;
+	  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+	  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+	  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 	}
 
 	/* Style the input fields */
@@ -89,329 +87,300 @@
 		background-color: #4CAF50;
 	}
 
-	.test {}
+	.test {
 
-	#topBtn {
-		display: none;
-		position: fixed;
-		bottom: 20px;
-		left: 30px;
-		z-index: 99;
-		font-size: 15px;
-		border: none;
-		outline: none;
-		background-color: #2C3E50;
-		color: white;
-		cursor: pointer;
-		padding: 15px;
-		border-radius: 4px;
 	}
 
-	#topBtn:hover {
-		background-color: #555;
-	}
+  	#topBtn {
+	    display: none;
+	    position: fixed;
+	    bottom: 20px;
+	    left: 30px;
+	    z-index: 99;
+	    font-size: 15px;
+	    border: none;
+	    outline: none;
+	    background-color: #2C3E50;
+	    color: white;
+	    cursor: pointer;
+	    padding: 15px;
+	    border-radius: 4px;
+	  }
+
+	  #topBtn:hover {
+	      background-color: #555;
+	  }
+
 </style>
 
 <script>
-	//Get the button
-	var mybutton = document.getElementById("topBtn");
+//Get the button
+var mybutton = document.getElementById("topBtn");
 
-	// When the user scrolls down 20px from the top of the document, show the button
-	window.onscroll = function () { scrollFunction() };
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
 
-	function scrollFunction() {
-		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-			mybutton.style.display = "block";
-		} else {
-			mybutton.style.display = "none";
-		}
-	}
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
 
-	// When the user clicks on the button, scroll to the top of the document
-	function topFunction() {
-		document.body.scrollTop = 0;
-		document.documentElement.scrollTop = 0;
-	}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 </script>
-
 <body>
 	<div class="grid-container">
 
-		<%- include("../partials/header.ejs")%>
+	<%- include("../partials/header.ejs")%>
 
 		<main class="main">
 
 			<script>
-				const currentTheme = localStorage.getItem('theme');
-				if (currentTheme) {
-					document.documentElement.setAttribute('data-theme', currentTheme);
-					localStorage.setItem('theme', currentTheme);
-				}
-			</script>
+	        const currentTheme = localStorage.getItem('theme');
+	        if (currentTheme) {
+	          document.documentElement.setAttribute('data-theme', currentTheme);
+	          localStorage.setItem('theme', currentTheme);
+	        }
+	   		</script> 
+	   		
+				<div class =  class-header>
+			            <h3>Edit Goal</h3>
+			    </div>
 
-			<div class=class-header>
-				<h3>Edit Goal</h3>
-			</div>
 
+		<div class="container d-flex justify-content-center">
+		<form id="regForm" action="/student/<%= student.id%>/goal/edit/<%= goalid %>" method="post">
 
-			<div class="container d-flex justify-content-center">
-				<form id="regForm" action="/student/<%= student.id%>/goal/edit/<%= goalid %>" method="post">
+				<!-- One "tab" for each step in the form: -->
 
-					<!-- One "tab" for each step in the form: -->
+				<!---Goal Title and Descriptoin-->
+				<div>
+					<h1>Goal Creation</h1>
+					<p><input value="<%=goal.name%>"  class="form-modified-control"  type="text" name="name" id="name"></p>
+					<p><textarea class="form-modified-control" style="height: 100px" type="textarea" class="form-modified-control" name="description" id="description"><%=goal.description%></textarea></p>
 
-					<!---Goal Title and Descriptoin-->
-					<div>
-						<h1>Goal Creation</h1>
-						<p><input value="<%=goal.name%>" class="form-modified-control" type="text" name="name"
-								id="name"></p>
-						<p><textarea class="form-modified-control" style="height: 100px" type="textarea"
-								class="form-modified-control" name="description"
-								id="description"><%=goal.description%></textarea></p>
+				</div>
+		<!-- One "tab" for each step in the form: -->
 
+				<!---Start and End Date-->
+
+				<div>
+					<h1>Dates</h1>
+					<p>Start Date:<input value="<%=goal.startDate%>" class="form-modified-control" type="date" name="startDate" id="startDate"></p>
+					<p>End Date:<input value="<%=goal.endDate%>" class="form-modified-control" type="date" name="endDate" id="endDate"></p>
+				</div>
+
+				
+				<!--Goal Type -->
+				<div>
+					<h1>Goal Type</h1>
+					
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio1" name="goalType" class="custom-control-input" value="STEM Goal">
+      					<label class="custom-control-label" for="customRadio1">STEM</label>
 					</div>
-					<!-- One "tab" for each step in the form: -->
-
-					<!---Start and End Date-->
-
-					<div>
-						<h1>Dates</h1>
-						<p>Start Date:<input value="<%=goal.startDate%>" class="form-modified-control" type="date"
-								name="startDate" id="startDate"></p>
-						<p>End Date:<input value="<%=goal.endDate%>" class="form-modified-control" type="date"
-								name="endDate" id="endDate"></p>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Language Goal">
+      					<label class="custom-control-label" for="customRadio2">Language Arts</label>
 					</div>
-
-
-					<!--Goal Type -->
-					<div>
-						<h1>Goal Type</h1>
-
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio1" name="goalType" class="custom-control-input"
-								value="STEM Goal">
-							<label class="custom-control-label" for="customRadio1">STEM</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio2" name="goalType" class="custom-control-input"
-								value="Language Goal">
-							<label class="custom-control-label" for="customRadio2">Language Arts</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio3" name="goalType" class="custom-control-input"
-								value="Health Goal">
-							<label class="custom-control-label" for="customRadio3">Health and Wellness</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio4" name="goalType" class="custom-control-input"
-								value="History Goal">
-							<label class="custom-control-label" for="customRadio4">History</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio5" name="goalType" class="custom-control-input"
-								value="Behavioral Goal">
-							<label class="custom-control-label" for="customRadio5">Behavior</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio6" name="goalType" class="custom-control-input"
-								value="Others Goal">
-							<label class="custom-control-label" for="customRadio6">Others</label>
-						</div>
-						<% console.log(goal.goalType) %>
-						<script>
-							var goalType = "<%=goal.goalType  %>"
-
-							if (goalType == "STEM Goal") {
-								document.getElementById("customRadio1").checked = true;
-							}
-							else if (goalType == "Launguage Goal") {
-								document.getElementById("customRadio2").checked = true;
-							}
-							else if (goalType == "Health Goal") {
-								document.getElementById("customRadio3").checked = true;
-							}
-							else if (goalType == "History Goal") {
-								document.getElementById("customRadio4").checked = true;
-							}
-							else if (goalType == "Behavioral Goal") {
-								document.getElementById("customRadio5").checked = true;
-							}
-							else {
-								document.getElementById("customRadio6").checked = true;
-							}
-						</script>
-
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Health Goal" >
+      					<label class="custom-control-label" for="customRadio3">Health and Wellness</label>
 					</div>
-					<!--Goal Collection Type -->
-					<div><br>
-						<h3>Method of Collection:</h3>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio4" name="goalType" class="custom-control-input" value="History Goal">
+      					<label class="custom-control-label" for="customRadio4">History</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio5" name="goalType" class="custom-control-input" value="Behavioral Goal">
+      					<label class="custom-control-label" for="customRadio5">Behavior</label>
+					  </div>
+					  <div class="custom-control custom-radio">
+						<input type="radio" id="customRadio6" name="goalType" class="custom-control-input" value="Others Goal" >
+      					<label class="custom-control-label" for="customRadio6">Others</label>
+					</div>
+					<% console.log(goal.goalType) %>
+					<script>
+					var goalType = "<%=goal.goalType  %>"
 
-						<%if(goal.methodOfCollection.includes("score")) { %>
-						<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score"
-							checked="" onclick="return false;"> Score <br>
-						<%} %>
+					if (goalType == "STEM Goal") 
+						{ 
+						document.getElementById("customRadio1").checked = true;
+						}
+						else if (goalType == "Launguage Goal") 
+						{ 
+						document.getElementById("customRadio2").checked = true;
+						}
+						else if (goalType == "Health Goal") 
+						{ 
+						document.getElementById("customRadio3").checked = true;
+						}
+						else if (goalType == "History Goal") 
+						{ 
+						document.getElementById("customRadio4").checked = true;
+						}
+						else if (goalType == "Behavioral Goal") 
+						{ 
+						document.getElementById("customRadio5").checked = true;
+						}
+						else 
+						{ 
+						document.getElementById("customRadio6").checked = true;
+						}
+					</script>
+					
+				</div>
+				<!--Goal Collection Type -->
+				<div><br>
+					<h3>Method of Collection:</h3>
 
-						<%if(goal.methodOfCollection.includes("count")) { %>
-						<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count"
-							checked="" onclick="return false;"> Count of Occurrences<br>
-						<select class="form-control" name="occurrences" style="width:100%">
-							<% if (goal.occurrencesType == 'Per hour') { %>
-							<option value="Per hour" selected="">Per hour</option>
-							<option value="Per class">Per class</option>
-							<option value="Per day">Per day</option>
-							<option value="Per week">Per week</option>
-							<%} %>
-							<% if (goal.occurrencesType == 'Per class') { %>
-							<option value="Per hour">Per hour</option>
-							<option value="Per class" selected="">Per class</option>
-							<option value="Per day">Per day</option>
-							<option value="Per week">Per week</option>
-							<%} %>
-							<% if (goal.occurrencesType == 'Per day') { %>
-							<option value="Per hour">Per hour</option>
-							<option value="Per class">Per class</option>
-							<option value="Per day" selected="">Per day</option>
-							<option value="Per week">Per week</option>
-							<%} %>
-							<% if (goal.occurrencesType == 'Per week') { %>
-							<option value="Per hour">Per hour</option>
-							<option value="Per class">Per class</option>
-							<option value="Per day">Per day</option>
-							<option value="Per week" selected="">Per week</option>
-							<%} %>
-						</select>
-						<%} %>
+					<%if(goal.methodOfCollection.includes("score")) { %>
+					<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score" checked="" onclick="return false;"> Score <br>
+					<%} %>
 
-						<%if(goal.methodOfCollection.includes("rubric")) { %>
-						<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric"
-							checked="" onclick="return false;"> Rubric <br>
+					<%if(goal.methodOfCollection.includes("count")) { %>
+					<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count" checked="" onclick="return false;"> Count of Occurrences<br>
+					<select class="form-control" name = "occurrences" style="width:100%">
+	            		<% if (goal.occurrencesType == 'Per hour') { %>
+	            			<option value="Per hour" selected="">Per hour</option>
+	            			<option value="Per class">Per class</option>
+		            		<option value="Per day">Per day</option>
+		            		<option value="Per week">Per week</option>
+	            		<%} %>
+	            		<% if (goal.occurrencesType == 'Per class') { %>
+	            			<option value="Per hour">Per hour</option>
+	            			<option value="Per class" selected="">Per class</option>
+		            		<option value="Per day">Per day</option>
+		            		<option value="Per week">Per week</option>
+	            		<%} %>
+	            		<% if (goal.occurrencesType == 'Per day') { %>
+	            			<option value="Per hour">Per hour</option>
+	            			<option value="Per class">Per class</option>
+		            		<option value="Per day" selected="">Per day</option>
+		            		<option value="Per week">Per week</option>
+	            		<%} %>
+	            		<% if (goal.occurrencesType == 'Per week') { %>
+	            			<option value="Per hour">Per hour</option>
+	            			<option value="Per class">Per class</option>
+		            		<option value="Per day">Per day</option>
+		            		<option value="Per week" selected="">Per week</option>
+	            		<%} %>
+	          		</select>
+					<%} %>
+					
+					<%if(goal.methodOfCollection.includes("rubric")) { %>
+					<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" checked="" onclick="return false;"> Rubric <br>
 						<% if (goal.rubricdescription[0] == '') { %>
-						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
+						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
 						<%} %>
 						<% if (goal.rubricdescription[0] != '') { %>
-						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rnotevident"
-								id="Rnotevident"><%= goal.rubricdescription[0] %></textarea></p>
+						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"><%= goal.rubricdescription[0] %></textarea></p>
 						<%} %>
 
 						<% if (goal.rubricdescription[1] == '') { %>
-						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rintroduced" id="Rintroduced"></textarea></p>
+						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"></textarea></p>
 						<%} %>
 						<% if (goal.rubricdescription[1] != '') { %>
-						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rintroduced"
-								id="Rintroduced"><%= goal.rubricdescription[1] %></textarea></p>
+						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"><%= goal.rubricdescription[1] %></textarea></p>
 						<%} %>
 
 						<% if (goal.rubricdescription[2] == '') { %>
-						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Remerging" id="Remerging"></textarea></p>
+						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"></textarea></p>
 						<%} %>
 						<% if (goal.rubricdescription[2] != '') { %>
-						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Remerging"
-								id="Remerging"><%= goal.rubricdescription[2] %></textarea></p>
+						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"><%= goal.rubricdescription[2] %></textarea></p>
 						<%} %>
 
 						<% if (goal.rubricdescription[3] == '') { %>
-						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rdeveloping" id="Rdeveloping"></textarea></p>
+						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"></textarea></p>
 						<%} %>
 						<% if (goal.rubricdescription[3] != '') { %>
-						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rdeveloping"
-								id="Rdeveloping"><%= goal.rubricdescription[3] %></textarea></p>
+						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"><%= goal.rubricdescription[3] %></textarea></p>
 						<%} %>
 
 						<% if (goal.rubricdescription[4] == '') { %>
-						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rongoing" id="Rongoing"></textarea></p>
+						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"></textarea></p>
 						<%} %>
 						<% if (goal.rubricdescription[4] != '') { %>
-						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rongoing"
-								id="Rongoing"><%= goal.rubricdescription[4] %></textarea></p>
+						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"><%= goal.rubricdescription[4] %></textarea></p>
 						<%} %>
 
 						<% if (goal.rubricdescription[5] == '') { %>
-						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"></textarea></p>
+						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"></textarea></p>
 						<%} %>
 						<% if (goal.rubricdescription[5] != '') { %>
-						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rdemonstrated"
-								id="Rdemonstrated"><%= goal.rubricdescription[5] %></textarea></p>
+						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"><%= goal.rubricdescription[5] %></textarea></p>
 						<%} %>
 
 						<% if (goal.rubricdescription[6] == '') { %>
-						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rapplied" id="Rapplied"></textarea></p>
+						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"></textarea></p>
 						<%} %>
 						<% if (goal.rubricdescription[6] != '') { %>
-						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea"
-								class="form-modified-control" name="Rapplied"
-								id="Rapplied"><%= goal.rubricdescription[6] %></textarea></p>
+						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"><%= goal.rubricdescription[6] %></textarea></p>
 						<%} %>
-						<%} %>
+					<%} %>
 
-						<%if(goal.methodOfCollection.includes("comments")) { %>
-						<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments"
-							id="comments" checked="" onclick="return false;"> Descriptive Comments <br>
-						<%} %>
+					<%if(goal.methodOfCollection.includes("comments")) { %>
+						<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments" checked="" onclick="return false;"> Descriptive Comments <br>
+					<%} %>
 
-						<%if(goal.methodOfCollection.includes("documentation")) { %>
-						<input type="checkbox" style="width: auto" name="methodOfCollection" value="documentation"
-							id="documentation" checked="" onclick="return false;"> File/Image documentation <br>
-						<%} %>
+					<%if(goal.methodOfCollection.includes("documentation")) { %>
+						<input type="checkbox" style="width: auto" name="methodOfCollection" value="documentation" id="documentation" checked="" onclick="return false;"> File/Image documentation <br>
+					<%} %>					
+				</div>
+
+				<div style="overflow:auto;">
+					<div style="float:right;">
+						<button type="submit"  class="btn btn-primary" id="nextBtn" >Submit</button>
+						<a href="javascript:history.back()" class="btn btn-info">Cancel</a>
 					</div>
-
-					<div style="overflow:auto;">
-						<div style="float:right;">
-							<button type="submit" class="btn btn-primary" id="nextBtn">Submit</button>
-							<a href="javascript:history.back()" class="btn btn-info">Cancel</a>
-						</div>
-					</div>
-				</form>
-			</div>
+				</div>
+			</form>
+		</div>
 		</main>
 		<%- include("../partials/footer.ejs")%>
 	</div>
-
+	
 </body>
-<script>
+	<script>
 
 	function validateForm() {
 		// This function deals with validation of the form fields
-		var x, y, i, valid = true;
-		x = document.getElementsByClassName("tab");
-		y = x[currentTab].getElementsByTagName("input");
-		// A loop that checks every input field in the current tab:
-		for (i = 0; i < y.length; i++) {
-			console.log("y[i].value: " + y[i].value);
-			// If a field is empty...
-			if (y[i].value == "") {
-				//check to see if this is the rubric field bc it is okay to leave rubric field empty as long as the checkbox is unchecked
-				console.log("I am an empty field");
-				if ((y[i].name == "rubricField" || y[i].type == "button")) {
-					console.log("and a rubric field");
-					if (document.getElementById("rubric").checked == true) {
+	  	var x, y, i, valid = true;
+	  	x = document.getElementsByClassName("tab");
+	  	y = x[currentTab].getElementsByTagName("input");
+	  	// A loop that checks every input field in the current tab:
+	  	for (i = 0; i < y.length; i++) {
+	  		console.log("y[i].value: " + y[i].value);
+	    	// If a field is empty...
+		    if (y[i].value == "") {
+		      	//check to see if this is the rubric field bc it is okay to leave rubric field empty as long as the checkbox is unchecked
+		      	console.log("I am an empty field");
+		      	if ((y[i].name == "rubricField" || y[i].type == "button")) {
+		      		console.log("and a rubric field");
+		      		if (document.getElementById("rubric").checked == true) {
 						// add an "invalid" class to the field:
 						y[i].className += " invalid";
 						console.log(y[i].className);
 						// and set the current valid status to false:
 						valid = false;
-					}
-				} else if (x[currentTab].id == "preview") {
-					console.log("and a preview page");
-					//we good
-				} else {
+		      		}
+		  		} else if (x[currentTab].id == "preview") {
+		  			console.log("and a preview page");
+		  			//we good
+		  		} else {
 					// add an "invalid" class to the field:
 					console.log("and im being marked as invalid");
-					y[i].className += " invalid";
-					console.log(y[i].className);
-					// and set the current valid status to false:
-					valid = false;
+			   		y[i].className += " invalid";
+			   		console.log(y[i].className);
+			      	// and set the current valid status to false:
+			      	valid = false;
 				}
 			}
 		}
@@ -424,14 +393,14 @@
 	}
 
 	function fixStepIndicator(n) {
-		// This function removes the "active" class of all steps...
-		var i, x = document.getElementsByClassName("step");
-		for (i = 0; i < x.length; i++) {
-			x[i].className = x[i].className.replace(" active", "");
-		}
-		//... and adds the "active" class to the current step:
-		x[n].className += " active";
+	  // This function removes the "active" class of all steps...
+	  var i, x = document.getElementsByClassName("step");
+	  for (i = 0; i < x.length; i++) {
+	  	x[i].className = x[i].className.replace(" active", "");
+	  }
+	  //... and adds the "active" class to the current step:
+	  x[n].className += " active";
 	}
-</script>
+	</script>
 
 </html>

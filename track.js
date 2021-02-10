@@ -22,18 +22,18 @@ let dev_db_url = 'mongodb://track:Woofwoof@track-dev-shard-00-00.4dk1e.mongodb.n
 let mongoDB = process.env.MONGO_URI || dev_db_url;
 mongoose.connect(mongoDB, ({
 	useNewUrlParser: true,
-	useUnifiedTopology: true
+	useUnifiedTopology: true	
 }));
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(product);
 app.use(express.static('public'))
 
 app.listen(PORT, () => {
-	console.log('Server is up and running on port number ' + PORT);
+    console.log('Server is up and running on port number ' + PORT);
 });
