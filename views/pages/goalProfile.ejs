@@ -355,15 +355,15 @@
 																	reader.addEventListener("load", function() {
 																		let fileSize = 0
 																        if (reader.result[reader.result.length - 2] == '=') {
-																            console.log("ends with ==");
+																            // console.log("ends with ==");
 																            fileSize = (reader.result.length * (3/4)) - 2;
 																        }
 																        else {
-																            console.log("ends with =");
+																            // console.log("ends with =");
 																            fileSize = (reader.result.length * (3/4)) - 1;
 																        }
 																        if (fileSize < 1048576) {
-																            console.log("fileSize is proper size");
+																            // console.log("fileSize is proper size");
 																            document.getElementById("filecontents").value = reader.result;
 																        }
 																		
@@ -506,19 +506,19 @@
 						    }
 
 							if ("<%=goalData.file%>" != "null") {
-								console.log("<%=goalData.file%>");
+								// console.log("<%=goalData.file%>");
 								let fileDataUrl = "<%=goalData.file%>"
 
 								var regex = /^data:.+\/(.+);base64,(.*)$/;
 								var matches = fileDataUrl.match(regex);
 								var ext = matches[1];
-								console.log("ext", ext)
+								// console.log("ext", ext)
 								var data = matches[2];
 								const blob = this.dataURItoBlob(data, ext);
 								const url = URL.createObjectURL(blob);
 
 								let aTag = document.getElementById("<%=goalData._id%>")
-								console.log("url", url);
+								// console.log("url", url);
 								aTag.href = url
 							}
 						</script>
@@ -558,7 +558,7 @@
 							dataset[<%=index %>].push(<%=goalData.count %>);
 										<%}) %>
 								}
-						console.log(dataset);
+						// console.log(dataset);
 
 						if (dataset.length == 0) {
 							return;

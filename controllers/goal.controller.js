@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 
 mongoose.set('useFindAndModify', false); // solve findAndModify() warning
 
+// encryption functions
 function encryption(string) {
     return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123').toString();
 }
@@ -16,22 +17,6 @@ function decryption(ciphertext) {
     var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
-
-
-// Require packages
-const path = require('path');
-const crypto = require('crypto');
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-const methodOverride = require('method-override');
-
-let gfs;
-let db = mongoose.connection;
-db.once('open', () => {
-  gfs = Grid(db.db, mongoose.mongo);
-  gfs.collection('uploads');
-});
 
 
 /*creates a new goal in database*/
@@ -43,7 +28,7 @@ exports.goal_create = function (req, res) {
     // Decrypt
     var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
-    console.log(req.body.methodOfCollection);
+    // console.log(req.body.methodOfCollection);
     try {
         //for name:
         let goal = new Goal(
@@ -80,7 +65,7 @@ exports.goal_create = function (req, res) {
 
 /* renders goal page */
 exports.navigate_to_goalProfile = async function (req, res) {
-    await console.log("navigate_to_goalProfile");
+    // await console.log("navigate_to_goalProfile");
     try {
         goalDatas = [];
 
@@ -90,14 +75,14 @@ exports.navigate_to_goalProfile = async function (req, res) {
                 return;
             }
             await goaldata.forEach(async function(s) {
-                console.log("goaldata pre decrypt", s)
+                // console.log("goaldata pre decrypt", s)
                 s.comments = await decryption(s.comments);
                 s.teacherEmail = await decryption(s.teacherEmail);
                 s.filename = await decryption(s.filename);
                 s.file = await decryption(s.file);
-                console.log("goaldata post decrypt", s)
+                // console.log("goaldata post decrypt", s)
                 await goalDatas.push(s);
-                await console.log(s)
+                // await console.log(s)
                 
                 
             });
@@ -115,17 +100,17 @@ exports.navigate_to_goalProfile = async function (req, res) {
             await User.findById(req.params.userid, async function(err, user) {
                 await Goal.findById(req.params.goalid, async function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
-                    console.log("goal pre decrypt", goal)
+                    // console.log("goal pre decrypt", goal)
                     goal.name = await decryption(goal.name);
                     goal.description = await decryption(goal.description);
                     goal.userid = await decryption(goal.userid);
-                    console.log("goal post decrypt", goal)
+                    // console.log("goal post decrypt", goal)
                     // goal.studentID = decryption(goal.studentID);
-                    await console.log("method:" + goal.methodOfCollection);
-                    await console.log("method as var:" + methodsOfCollection);
+                    // await console.log("method:" + goal.methodOfCollection);
+                    // await console.log("method as var:" + methodsOfCollection);
 
-                    await console.log("goal:" + goal);
-                    await console.log(req.params.goalid);
+                    // await console.log("goal:" + goal);
+                    // await console.log(req.params.goalid);
                     
                     await res.render('pages/goalProfile', {
                         user: user,
@@ -151,7 +136,7 @@ exports.navigate_to_goalProfile = async function (req, res) {
 //TODO: make sure to delete any corresponding goaldata as well
 exports.goal_delete = function (req, res) {
     try {
-        console.log("Goal id: [delete]: " + req.params.goalid);
+        // console.log("Goal id: [delete]: " + req.params.goalid);
         Goal.findByIdAndRemove(req.params.goalid, function (err) {
             if (err) {
                 console.log(err);
@@ -171,11 +156,11 @@ exports.goal_redirect_edit = function (req, res) {
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
               Goal.findById(req.params.goalid, function(err, goal) {
-                  console.log("goal pre decrypt", goal)
+                  // console.log("goal pre decrypt", goal)
                   goal.name = decryption(goal.name);
                   goal.description =decryption(goal.description);
                   goal.userid = decryption(goal.userid)
-                  console.log("goal post decrypt", goal)
+                  // console.log("goal post decrypt", goal)
 
                 res.render('pages/EditGoal', {
                     student: student,
@@ -195,7 +180,7 @@ exports.goal_redirect_edit = function (req, res) {
 
 /*submits and updates any edits made to goal profile*/
 exports.goal_edit = function (req, res) {
-    console.log("Goal id: [edit]: " + req.params.goalid);
+    // console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
             { $set: { name: encryption(req.body.name),
                 description: encryption(req.body.description),
@@ -325,9 +310,9 @@ exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
             User.findById(req.params.userid, function(err, user) {
                 Goal.findById(req.params.goalid, function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
-                    console.log("method:" + goal.methodOfCollection);
-                    console.log("method as var:" + methodsOfCollection);
-                    console.log("goal:" + goal);
+                    // console.log("method:" + goal.methodOfCollection);
+                    // console.log("method as var:" + methodsOfCollection);
+                    // console.log("goal:" + goal);
                     gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
                         goal.name = encryption(goal.name);
                         goal.description = encryption(goal.description);
