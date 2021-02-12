@@ -26,6 +26,7 @@
     "cookie-parser": "^1.4.4",
     "crypto-js": "^4.0.0",
     "cryptojs": "^2.5.3",
+    "dataurl-to-blob": "0.0.1",
     "ejs": "^2.6.1",
     "express": "^4.17.1",
     "express-session": "^1.15.6",
@@ -42,7 +43,8 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
     "passport-local-mongoose-email": "^0.1.4",
-    "passport-outlook": "^2.2.0"
+    "passport-outlook": "^2.2.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "exports-loader": "^0.7.0"

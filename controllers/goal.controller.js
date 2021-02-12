@@ -79,72 +79,103 @@ exports.goal_create = function (req, res) {
 };
 
 /* renders goal page */
-exports.navigate_to_goalProfile = function (req, res) {
+exports.navigate_to_goalProfile = async function (req, res) {
+    await console.log("navigate_to_goalProfile");
     try {
         goalDatas = [];
 
-        GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
+        await GoalData.find({goalID: req.params.goalid}, {}, async function(err, goaldata) {
             if (err) {
-                res.send(err);
+                await res.send(err);
                 return;
             }
-            goaldata.forEach(function(s) {
-                goalDatas.push(s);
+            await goaldata.forEach(async function(s) {
+                await goalDatas.push(s);
+                await console.log(s)
+                // await console.log(s.serial)
+                
+                // // this doesn't work :(
+                // await gfs.files.find().toArray(async function (err, files) {
+                //     await console.log("inside gfs.files.find()")
+                //     if (err) {
+                //         await console.log(err)
+                //     }
+                //     else {
+                //         await console.log("s.serial files", files);
+                //     }
+                // })
+                
             });
         });
 
 
-        Student.findById(req.params.studentid, function(err, student) {
+
+
+        await Student.findById(req.params.studentid, async function(err, student) {
             if (err) {
-                res.send(err);
+                await res.send(err);
                 return;
             }
 
-            User.findById(req.params.userid, function(err, user) {
-                Goal.findById(req.params.goalid, function(err, goal) {
+            await User.findById(req.params.userid, async function(err, user) {
+                await Goal.findById(req.params.goalid, async function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
 
-                    goal.name = decryption(goal.name);
-                    goal.description = decryption(goal.description);
+                    goal.name = await decryption(goal.name);
+                    goal.description = await decryption(goal.description);
                     // goal.studentID = decryption(goal.studentID);
-                    console.log("method:" + goal.methodOfCollection);
-                    console.log("method as var:" + methodsOfCollection);
+                    await console.log("method:" + goal.methodOfCollection);
+                    await console.log("method as var:" + methodsOfCollection);
 
-                    console.log("goal:" + goal);
-                    gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
-                      if (!files || files.length === 0) {
-                        res.render('pages/goalProfile', {
-                            user: user,
-                            goalDatas: goalDatas,
-                            student: student,
-                            goal: goal,
-                            methodOfCollection: methodsOfCollection,
-                            shared: false,
-                            files: false
-                        });
-                      } else {
-                        files.map((file) => {
-                          (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
-                        });         
-                        res.render('pages/goalProfile', {
-                            user: user,
-                            goalDatas: goalDatas,
-                            student: student,
-                            goal: goal,
-                            methodOfCollection: methodsOfCollection,
-                            shared: false,
-                            files: files
-                        });
-                      }
+                    await console.log("goal:" + goal);
+                    await console.log(req.params.goalid);
+                    
+                    await res.render('pages/goalProfile', {
+                        user: user,
+                        goalDatas: goalDatas,
+                        student: student,
+                        goal: goal,
+                        methodOfCollection: methodsOfCollection,
+                        shared: false,
+                        files: false
                     });
+                    // also is not working
+                    // await gfs.files.find().toArray(async function(err, files) {
+                    //   await console.log("inside gfs.files.find()")
+                    //   await console.log("req.params.goalid files", files)
+                    //   if (!files || files.length === 0) {
+                    //     await res.render('pages/goalProfile', {
+                    //         user: user,
+                    //         goalDatas: goalDatas,
+                    //         student: student,
+                    //         goal: goal,
+                    //         methodOfCollection: methodsOfCollection,
+                    //         shared: false,
+                    //         files: false
+                    //     });
+                    //   } else {
+                    //     await files.map(async function(file) {
+                    //       (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
+                    //     });         
+                    //     await res.render('pages/goalProfile', {
+                    //         user: user,
+                    //         goalDatas: goalDatas,
+                    //         student: student,
+                    //         goal: goal,
+                    //         methodOfCollection: methodsOfCollection,
+                    //         shared: false,
+                    //         files: files
+                    //     });
+                    //   }
+                    // });
 
                 });
             });
         });
         return;
     } catch(error) {
-        console.log("err:" + err);
-        res.render('./error');
+        await console.log("err:" + err);
+        await res.render('./error');
     }
 }
 
