@@ -59,7 +59,7 @@ exports.goal_create = function (req, res) {
                 shared: false,
                 rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
                 goaldata: [],
-                userid: req.body.userID
+                userid: encryption(req.body.userID)
             })
 
         Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {
@@ -90,20 +90,15 @@ exports.navigate_to_goalProfile = async function (req, res) {
                 return;
             }
             await goaldata.forEach(async function(s) {
+                console.log("goaldata pre decrypt", s)
+                s.comments = await decryption(s.comments);
+                s.teacherEmail = await decryption(s.teacherEmail);
+                s.filename = await decryption(s.filename);
+                s.file = await decryption(s.file);
+                console.log("goaldata post decrypt", s)
                 await goalDatas.push(s);
                 await console.log(s)
-                // await console.log(s.serial)
                 
-                // // this doesn't work :(
-                // await gfs.files.find().toArray(async function (err, files) {
-                //     await console.log("inside gfs.files.find()")
-                //     if (err) {
-                //         await console.log(err)
-                //     }
-                //     else {
-                //         await console.log("s.serial files", files);
-                //     }
-                // })
                 
             });
         });
@@ -120,9 +115,11 @@ exports.navigate_to_goalProfile = async function (req, res) {
             await User.findById(req.params.userid, async function(err, user) {
                 await Goal.findById(req.params.goalid, async function(err, goal) {
                     var methodsOfCollection = goal.methodOfCollection;
-
+                    console.log("goal pre decrypt", goal)
                     goal.name = await decryption(goal.name);
                     goal.description = await decryption(goal.description);
+                    goal.userid = await decryption(goal.userid);
+                    console.log("goal post decrypt", goal)
                     // goal.studentID = decryption(goal.studentID);
                     await console.log("method:" + goal.methodOfCollection);
                     await console.log("method as var:" + methodsOfCollection);
@@ -139,35 +136,6 @@ exports.navigate_to_goalProfile = async function (req, res) {
                         shared: false,
                         files: false
                     });
-                    // also is not working
-                    // await gfs.files.find().toArray(async function(err, files) {
-                    //   await console.log("inside gfs.files.find()")
-                    //   await console.log("req.params.goalid files", files)
-                    //   if (!files || files.length === 0) {
-                    //     await res.render('pages/goalProfile', {
-                    //         user: user,
-                    //         goalDatas: goalDatas,
-                    //         student: student,
-                    //         goal: goal,
-                    //         methodOfCollection: methodsOfCollection,
-                    //         shared: false,
-                    //         files: false
-                    //     });
-                    //   } else {
-                    //     await files.map(async function(file) {
-                    //       (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
-                    //     });         
-                    //     await res.render('pages/goalProfile', {
-                    //         user: user,
-                    //         goalDatas: goalDatas,
-                    //         student: student,
-                    //         goal: goal,
-                    //         methodOfCollection: methodsOfCollection,
-                    //         shared: false,
-                    //         files: files
-                    //     });
-                    //   }
-                    // });
 
                 });
             });
@@ -203,9 +171,12 @@ exports.goal_redirect_edit = function (req, res) {
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
               Goal.findById(req.params.goalid, function(err, goal) {
+                  console.log("goal pre decrypt", goal)
                   goal.name = decryption(goal.name);
                   goal.description =decryption(goal.description);
-                  goal.studentID = decryption(goal.studentID);
+                  goal.userid = decryption(goal.userid)
+                  console.log("goal post decrypt", goal)
+
                 res.render('pages/EditGoal', {
                     student: student,
                     user: user,
@@ -226,8 +197,8 @@ exports.goal_redirect_edit = function (req, res) {
 exports.goal_edit = function (req, res) {
     console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
-            { $set: { name: req.body.name,
-                description: req.body.description,
+            { $set: { name: encryption(req.body.name),
+                description: encryption(req.body.description),
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,

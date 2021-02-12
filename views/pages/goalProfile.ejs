@@ -362,7 +362,7 @@
 																            console.log("ends with =");
 																            fileSize = (reader.result.length * (3/4)) - 1;
 																        }
-																        if (fileSize < 15728640) {
+																        if (fileSize < 1048576) {
 																            console.log("fileSize is proper size");
 																            document.getElementById("filecontents").value = reader.result;
 																        }
