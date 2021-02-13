@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
+var forceSsl = require('force-ssl-heroku');
 const app = express();
 
+app.use(forceSsl);
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
@@ -16,7 +18,7 @@ app.get('/', student.run);
 
 //Set up mongoose connection
 const mongoose = require('mongoose');
-let dev_db_url = 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track';
+let dev_db_url = 'mongodb://track:Woofwoof@track-dev-shard-00-00.4dk1e.mongodb.net:27017,track-dev-shard-00-01.4dk1e.mongodb.net:27017,track-dev-shard-00-02.4dk1e.mongodb.net:27017/TRACK-dev?ssl=true&replicaSet=atlas-1467wp-shard-0&authSource=admin&retryWrites=true&w=majority';
 let mongoDB = process.env.MONGO_URI || dev_db_url;
 mongoose.connect(mongoDB, ({
 	useNewUrlParser: true,

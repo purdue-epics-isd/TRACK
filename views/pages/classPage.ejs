@@ -3,99 +3,260 @@
 <html>
 
 <head>
-  <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s" />
-  <title>Track</title>
+  <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s">
+  <title>Class Page</title>
   <%- include("../partials/head.ejs")%>
 </head> 
 
-<div class="grid-container">
+<style>
+  #topBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 30px;
+    z-index: 99;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    background-color: #2C3E50;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+  }
 
-    <header class="header">
-      <div class="header__menu">
-       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-      <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s" />
-    </header>
+  #topBtn:hover {
+      background-color: #555;
+  }
+
+</style>
+<script>
+//Get the button
+var mybutton = document.getElementById("topBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+<body>
+<div>
 
   <%- include("../partials/header.ejs")%>
-
-    <main class="main">
-        <div class =  class-header>
-         <!--- <div class="form-group">
-            <select class="custom-select" id="selectNumber" class="dropbtn"></select>
-          </div>-->
-          <h3>Class List
-          </h3>
-
-          <button type="button" class="btn btn-primary">
-            <a href="/createNewStudent">Create New Student</a>
-          </button>
+  <div class="class-header">
+      <div class="form-group ">
+          <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
         </div>
-
-
-         <div class = "overviewcard" id="studentBox">
-
-                <!--Loads the Students and Creates Buttons for them-->
-              <% students.forEach(function(student) { %>
-              <h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>
-              <!--<div class = "cardName" id="<%=student.userid%>">-->
-              <script>
-                if(localStorage.getItem("userID") == "<%=student.userid %>") {
-                  var card = document.createElement("div");
-                  card.className = "cardName";
-
-                  var studentLink = document.createElement("a");
-                  studentLink.href = "/student/<%=student.id%>";
-
-                  var studentImg = document.createElement("img");
-                  studentImg.className = "img-circle";
-                  studentImg.src = "/img/studentIcon.png";
-                  studentImg.width = "200";
-                  studentImg.height = "200";
-
-                  var studentLabel = document.createElement("class");
-                  studentLabel.className = "name";
-                  studentLabel.innerHTML = "<%=student.firstname%>";
-
-                  studentLink.appendChild(studentImg);
-                  studentLink.appendChild(studentLabel);
-                  card.appendChild(studentLink);
-
-                  document.getElementById("studentBox").appendChild(card);
-
-                  var toDelete = document.getElementById("uid");
-
-                  toDelete.parentNode.removeChild(toDelete);
-                }
-              </script>
-              <% }); %>
-            </div>
-
       
+        
 
+  <p style="font-size: 24px;">Class List</p>
+  
+  <div>
+  <a href="/createNewStudent"> <button type="button" class="btn btn-primary">
+          Create New Student
+    </button></a>
+    <button id="tutorialBtn" class="btn btn-info">Tutorial</button>
+    </div>
+  </div>
+<div>
+    <main class="main">
+        <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+        </script>  
+    
+    <!-- Tutorial -->
+    <!-- Inital Popup -->
+    
+    <div id="tutorial" class="tutorial">
+      <div style="text-align: center" class="tutorialContent">
+        <p style="text-align: center;font-size: 35px;">These popup boxes will guide you 
+              thorugh the website. Click "Next" to continue.</p>
+        <span style="margin-left: 27%;font-size: 30px;" class="exit">Exit</span>
+        <span style="margin-left: 27%;font-size: 30px;" class="next">Next</span>
+      </div>
+    </div>
+    <!-- Second Popup: Create New Student -->
+    <div id="tutorial1" class="tutorial1">
+      <div class="tutorial1Content">
+        <p style="text-align: center;font-size: 28px;">Click on this button to create a new student. ---></p> 
+        <span class="exit">Exit</span>
+        <span class="previous">Previous</span>
+        <span class="next">Next</span>
+      </div>
+    </div>
+    <!-- Tutorial Script -->
+    <script>
+      var tutorial = document.getElementById("tutorial");
+      var tutorial1 = document.getElementById("tutorial1");
+      var btn = document.getElementById("tutorialBtn");
+      var exit = document.getElementsByClassName("exit")[0];
+      var next = document.getElementsByClassName("next")[0];
+      var exit1 = document.getElementsByClassName("exit")[1];
+      var previous = document.getElementsByClassName("previous")[0];
+      var next1 = document.getElementsByClassName("next")[1];
+
+      btn.onclick = function() {
+	      tutorial.style.display = "block";
+      }
+      exit.onclick = function() {
+	      tutorial.style.display = "none";
+      }
+      next.onclick = function() {
+        tutorial.style.display = "none";
+        tutorial1.style.display = "block"
+      }
+      exit1.onclick = function() {
+	      tutorial1.style.display = "none";
+      }
+      previous.onclick = function() {
+        tutorial1.style.display = "none";
+        tutorial.style.display = "block";
+      }
+      next1.onclick = function() {
+        tutorial1.style.display = "none";
+        // tutorial2.style.display = "block";
+      }
+    </script>
+
+    <!-- End Tutorial -->
+
+	  <!-- Trigger/Open The Modal 
+	   <button id="myBtn" class= "btn btn-info">
+		  Need Help?	  
+	  </button> 
+
+	  
+	  <div id="myModal" class="modal">
+
+		    
+		      <div class="modal-content">
+			          <span class="close">&times;</span>
+				      <p>Welcome back to TRACK, your one stop shop for creating and managing your students goals.</p>
+				      <img src="/img/createNewStudent.png">
+				      <p>Click the Create Student button to get started!</p>
+
+		      </div>
+
+	  </div>
+
+	  <script>
+	  // Get the modal
+	  var modal = document.getElementById("myModal");
+
+	  // Get the button that opens the modal
+	  var btn = document.getElementById("myBtn");
+
+	  // Get the <span> element that closes the modal
+	  var span = document.getElementsByClassName("close")[0];
+
+	  // When the user clicks the button, open the modal 
+	  btn.onclick = function() {
+	    modal.style.display = "block";
+	  }
+
+	  // When the user clicks on <span> (x), close the modal
+	  span.onclick = function() {
+	    modal.style.display = "none";
+	  }
+
+	  // When the user clicks anywhere outside of the modal, close it
+	  window.onclick = function(event) {
+	    if (event.target == modal) {
+	      modal.style.display = "none";
+	    }
+	  }
+	  </script> -->
+        
+	 <div class = "overviewcard" id="studentBox">
+              <script>
+                console.log("jfjff");
+                console.log(localStorage);
+                console.log("post jfjfjf");
+              </script>
+
+              <!--Loads the Students and Creates Buttons for them-->
+              <% students.forEach(function(student) { %>
+                <script>
+                  // console.log("<%=student%>")
+                </script>
+                <% let shouldBreak = false %>
+                <% student.userid.forEach(function(id) { %>
+                  <% if (!shouldBreak) { %>
+
+                  <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
+                  <!--<div class = "cardName" id="<%=student.userid%>">-->
+                  <script>
+                    console.log("hey");
+                    console.log(localStorage.getItem("username"));
+                    console.log("student email", "<%=student.email%>")
+                    console.log("teacher email", "<%=id%>")
+                    console.log("student grade", "<%=student.grade%>")
+
+                    
+                    if(localStorage.getItem("username") === "<%=id%>") {
+                      var card = document.createElement("div");
+                      card.className = "studentCardName";
+                      card.id = "<%=student.id%>";
+                      card.setAttribute("period", "<%=student.grade%>")
+                      console.log("<%=student.id%>");
+                      var studentLink = document.createElement("a");
+                      studentLink.href = "/student/<%=student.id%>";
+                      var studentImg = document.createElement("img");
+                      studentImg.className = "img-circle";
+                      studentImg.src = "/img/studentIcon.png";
+                      studentImg.width = "200";
+                      studentImg.height = "200";
+                      var studentLabel = document.createElement("class");
+                      studentLabel.className = "name";
+                      studentLabel.innerHTML = "<%=student.firstname%>"; //+ " " + "<%=student.lastname%>";
+                      studentLink.appendChild(card);
+                      card.appendChild(studentImg);
+                      card.appendChild(studentLabel);
+                      document.getElementById("studentBox").appendChild(studentLink);
+                      //var toDelete = document.getElementById("uid");
+                      //toDelete.parentNode.removeChild(toDelete);
+                      
+                      
+                    }
+                    
+                  </script>
+                <% } %>
+                <% } ); %>
+              <% }); %>
+
+              
+
+
+            </div>
     </main>
-
-
-  <footer class="footer">
-      <div class="footer__copyright">&copy; 2019 TRACK</div>
-  </footer>
-
+</div>
 </div>
 
-</html>
+</body>
+
 
 <script>
-  /* When the user clicks on the button,
-  toggle between hiding and showing the dropdown content */
-  function myFunction() {
-    //document.getElementById("myDropdown").classList.toggle("show");
-    //document.getElementById("myDropdown").innerHTML = sessionStorage.getItem("userID");
-  }
-  console.log(localStorage.getItem("userID"));
+
+  //console.log(localStorage.getItem("userID"));
   // Close the dropdown if the user clicks outside of it
+  
   window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -110,49 +271,40 @@
   }
 
   var sel = document.getElementById('selectNumber');
-  var options = ["All students", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period", "10th Period",]; 
+  var options = ["All students &nbsp;", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period"]; 
   for(var i = 0; i < options.length; i++) {
     var opt = document.createElement('option');
     opt.innerHTML = options[i];
-        /*if(i==0) {
-          opt.value="/classPage";
-        } else {
-          opt.value="/classPage";
-        }*/
-        sel.onchange = function() {
-          console.log("changing period");
-         //Dropdown1.Selected.Value;
-         var studentContainer = document.getElementById('demo');
-         for(var j = 0; j < studentContainer.children.length; j++) {
-          //console.log("studencontainer.children[0] class: " + studentContainer.children[j].className.split(" ")[1]);
-          //console.log("options[i]: "+ options);
-          //console.log("i:" + sel.options[sel.selectedIndex].value);
-          var studentPeriod = studentContainer.children[j].className.split(" ")[1];
-          var currentPeriod = sel.options[sel.selectedIndex].text;
-          var currentPeriodSimplified = sel.options[sel.selectedIndex].value[0];
-          console.log("studentPeriod: " + studentPeriod);
-          console.log("currentPeriod: " + currentPeriod);
-          console.log("currentPeriodSimplified: " + currentPeriodSimplified);
-          if(currentPeriod != "All students") {
-            if(studentPeriod == currentPeriod || studentPeriod == currentPeriodSimplified){
-              studentContainer.children[j].style.visibility = "visible";
-            } else {
-              studentContainer.children[j].style.visibility = "hidden";
-            }
-          } else {
-            studentContainer.children[j].style.visibility = "visible";
-          }
-         }
+    sel.appendChild(opt);
+  };
 
-        };
-          sel.appendChild(opt);
+  sel.onchange = function() {
+    console.log("changing period");
+    var input, filter, students, studentChildren, a, i, txtValue, period;
+    input = document.getElementById("selectNumber");
+    filter = input.selectedIndex;
+    //filter = input.options[input.selectedIndex].text.toUpperCase();
+    //console.log("filter: " + filter);
+    students = document.getElementsByClassName("studentCardName");
+    console.log(students)
+    numStudents = students.length;
+    console.log("numStudents: " + numStudents);
 
+    for (i = 0; i < numStudents; i++) {
 
-        };
+      period = students[i].attributes[2].nodeValue;
+      console.log("period: " + period);
+      if (period.toUpperCase().indexOf(filter) > -1 || filter == 0) {
+        students[i].parentNode.style.display = "";
+      } else {
+        students[i].parentNode.style.display = "none";
+      }
+    }
+
+  };
+
 </script>
 
-<script>
-  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
-  //document.getElementById("userID").value = localStorage.getItem("userID");
-  //console.log("user id: " + localStorage.getItem("userID"));
-</script>
+</html>
+
+

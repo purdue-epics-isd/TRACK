@@ -8,13 +8,11 @@
 <style>
 /* Style the form */
 #regForm {
-	background-color: white;
-	color: black;
-	margin: 100px auto;
-	padding: 40px;
-	width: 70%;
-	min-width: 300px;
-}
+		background-color: white;
+		color: black;
+		width: 50%;
+		min-width: 300px;
+	}
 p {
 	margin: 10px;
 }
@@ -26,7 +24,7 @@ p {
   height: calc(2.15625rem + 2px);
   padding: 0.375rem 0.75rem;
   font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 0.9375rem;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
   color: #7b8a8b;
@@ -73,7 +71,7 @@ input.invalid {
 	width: 15px;
 	margin: 0 2px;
 	background-color: #bbbbbb;
-	border: none; 
+	border: none;
 	border-radius: 50%;
 	display: inline-block;
 	opacity: 0.5;
@@ -92,87 +90,172 @@ input.invalid {
 .test {
 
 }
+
+#topBtn {
+display: none;
+position: fixed;
+bottom: 20px;
+left: 30px;
+z-index: 99;
+font-size: 15px;
+border: none;
+outline: none;
+background-color: #2C3E50;
+color: white;
+cursor: pointer;
+padding: 15px;
+border-radius: 4px;
+}
+
+#topBtn:hover {
+  background-color: #555;
+}
+
 </style>
 
-<div class="grid-container">
+<script>
+//Get the button
+var mybutton = document.getElementById("topBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+<div>
 
 <%- include("../partials/header.ejs")%>
-
+<div>
 	<main class="main">
+		<script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+    	</script> 
+    	
 			<div class =  class-header>
 		            <h3>Create Goal</h3>
 		    </div>
-
-
-
-		<form id="regForm" action="/student/<%= student.id%>/goal/create" method="post">
+		<div class="container d-flex justify-content-center">
+		<form id="regForm" action="/student/<%= student.id%>/goal/create" method="post" style="margin-top:0">
 
 			<!-- One "tab" for each step in the form: -->
 
 			<!---Goal Title and Descriptoin-->
-			<div class="tab">
-				<h1>Goal Creation</h1>
+			<div>
+				<h3>Create New Goal:</h3>
 				<p><input placeholder="Goal Title..."  class="form-modified-control"  type="text" name="name" id="name"></p>
 				<p><textarea style="height: 100px" type="textarea" placeholder="Goal Description..." class="form-modified-control" name="description" id="description"></textarea></p>
 			</div>
 	<!-- One "tab" for each step in the form: -->
-	
+
 			<!---Start and End Date-->
-			<div class="tab">
-				<h1>Dates</h1>
-				<p>Start Date: <input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
-				<p>End Date: <input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
+			<div><br>
+				<h3>Dates</h3>
+				<p>Start Date:<input placeholder="Start Date..." class="form-modified-control" type="date" name="startDate" id="startDate"></p>
+				<p>End Date:<input placeholder="End Date..." class="form-modified-control" type="date" name="endDate" id="endDate"></p>
 			</div>
 
 			<!--Goal Type -->
 
-				<div class="tab">
-					<h1>Goal Types</h1>
-					<!--<input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>-->
+				<div><br>
+					<h3>Goal Types</h3>
+					<!-- <input type="radio" style="width: auto" name="goalType" class="custom-control-input" value="academic" checked> Academic <br>
 
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Academic Goal" checked="true">
-      					<label class="custom-control-label" for="customRadio2">Academic</label>
+						<input type="radio" id="customRadio1" name="goalType" class="custom-control-input" value="STEM Goal">
+      					<label class="custom-control-label" for="customRadio1">STEM</label>
 					</div>
-					<!--<input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br>-->
-					
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Behavioral Goal">
-      					<label class="custom-control-label" for="customRadio3">Behavior</label>
-      				</div>
+						<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Language Goal">
+      					<label class="custom-control-label" for="customRadio2">Language Arts</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Health Goal" >
+      					<label class="custom-control-label" for="customRadio3">Health and Wellness</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio4" name="goalType" class="custom-control-input" value="History Goal">
+      					<label class="custom-control-label" for="customRadio4">History</label>
+					</div> -->
+					
+
+					<!-- <input type="radio" style="width: auto" name="goalType" id="customRadio2" value="behavioral"> Behavioral <br> -->
+
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio5" name="goalType" class="custom-control-input" value="Behavioral Goal">
+      					<label class="custom-control-label" for="customRadio5">Behavior</label>
+					  </div>
+					  <div class="custom-control custom-radio">
+						<input type="radio" id="customRadio6" name="goalType" class="custom-control-input" value="Academic" >
+      					<label class="custom-control-label" for="customRadio6">Academic</label>
+					</div>
 				</div>
 
 			<!--Goal Collection Type -->
-			<div class="tab">
-				<h1>Method of Collection:</h1>
-				
-				<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score"> Score <br>
+			<div><br>
+				<h3>Method of Collection:</h3>
 
-				<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count"> Count of Occurrences<br>
+				<input type="radio" style="width: auto" name="methodOfCollection" value="score" id="score" onclick="rubricVisibility()"> Score <br>
 
-				<select class="form-control" name = "occurrences" style="width:100%">
+				<input type="radio" style="width: auto" name="methodOfCollection" value="count" id="count" onclick="rubricVisibility()">Occurrences<br>
+				<input type="radio" style="width: auto" name="methodOfCollection" value="description" id="description" onclick="rubricVisibility()"> Description<br>
+				<input type="hidden" name="methodOfCollection" value="comments" id="comments"></input>
+
+
+				<!-- <select class="form-control" name = "occurrences" style="width:100%">
             		<option value="Per hour">Per hour</option>
             		<option value="Per class">Per class</option>
             		<option value="Per day">Per day</option>
             		<option value="Per week">Per week</option>
-          		</select>
-				
-				<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
-				<!--<div style="display: none" id="rubricDiv">
+          		</select> -->
+
+				<input type="radio" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" onclick="rubricVisibility()"> Rubric <br>
+					
+
+				<div style="display: none" id="rubricDiv">
 						<div id = "rubricFieldsHolder">
 							<p><input placeholder="Rubric Field" type="text" name="rubricField"></p>
 						</div>
 
+						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
+						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"></textarea></p>
+						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"></textarea></p>
+						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"></textarea></p>
+						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"></textarea></p>
+						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"></textarea></p>
+						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"></textarea></p>
+
 						<p><input type="button" value="Add more" onclick="addRubricField()"></input></p>
 						<p><input type="button" value="Delete One" onclick="deleteRubricField()"></input></p>
-				</div>-->
+				</div>
 
 
 
 
 					<!--<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Comments <br>-->
 
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Descriptive Comments <br>
+					<!-- <input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments"> Descriptive Comments <br> -->
+
+					<!-- d -->
+
+					
+					
 
 
 					<script>
@@ -200,178 +283,50 @@ input.invalid {
 						}
 
 						function rubricVisibility() {
+							console.log("rubricVisibility")
 							// Get the checkbox
-							var checkBox = document.getElementById("rubric");
+							var radio = document.getElementById("rubric");
 							// Get the output text
 							var rubricDiv = document.getElementById("rubricDiv");
 
 							// If the checkbox is checked, display the output text
-							if (checkBox.checked == true){
+							if (radio.checked == true){
+								console.log("radio is checked");
 								rubricDiv.style.display = "block";
 							} else {
+								console.log("radio isnt checked");
 								rubricDiv.style.display = "none";
 							}
 						}
 					</script>
 			</div>
 
-			<!--<div class="tab" id="preview">
-				<p>Goal Preview</p>
-			</div>-->
+			<div>
+				<p><strong>WARNING: you can ONLY change the Method of Collection you have selected in the future.</p></strong>
+				<p>Please double check before you submit.</p>
+			</div>
 
 			<div style="overflow:auto;">
 				<div style="float:right;">
-					<button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-					<button type="button"  class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>
+					<button type="submit"  class="btn btn-primary" id="nextBtn" >Submit</button>
+					<a href="/student/<%=student.id%>" class="btn btn-info">Cancel</a>
 				</div>
 			</div>
-
-			<!-- Circles which indicates the steps of the form: -->
-			<div style="text-align:center;margin-top:40px;">
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-			</div>
-	
+			<input type="hidden" name="userID" id="userID">
 		</form>
+	</div>
 	</main>
 
-
- <footer class="footer">
-      <div class="footer__copyright">&copy; 2019 TRACK</div>
-  </footer>
-
 </div>
-
+<%- include("../partials/footer.ejs")%>
 </html>
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  document.getElementById("userID").value = localStorage.getItem("username");
+  console.log(localStorage.getItem("userID"));
+</script>
 
 <script>
-var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the current tab
-
-function showTab(n) {
-  // This function will display the specified tab of the form ...
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
-
-  console.log("x.length: " + x.length);
-  console.log("N: " + n);
-  // ... and fix the Previous/Next buttons:
-  if (n == 0) {
-  	document.getElementById("prevBtn").style.display = "none";
-  } else {
-  	document.getElementById("prevBtn").style.display = "inline";
-  }
-  if (n == (x.length - 1)) {
-  	document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-  	document.getElementById("nextBtn").innerHTML = "Next";
-  }
-  // ... and run a function that displays the correct step indicator:
-  fixStepIndicator(n);
-}
-
-function nextPrev(n) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("tab");
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-
-  // if you have reached the end of the form... s
-  if (currentTab >= x.length) {
-    //...the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-}
-
-//show preview of the goal
-  if (x[currentTab].id == "preview") {
-
-  	//clear previous preview
-  	var preview = document.getElementById("preview");
-	while (preview.firstChild) {
-	    preview.removeChild(preview.firstChild);
-	}
-
-	var heading = document.createElement("h1");
-	heading.innerHTML = "Preview";
-	var goalTitle = document.createElement("h2");
-	goalTitle.innerHTML = document.getElementById("name").value;
-	goalTitle.style["margin-left"] = "0%";
-	var goalDescription = document.createElement("p");
-	goalDescription.innerHTML = document.getElementById("description").value;
-	var startDate = document.getElementById("startDate").value;
-	var endDate = document.getElementById("endDate").value;
-	var dates = document.createElement("p");
-	dates.innerHTML = startDate + " - " + endDate;
-
-	document.getElementById("preview").appendChild(heading);
-	document.getElementById("preview").appendChild(goalTitle);
-	document.getElementById("preview").appendChild(goalDescription);
-	document.getElementById("preview").appendChild(dates);
-
-	if (document.getElementById("singlePoint").checked == true) {
-		console.log("single point testing");
-		var txt = document.createElement("p");
-		txt.innerHTML = "Percentage Complete:";
-		var input = document.createElement("input");
-		input.type = "value";
-		input.name = "percentage";
-
-		var percentageElement = document.createElement("div");
-		percentageElement.appendChild(txt);
-		percentageElement.appendChild(input);
-		document.getElementById("preview").appendChild(percentageElement);
-	}
-
-	if (document.getElementById("rubric").checked == true) {
-		console.log("rubric preview testing");
-		var rubricDiv = document.getElementById("rubricFieldsHolder");
-		var rubricElement = document.createElement("div");
-
-		for (var i = 0; i < rubricDiv.children.length; i++) {
-			var radiobtn = document.createElement("input");
-			radiobtn.type = "radio";
-			radiobtn.name = "rubric";
-			radiobtn.style["width"] = "10%";
-			var label = document.createElement("label");
-			label.innerHTML = rubricDiv.children[i].children[0].value + "<br />";
-			radiobtn.value = rubricDiv.children[i].children[0].value;
-
-			rubricElement.appendChild(radiobtn);
-			rubricElement.appendChild(label);
-			//rubricElement.appendChild(txt);
-		}
-
-		document.getElementById("preview").appendChild(rubricElement);
-  
-	}
-
-	if (document.getElementById("comments").checked == true) {
-		console.log("comment testing");
-		var txt = document.createElement("p");
-		txt.innerHTML = "Additional Comments:";
-		var input = document.createElement("input");
-		input.type = "value";
-		input.name = "comments";
-
-		var commentElement = document.createElement("div");
-		commentElement.appendChild(txt);
-		commentElement.appendChild(input);
-		document.getElementById("preview").appendChild(commentElement);
-	}
-
-  }
-
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
-}
 
 function validateForm() {
 	// This function deals with validation of the form fields
@@ -394,7 +349,7 @@ function validateForm() {
 					// and set the current valid status to false:
 					valid = false;
 	      		}
-	  		} else if (x[currentTab].id == "preview") { 
+	  		} else if (x[currentTab].id == "preview") {
 	  			console.log("and a preview page");
 	  			//we good
 	  		} else {
@@ -424,4 +379,7 @@ function fixStepIndicator(n) {
   //... and adds the "active" class to the current step:
   x[n].className += " active";
 }
+
+
 </script>
+

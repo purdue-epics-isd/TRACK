@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s">
+  <title>Class Page</title>
+  <%- include("../partials/head.ejs")%>
+</head> 
+
+<div class="grid-container">
+
+  <header class="header">
+    <div class="header__menu">
+     <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+  <meta name="google-site-verification" content="R5zD9Z0WWGqjCpnUaGN85YzU-Ndv24ftBflSn3kEk9s">
+</header>
+
+<%- include("../partials/header.ejs")%>
+
+<main class="main">
+  <script>
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('theme', currentTheme);
+    }
+  </script>   
+
+
+  <div class =  class-header>
+    <h3>Shared with me...</h3>
+  </div>
+  <form  style="display: none" id="submitForm" method="post">
+    <input type="hidden" name="useremail" id="useremail"> </input>
+    <script>
+      var email = document.getElementById('useremail');
+      email.value = localStorage.getItem("username");
+    </script>
+  </form>
+
+
+  <div class = "overviewcard" id="studentBox">
+
+    <!--Loads the Students and Creates Buttons for them-->
+    <% students.forEach(function(student) { %>
+    <% student.sharedWith.forEach(function(teacher) { %>
+    <script>
+
+      if(localStorage.getItem("username") == "<%=teacher%>") {
+        var card = document.createElement("div");
+        card.className = "studentCardName <%=student.period%>";
+        card.id = "<%=student.id%>";
+
+        var studentLink = document.createElement("a");
+        studentLink.href = "/sharedWithMe/<%=student.id%>";
+
+        var studentImg = document.createElement("img");
+        studentImg.className = "img-circle";
+        studentImg.src = "/img/studentIcon.png";
+        studentImg.width = "200";
+        studentImg.height = "200";
+
+        var studentLabel = document.createElement("class");
+        studentLabel.className = "name";
+        studentLabel.innerHTML = "<%=student.firstname%>";//+ " " + "<%=student.lastname%>";
+
+        studentLink.appendChild(card);
+        card.appendChild(studentImg);
+        card.appendChild(studentLabel);
+
+        document.getElementById("studentBox").appendChild(studentLink);
+      }
+    </script>               
+
+    <% }) %>
+
+    <% }); %>
+  </div>
+
+
+
+</main>
+
+</div>
+<%- include("../partials/footer.ejs")%>
+</html>

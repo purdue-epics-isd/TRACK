@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Create New Student</title>
+  <%- include("../partials/head.ejs")%>
+  <!--<link rel="icon" type="image/gif/png" href="img/logo.png">
+  <link rel="stylesheet" href="/main.css">
+  <script type="text/javascript" src="myScripts.js"></script>-->
+</head>
+
+<div class="grid-container">
+
+  <%- include("../partials/header.ejs")%>
+
+  <main class="main">
+
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+    </script>   
+
+    <div class =  class-header>
+      <h3>Edit <%= student.firstname %> <%= student.lastname %></h3>
+    </div>
+    <div class = "studentOverview">
+      <div class = "part">
+        <form action="/student/<%= student.id %>/student_edit/submit" method="post">
+
+          <label for="First Name">First Name:</label>
+          <input type="text" class="form-control" name="firstname" value="<%= student.firstname %>"style="width:150%">
+
+          <label for="Last Name">Last Name:</label>
+          <input type="text" class="form-control" name="lastname" value="<%= student.lastname %>"style="width:150%">
+
+          <label for="Class Period">Class Period:</label>
+          <select class="form-control" name="period" style="width:100%" id="period">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+          <br>
+            <input type="submit" class="btn btn-primary">
+            <a href="/student/<%=student.id%>" class="btn btn-info">Cancel</a>
+
+        </div>
+        
+        <div class = "part">
+          <label for="Date of Birth">Date of Birth:</label>
+          <input type="date" class="form-control" name="dob" style="width:100%" id="dob">
+
+          <label for="Email">Email:</label>
+          <input type="email" class="form-control" name="studentemail" value="<%= student.email %>"style="width:100%">
+
+          <label for="Grade Level">Grade Level:</label>
+          <select class="form-control" name="grade" id="grade" style="width:100%">
+            <option value=""></option>
+            <option value="Pre-K">Pre-K</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <input type="hidden" name="userID" id="userID">
+        </div>
+      </form>
+    </div>
+  </main>
+
+</div>
+<%- include("../partials/footer.ejs")%>
+</html>
+
+<script>
+  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  document.getElementById("userID").value = localStorage.getItem("userID");
+  console.log(localStorage.getItem("userID"));
+  convertToYYYYMMDD("<%=student.dob%>");
+  var grade = parseInt("<%= student.grade %>",10);
+  console.log("grade: " + grade);
+  if(grade == NaN) {
+    document.getElementById("grade").selectedIndex = 2;
+    console.log("is not number");
+  } else {
+    document.getElementById("grade").selectedIndex = parseInt("<%= student.grade %>",10)+1;
+    console.log("is number?? confused");
+  }
+  document.getElementById("period").selectedIndex = "<%= student.period %>"-1;
+
+  function convertToYYYYMMDD(d) {
+    date = new Date(d);
+    year = date.getFullYear();
+    //console.log("Year: " + year);
+    month = date.getMonth()+1;
+    dt = date.getDate()+1;
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    if(year != NaN) {
+      var format = String(year)+'-' + String(month) + '-'+String(dt);
+    } else {
+      var format = "";
+    }
+    console.log("formatted year: " + format);
+    document.getElementById('dob').value = format;
+  }
+</script>

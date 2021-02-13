@@ -10,15 +10,17 @@ input {
 	margin: .4rem;
 }
 </style>
+
+
+
 <body>
-	
-	<div>
-	    <% users.forEach(function(user) { %>
-	    	<p> <%=user%> </p>
-		<% }); %>
-	</div>
-
-
+	<%- include("../partials/head.ejs")%>
+	<a href="/classPage">
+		<button>
+			Navigate to class page
+		</button>
+	</a>
+<!--
 	<p>Select a maintenance drone:</p>
 
 	<div>
@@ -67,5 +69,5 @@ function createRadioElement(name) {
 function submit() {
 	console.log("radio")
 }
-</script>
+</script>-->
 </html>
