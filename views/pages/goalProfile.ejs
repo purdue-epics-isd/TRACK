@@ -366,6 +366,10 @@
 																            // console.log("fileSize is proper size");
 																            document.getElementById("filecontents").value = reader.result;
 																        }
+																        else {
+																        	console.log("file is too big")
+																        }
+																        
 																		
 																	})
 																	if (file) {
@@ -508,12 +512,33 @@
 							if ("<%=goalData.file%>" != "null") {
 								// console.log("<%=goalData.file%>");
 								let fileDataUrl = "<%=goalData.file%>"
+								console.log(fileDataUrl)
 
-								var regex = /^data:.+\/(.+);base64,(.*)$/;
-								var matches = fileDataUrl.match(regex);
-								var ext = matches[1];
-								// console.log("ext", ext)
-								var data = matches[2];
+								// var regex = /^data:.+\/(.+);base64,(.*)$/;
+								// var matches = fileDataUrl.match(regex);
+								// var ext = matches[1];
+								// // console.log("ext", ext)
+								// var data = matches[2];
+								var extIndex = 0;
+								for (let i = 0; i < fileDataUrl.length; i++) {
+									extIndex = i;
+									if (fileDataUrl[i] == '/') {
+										break;
+									}
+								}
+								var ext = fileDataUrl.substring(extIndex + 1, extIndex + 4);
+								console.log("/ is at index ", extIndex)
+								console.log("ext", ext)
+								let dataIndex = 0
+								for (let i = 0; i < fileDataUrl.length; i++) {
+									dataIndex = i;
+									if (fileDataUrl[i] == ',') {
+										break;
+									}
+								}
+								var data = fileDataUrl.substring(dataIndex + 1, fileDataUrl.length);
+								console.log(", is at index ", dataIndex)
+								console.log("data", data)
 								const blob = this.dataURItoBlob(data, ext);
 								const url = URL.createObjectURL(blob);
 

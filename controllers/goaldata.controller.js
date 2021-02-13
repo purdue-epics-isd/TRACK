@@ -2,6 +2,7 @@ const GoalData = require('../models/goaldata.model');
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 var CryptoJS = require("crypto-js");
+var LZUTF8 = require('lzutf8');
 
 // functions for encryption of db
 async function encryption(string) {
@@ -22,6 +23,8 @@ async function decryption(ciphertext) {
 exports.goaldata_create = async function (req, res) {
     try {
         // console.log("req.body", req.body)
+        console.log("uncompressed", req.body.filecontents);
+        console.log("compressed", LZUTF8.compress(req.body.filecontents));
         let goaldata = new GoalData(
             {
                 goalID: req.params.goalid,
