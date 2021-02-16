@@ -362,17 +362,19 @@
 																            // console.log("ends with =");
 																            fileSize = (reader.result.length * (3/4)) - 1;
 																        }
-																        if (fileSize < 1048576) {
-																            // console.log("fileSize is proper size");
-																            document.getElementById("filecontents").value = reader.result;
-																        }
-																        else {
-																        	console.log("file is too big")
-																        }
+																        // if (fileSize < 1048576) {
+																        //     // console.log("fileSize is proper size");
+																        //     document.getElementById("filecontents").value = reader.result;
+																        // }
+																        // else {
+																        // 	console.log("file is too big")
+																        // }
+																        document.getElementById("filecontents").value = reader.result;
 																        
 																		
 																	})
 																	if (file) {
+																		console.log("if (file)")
 																		reader.readAsDataURL(file);
 																		document.getElementById("filebool").value = true;
 																	}

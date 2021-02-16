@@ -339,6 +339,7 @@ exports.navigate_to_studentProfile = async function (req, res) {
         var goals = [];
         // console.log("pre Goal.find");
         // console.log(req.params)
+
         await Goal.find({studentID: req.params.studentid}, {}, async function(err, goal) {
             // console.log("in Goal.find");
             await goal.forEach(async function(s) {
@@ -361,32 +362,36 @@ exports.navigate_to_studentProfile = async function (req, res) {
                 // await console.log("ID", s.studentID);
                 // await console.log("post log statements");
                 // if (s.userid == req.params.studnetid)
+                
                 await goals.push(s);
             });
 
-        });
-        // console.log("post Goal.find");
-        await User.findById(req.params.userid,  async function(err, user) {
-            await  Student.findById(req.params.studentid,async function(err, student) {
-                await  Goal.findById(req.params.goalid,async function(err, goal) {
-                    // await console.log("\nCurrent student: " + student);
-                    // console.log("student pre decrypt", student)
-                    student.firstname = await decryption(student.firstname);
-                    student.lastname = await decryption(student.lastname);
-                    student.email = await decryption(student.email);
-                    for (let i = 0; i < student.userid.length; i++) {
-                        student.userid[i] = await decryption(student.userid[i])
-                    }
-                    // student.userid = await decryption(student.userid);
-                    // console.log("student post decrypt", student)
-                    await  res.render('pages/studentProfile', {
-                        goals: goals,
-                        student: student, 
-                        user: user
+        }).then(() => {
+            // console.log("post Goal.find");
+            User.findById(req.params.userid,  async function(err, user) {
+                await  Student.findById(req.params.studentid,async function(err, student) {
+                    await  Goal.findById(req.params.goalid,async function(err, goal) {
+                        // await console.log("\nCurrent student: " + student);
+                        // console.log("student pre decrypt", student)
+                        student.firstname = await decryption(student.firstname);
+                        student.lastname = await decryption(student.lastname);
+                        student.email = await decryption(student.email);
+                        for (let i = 0; i < student.userid.length; i++) {
+                            student.userid[i] = await decryption(student.userid[i])
+                        }
+                        // student.userid = await decryption(student.userid);
+                        // console.log("student post decrypt", student)
+                        await console.log("render from navigate_to_studentProfile");
+                        await res.render('pages/studentProfile', {
+                            goals: goals,
+                            student: student, 
+                            user: user
+                        });
                     });
                 });
             });
         });
+        
     } catch(err) {
         // await  console.log("exports.navigate_to_studentProfile");
         // await  console.log(err);
@@ -397,48 +402,49 @@ exports.navigate_to_studentProfile = async function (req, res) {
 /*redirects to class page*/
 exports.navigate_to_classPage = async function (req, res) {
     try {
-        // await console.log("student.controller email in body:" + req.body.email);
+        await console.log("navigate_to_class_page")
+
         var students = [];
-        // var classes = [];
-        // var teachers = [];
-
-        // await console.log("localStorage", localStorage)
-
-
         
-        await Student.find({}, {}, async function(err, student) {
-            await student.forEach(async function(s) { 
-                    // console.log("student pre decrypt", s)
-                
-                    // s.firstname =  await decryption(s.name);
-
-                    // s.lastname = await decryption(s.description);
-                    // await console.log("pushing student", s);
-                    // await console.log("s.name", await decryption(s.firstname));
-                    s.firstname = await decryption(s.firstname);
-                    s.lastname = await decryption(s.lastname);
-                    s.email = await decryption(s.email);
-                    for (let i = 0; i < s.userid.length; i++) {
-                        s.userid[i] = await decryption(s.userid[i])
-                    }
-                    // s.userid = await decryption(s.userid);
-                    // console.log("student post decrypt", s)
-                    
-                    await students.push(s);
-            });
-        });
-
-        
-        // await console.log(students)
+        await console.log("decryptStudentList", await decryptStudentList())
         await res.render('pages/classPage', {
-            students: students
+            students: await decryptStudentList()
         });
+        
+        
         
     } catch(err) {
         await console.log("exports.navigate_to_classPage");
         await console.log(err);
         await res.render('./error');
     }
+}
+
+async function decryptStudentList() {
+    
+    let students = []
+    let promises = await Student.find({}).map(async function(stud) {
+        return stud.map(async function(s) {
+
+            s.firstname = await decryption(s.firstname);
+            s.lastname = await decryption(s.lastname);
+            s.email = await decryption(s.email);
+            for (let i = 0; i < s.userid.length; i++) {
+                s.userid[i] = await decryption(s.userid[i])
+            }
+
+            return s
+        })
+        
+    })
+
+    const result = await Promise.all(promises)
+
+    
+    return result
+    
+    
+
 }
 
 /*redirects to new student page*/

@@ -86,51 +86,55 @@ exports.navigate_to_goalProfile = async function (req, res) {
                 
                 
             });
-        });
+        }).then(() => {
+            Student.findById(req.params.studentid, async function(err, student) {
+                if (err) {
+                    await res.send(err);
+                    return;
+                }
 
+                await User.findById(req.params.userid, async function(err, user) {
+                    await Goal.findById(req.params.goalid, async function(err, goal) {
+                        var methodsOfCollection = goal.methodOfCollection;
+                        // console.log("goal pre decrypt", goal)
+                        goal.name = await decryption(goal.name);
+                        goal.description = await decryption(goal.description);
+                        goal.userid = await decryption(goal.userid);
+                        // console.log("goal post decrypt", goal)
+                        // goal.studentID = decryption(goal.studentID);
+                        // await console.log("method:" + goal.methodOfCollection);
+                        // await console.log("method as var:" + methodsOfCollection);
 
+                        // await console.log("goal:" + goal);
+                        // await console.log(req.params.goalid);
+                        
+                        await res.render('pages/goalProfile', {
+                            user: user,
+                            goalDatas: goalDatas,
+                            student: student,
+                            goal: goal,
+                            methodOfCollection: methodsOfCollection,
+                            shared: false,
+                            files: false
+                        });
 
-
-        await Student.findById(req.params.studentid, async function(err, student) {
-            if (err) {
-                await res.send(err);
-                return;
-            }
-
-            await User.findById(req.params.userid, async function(err, user) {
-                await Goal.findById(req.params.goalid, async function(err, goal) {
-                    var methodsOfCollection = goal.methodOfCollection;
-                    // console.log("goal pre decrypt", goal)
-                    goal.name = await decryption(goal.name);
-                    goal.description = await decryption(goal.description);
-                    goal.userid = await decryption(goal.userid);
-                    // console.log("goal post decrypt", goal)
-                    // goal.studentID = decryption(goal.studentID);
-                    // await console.log("method:" + goal.methodOfCollection);
-                    // await console.log("method as var:" + methodsOfCollection);
-
-                    // await console.log("goal:" + goal);
-                    // await console.log(req.params.goalid);
-                    
-                    await res.render('pages/goalProfile', {
-                        user: user,
-                        goalDatas: goalDatas,
-                        student: student,
-                        goal: goal,
-                        methodOfCollection: methodsOfCollection,
-                        shared: false,
-                        files: false
                     });
-
                 });
             });
         });
+
+
+
+
+        
         return;
     } catch(error) {
         await console.log("err:" + err);
         await res.render('./error');
     }
 }
+
+async function 
 
 /*deletes goal from database*/
 //TODO: make sure to delete any corresponding goaldata as well
