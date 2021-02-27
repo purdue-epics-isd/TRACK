@@ -134,7 +134,6 @@ exports.navigate_to_goalProfile = async function (req, res) {
     }
 }
 
-async function 
 
 /*deletes goal from database*/
 //TODO: make sure to delete any corresponding goaldata as well
@@ -268,7 +267,7 @@ exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
             goal.studentID = decryption(goal.studentID);
             goal.forEach(function(s) { 
                     goals.push(s);
-                    console.log(s);
+                    // console.log(s);
             });
         });
 
