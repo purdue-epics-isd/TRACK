@@ -194,7 +194,7 @@ function topFunction() {
               <!--Loads the Students and Creates Buttons for them-->
               <% students.forEach(function(student) { %>
                 <script>
-                  // console.log("<%=student%>")
+                  console.log("<%=student%>")
                 </script>
                 <% let shouldBreak = false %>
                 <% student.userid.forEach(function(id) { %>
@@ -203,11 +203,11 @@ function topFunction() {
                   <!--<h2 style="display:none;" id="uid" value="<%=student.userid %>"></h2>-->
                   <!--<div class = "cardName" id="<%=student.userid%>">-->
                   <script>
-                    console.log("hey");
-                    console.log(localStorage.getItem("username"));
-                    console.log("student email", "<%=student.email%>")
-                    console.log("teacher email", "<%=id%>")
-                    console.log("student grade", "<%=student.grade%>")
+                    // console.log("hey");
+                    // console.log(localStorage.getItem("username"));
+                    // console.log("student email", "<%=student.email%>")
+                    // console.log("teacher email", "<%=id%>")
+                    // console.log("student grade", "<%=student.grade%>")
 
                     
                     if(localStorage.getItem("username") === "<%=id%>") {
@@ -215,7 +215,7 @@ function topFunction() {
                       card.className = "studentCardName";
                       card.id = "<%=student.id%>";
                       card.setAttribute("period", "<%=student.grade%>")
-                      console.log("<%=student.id%>");
+                      // console.log("<%=student.id%>");
                       var studentLink = document.createElement("a");
                       studentLink.href = "/student/<%=student.id%>";
                       var studentImg = document.createElement("img");

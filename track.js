@@ -3,11 +3,13 @@ const PORT = process.env.PORT || 1234
 const express = require('express');
 const bodyParser = require('body-parser');
 
+
 // initialize our express app
 const product = require('./routes/routes'); // Imports routes for the products
 const student = require('./controllers/student.controller');
 var forceSsl = require('force-ssl-heroku');
 const app = express();
+
 
 app.use(forceSsl);
 app.set('views', './views');
@@ -15,6 +17,10 @@ app.set('view engine', 'ejs');
 
 // navigate to .ejs
 app.get('/', student.run);
+
+app.use(bodyParser.json());
+app.use(bodyParser({limit: '15mb'}));
+
 
 //Set up mongoose connection
 const mongoose = require('mongoose');
