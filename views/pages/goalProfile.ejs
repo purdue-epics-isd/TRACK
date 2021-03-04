@@ -152,7 +152,7 @@
 				}
 			</script>
 			<div style="margin: 20px;">
-				<a href="javascript:history.back()" class="btn btn-primary">Go Back to Student Profile</a>
+				<a href="/student/<%= student.id %>" class="btn btn-primary">Go Back to Student Profile</a>
 				<!-- Trigger/Open The Modal -->
 				<button id="myBtn" class="btn btn-primary">Need Help?</button>
 			</div>
@@ -214,9 +214,8 @@
 				<div class="class-input">
 
 
-					<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>"
-						id="submitForm" method="post">
-
+					<form action="/student/<%=student.id%>/goal/<%=goal.id%>/goaldata/create/<%=shared%>"
+						id="submitForm" method="post"> 
 						<table style="position: center" id="goalInput">
 
 							<%if(goal.methodOfCollection.includes("score")) { %>
