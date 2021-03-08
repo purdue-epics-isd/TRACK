@@ -332,6 +332,7 @@
 																placeholder="Type Comment" name="comments"></textarea>
 														</div>
 														<%} %>
+														<br>
 												<div class="file is-centered">
 													<label class="file-label">
 														<input class="file-input" type="file" name="file" id="file" onChange="updateFile()">
@@ -340,6 +341,9 @@
 														</span>
 													</label>
 												</div><br>
+
+												<label for="Date:">Date:</label>
+         										 <input type="date" class="form-control" name="goal_data_date" style="width:100%">
 
 															<br>
 															<input type="hidden" name="useremail" id="useremail">
@@ -476,9 +480,37 @@
 														<%} %>
 
 															<td>
-																<%= goalData.time.getMonth()+1 %>/<%=
-																		goalData.time.getDate() %>/<%=
-																			goalData.time.getFullYear() %>
+																	<script>
+																		
+																		if (convertToYYYYMMDD("<%=goalData.date%>")!="") {
+																			console.log("diff");
+																		  document.write(convertToYYYYMMDD("<%=goalData.date%>"));
+																		}
+																		else
+																		{
+																			console.log("same");
+																			document.write("<%= goalData.time.getMonth()+1 %>/<%=goalData.time.getDate() %>/<%=goalData.time.getFullYear()%>");
+																
+																		}
+																			function convertToYYYYMMDD(d) {
+																			  date = new Date(d);
+																			  year = date.getFullYear();
+																			//console.log("Year: " + year);
+																			month = date.getUTCMonth()+1;
+																			dt = date.getUTCDate();
+																		
+																			if(String(year) != "NaN") {
+																			  console.log("good");
+																			  var format = String(month) + '/'+ String(dt) +'/' + String(year);
+																			} else {
+																			  console.log("bad");
+																			  var format = "";
+																			}
+																			return format;
+																		  }
+
+																		
+																		  </script>
 															</td>
 
 															
@@ -748,3 +780,4 @@
 		}
 	}		
 </script>
+

@@ -10,6 +10,7 @@ let goalDataSchema = new Schema({
     comments: {type: String, required:false},
     teacherEmail: {type: String, required:true},
     time: {type: Date},
+    date : {type: Date},
     filename: {type: String, required: false},
     file: {type: String, required: false}
 });

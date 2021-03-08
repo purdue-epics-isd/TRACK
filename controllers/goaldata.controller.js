@@ -34,12 +34,16 @@ exports.goaldata_create = async function (req, res) {
                 support: req.body.support,
                 comments: await encryption(req.body.comments),
                 time: Date.now(),
+                date :req.body.goal_data_date,
                 teacherEmail: await encryption(req.body.useremail),
                 filename: await encryption(req.body.file),
                 file: await encryption(req.body.filecontents)
             }
         );
-
+        /*if(goaldata.date==null){
+            goaldata.date=Date.now();
+        }
+        console.log(goaldata);*/
         // saves goal after pushing goaldata onto its array
         Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
             goaldata.save(function (err) { 
