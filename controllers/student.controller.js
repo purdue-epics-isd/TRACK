@@ -471,7 +471,7 @@ exports.navigate_to_classPage = async function (req, res) {
         // await console.log("\n\n\n\n\n\n\n\n\nstudents in students", students);
         // console.log("req", req)
         
-        await res.render('updated_design/pages/index', {
+        await res.render('pages/classPage', {
             students: students
         });
         
