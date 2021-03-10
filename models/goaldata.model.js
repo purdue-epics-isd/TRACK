@@ -9,7 +9,9 @@ let goalDataSchema = new Schema({
     support: {type: String, required: false},
     comments: {type: String, required:false},
     teacherEmail: {type: String, required:true},
-    time: {type: Date}
+    time: {type: Date},
+    filename: {type: String, required: false},
+    file: {type: String, required: false}
 });
 
 // Export the model

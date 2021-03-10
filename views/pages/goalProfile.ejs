@@ -178,9 +178,9 @@
 					</div>
 					<div>
 						<!--triggers the modal opening-->
-						<button id="sharingBtn" type="button" class="btn btn-primary">
+						<!-- <button id="sharingBtn" type="button" class="btn btn-primary">
 							Share Goal
-						</button>
+						</button> -->
 						<a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
 
 							<button type="button" class="btn btn-primary">
@@ -331,20 +331,60 @@
 																placeholder="Type Comment" name="comments"></textarea>
 														</div>
 														<%} %>
+												<div class="file is-centered">
+													<label class="file-label">
+														<input class="file-input" type="file" name="file" id="file" onChange="updateFile()">
+														<span class="file-cta">
+															<span class="file-icon"><i class="fas fa-upload"></i></span>
+														</span>
+													</label>
+												</div><br>
 
 															<br>
 															<input type="hidden" name="useremail" id="useremail">
+															<input type="hidden" name="filecontents" id="filecontents">
+															<input type="hidden" name="filebool" id="filebool">
 															</input>
 															<script>
 																var email = document.getElementById('useremail');
 																email.value = localStorage.getItem("username");
+																function updateFile() {
+																	var file = document.getElementById('file').files[0];
+																	var reader = new FileReader();
+																	reader.addEventListener("load", function() {
+																		let fileSize = 0
+																        if (reader.result[reader.result.length - 2] == '=') {
+																            // console.log("ends with ==");
+																            fileSize = (reader.result.length * (3/4)) - 2;
+																        }
+																        else {
+																            // console.log("ends with =");
+																            fileSize = (reader.result.length * (3/4)) - 1;
+																        }
+																        // if (fileSize < 1048576) {
+																        //     // console.log("fileSize is proper size");
+																        //     document.getElementById("filecontents").value = reader.result;
+																        // }
+																        // else {
+																        // 	console.log("file is too big")
+																        // }
+																        document.getElementById("filecontents").value = reader.result;
+																        
+																		
+																	})
+																	if (file) {
+																		console.log("if (file)")
+																		reader.readAsDataURL(file);
+																		document.getElementById("filebool").value = true;
+																	}
+																}
 															</script>
 						</table>
 						<input type="submit" class="btn btn-primary"></input>
 					</form>
 
-					<%if(goal.methodOfCollection.includes("documentation")) { %>
-						<div class="generic-box">
+					
+						<!-- <div class="generic-box">
 							<label for="documentation">Documentation :</label>
 							<form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/upload" method="POST"
 								enctype="multipart/form-data">
@@ -358,44 +398,7 @@
 								</div><br>
 								<input class="btn btn-primary" type="submit" value="Submit">
 							</form>
-						</div>
-						<% if(files) { %>
-							<% files.forEach(function(file) { %>
-								<% if(file.isImage) { %>
-									<div>
-										<%= file.filename %>
-											<form style="display: inline-block;" method="POST"
-												action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-												<button style="display: inline-block;"
-													class="btn btn-primary">Delete</button>
-											</form>
-											<form style="display: inline-block;" method="POST"
-												action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-												<button style="display: inline-block;"
-													class="btn btn-primary">Open</button>
-											</form>
-									</div>
-									<% } else { %>
-										<div>
-											<%= file.filename %>
-												<form style="display: inline-block;" method="POST"
-													action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>?_method=DELETE">
-													<button style="display: inline-block;"
-														class="btn btn-primary">Delete</button>
-												</form>
-												<form style="display: inline-block;" method="POST"
-													action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/files/<%= file._id %>/download">
-													<button style="display: inline-block;"
-														class="btn btn-primary">Open</button>
-												</form>
-										</div>
-										<% } %>
-											<% }); %>
-												<% } else { %>
-													<p class="content">No files to show</p>
-													<% } %>
-														<%} %>
-
+						</div> -->
 				</div>
 			</div>
 
@@ -429,13 +432,17 @@
 
 														<th>Date</th>
 
-														<%if(goal.shared==true) { %>
+														
 															<th>Created by</th>
-															<%} %>
+															<th>Files</th>
+															
 
 																<th id="deleteHeader">Delete Goal</th>
 					</tr>
 					<% goalDatas.forEach(function(goalData) { %>
+					
+					
+
 						<tr>
 							<%if(goal.methodOfCollection[0]=="score" ) { %>
 								<td>
@@ -473,11 +480,17 @@
 																			goalData.time.getFullYear() %>
 															</td>
 
-															<%if(goal.shared==true) { %>
+															
 																<td>
 																	<%=goalData.teacherEmail%>
 																</td>
-																<%} %>
+
+																<td>
+																	<a name="<%=goalData._id%>" id="<%=goalData._id%>" target="_blank">
+																		<%=goalData.filename%>
+																	</a>
+																</td>
+																
 
 																	<td id="deleteButton"><a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"
 																			onclick="return confirm('Please confirm to delete this data');">
@@ -485,9 +498,62 @@
 																				onclick="deleteGoalData()">delete</i></a>
 																	</td>
 						</tr>
+						<script>
+							dataURItoBlob = function(dataURI, ext) {
+						      	const byteString = window.atob(dataURI);
+						      	const arrayBuffer = new ArrayBuffer(byteString.length);
+						      	const int8Array = new Uint8Array(arrayBuffer);
+						      	for (let i = 0; i < byteString.length; i++) {
+						        	int8Array[i] = byteString.charCodeAt(i);
+						      	}
+						      	const blob = new Blob([int8Array], { type: 'application/'+ext});
+						      	return blob;
+						    }
+
+							if ("<%=goalData.file%>" != "null") {
+								// console.log("<%=goalData.file%>");
+								let fileDataUrl = "<%=goalData.file%>"
+								console.log(fileDataUrl)
+
+								// var regex = /^data:.+\/(.+);base64,(.*)$/;
+								// var matches = fileDataUrl.match(regex);
+								// var ext = matches[1];
+								// // console.log("ext", ext)
+								// var data = matches[2];
+								var extIndex = 0;
+								for (let i = 0; i < fileDataUrl.length; i++) {
+									extIndex = i;
+									if (fileDataUrl[i] == '/') {
+										break;
+									}
+								}
+								var ext = fileDataUrl.substring(extIndex + 1, extIndex + 4);
+								console.log("/ is at index ", extIndex)
+								console.log("ext", ext)
+								let dataIndex = 0
+								for (let i = 0; i < fileDataUrl.length; i++) {
+									dataIndex = i;
+									if (fileDataUrl[i] == ',') {
+										break;
+									}
+								}
+								var data = fileDataUrl.substring(dataIndex + 1, fileDataUrl.length);
+								console.log(", is at index ", dataIndex)
+								console.log("data", data)
+								const blob = this.dataURItoBlob(data, ext);
+								const url = URL.createObjectURL(blob);
+
+								let aTag = document.getElementById("<%=goalData._id%>")
+								// console.log("url", url);
+								aTag.href = url
+							}
+						</script>
 						<% }); %>
 							</tbody>
 				</table>
+				<div>
+					<img name="documentationImg">
+				</div>
 				<div id="data_chart"></div>
 				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 				<script>
@@ -518,7 +584,7 @@
 							dataset[<%=index %>].push(<%=goalData.count %>);
 										<%}) %>
 								}
-						console.log(dataset);
+						// console.log(dataset);
 
 						if (dataset.length == 0) {
 							return;
