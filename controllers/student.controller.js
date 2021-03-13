@@ -416,7 +416,7 @@ exports.navigate_to_classPage = async function (req, res) {
     } catch(err) {
         await console.log("exports.navigate_to_classPage");
         await console.log(err);
-        await res.render('./error');
+        await res.render('../pages/error');
     }
 }
 
