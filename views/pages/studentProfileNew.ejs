@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HOME</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/student.css" />
+  </head>
+  <body>
+    <!-- NAV BAR -->
+    <%- include("navbar")%>
+    <!-- END NAV BAR -->
+    <!-- NAME TAG -->
+    <section>
+      <div class="studentHeader">
+        
+        <div class="studentName">
+          <h1>STUDENT NAME</h1>
+        </div>
+        
+        <div class ="studentInfo">
+          <button class="studentInfoButton">
+            <a href="studentInfo.html"><h2>INFO</h2></a>
+          </button>
+          <button class="studentInfoButton">
+            <div class="dropdown">
+              <h2>VIEW</h2>
+              <div class="dropdown-content">
+                <input type="checkbox" id="person1" name="person1">
+                <label for="person1">Conley</label>
+                <input type="checkbox" id="person2" value="person2">
+                <label for="person2">Michael</label>
+              </div>
+            </div>
+          </button>
+        </div>
+
+      </div>
+      
+    </section>
+    <!-- END NAME TAG -->
+    <section>
+      <div class="cardContainer">
+        <!-- CREATE CARD -->
+        <a href="createGoal.html">
+          <div class="card">  
+            <div class="cardInitial">+</div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+        <!-- SAMPLE CARD -->
+        <a href="goalOccurrence.html"
+          ><div class="card acaedmic">
+            <div class="cardInfo">
+                <h2>COUNTING TO 10 FIVE TIMES</h2>
+            </div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+        <!-- SAMPLE CARD -->
+        <a href="goalDescription.html"
+          ><div class="card acaedmic">
+            <div class="cardInfo">
+                <h2>Reading books</h2>
+            </div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+        <!-- SAMPLE CARD -->
+        <a href="goalScore.html"
+          ><div class="card acaedmic">
+            <div class="cardInfo">
+                <h2>MATH HW AS MUCH AS I CAN</h2>
+            </div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+        <!-- SAMPLE CARD -->
+        <a href="goal.html"
+          ><div class="card behavior">
+            <div class="cardInfo">
+                <h2>BE A GOOD STUDENT</h2>
+            </div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+      </div>
+    </section>
+  </body>
+</html>

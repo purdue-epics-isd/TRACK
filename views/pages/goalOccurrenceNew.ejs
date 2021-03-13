@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HOME</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/goal.css" />
+    <script src="../js/kebabMenu.js"></script>
+  </head>
+  <body>
+    <%- include("navbar")%>
+    <!-- GOAL NAME TAG -->
+    <section>
+      <div class="goalHeader">    
+        <div class="goalName">
+          <h1>GOAL NAME</h1>
+        </div>
+        <div class ="goalInfo">
+          <button class="goalInfoButton">
+            <a href="student.html"><h2>BACK</h2></a>
+          </button>
+          <button class="goalInfoButton">
+            <a href="goalInfo.html"><h2>INFO</h2></a>
+          </button>
+            <!-- <button class="goalInfoButton">
+              <a href="goalShare.html"><h2>SHARE</h2></a>
+            </button> -->
+        </div>
+      </div>
+    </section>
+    <!-- END GOAL NAME TAG -->
+    <!-- GOAL INPUT -->
+    <section>
+      <div class="generalBox">
+        <form class="formBox">
+          <h2>Occurrence</h2>
+          <input type="file" id="myfile" name="myfile">
+          <input type="number" placeholder="Occurrence">
+          <textarea rows="4" cols="50" type="text" name="description" placeholder="Goal Description"></textarea>
+          <button class="submit"><a href="index.html">Submit</a></button>
+        </form>
+      </div>
+    </section>
+    <!-- END GOAL INPUT -->
+    <section class ="progress">
+      <div class="generalBox graph">
+        <h1>Graph</h1>
+      </div>
+      <div class="generalBox table">
+        <h1>Progress</h1>
+        <table>
+          <tr>
+            <th>Progress</th>
+            <th>Date</th>
+            <th>Created</th>
+            <th>File</th>
+            <th>Modify</th>
+          </tr>
+          <tr>
+            <td>Counted to 10</td>
+            <td>03/07/2021</td>
+            <td>Conley Tjahjono</td>
+            <td>workbook.png</td>
+            <td>
+                <div class="dropdown">
+                  <button class="dropbtn">
+                    <div class = "menu"></div>
+                    <div class = "menu"></div>
+                    <div class = "menu"></div>
+                  </button>
+                  <div class="dropdown-content">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                  </div>
+                </div> 
+            </td>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>

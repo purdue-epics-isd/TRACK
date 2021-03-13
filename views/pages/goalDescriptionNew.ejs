@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HOME</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/goal.css" />
+  </head>
+  <body>
+    <%- include("navbar")%>
+    <!-- GOAL NAME TAG -->
+    <section>
+      <div class="goalHeader">    
+        <div class="goalName">
+          <h1>GOAL NAME</h1>
+        </div>
+        <div class ="goalInfo">
+            <button class="goalInfoButton">
+              <a href="student.html"><h2>BACK</h2></a>
+            </button>
+            <button class="goalInfoButton">
+              <a href="goalInfo.html"><h2>INFO</h2></a>
+            </button>
+            <!-- <button class="goalInfoButton">
+              <a href="goalShare.html"><h2>SHARE</h2></a>
+            </button> -->
+        </div>
+      </div>
+    </section>
+    <!-- END GOAL NAME TAG -->
+    <!-- GOAL INPUT -->
+    <section>
+      <div class="generalBox">
+        <form class="formBox">
+          <h2>Description</h2>
+          <input type="file" id="myfile" name="myfile">
+          <textarea rows="4" cols="50" type="text" name="description" placeholder="Goal Description"></textarea>
+          <button class="submit"><a href="index.html">Submit</a></button>
+        </form>
+      </div>
+    </section>
+    <!-- END GOAL INPUT -->
+    <section class ="progress">
+      <div class="generalBox graph">
+        <h1>Graph</h1>
+      </div>
+      <div class="generalBox table">
+        <h1>Progress</h1>
+      </div>
+    </section>
+  </body>
+</html>
