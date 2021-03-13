@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feedback</title>
+  <%- include("../partials/head.ejs")%>
+</head>
+
+<body>
+<div class="grid-container">
+
+    <header class="header">
+        <div class="header__menu">
+           <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" style="width: all; margin-left: 15px;"> 
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        </div>
+    </header>
+
+    <%- include("../partials/header.ejs")%>
+
+    <div class="main text-center">
+        <h1>Feedback Form</h1>
+
+
+        <script>
+
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+          localStorage.setItem('theme', currentTheme);
+        }
+        
+        $(document).ready(function() {
+            $('#bt1').click(function() {
+                $('#fr1').attr('action',
+                               'mailto:purdue.epics.isd.track@gmail.com?subject=' +
+                               $('#tb1').val() + '&body=' + $('#tb2').val());
+                $('#fr1').submit();
+            });
+        });
+        </script>
+        <div class="d-flex justify-content-center">
+            <script>(function(t,e,s,n){var o,a,c;t.SMCX=t.SMCX||[],e.getElementById(n)||(o=e.getElementsByTagName(s),a=o[o.length-1],c=e.createElement(s),c.type="text/javascript",c.async=!0,c.id=n,c.src=["https:"===location.protocol?"https://":"http://","widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgdybVvfatNkc1eSplTFwWbZIrJNs8taSlv89elIcew4gi.js"].join(""),a.parentNode.insertBefore(c,a))})(window,document,"script","smcx-sdk");</script>
+    </div>
+
+</div>
+<%- include("../partials/footer.ejs")%>
+</body>
+</html>
