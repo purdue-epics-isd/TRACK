@@ -29,7 +29,7 @@ emailInputButton.click()
 time.sleep(3)
 
 passwordInput = driver.find_element_by_id("i0118")
-passwordInput.send_keys("")
+passwordInput.send_keys("pwpzeber44")
 passwordInputButton = driver.find_element_by_id("idSIButton9")
 passwordInputButton.click()
 time.sleep(3)
