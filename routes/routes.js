@@ -1,7 +1,5 @@
 const express = require('express');
-const app = express()
 const router = express.Router();
-
 var passport = require('passport');
 var LocalStrategy   = require("passport-local");
 var passportLocalMongoose   = require("passport-local-mongoose");
@@ -23,8 +21,6 @@ const user_controller = require('../controllers/user.controller');
 const Student = require('../models/student.model');
 const Goal = require('../models/goal.model');
 const User = require('../models/user.model');
-
-
 
 const storage = new GridFsStorage({
 	url: 'mongodb://TRACK:woofwoofTRACKER7@ds255403.mlab.com:55403/track',
@@ -85,11 +81,11 @@ router.post('/student/:studentid/goal/:goalid/goaldata/files/:id/download', (req
         gfs.exist({ _id: req.params.id, root: 'uploads'}, (err, file) => {
             if (err || !file) {
                 res.status(404).send('File Not Found');
-        		return
+        return
             }
 
-      	var readstream = gfs.createReadStream({ _id: req.params.id });
-      		readstream.pipe(res);
+      var readstream = gfs.createReadStream({ _id: req.params.id });
+      readstream.pipe(res);
         });
     });
 

@@ -152,13 +152,13 @@ function topFunction() {
       <% goals.forEach(async function(goal) { %> 
       <div id="<%=goal.id%>" className="changeable"> 
       <script async>
-        // console.log("hello");
-        // console.log("<%=student.id%>/goal/<%=goal.id%>");
-        // console.log("<%=goal.userid%>")
+        console.log("hello");
+        console.log("<%=student.id%>/goal/<%=goal.id%>");
+        console.log("<%=goal.userid%>")
         
         console.log(localStorage.getItem("username"))
         if ("<%=goal.userid%>" == localStorage.getItem("username")) {
-          // console.log("goal is made by user")
+          console.log("goal is made by user")
           var anchor = document.createElement("a");
           anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
           anchor.id = "goalCard";
@@ -183,7 +183,7 @@ function topFunction() {
 
         }
         else {
-          // console.log("goal is not made by user")
+          console.log("goal is not made by user")
           var anchor = document.createElement("a");
           anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
           anchor.id = "goalCard";

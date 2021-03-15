@@ -1,30 +1,9 @@
 const GoalData = require('../models/goaldata.model');
 const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
-var CryptoJS = require("crypto-js");
-var LZUTF8 = require('lzutf8');
 
-// functions for encryption of db
-async function encryption(string) {
-    let ciphertext = await CryptoJS.AES.encrypt(string, 'secret key 123').toString();
-    return ciphertext;
-}
-
-async function decryption(ciphertext) {
-    // await console.log("decryption")
-    var bytes  = await CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
-    // await console.log("bytes:", bytes);
-    var originalText = await bytes.toString(CryptoJS.enc.Utf8);
-    // await console.log("originalText", originalText);
-    return originalText;
-}
-
-// function that creates goaldata in db
-exports.goaldata_create = async function (req, res) {
+exports.goaldata_create = function (req, res) {
     try {
-        // console.log("req.body", req.body)
-        console.log("uncompressed", req.body.filecontents);
-        console.log("compressed", LZUTF8.compress(req.body.filecontents));
         let goaldata = new GoalData(
             {
                 goalID: req.params.goalid,
@@ -32,16 +11,17 @@ exports.goaldata_create = async function (req, res) {
                 count: req.body.count,
                 rubricOption: req.body.optionsRadios,
                 support: req.body.support,
-                comments: await encryption(req.body.comments),
+                comments: req.body.comments,
                 time: Date.now(),
-                teacherEmail: await encryption(req.body.useremail),
-                filename: await encryption(req.body.file),
-                file: await encryption(req.body.filecontents)
+                teacherEmail: req.body.useremail
             }
         );
 
-        // saves goal after pushing goaldata onto its array
         Goal.findOneAndUpdate({_id: req.params.goalid}, {$push: {goaldata: goaldata}}, function (err, goal) {
+            console.log("\nGoal to be updated: " + goal);
+            console.log("\nGoaldata to be added: " + goaldata);
+            //console.log("\nTeacher email: " + req.body.useremail);
+
             goaldata.save(function (err) { 
                 if (err) {
                     res.send(err);
@@ -50,7 +30,6 @@ exports.goaldata_create = async function (req, res) {
         });
         
         res.redirect("/student/" + req.params.studentid);
-        
         // if(req.params.shared == "true") {
         //     console.log("navigating to shared student profile...");
         //     res.redirect("/sharedWithMe/" + req.params.studentid);
@@ -66,6 +45,7 @@ exports.goaldata_create = async function (req, res) {
 
 exports.goaldata_delete = function (req, res) {
     try {
+        //console.log(req.body.id)
         GoalData.findByIdAndRemove(req.params.goaldataid, function (err) {
             if (err) return next(err);
             res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
