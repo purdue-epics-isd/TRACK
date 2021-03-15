@@ -49,10 +49,15 @@ exports.goaldata_create = async function (req, res) {
             });
         });
         
-
-        console.log("navigating to goal profile...");
-        setTimeout(() => { res.redirect("/student/" + req.params.studentid + "/goal/" + req.params.goalid); }, 1000);
+        res.redirect("/student/" + req.params.studentid);
         
+        // if(req.params.shared == "true") {
+        //     console.log("navigating to shared student profile...");
+        //     res.redirect("/sharedWithMe/" + req.params.studentid);
+        // } else {
+        //     console.log("navigating to personal student profile...");
+        //     res.redirect("/student/" + req.params.studentid);
+        // }
     } catch(err) {
         console.log(err);
         res.render('./error');
