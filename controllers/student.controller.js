@@ -394,19 +394,19 @@ exports.navigate_to_studentProfile = async function (req, res) {
         
     } catch(err) {
         // await  console.log("exports.navigate_to_studentProfile");
-        // await  console.log(err);
-        await res.render('./error');
+        console.log(err);
+        await res.render('pages/error');
     }
 }
 
 /*redirects to class page*/
 exports.navigate_to_classPage = async function (req, res) {
     try {
-        await console.log("navigate_to_class_page")
+        console.log("navigate_to_class_page")
 
         var students = [];
         
-        await console.log("decryptStudentList", await decryptStudentList())
+        // await console.log("decryptStudentList", await decryptStudentList())
         await res.render('pages/classPage', {
             students: await decryptStudentList()
         });
@@ -414,9 +414,11 @@ exports.navigate_to_classPage = async function (req, res) {
         
         
     } catch(err) {
-        await console.log("exports.navigate_to_classPage");
-        await console.log(err);
-        await res.render('./error');
+        console.log("Error attempting to navigate_to_classPage");
+        console.log(err);
+        // console.log("Waiting and then redirecting back to class page");
+        // setTimeout(() => { res.render("pages/classPage"); }, 1000);
+        await res.render('pages/error');
     }
 }
 
@@ -439,12 +441,8 @@ async function decryptStudentList() {
     })
 
     const result = await Promise.all(promises)
-
-    
+ 
     return result
-    
-    
-
 }
 
 /*redirects to new student page*/
