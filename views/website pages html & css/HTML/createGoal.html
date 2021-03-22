@@ -58,16 +58,44 @@
       <!-- Method of Collection -->
       <h2>METHOD OF COLLECTION</h2>
       <div class="methodOfCollection" name="methodOfCollection">
-        <input type="radio" id="Score" name="methodOfCollection" value="Score">
+        <input type="radio" id="Score" name="methodOfCollection" onclick="disappear()" value="Score">
         <label for="Score">Score</label>
-        <input type="radio" id="Occurences" name="methodOfCollection" value="Occurences">
+        <input type="radio" id="Occurences" name="methodOfCollection" onclick="disappear()" value="Occurences">
         <label for="Occurences">Occurences</label>
-        <input type="radio" id="Description" name="methodOfCollection" value="Description">
+        <input type="radio" id="Description" name="methodOfCollection" onclick="disappear()" value="Description">
         <label for="Description">Description</label>
-        <input type="radio" id="Rubric" name="methodOfCollection" value="Rubric">
+        <input type="radio" id="Rubric" name="methodOfCollection" onclick="appear()" value="Rubric">
         <label for="Rubric">Rubric</label>
       </div>
-    
+      
+      <div class="rubricLayout" name="rubricLayout" id="rubricLayout">
+        <h2>RUBRIC</h2>
+          <h3>Description for Not Evident</h3>
+          <textarea rows="1" cols="50" type="text" name="notEvident" placeholder="Description for Not Evident"></textarea>
+          <h3>Description for Introduced</h3>
+          <textarea rows="1" cols="50" type="text" name="introduced" placeholder="Description for Introduced"></textarea>
+          <h3>Description for Emerging</h3>
+          <textarea rows="1" cols="50" type="text" name="emerging" placeholder="Description for Emerging"></textarea>
+          <h3>Description for Developing</h3>
+          <textarea rows="1" cols="50" type="text" name="developing" placeholder="Description for Developing"></textarea>
+          <h3>Description for Ongoing</h3>
+          <textarea rows="1" cols="50" type="text" name="ongoing" placeholder="Description for Ongoing"></textarea>
+          <h3>Description for Demonstrated</h3>
+          <textarea rows="1" cols="50" type="text" name="demonstrated" placeholder="Description for Demonstrated"></textarea>
+          <h3>Description for Applied</h3>
+          <textarea rows="1" cols="50" type="text" name="applied" placeholder="Description for Applied"></textarea>
+        </div>
+      </div>
+      
+      <script>
+        function appear(){
+          document.getElementById("rubricLayout").style.display = "flex";
+        }
+
+        function disappear(){
+          document.getElementById("rubricLayout").style.display = "none";
+        }
+      </script>
       <button class="submit"><a href="student.html">Submit</a></button>
     </form>
     </section>

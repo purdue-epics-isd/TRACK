@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HOME</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/goal.css" />
+  </head>
+  <body>
+    <!-- NAV BAR -->
+    <nav>
+      <div>
+        <h2>TRACK ISD 2.0</h2>
+      </div>
+      <ul>
+        <li>
+          <a href="index.html">
+            <div>HOME</div>
+          </a>
+        </li>
+        <li>
+          <a href="about.html">
+            <div>ABOUT</div>
+          </a>
+        </li>
+        <li>
+          <a href="feedback.html">
+            <div>FEEDBACK</div>
+          </a>
+        </li>
+        <li>
+            <a href="logout.html">
+              <div>LOGOUT</div>
+            </a>
+          </li>
+      </ul>
+    </nav>
+    <!-- END NAV BAR -->
+    <!-- GOAL NAME TAG -->
+    <section>
+      <div class="goalHeader">    
+        <div class="goalName">
+          <h1>GOAL NAME</h1>
+        </div>
+        <div class ="goalInfo">
+            <button class="goalInfoButton">
+              <a href="student.html"><h2>BACK</h2></a>
+            </button>
+            <button class="goalInfoButton">
+              <a href="goalInfo.html"><h2>INFO</h2></a>
+            </button>
+            <!-- <button class="goalInfoButton">
+              <a href="goalShare.html"><h2>SHARE</h2></a>
+            </button> -->
+        </div>
+      </div>
+    </section>
+    <!-- END GOAL NAME TAG -->
+    <!-- GOAL INPUT -->
+    <section>
+      <div class="generalBox">
+        <form class="formBox">
+          <h2>Rubric</h2>
+          <input type="file" id="myfile" name="myfile">
+          <div class="methodOfCollection" name="methodOfCollection">
+            <input type="radio" id="notEvident" name="methodOfCollection" value="notEvident">
+            <label for="notEvident">Not evident:</label>
+            <input type="radio" id="introduced" name="methodOfCollection" value="introduced">
+            <label for="introduced">Introduced:</label>
+            <input type="radio" id="emerging" name="methodOfCollection" value="emerging">
+            <label for="emerging">Emerging:</label>
+            <input type="radio" id="developing" name="methodOfCollection" value="developing">
+            <label for="developing">Developing:</label>
+            <input type="radio" id="ongoing" name="methodOfCollection" value="ongoing">
+            <label for="ongoing">Ongoing:</label>
+            <input type="radio" id="demonstrated" name="methodOfCollection" value="demonstrated">
+            <label for="demonstrated">Demonstrated:</label>
+            <input type="radio" id="applied" name="methodOfCollection" value="applied">
+            <label for="applied">Applied:</label>
+          </div>
+          <textarea rows="4" cols="50" type="text" name="description" placeholder="Descriptive Comment"></textarea>
+          <button class="submit"><a href="index.html">Submit</a></button>
+        </form>
+      </div>
+    </section>
+    <!-- END GOAL INPUT -->
+    <section class ="progress">
+      <div class="generalBox graph">
+        <h1>Graph</h1>
+      </div>
+      <div class="generalBox table">
+        <h1>Progress</h1>
+      </div>
+    </section>
+  </body>
+</html>
