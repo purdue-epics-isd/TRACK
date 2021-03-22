@@ -18,6 +18,24 @@ input {
   border-radius: 4px;
 }
 
+input, select{
+  margin: 2px;
+  border: 2px solid #eee;
+  border-radius: 4px;
+  max-width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.gradeYear{
+  width: 100%;
+}
+
+input[type="date"]{
+  font-family: inherit;
+  font-size: inherit;
+}
+
 .sectionOne {
   display: flex;
   flex-direction: column;
