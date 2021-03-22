@@ -59,7 +59,7 @@ exports.goal_create = function (req, res) {
         });
     } catch (err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     };
 };
 
@@ -130,7 +130,7 @@ exports.navigate_to_goalProfile = async function (req, res) {
         return;
     } catch(error) {
         await console.log("err:" + err);
-        await res.render('./error');
+        await res.render('pages/error');
     }
 }
 
@@ -149,7 +149,7 @@ exports.goal_delete = function (req, res) {
         })
     } catch(err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
@@ -177,7 +177,7 @@ exports.goal_redirect_edit = function (req, res) {
 
     } catch(err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
@@ -249,109 +249,125 @@ exports.navigate_to_createNewGoal = function (req, res) {
         });
     } catch(err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
-/*redirects page to the student profile page, specifically for said students that are shared with a specified user*/
-exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
+exports.navigate_to_goalInfo = function (req, res) {
     try {
-        var goals = [];
-
-        /*load all the goals that match the student id*/
-        //TODO: we may need to add filtering (i.e. an if statement) to make sure that the goals are actually shared goals
-        //Just because the student is shared, doesn't necessarily mean all of their goals should be shared
-        Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
-            goal.name = decryption(goal.name);
-            goal.description = decryption(goal.description);
-            goal.studentID = decryption(goal.studentID);
-            goal.forEach(function(s) { 
-                    goals.push(s);
-                    // console.log(s);
-            });
-        });
-
-        /*load the actual page*/
-        goals.name = decryption(goals.name);
-        goals.description = decryption(goals.description);
-        goals.studentID = decryption(goals.studentID);
         User.findById(req.params.userid, function(err, user) {
             Student.findById(req.params.studentid, function(err, student) {
-                Goal.findById(req.params.goalid, function(err, goal) {
-                    res.render('pages/sharedWithMeStudentProfile', {
-                        goals: goals,
-                        student: student, 
-                        user: user
-                    });
+                res.render('pages/goalInfo', {
+                    student: student,
+                    user: user
                 });
             });
         });
     } catch(err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
-}
+};
 
-/* renders shared goal page */
-exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
-    try {
-        goalDatas = [];
+// /*redirects page to the student profile page, specifically for said students that are shared with a specified user*/
+// exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
+//     try {
+//         var goals = [];
 
-        /*go through database to find all of the goal data that matches this specific goal*/
-        GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-            goaldata.forEach(function(s) {
-                goalDatas.push(s);
-            });
-        });
+//         /*load all the goals that match the student id*/
+//         //TODO: we may need to add filtering (i.e. an if statement) to make sure that the goals are actually shared goals
+//         //Just because the student is shared, doesn't necessarily mean all of their goals should be shared
+//         Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
+//             goal.name = decryption(goal.name);
+//             goal.description = decryption(goal.description);
+//             goal.studentID = decryption(goal.studentID);
+//             goal.forEach(function(s) { 
+//                     goals.push(s);
+//                     // console.log(s);
+//             });
+//         });
+
+//         /*load the actual page*/
+//         goals.name = decryption(goals.name);
+//         goals.description = decryption(goals.description);
+//         goals.studentID = decryption(goals.studentID);
+//         User.findById(req.params.userid, function(err, user) {
+//             Student.findById(req.params.studentid, function(err, student) {
+//                 Goal.findById(req.params.goalid, function(err, goal) {
+//                     res.render('pages/sharedWithMeStudentProfile', {
+//                         goals: goals,
+//                         student: student, 
+//                         user: user
+//                     });
+//                 });
+//             });
+//         });
+//     } catch(err) {
+//         console.log(err);
+//         res.render('pages/error');
+//     }
+// }
+
+// /* renders shared goal page */
+// exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
+//     try {
+//         goalDatas = [];
+
+//         /*go through database to find all of the goal data that matches this specific goal*/
+//         GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
+//             if (err) {
+//                 res.send(err);
+//                 return;
+//             }
+//             goaldata.forEach(function(s) {
+//                 goalDatas.push(s);
+//             });
+//         });
 
 
-        Student.findById(req.params.studentid, function(err, student) {
-            User.findById(req.params.userid, function(err, user) {
-                Goal.findById(req.params.goalid, function(err, goal) {
-                    var methodsOfCollection = goal.methodOfCollection;
-                    // console.log("method:" + goal.methodOfCollection);
-                    // console.log("method as var:" + methodsOfCollection);
-                    // console.log("goal:" + goal);
-                    gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
-                        goal.name = encryption(goal.name);
-                        goal.description = encryption(goal.description);
-                      if (!files || files.length === 0) {
-                        res.render('pages/sharedWithMeGoalProfile', {
-                            user: user,
-                            goalDatas: goalDatas,
-                            student: student,
-                            goal: goal,
-                            methodOfCollection: methodsOfCollection,
-                            shared: true,
-                            files: false
-                        });
-                      } else {
-                        files.map((file) => {
-                          (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
-                        });         
-                        res.render('pages/sharedWithMeGoalProfile', {
-                            user: user,
-                            goalDatas: goalDatas,
-                            student: student,
-                            goal: goal,
-                            methodOfCollection: methodsOfCollection,
-                            shared: true,
-                            files: files
-                        });
-                      }
-                    });
+//         Student.findById(req.params.studentid, function(err, student) {
+//             User.findById(req.params.userid, function(err, user) {
+//                 Goal.findById(req.params.goalid, function(err, goal) {
+//                     var methodsOfCollection = goal.methodOfCollection;
+//                     // console.log("method:" + goal.methodOfCollection);
+//                     // console.log("method as var:" + methodsOfCollection);
+//                     // console.log("goal:" + goal);
+//                     gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
+//                         goal.name = encryption(goal.name);
+//                         goal.description = encryption(goal.description);
+//                       if (!files || files.length === 0) {
+//                         res.render('pages/sharedWithMeGoalProfile', {
+//                             user: user,
+//                             goalDatas: goalDatas,
+//                             student: student,
+//                             goal: goal,
+//                             methodOfCollection: methodsOfCollection,
+//                             shared: true,
+//                             files: false
+//                         });
+//                       } else {
+//                         files.map((file) => {
+//                           (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
+//                         });         
+//                         res.render('pages/sharedWithMeGoalProfile', {
+//                             user: user,
+//                             goalDatas: goalDatas,
+//                             student: student,
+//                             goal: goal,
+//                             methodOfCollection: methodsOfCollection,
+//                             shared: true,
+//                             files: files
+//                         });
+//                       }
+//                     });
 
-                });
-            });
-        });
-        //console.log("pls workmaybe");
-        return;
-    } catch(error) {
-        console.log("err:" + err);
-        res.render('./error');
-    }
-}
+//                 });
+//             });
+//         });
+//         //console.log("pls workmaybe");
+//         return;
+//     } catch(error) {
+//         console.log("err:" + err);
+//         res.render('pages/error');
+//     }
+// }

@@ -24,7 +24,7 @@ exports.goaldata_create = async function (req, res) {
     try {
         // console.log("req.body", req.body)
         console.log("uncompressed", req.body.filecontents);
-        console.log("compressed", LZUTF8.compress(req.body.filecontents));
+        // console.log("compressed", LZUTF8.compress(req.body.filecontents));
         let goaldata = new GoalData(
             {
                 goalID: req.params.goalid,
@@ -55,7 +55,7 @@ exports.goaldata_create = async function (req, res) {
         
     } catch(err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
@@ -67,6 +67,6 @@ exports.goaldata_delete = function (req, res) {
         })
     } catch(err) {
         console.log(err);
-        res.render('/error');
+        res.render('pages/error');
     }
 };

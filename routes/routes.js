@@ -99,9 +99,10 @@ router.get('/student/:studentid', student_controller.navigate_to_studentProfile)
 router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
 router.get('/createNewStudent', student_controller.navigate_to_createNewStudent); //navigates to new student page
-router.get('/sharedWithMe', student_controller.navigate_to_sharedWithMeClassPage); //navigate to class page of shared students
-router.get('/sharedWithMe/:studentid', goal_controller.navigate_to_sharedWithMeStudentProfile); //navigate to student profile of shared student
-router.get('/sharedWithMe/:studentid/:goalid', goal_controller.navigate_to_sharedWithMeGoalProfile); //navigate to goal profile of shared goal
+// router.get('/sharedWithMe', student_controller.navigate_to_sharedWithMeClassPage); //navigate to class page of shared students
+// router.get('/sharedWithMe/:studentid', goal_controller.navigate_to_sharedWithMeStudentProfile); //navigate to student profile of shared student
+// router.get('/sharedWithMe/:studentid/:goalid', goal_controller.navigate_to_sharedWithMeGoalProfile); //navigate to goal profile of shared goal
+router.get('/student/:studentid/goal/:goalid/info', goal_controller.navigate_to_goalInfo); //navigate to goal info page
 router.get('/aboutUs', (req, res) => { //navigate to about us page
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/aboutUs.ejs', {

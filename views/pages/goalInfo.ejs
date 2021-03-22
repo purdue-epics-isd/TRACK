@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HOME</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/goalInfo.css" />
+</head>
+
+<body>
+  <%- include("navbar.ejs")%>
+    <!-- NAME TAG -->
+    <section>
+      <div class="studentHeader">
+
+        <div class="studentName">
+          <h1>STUDENT NAME</h1>
+        </div>
+
+        <div class="studentInfo">
+          <a href="/student/<%= student.id%>/goal/<%= goal.id%>">
+            <button class="studentInfoButton">
+              <h2>GOAL</h2>
+            </button>
+          </a>
+
+          <a href="/student/<%=student.id%>/createNewGoal">
+            <button class="studentInfoButton">
+              <h2>EDIT</h2>
+            </button>
+          </a>
+
+          <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_delete"
+            onclick="return confirm('Please confirm to delete this goal');">
+            <button class="studentInfoButton">
+              <h2>DELETE</h2>
+            </button>
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+    <!-- END NAME TAG -->
+    <section>
+      <div class="studentInformation">
+        <div class="box left">
+          <h3>Goal Name</h3>
+          <p>COUNTING TO 10</p>
+          <h3>Goal Description</h3>
+          <p>Student has to count to 10!</p>
+        </div>
+        <div class="box right">
+          <h3>Dates</h3>
+          <p>Start Date: 01/02/21</p>
+          <p>End Date: 06/02/21</p>
+          <h3>Goal Type</h3>
+          <p>Academic</p>
+          <h3>Method of Collection</h3>
+          <p>Score</p>
+        </div>
+      </div>
+    </section>
+</body>
+
+</html>

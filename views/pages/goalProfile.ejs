@@ -2,95 +2,324 @@
 <html>
 
 <head>
-  <title>HOME</title>
-  <link rel="stylesheet" href="global.css">
-  <link rel="stylesheet" href="goal.css">
-  <!-- <script src="../pagesJS/js/kebabMenu.js"></script> ../public/css/-->
+    <title>HOME</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/goal.css">
 </head>
 
 <body>
-  <%- include("navbar.ejs")%>
-    <!-- GOAL NAME TAG -->
-    <section>
-      <div class="goalHeader">
-        <div class="goalName">
-          <%= goal.name %>
-        </div>
-        <div class="goalInfo">
-          <button class="goalInfoButton">
-            <!-- <a href="student.html"> -->
-              <h2>BACK</h2>
-            </a> <!-- gonna need to fix these links once the other guys r done-->
-          </button>
-          <button class="goalInfoButton">
-            <!-- <a href="goalInfo.html"> -->
-              <h2>INFO</h2>
-            </a>
-          </button>
-        </div>
-      </div>
-    </section>
-    <!-- END GOAL NAME TAG -->
-    <!-- GOAL INPUT -->
-    <form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm"
-      method="post" class="formBox">
-      <div class="generalBox">
-        <%if(goal.methodOfCollection.includes("count")) { %>
-          <h2>Occurrence</h2>
-          <input type="number" placeholder="Occurrence">
-          <%} %>
-
-            <%if(goal.methodOfCollection.includes("score")) { %>
-              <input type="number" placeholder="Score">
-              <%} %>
-
-                <%if(goal.methodOfCollection.includes("comments")) { %>
-                  <textarea rows="4" cols="50" type="text" name="description" placeholder="Goal Description"></textarea>
-                  <%} %>
-
-                  <%if(goal.methodOfCollection.includes("rubric")) { %>
-
-                    <%} %>
-      </div>
-      <input type="submit" class="submit">Submit</button>
-    </form>
-    <!-- END GOAL INPUT -->
-    <section class="progress">
-      <div class="generalBox graph">
-        <h1>Graph</h1>
-      </div>
-      <div class="generalBox table">
-        <h1>Progress</h1>
-        <table>
-          <tr>
-            <th>Progress</th>
-            <th>Date</th>
-            <th>Created</th>
-            <th>File</th>
-            <th>Modify</th>
-          </tr>
-          <tr>
-            <td>Counted to 10</td>
-            <td>03/07/2021</td>
-            <td>Conley Tjahjono</td>
-            <td>workbook.png</td>
-            <td>
-              <div class="dropdown">
-                <button class="dropbtn">
-                  <div class="menu"></div>
-                  <div class="menu"></div>
-                  <div class="menu"></div>
-                </button>
-                <div class="dropdown-content">
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
+    <%- include("navbar.ejs")%>
+        <!-- GOAL NAME TAG -->
+        <section>
+            <div class="goalHeader">
+                <div class="goalName">
+                    <%= goal.name %>
                 </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </section>
+                <div class="goalInfo">
+                    <a href="/student/<%=student.id%>">
+                        <button class="goalInfoButton">
+                            <h2>STUDENT</h2>
+                        </button>
+                    </a>
+                    <a href="/student/<%= student.id %>/goal/<%= goal.id %>/info">
+                        <button id="goalInfo" class="goalInfoButton">
+                            <h2>INFO</h2>
+                        </button>
+                    </a>
+                    <button id="btnExport" onclick="exportTableToExcel()" class="goalInfoButton">
+                        <h2>EXPORT</h2>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <script type="text/javascript">
+            function exportTableToExcel() {
+                alert("When opening the exported Excel file, you will receive the follwing alert:\n       " +
+                    "\"The file format and extension of 'exportedGoalData.xls' don't match. The file could be corrupted or unsafe." +
+                    " Unless you trust its source, don't open it. Do you want to open it anyway?\"" +
+                    "\n\n The file is safe. Just click \"yes\" to open the Excel sheet.");
+
+                var downloadLink;
+                var dataType = 'application/vnd.ms-excel';
+                var table = document.getElementById("goalTable");
+                var tableClone = table.cloneNode(true); //create clone of the table
+
+                //remove the delete column
+                var rows = tableClone.rows;
+                for (var i = 0; i < rows[0].cells.length; i++) {
+                    if (rows[0].cells[i].innerHTML == "Modify" || rows[0].cells[i].innerHTML == "Created by") {
+                        for (var j = 0; j < rows.length; j++) {
+                            rows[j].deleteCell(i);
+                        }
+                    }
+                }
+
+
+
+                var tableHTML = tableClone.outerHTML.replace(/ /g, '%20');
+
+                // Specify file name
+                var filename = filename ? filename + '.xls' : 'exportedGoalData.xls';
+
+                // Create download link element
+                downloadLink = document.createElement("a");
+
+                document.body.appendChild(downloadLink);
+
+                if (navigator.msSaveOrOpenBlob) {
+                    var blob = new Blob(['\ufeff', tableHTML], {
+                        type: dataType
+                    });
+                    navigator.msSaveOrOpenBlob(blob, filename);
+                } else {
+                    // Create a link to the file
+                    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                    // Setting the file name
+                    downloadLink.download = filename;
+
+                    //triggering the function
+                    downloadLink.click();
+                }
+            }
+        </script>
+        <!-- END GOAL NAME TAG -->
+        <!-- GOAL INPUT -->
+        <div class="generalBox">
+            <form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm"
+                method="post" class="formBox">
+
+                <%if(goal.methodOfCollection.includes("count")) { %>
+                    <h2>Click to Add Occurrence</h2>
+                    <button class="occurrButton" type="button" id="occurrencesButton"
+                        onclick="addOccurrence()"></button>
+                    <input type="hidden" name="count" id="inputOccurr" value="0"></input>
+                    <script type="text/javascript">
+                        var numOccurrences = 0;
+                        var button = document.getElementById("occurrencesButton");
+                        var input = document.getElementById("inputOccurr");
+                        button.innerHTML = numOccurrences;
+
+                        function addOccurrence() {
+                            numOccurrences++;
+                            button.innerHTML = numOccurrences;
+                            input.value = numOccurrences;
+                        }
+                    </script>
+                    <%} %>
+
+                        <%if(goal.methodOfCollection.includes("score")) { %>
+                            <h2>Score</h2>
+                            <input type="number" placeholder="Score" id="score" name="score">
+                            <%} %>
+
+                                <%if(goal.methodOfCollection.includes("comments")) { %>
+                                    <%if(goal.methodOfCollection[0]=="description") { %>
+                                        <h2>Description</h2>
+                                        <%} %>
+                                            <textarea rows="4" cols="50" type="text" id="description"
+                                                placeholder="Comments"></textarea>
+                                            <%} %>
+
+                                                <%if(goal.methodOfCollection.includes("rubric")) { %>
+                                                    <p>Not in place yet</p>
+                                                    <%} %>
+
+                                                        <input type="file" id="file" class="file">
+                                                        <input type="hidden" name="useremail" id="useremail">
+                                                        <input type="hidden" name="filecontents" id="filecontents">
+                                                        <input type="hidden" name="filebool" id="filebool">
+                                                        <script>
+                                                            var email = document.getElementById('useremail');
+                                                            email.value = localStorage.getItem("username");
+                                                            function updateFile() {
+                                                                var file = document.getElementById('file').files[0];
+                                                                var reader = new FileReader();
+                                                                reader.addEventListener("load", function () {
+                                                                    let fileSize = 0
+                                                                    if (reader.result[reader.result.length - 2] == '=') {
+                                                                        fileSize = (reader.result.length * (3 / 4)) - 2;
+                                                                    }
+                                                                    else {
+                                                                        fileSize = (reader.result.length * (3 / 4)) - 1;
+                                                                    }
+                                                                    document.getElementById("filecontents").value = reader.result;
+                                                                })
+                                                                if (file) {
+                                                                    console.log("if (file)")
+                                                                    reader.readAsDataURL(file);
+                                                                    document.getElementById("filebool").value = true;
+                                                                }
+                                                            }
+                                                        </script>
+
+                                                        <input type="submit" class="submit"></button>
+            </form>
+        </div>
+        <!-- END GOAL INPUT -->
+        <section class="progress">
+            <%if(goal.methodOfCollection.includes("score") || goal.methodOfCollection.includes("count")) { %>
+                <div class="generalBox graph">
+                    <h1>Graph</h1>
+                    <div id="data_chart"></div>
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                    <script>
+                        google.charts.load('current', { 'packages': ['line', 'corechart'] });
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+                            var TrackMethod = ["<%=goal.methodOfCollection[0]%>", "<%=goal.methodOfCollection[1]%>"];
+                            var dataset = [];
+                            var date;
+                            if (TrackMethod[0] == "score") {
+									<% goalDatas.forEach(function (goalData) {%>
+                                date = new Date("<%=goalData.time%>")
+                                dataset.push([date, <%=goalData.score %>]);
+										<%}) %>
+								}
+                            else if (TrackMethod[0] == "count") {
+									<% goalDatas.forEach(function (goalData) {%>
+                                date = new Date("<%=goalData.time%>")
+                                dataset.push([date, <%=goalData.count %>]);
+										<%}) %>
+								}
+                            else {
+                                return;
+                            }
+                            if (TrackMethod[1] == "count") {
+									<% goalDatas.forEach(function (goalData, index) {%>
+                                dataset[<%=index %>].push(<%=goalData.count %>);
+										<%}) %>
+								}
+                            // console.log(dataset);
+
+                            if (dataset.length == 0) {
+                                return;
+                            }
+
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('date', "Date");
+                            data.addColumn('number', TrackMethod[0]);
+                            if (TrackMethod[1] == 'count') {
+                                data.addColumn('number', TrackMethod[1]);
+                            }
+                            data.addRows(dataset);
+
+                            var options = {
+                                'title': "<%=goal.name%>",
+                                chartArea: {
+                                    left: 140,
+                                    top: 30,
+                                    width: 670,
+                                    height: 100
+                                },
+                                vAxis: {
+                                    title: 'Data'
+                                },
+                                width: 1000,
+                                height: 200,
+                                pointsVisible: true,
+                            };
+
+                            var chart = new google.visualization.LineChart(document.getElementById('data_chart'));
+
+                            chart.draw(data, options);
+                        }
+                    </script>
+                </div>
+                <%} %>
+                    <div class="generalBox table">
+                        <h1>Progress</h1>
+                        <table id="goalTable">
+                            <tr>
+                                <%if(goal.methodOfCollection[0]=="score" ) { %>
+                                    <th>Score</th>
+                                    <%} %>
+
+                                        <%if(goal.methodOfCollection[0]=="count" || goal.methodOfCollection[1]=="count"
+                                            ) { %>
+                                            <th>Occurrences</th>
+                                            <%} %>
+
+                                                <%if(goal.methodOfCollection[0]=="rubric" ||
+                                                    goal.methodOfCollection[1]=="rubric" ||
+                                                    goal.methodOfCollection[2]=="rubric" ) { %>
+                                                    <th>Progress</th>
+                                                    <%} %>
+
+                                                        <%if(goal.methodOfCollection[0]=="comments" ||
+                                                            goal.methodOfCollection[1]=="comments" ||
+                                                            goal.methodOfCollection[2]=="comments" ||
+                                                            goal.methodOfCollection[3]=="comments" ) { %>
+                                                            <th>Comments</th>
+                                                            <%} %>
+                                                                <th>Date</th>
+                                                                <th>Created by</th>
+                                                                <th>Files</th>
+                                                                <th>Modify</th>
+                            </tr>
+                            <% goalDatas.forEach(function(goalData) { %>
+                                <tr>
+                                    <%if(goal.methodOfCollection[0]=="score" ) { %>
+                                        <td>
+                                            <%= goalData.score %>
+                                        </td>
+                                        <%} %>
+                                            <%if(goal.methodOfCollection[0]=="count" ||
+                                                goal.methodOfCollection[1]=="count" ||
+                                                goal.methodOfCollection[2]=="count" ) { %>
+                                                <td>
+                                                    <%= goalData.count %>
+                                                </td>
+                                                <%} %>
+                                                    <%if(goal.methodOfCollection[0]=="rubric" ||
+                                                        goal.methodOfCollection[1]=="rubric" ||
+                                                        goal.methodOfCollection[2]=="rubric" ) { %>
+                                                        <td>
+                                                            <%= goalData.rubricOption %>
+                                                        </td>
+                                                        <%} %>
+                                                            <%if(goal.methodOfCollection[0]=="comments" ||
+                                                                goal.methodOfCollection[1]=="comments" ||
+                                                                goal.methodOfCollection[2]=="comments" ||
+                                                                goal.methodOfCollection[3]=="comments" ) { %>
+                                                                <td>
+                                                                    <%= goalData.comments %>
+                                                                </td>
+                                                                <%} %>
+                                                                    <td>
+                                                                        <%= goalData.time.getMonth()+1 %>/<%=
+                                                                                goalData.time.getDate() %>/<%=
+                                                                                    goalData.time.getFullYear() %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=goalData.teacherEmail%>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a name="<%=goalData._id%>"
+                                                                            id="<%=goalData._id%>" target="_blank">
+                                                                            <%=goalData.filename%>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="dropdown">
+                                                                            <button class="dropbtn">
+                                                                                <div class="menu"></div>
+                                                                                <div class="menu"></div>
+                                                                                <div class="menu"></div>
+                                                                            </button>
+                                                                            <div class="dropdown-content">
+                                                                                <a href="">Edit</a>
+                                                                                <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"
+                                                                                    onclick="return confirm('Please confirm to delete this data');">Delete</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                </tr>
+                                <% }); %>
+                        </table>
+                    </div>
+        </section>
 </body>
 
 </html>

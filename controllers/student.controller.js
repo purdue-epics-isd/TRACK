@@ -148,7 +148,7 @@ exports.student_create = async function (req, res) {
     } catch(err) {
         //console.log(err);
         console.log("exports.student_create");
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
@@ -458,7 +458,7 @@ exports.navigate_to_createNewStudent = function (req, res) {
     } catch(err) {
         // console.log("exports.navigate_to_createNewStudent");
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 }
 
@@ -474,7 +474,7 @@ exports.student_delete = function (req, res) {
     } catch(err) {
         console.log("exports.student_delete");
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }        
 };
 
@@ -502,7 +502,7 @@ exports.student_redirect_edit = async function (req, res) {
     } catch(err) {
         console.log("exports.student_redirect_edit");
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
@@ -553,7 +553,7 @@ exports.navigate_to_sharedWithMeClassPage = async function (req, res) {
     } catch(err) {
         // await console.log("exports.navigate_to_sharedWithMeClassPage");
         await console.log(err);
-        await res.render('./error');
+        await res.render('pages/error');
     }
 }
 
@@ -567,6 +567,6 @@ exports.run = function(req, res) {
     } catch(err) {
         console.log("exports.run");
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 }
