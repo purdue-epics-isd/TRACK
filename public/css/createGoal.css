@@ -107,4 +107,5 @@ button:hover {
 
 input[type="date"]{
   font-family: inherit;
+  font-size: inherit;
 }
