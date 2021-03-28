@@ -11,10 +11,10 @@ mongoose.set('useFindAndModify', false); // solve findAndModify() warning
 
 // encryption functions
 function encryption(string) {
-    return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123').toString();
+    return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123', { mode: CryptoJS.mode.ECB }).toString();
 }
 function decryption(ciphertext) {
-    var bytes = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    var bytes = CryptoJS.AES.decrypt(ciphertext, 'secret key 123', { mode: CryptoJS.mode.ECB });
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
 
@@ -198,22 +198,22 @@ exports.goal_delete = function (req, res) {
 /*navigates user to EditGoal.ejs page */
 exports.goal_redirect_edit = function (req, res) {
     try {
-        User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
-              Goal.findById(req.params.goalid, function(err, goal) {
-                  // console.log("goal pre decrypt", goal)
-                  goal.name = goal.name;
-                  goal.description = goal.description;
-                  goal.userid = goal.userid
-                  // console.log("goal post decrypt", goal)
 
-                res.render('pages/EditGoal', {
-                    student: student,
-                    user: user,
-                    goalid: req.params.goalid,
-                    goal: goal
-                });
+        User.findById(req.params.userid, function (err, user) {
+            Student.findById(req.params.studentid, function (err, student) {
+                Goal.findById(req.params.goalid, function (err, goal) {
+                    // console.log("goal pre decrypt", goal)
+                    goal.name = decryption(goal.name);
+                    goal.description = decryption(goal.description);
+                    goal.userid = decryption(goal.userid)
+                    // console.log("goal post decrypt", goal)
 
+                    res.render('pages/EditGoal', {
+                        student: student,
+                        user: user,
+                        goalid: req.params.goalid,
+                        goal: goal
+                    });
                 });
             });
         });
@@ -236,9 +236,11 @@ exports.goal_edit = function (req, res) {
 
     // console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
-            { $set: { name: req.body.name,
-                description: req.body.description,
 
+        {
+            $set: {
+                name: encryption(req.body.name),
+                description: encryption(req.body.description),
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
