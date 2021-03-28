@@ -14,10 +14,37 @@ function encryption(string) {
     return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123').toString();
 }
 function decryption(ciphertext) {
-    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    var bytes = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
 
+//converts the date to YYYY-MM-DD
+function convertToYYYYMMDD(d) {
+    if (d.substring(4, 5) != "-") {
+        date = new Date(d);
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        dt = date.getDate();
+        if (dt < 10) {
+            dt = '0' + dt;
+        }
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        if (year != NaN) {
+            var format = String(year) + '-' + String(month) + '-' + String(dt);
+        } else {
+            var format = "";
+        }
+        return format;
+    }
+    else {
+        return d;
+    }
+
+
+}
 
 /*creates a new goal in database*/
 exports.goal_create = function (req, res) {
@@ -26,9 +53,18 @@ exports.goal_create = function (req, res) {
     // Encrypt
     var ciphertext = CryptoJS.AES.encrypt(req.body.name, 'secret key 123').toString();
     // Decrypt
-    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    var bytes = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
     // console.log(req.body.methodOfCollection);
+
+    //Converting date to YYYY-MM-DD
+    if (req.body.startDate != NaN) {
+        req.body.startDate = convertToYYYYMMDD(req.body.startDate);
+    }
+    if (req.body.endDate != NaN) {
+        req.body.endDate = convertToYYYYMMDD(req.body.endDate);
+    }
+
     try {
         //for name:
         let goal = new Goal(
@@ -42,12 +78,12 @@ exports.goal_create = function (req, res) {
                 methodOfCollection: req.body.methodOfCollection,
                 occurrencesType: req.body.occurrences,
                 shared: false,
-                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
+                rubricdescription: [req.body.Rnotevident, req.body.Rintroduced, req.body.Remerging, req.body.Rdeveloping, req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
                 goaldata: [],
                 userid: req.body.userID
             })
 
-        Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {
+        Student.findOneAndUpdate({ _id: req.params.studentid }, { $push: { goals: goal } }, function (err, student) {
             goal.save(function (err) {
                 if (err) {
                     res.send(err);
@@ -69,12 +105,12 @@ exports.navigate_to_goalProfile = async function (req, res) {
     try {
         goalDatas = [];
 
-        await GoalData.find({goalID: req.params.goalid}, {}, async function(err, goaldata) {
+        await GoalData.find({ goalID: req.params.goalid }, {}, async function (err, goaldata) {
             if (err) {
                 await res.send(err);
                 return;
             }
-            await goaldata.forEach(async function(s) {
+            await goaldata.forEach(async function (s) {
                 // console.log("goaldata pre decrypt", s)
                 console.log("s.comments", s.comments);
                 console.log("s.teacherEmail", s.teacherEmail);
@@ -89,18 +125,18 @@ exports.navigate_to_goalProfile = async function (req, res) {
                 // console.log("goaldata post decrypt", s)
                 await goalDatas.push(s);
                 // await console.log(s)
-                
-                
+
+
             });
         }).then(() => {
-            Student.findById(req.params.studentid, async function(err, student) {
+            Student.findById(req.params.studentid, async function (err, student) {
                 if (err) {
                     await res.send(err);
                     return;
                 }
 
-                await User.findById(req.params.userid, async function(err, user) {
-                    await Goal.findById(req.params.goalid, async function(err, goal) {
+                await User.findById(req.params.userid, async function (err, user) {
+                    await Goal.findById(req.params.goalid, async function (err, goal) {
                         var methodsOfCollection = goal.methodOfCollection;
                         // console.log("goal pre decrypt", goal)
                         goal.name = goal.name;
@@ -113,7 +149,7 @@ exports.navigate_to_goalProfile = async function (req, res) {
 
                         // await console.log("goal:" + goal);
                         // await console.log(req.params.goalid);
-                        
+
                         await res.render('pages/goalProfile', {
                             user: user,
                             goalDatas: goalDatas,
@@ -132,9 +168,9 @@ exports.navigate_to_goalProfile = async function (req, res) {
 
 
 
-        
+
         return;
-    } catch(error) {
+    } catch (error) {
         await console.log("err:" + err);
         await res.render('pages/error');
     }
@@ -153,7 +189,7 @@ exports.goal_delete = function (req, res) {
                 res.redirect('/student/' + req.params.studentid);
             }
         })
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.render('pages/error');
     }
@@ -176,12 +212,12 @@ exports.goal_redirect_edit = function (req, res) {
                     user: user,
                     goalid: req.params.goalid,
                     goal: goal
+
                 });
             });
-          });
         });
 
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.render('pages/error');
     }
@@ -189,22 +225,32 @@ exports.goal_redirect_edit = function (req, res) {
 
 /*submits and updates any edits made to goal profile*/
 exports.goal_edit = function (req, res) {
+    //Converting date to YYYY-MM-DD
+    if (req.body.startDate != NaN) {
+        req.body.startDate = convertToYYYYMMDD(req.body.startDate);
+    }
+    if (req.body.endDate != NaN) {
+        req.body.endDate = convertToYYYYMMDD(req.body.endDate);
+    }
+
     // console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
+
             { $set: { name: req.body.name,
                 description: req.body.description,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
                 occurrencesType: req.body.occurrences,
-                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied]
-                } }, function (err) {
-              if (err) {
+                rubricdescription: [req.body.Rnotevident, req.body.Rintroduced, req.body.Remerging, req.body.Rdeveloping, req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied]
+            }
+        }, function (err) {
+            if (err) {
                 console.log(err);
-              }
-              else {
+            }
+            else {
                 res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
-              }
+            }
         });
 }
 
@@ -217,12 +263,12 @@ exports.goal_share = function (req, res) {
     Student.findById(req.params.studentid, function (err, student) {
         student.shared = true;
         var alreadyShared = false;
-        for(var i=0;i<student.sharedWith.length;i++) {
-            if(student.sharedWith[i] == sharingemail) {
+        for (var i = 0; i < student.sharedWith.length; i++) {
+            if (student.sharedWith[i] == sharingemail) {
                 alreadyShared = true;
             }
         }
-        if(!alreadyShared) student.sharedWith.push(sharingemail);
+        if (!alreadyShared) student.sharedWith.push(sharingemail);
         student.save();
     });
 
@@ -230,12 +276,12 @@ exports.goal_share = function (req, res) {
     Goal.findById(req.params.goalid, function (err, goal) {
         goal.shared = true;
         var alreadyShared = false;
-        for(var i=0;i<goal.sharedWith.length;i++) {
-            if(goal.sharedWith[i] == sharingemail) {
+        for (var i = 0; i < goal.sharedWith.length; i++) {
+            if (goal.sharedWith[i] == sharingemail) {
                 alreadyShared = true;
             }
         }
-        if(!alreadyShared) goal.sharedWith.push(sharingemail);
+        if (!alreadyShared) goal.sharedWith.push(sharingemail);
         goal.save();
     });
 
@@ -245,15 +291,15 @@ exports.goal_share = function (req, res) {
 /*redirects page to the "create new goal" page*/
 exports.navigate_to_createNewGoal = function (req, res) {
     try {
-            User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
+        User.findById(req.params.userid, function (err, user) {
+            Student.findById(req.params.studentid, function (err, student) {
                 res.render('pages/createNewGoal', {
                     student: student,
                     user: user
                 });
             });
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.render('pages/error');
     }
@@ -261,15 +307,25 @@ exports.navigate_to_createNewGoal = function (req, res) {
 
 exports.navigate_to_goalInfo = function (req, res) {
     try {
-        User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
-                res.render('pages/goalInfo', {
-                    student: student,
-                    user: user
+        User.findById(req.params.userid, function (err, user) {
+            Student.findById(req.params.studentid, function (err, student) {
+                Goal.findById(req.params.goalid, function (err, goal) {
+                    // console.log("goal pre decrypt", goal)
+                    goal.name = decryption(goal.name);
+                    goal.description = decryption(goal.description);
+                    goal.userid = decryption(goal.userid)
+                    // console.log("goal post decrypt", goal)
+
+                    res.render('pages/goalInfo', {
+                        student: student,
+                        user: user,
+                        goalid: req.params.goalid,
+                        goal: goal
+                    });
                 });
             });
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.render('pages/error');
     }

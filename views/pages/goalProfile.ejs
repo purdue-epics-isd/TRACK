@@ -113,17 +113,35 @@
                             <input type="number" placeholder="Score" id="score" name="score">
                             <%} %>
 
-                                <%if(goal.methodOfCollection.includes("comments")) { %>
-                                    
-                                        
-                                        <textarea type="text" id="description"
-                                                placeholder="Comments" name="comments"></textarea>
-                                        
-                                            
-                                            <%} %>
-
-                                                <%if(goal.methodOfCollection.includes("rubric")) { %>
-                                                    <p>Not in place yet</p>
+                                <%if(goal.methodOfCollection.includes("rubric")) { %>
+                                    <h2>Rubric</h2>
+                                    <div class="methodOfCollection" name="methodOfCollection">
+                                        <input type="radio" id="notEvident" name="optionsRadios"
+                                            value="Not evident">
+                                        <label for="notEvident">Not evident: <%= goal.rubricdescription[0] %></label>
+                                        <input type="radio" id="introduced" name="optionsRadios"
+                                            value="Introduced">
+                                        <label for="introduced">Introduced: <%= goal.rubricdescription[1] %></label>
+                                        <input type="radio" id="emerging" name="optionsRadios" value="Emerging">
+                                        <label for="emerging">Emerging: <%= goal.rubricdescription[2] %></label>
+                                        <input type="radio" id="developing" name="optionsRadios"
+                                            value="Developing">
+                                        <label for="developing">Developing: <%= goal.rubricdescription[3] %></label>
+                                        <input type="radio" id="ongoing" name="optionsRadios" value="Ongoing">
+                                        <label for="ongoing">Ongoing: <%= goal.rubricdescription[4] %></label>
+                                        <input type="radio" id="demonstrated" name="optionsRadios"
+                                            value="Demonstrated">
+                                        <label for="demonstrated">Demonstrated: <%= goal.rubricdescription[5] %></label>
+                                        <input type="radio" id="applied" name="optionsRadios" value="Applied">
+                                        <label for="applied">Applied: <%= goal.rubricdescription[6] %></label>
+                                    </div>
+                                    <%} %>
+                                        <%if(goal.methodOfCollection.includes("comments")) { %>
+                                            <%if(goal.methodOfCollection[0]=="description") { %>
+                                                <h2>Description</h2>
+                                                <%} %>
+                                                    <textarea rows="4" cols="50" type="text" name="comments"
+                                                        id="description" placeholder="Comments"></textarea>
                                                     <%} %>
 
                                                         <input type="file" id="file" class="file" name="file" onChange="updateFile()">
