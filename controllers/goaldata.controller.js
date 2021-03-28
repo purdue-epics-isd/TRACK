@@ -23,8 +23,14 @@ async function decryption(ciphertext) {
 exports.goaldata_create = async function (req, res) {
     try {
         // console.log("req.body", req.body)
-        console.log("uncompressed", req.body.filecontents);
+        // console.log("uncompressed", req.body.filecontents);
         // console.log("compressed", LZUTF8.compress(req.body.filecontents));
+        console.log("body", req.body);
+        // console.log("params", req.params);
+        // console.log("comments", req.body.comments);
+        // console.log("encrypted comments", await encryption(req.body.comments));
+        // console.log("decrypted encrypted comments", await decryption(await encryption(req.body.comments)));
+        
         let goaldata = new GoalData(
             {
                 goalID: req.params.goalid,
@@ -36,7 +42,7 @@ exports.goaldata_create = async function (req, res) {
                 time: Date.now(),
                 teacherEmail: await encryption(req.body.useremail),
                 filename: await encryption(req.body.file),
-                file: await encryption(req.body.filecontents)
+                file: req.body.filecontents
             }
         );
 

@@ -506,14 +506,18 @@ exports.student_redirect_edit = async function (req, res) {
     }
 };
 
-exports.student_edit = function (req, res) {
+exports.student_edit = async function (req, res) {
+    console.log("student_edit func")
+    console.log("body", req.body)
+    console.log("params", req.params)
     console.log("Student being edited: " + req.params.studentid);
+
     Student.findByIdAndUpdate(req.params.studentid,
-        { $set: { firstname: encryption(req.body.firstname),
-            lastname: encryption(req.body.lastname),
+        { $set: { firstname: await encryption(req.body.firstname),
+            lastname: await encryption(req.body.lastname),
             grade: req.body.grade,
-            dob: req.body.dob,
-            email: encryption(req.body.studentemail)
+            dob: null,
+            email: await encryption(req.body.studentemail)
              } }, function (err) {
           if (err) {
             // console.log("exports.student_edit");

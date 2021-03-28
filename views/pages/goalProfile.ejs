@@ -144,11 +144,17 @@
                                                         id="description" placeholder="Comments"></textarea>
                                                     <%} %>
 
-                                                        <input type="file" id="file" name="file" class="file">
+                                                        <input type="file" id="file" class="file" name="file" onChange="updateFile()">
                                                         <input type="hidden" name="useremail" id="useremail">
                                                         <input type="hidden" name="filecontents" id="filecontents">
                                                         <input type="hidden" name="filebool" id="filebool">
+                                                        <input type="hidden" name="commentContent" id="commentContent">
                                                         <script>
+                                                            var description = document.getElementById("description");
+                                                            var commentContent = document.getElementById("commentContent");
+                                                            console.log(description);
+                                                            console.log(description.value);
+                                                            commentContent.value = description.value;
                                                             var email = document.getElementById('useremail');
                                                             email.value = localStorage.getItem("username");
                                                             function updateFile() {
@@ -249,6 +255,7 @@
                 <%} %>
                     <div class="generalBox table">
                         <h1>Progress</h1>
+                        <tbody>
                         <table id="goalTable">
                             <tr>
                                 <%if(goal.methodOfCollection[0]=="score" ) { %>
@@ -315,8 +322,7 @@
                                                                         <%=goalData.teacherEmail%>
                                                                     </td>
                                                                     <td>
-                                                                        <a name="<%=goalData._id%>"
-                                                                            id="<%=goalData._id%>" target="_blank">
+                                                                        <a name="<%=goalData._id%>" id="<%=goalData._id%>" target="_blank">
                                                                             <%=goalData.filename%>
                                                                         </a>
                                                                     </td>
@@ -334,8 +340,70 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
+                                        <script>
+                                            dataURItoBlob = function(dataURI, ext) {
+                                                const byteString = window.atob(dataURI);
+                                                const arrayBuffer = new ArrayBuffer(byteString.length);
+                                                const int8Array = new Uint8Array(arrayBuffer);
+                                                for (let i = 0; i < byteString.length; i++) {
+                                                    int8Array[i] = byteString.charCodeAt(i);
+                                                }
+                                                var blob;
+                                                if (ext == 'pdf') {
+                                                    blob = new Blob([int8Array], { type: 'application/'+ext});
+                                                }
+                                                else {
+                                                    blob = new Blob([int8Array], { type: 'image/'+ext});
+                                                }
+                                                return blob;
+                                            }
+                                            console.log("should print as many times as there are goaldatas")
+                                            if ("<%=goalData.file%>" != "null") {
+                                                console.log("should print when there is a file")
+                                                // console.log("<%=goalData.file%>");
+                                                let fileDataUrl = "<%=goalData.file%>"
+                                                console.log(fileDataUrl)
+                                                // var regex = /^data:.+\/(.+);base64,(.*)$/;
+                                                // var matches = fileDataUrl.match(regex);
+                                                // var ext = matches[1];
+                                                // // console.log("ext", ext)
+                                                // var data = matches[2];
+                                                console.log("printme")
+                                                var extIndex = 0;
+                                                for (let i = 0; i < fileDataUrl.length; i++) {
+                                                    extIndex = i;
+                                                    if (fileDataUrl[i] == '/') {
+                                                        break;
+                                                    }
+                                                }
+                                                var ext = fileDataUrl.substring(extIndex + 1, extIndex + 4);
+                                                console.log("/ is at index ", extIndex)
+                                                console.log("ext", ext)
+                                                let dataIndex = 0
+                                                for (let i = 0; i < fileDataUrl.length; i++) {
+                                                    dataIndex = i;
+                                                    if (fileDataUrl[i] == ',') {
+                                                        break;
+                                                    }
+                                                }
+                                                console.log("printme2")
+                                                var data = fileDataUrl.substring(dataIndex + 1, fileDataUrl.length);
+                                                console.log(", is at index ", dataIndex)
+                                                console.log("data", data)
+                                                const blob = this.dataURItoBlob(data, ext);
+                                                console.log("blob", blob)
+                                                const url = URL.createObjectURL(blob);
+                                                console.log("url", url)
+                                                let aTag = document.getElementById("<%=goalData._id%>")
+                                                console.log("aTag", aTag)
+                                                aTag.href = url
+                                                console.log("aTag post", aTag)
+                                            }
+                                        </script>
                                 </tr>
+                                
                                 <% }); %>
+                            </tbody>
                         </table>
                     </div>
         </section>

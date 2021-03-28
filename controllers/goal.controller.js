@@ -112,10 +112,16 @@ exports.navigate_to_goalProfile = async function (req, res) {
             }
             await goaldata.forEach(async function (s) {
                 // console.log("goaldata pre decrypt", s)
+                console.log("s.comments", s.comments);
+                console.log("s.teacherEmail", s.teacherEmail);
+                console.log("s.filename", s.filename);
                 s.comments = await decryption(s.comments);
                 s.teacherEmail = await decryption(s.teacherEmail);
                 s.filename = await decryption(s.filename);
-                s.file = await decryption(s.file);
+                s.file = s.file;
+                await console.log("s.comments", s.comments);
+                await console.log("s.teacherEmail", s.teacherEmail);
+                await console.log("s.filename", s.filename);
                 // console.log("goaldata post decrypt", s)
                 await goalDatas.push(s);
                 // await console.log(s)
