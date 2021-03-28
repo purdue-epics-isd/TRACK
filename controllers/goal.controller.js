@@ -212,6 +212,7 @@ exports.goal_redirect_edit = function (req, res) {
                     user: user,
                     goalid: req.params.goalid,
                     goal: goal
+                });
 
                 });
             });
@@ -235,9 +236,9 @@ exports.goal_edit = function (req, res) {
 
     // console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
-
             { $set: { name: req.body.name,
                 description: req.body.description,
+
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
