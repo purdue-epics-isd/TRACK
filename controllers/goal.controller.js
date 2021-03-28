@@ -11,10 +11,10 @@ mongoose.set('useFindAndModify', false); // solve findAndModify() warning
 
 // encryption functions
 function encryption(string) {
-    return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123', { mode: CryptoJS.mode.ECB }).toString();
+    return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123').toString();
 }
 function decryption(ciphertext) {
-    var bytes = CryptoJS.AES.decrypt(ciphertext, 'secret key 123', { mode: CryptoJS.mode.ECB });
+    var bytes = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
 
@@ -203,9 +203,9 @@ exports.goal_redirect_edit = function (req, res) {
             Student.findById(req.params.studentid, function (err, student) {
                 Goal.findById(req.params.goalid, function (err, goal) {
                     // console.log("goal pre decrypt", goal)
-                    goal.name = decryption(goal.name);
-                    goal.description = decryption(goal.description);
-                    goal.userid = decryption(goal.userid)
+                    goal.name = goal.name;
+                    goal.description = dgoal.description;
+                    goal.userid = goal.userid
                     // console.log("goal post decrypt", goal)
 
                     res.render('pages/EditGoal', {
@@ -239,8 +239,8 @@ exports.goal_edit = function (req, res) {
 
         {
             $set: {
-                name: encryption(req.body.name),
-                description: encryption(req.body.description),
+                name: req.body.name,
+                description: req.body.description,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
@@ -314,9 +314,9 @@ exports.navigate_to_goalInfo = function (req, res) {
             Student.findById(req.params.studentid, function (err, student) {
                 Goal.findById(req.params.goalid, function (err, goal) {
                     // console.log("goal pre decrypt", goal)
-                    goal.name = decryption(goal.name);
-                    goal.description = decryption(goal.description);
-                    goal.userid = decryption(goal.userid)
+                    goal.name = goal.name;
+                    goal.description = goal.description;
+                    goal.userid = goal.userid
                     // console.log("goal post decrypt", goal)
 
                     res.render('pages/goalInfo', {
