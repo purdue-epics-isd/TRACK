@@ -125,7 +125,7 @@ exports.student_create = async function (req, res) {
                                             // console.log("docs", docs)
                                         }
                                     })
-                                    Student.updateOne({email: req.body.studentemail}, {$push: {userid: await encryption(req.body.userID)}}, function(err, docs) {
+                                    Student.updateOne({email: req.body.studentemail}, {$push: {userid: req.body.userID}}, function(err, docs) {
                                         if (err) {
                                             console.log("err", err)
                                         }
