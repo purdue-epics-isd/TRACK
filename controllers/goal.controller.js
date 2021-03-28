@@ -33,8 +33,8 @@ exports.goal_create = function (req, res) {
         //for name:
         let goal = new Goal(
             {
-                name: encryption(req.body.name),
-                description: encryption(req.body.description),
+                name: req.body.name,
+                description: req.body.description,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
@@ -44,7 +44,7 @@ exports.goal_create = function (req, res) {
                 shared: false,
                 rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
                 goaldata: [],
-                userid: encryption(req.body.userID)
+                userid: req.body.userID
             })
 
         Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {
@@ -79,9 +79,9 @@ exports.navigate_to_goalProfile = async function (req, res) {
                 console.log("s.comments", s.comments);
                 console.log("s.teacherEmail", s.teacherEmail);
                 console.log("s.filename", s.filename);
-                s.comments = await decryption(s.comments);
-                s.teacherEmail = await decryption(s.teacherEmail);
-                s.filename = await decryption(s.filename);
+                s.comments = s.comments;
+                s.teacherEmail = s.teacherEmail;
+                s.filename = s.filename;
                 s.file = s.file;
                 await console.log("s.comments", s.comments);
                 await console.log("s.teacherEmail", s.teacherEmail);
@@ -103,9 +103,9 @@ exports.navigate_to_goalProfile = async function (req, res) {
                     await Goal.findById(req.params.goalid, async function(err, goal) {
                         var methodsOfCollection = goal.methodOfCollection;
                         // console.log("goal pre decrypt", goal)
-                        goal.name = await decryption(goal.name);
-                        goal.description = await decryption(goal.description);
-                        goal.userid = await decryption(goal.userid);
+                        goal.name = goal.name;
+                        goal.description = goal.description;
+                        goal.userid = goal.userid;
                         // console.log("goal post decrypt", goal)
                         // goal.studentID = decryption(goal.studentID);
                         // await console.log("method:" + goal.methodOfCollection);
@@ -166,9 +166,9 @@ exports.goal_redirect_edit = function (req, res) {
             Student.findById(req.params.studentid, function(err, student) {
               Goal.findById(req.params.goalid, function(err, goal) {
                   // console.log("goal pre decrypt", goal)
-                  goal.name = decryption(goal.name);
-                  goal.description =decryption(goal.description);
-                  goal.userid = decryption(goal.userid)
+                  goal.name = goal.name;
+                  goal.description = goal.description;
+                  goal.userid = goal.userid
                   // console.log("goal post decrypt", goal)
 
                 res.render('pages/EditGoal', {
@@ -191,8 +191,8 @@ exports.goal_redirect_edit = function (req, res) {
 exports.goal_edit = function (req, res) {
     // console.log("Goal id: [edit]: " + req.params.goalid);
     Goal.findByIdAndUpdate(req.params.goalid,
-            { $set: { name: encryption(req.body.name),
-                description: encryption(req.body.description),
+            { $set: { name: req.body.name,
+                description: req.body.description,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,

@@ -38,10 +38,10 @@ exports.goaldata_create = async function (req, res) {
                 count: req.body.count,
                 rubricOption: req.body.optionsRadios,
                 support: req.body.support,
-                comments: await encryption(req.body.comments),
+                comments: req.body.comments,
                 time: Date.now(),
-                teacherEmail: await encryption(req.body.useremail),
-                filename: await encryption(req.body.file),
+                teacherEmail: req.body.useremail,
+                filename: req.body.file,
                 file: req.body.filecontents
             }
         );
