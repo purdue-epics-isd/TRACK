@@ -330,7 +330,13 @@
                                                 for (let i = 0; i < byteString.length; i++) {
                                                     int8Array[i] = byteString.charCodeAt(i);
                                                 }
-                                                const blob = new Blob([int8Array], { type: 'application/'+ext});
+                                                var blob;
+                                                if (ext == 'pdf') {
+                                                    blob = new Blob([int8Array], { type: 'application/'+ext});
+                                                }
+                                                else {
+                                                    blob = new Blob([int8Array], { type: 'image/'+ext});
+                                                }
                                                 return blob;
                                             }
                                             console.log("should print as many times as there are goaldatas")
@@ -367,11 +373,13 @@
                                                 console.log(", is at index ", dataIndex)
                                                 console.log("data", data)
                                                 const blob = this.dataURItoBlob(data, ext);
+                                                console.log("blob", blob)
                                                 const url = URL.createObjectURL(blob);
+                                                console.log("url", url)
                                                 let aTag = document.getElementById("<%=goalData._id%>")
-                                                console.log(aTag)
-                                                // console.log("url", url);
+                                                console.log("aTag", aTag)
                                                 aTag.href = url
+                                                console.log("aTag post", aTag)
                                             }
                                         </script>
                                 </tr>
