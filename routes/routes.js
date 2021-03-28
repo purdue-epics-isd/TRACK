@@ -133,6 +133,14 @@ router.get('/bulkadd', (req, res) => { //navigate to bulkadd page
 	});
 });
 
+router.get('/error', (req, res) => { //navigate to error page
+	User.findById(req.params.userid, function(err, user) {
+		res.render('./pages/error.ejs', {
+			user: user
+		})
+	});
+});
+
 
 router.get('/testing', (req, res) => { //navigate to testing page - purely used for testing and not accessible by users
 	/*
