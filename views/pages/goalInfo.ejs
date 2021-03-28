@@ -14,17 +14,17 @@
       <div class="studentHeader">
 
         <div class="studentName">
-          <h1>STUDENT NAME</h1>
+          <%= goal.name %>
         </div>
 
         <div class="studentInfo">
           <a href="/student/<%= student.id%>/goal/<%= goal.id%>">
             <button class="studentInfoButton">
-              <h2>GOAL</h2>
+              <h2>GOAL DATA</h2>
             </button>
           </a>
 
-          <a href="/student/<%=student.id%>/createNewGoal">
+          <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goal_edit">
             <button class="studentInfoButton">
               <h2>EDIT</h2>
             </button>
@@ -46,18 +46,18 @@
       <div class="studentInformation">
         <div class="box left">
           <h3>Goal Name</h3>
-          <p>COUNTING TO 10</p>
+          <p><%=goal.name%></p>
           <h3>Goal Description</h3>
-          <p>Student has to count to 10!</p>
+          <p><%=goal.description%></p>
         </div>
         <div class="box right">
           <h3>Dates</h3>
-          <p>Start Date: 01/02/21</p>
-          <p>End Date: 06/02/21</p>
+          <p>Start Date: <%=goal.startDate%></p>
+          <p>End Date: <%=goal.endDate%></p>
           <h3>Goal Type</h3>
-          <p>Academic</p>
+          <p><%=goal.goalType%></p>
           <h3>Method of Collection</h3>
-          <p>Score</p>
+          <p><%=goal.methodOfCollection[0]%></p>
         </div>
       </div>
     </section>
