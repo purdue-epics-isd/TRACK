@@ -1,144 +1,150 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>HOME</title>
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/student.css" />
 
-  </head>
-  <body>
-    <!-- NAV BAR -->
-    <%- include("navbar")%>
+<head>
+  <title>HOME</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/student.css" />
+
+</head>
+
+<body>
+  <!-- NAV BAR -->
+  <%- include("navbar")%>
     <!-- END NAV BAR -->
     <!-- NAME TAG -->
     <section>
       <div class="studentHeader">
-        
+
         <div class="studentName">
-          <h1><%= student.firstname %>'s Profile</h1>
+          <h1>
+            <%= student.firstname %>'s Profile
+          </h1>
         </div>
-        
-        <div class ="studentInfo">
-          <button type="button" onclick="showInfo()" class="studentInfoButton" id="infoButton"><h2>INFO</h2>
+
+        <div class="studentInfo">
+          <button type="button" onclick="showInfo()" class="studentInfoButton" id="infoButton">
+            <h2>INFO</h2>
           </button>
 
-          <button class="studentInfoButton">
-              <a href="/student/<%= student.id%>/student_edit"><h2>EDIT</h2></a>
-            </button>
+          <button type="button" onclick="showGoals()" class="studentGoalButton" id="goalButton">
+            <h2>GOALS</h2>
+          </button>
 
+          <a href="/student/<%= student.id%>/student_edit">
             <button class="studentInfoButton">
-                <a href="/student/<%= student.id %>/delete" onclick="return confirm('Please confirm to delete this student')" class="Delete" style="color: black"><h2>DELETE</h2></a>
-              </button>
+              <h2>EDIT</h2>
+            </button>
+          </a>
+
+          <a href="/student/<%= student.id %>/delete" onclick="return confirm('Please confirm to delete this student')"
+            class="Delete">
+            <button class="studentInfoButton">
+              <h2>DELETE</h2>
+            </button>
+          </a>
+          </button>
 
           <button class="studentInfoButton" id="toggle" onClick="toggle()">
-            <div class="dropdown">
-              <h2>VIEW</h2>
-              <div class="dropdown-content">
-                <input type="checkbox" id="person1" name="person1">
-                <label for="person1">Conley</label>
-                <input type="checkbox" id="person2" value="person2">
-                <label for="person2">Michael</label>
-              </div>
-            </div>
+            <h2>VIEW</h2>
           </button>
         </div>
 
       </div>
 
-      <div class = "overviewcard" id="studentsInfoBox" style="display: none; grid-template-columns: auto">
-          Date of Birth: <span id="dob"></span> <br>
-          Email: <%= student.email %> <br>
-          Grade Level: <%= student.grade %> <br>
-          Class Period: <%= student.period %> 
-        </div>
-    
-      
-</section>
-    <div class = "cardContainer" id="goalsBox">
-        <a href="/student/<%=student.id%>/createNewGoal">
-          <div class="goalCardName">
+      <div class="overviewcard" id="studentsInfoBox" style="display: none; grid-template-columns: auto">
+        Name: <%= student.firstname %>
+          <%= student.lastname %> <br>
+            Date of Birth: <%= student.dob %> <br>
+              Email: <%= student.email %> <br>
+                Grade Level: <%= student.grade %> <br>
+      </div>
+
+
+    </section>
+    <div class="cardContainer" id="goalsBox">
+      <a href="/student/<%=student.id%>/createNewGoal">
+        <div class="goalCardName">
           <div style="max-width: 18rem">
-              <div class="card">  
-                <div class="cardInitial">+</div>
-              </div>
+            <div class="card">
+              <div class="cardInitial">+</div>
             </div>
           </div>
-            </a>
-      
-        <% goals.forEach(async function(goal) { %> 
-        <div id="<%=goal.id%>" className="changeable"> 
-          
-        <script async>
-          console.log("hello");
-          console.log("<%=student.id%>/goal/<%=goal.id%>");
-          console.log("<%=goal.userid%>")
-          
-          console.log(localStorage.getItem("username"))
-          
-          if ("<%=goal.userid%>" == localStorage.getItem("username")) {
-            console.log("goal is made by user")
-            var anchor = document.createElement("a");
-            anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
-            anchor.id = "cardContainer";
-            var card = document.createElement("div");
-            card.className = "goalCardName";
-            var cardText = document.createElement("div");
-            console.log("<%=goal.goalType%>");
-            if("<%=goal.goalType%>".localeCompare("Academic"))
-            {
-              cardText.className = "card acaedmic text-white bg-primary mb-3";
-            }
-            else
-            {
-              cardText.className = "card behavior text-white bg-primary mb-3";
-            }
-            cardText.style = "max-width: 20rem;";
-            var cardHeader = document.createElement("div");
-            cardHeader.innerHTML = "<%=goal.goalType%>";
-            var cardBody = document.createElement("div");
-            var cardTitle = document.createElement("h4");
-            cardTitle.className = "cardInfo";
-            cardTitle.innerHTML = "<%= goal.name %>";
-            cardBody.appendChild(cardTitle);
-            cardText.appendChild(cardHeader);
-            cardText.appendChild(cardBody);
-            card.appendChild(cardText);
-            anchor.appendChild(card);
-            document.getElementById("<%=goal.id%>").appendChild(anchor);
-            document.getElementById("<%=goal.id%>").style = "display: "
-  
-          }
-          else {
-            console.log("goal is not made by user")
-            var anchor = document.createElement("a");
-            anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
-            anchor.id = "goalCard";
-            var card = document.createElement("div");
-            card.className = "goalCardName";
-            var cardText = document.createElement("div");
-            cardText.className = "card text-white bg-primary mb-3";
-            cardText.style = "max-width: 20rem;";
-            var cardHeader = document.createElement("div");
-            cardHeader.innerHTML = "<%=goal.goalType%>";
-            var cardBody = document.createElement("div");
-            var cardTitle = document.createElement("h4");
-            cardTitle.className = "card-title";
-            cardTitle.innerHTML = "<%= goal.name %>";
-            cardBody.appendChild(cardTitle);
-            cardText.appendChild(cardHeader);
-            cardText.appendChild(cardBody);
-            card.appendChild(cardText);
-            anchor.appendChild(card);
-            document.getElementById("<%=goal.id%>").appendChild(anchor);
-            document.getElementById("<%=goal.id%>").style = "display: none"
-          }
-  
-        
-  
-        </script>
         </div>
-  
-          <!-- <a id="goalCard" href="/student/<%=student.id%>/goal/<%=goal.id%>">
+      </a>
+
+      <% goals.forEach(async function(goal) { %>
+        <div id="<%=goal.id%>" className="changeable">
+
+          <script async>
+            console.log("hello");
+            console.log("<%=student.id%>/goal/<%=goal.id%>");
+            console.log("<%=goal.userid%>")
+
+            console.log(localStorage.getItem("username"))
+
+            if ("<%=goal.userid%>" == localStorage.getItem("username")) {
+              console.log("goal is made by user")
+              var anchor = document.createElement("a");
+              anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
+              anchor.id = "cardContainer";
+              var card = document.createElement("div");
+              card.className = "goalCardName";
+              var cardText = document.createElement("div");
+              console.log("<%=goal.goalType%>");
+              if ("<%=goal.goalType%>".localeCompare("Academic")) {
+                cardText.className = "card acaedmic text-white bg-primary mb-3";
+              }
+              else {
+                cardText.className = "card behavior text-white bg-primary mb-3";
+              }
+              cardText.style = "max-width: 20rem;";
+              var cardHeader = document.createElement("div");
+              cardHeader.innerHTML = "<%=goal.goalType%>";
+              var cardBody = document.createElement("div");
+              var cardTitle = document.createElement("h4");
+              cardTitle.className = "cardInfo";
+              cardTitle.innerHTML = "<%= goal.name %>";
+              cardBody.appendChild(cardTitle);
+              cardText.appendChild(cardHeader);
+              cardText.appendChild(cardBody);
+              card.appendChild(cardText);
+              anchor.appendChild(card);
+              document.getElementById("<%=goal.id%>").appendChild(anchor);
+              document.getElementById("<%=goal.id%>").style = "display: "
+
+            }
+            else {
+              console.log("goal is not made by user")
+              var anchor = document.createElement("a");
+              anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
+              anchor.id = "goalCard";
+              var card = document.createElement("div");
+              card.className = "goalCardName";
+              var cardText = document.createElement("div");
+              cardText.className = "card text-white bg-primary mb-3";
+              cardText.style = "max-width: 20rem;";
+              var cardHeader = document.createElement("div");
+              cardHeader.innerHTML = "<%=goal.goalType%>";
+              var cardBody = document.createElement("div");
+              var cardTitle = document.createElement("h4");
+              cardTitle.className = "card-title";
+              cardTitle.innerHTML = "<%= goal.name %>";
+              cardBody.appendChild(cardTitle);
+              cardText.appendChild(cardHeader);
+              cardText.appendChild(cardBody);
+              card.appendChild(cardText);
+              anchor.appendChild(card);
+              document.getElementById("<%=goal.id%>").appendChild(anchor);
+              document.getElementById("<%=goal.id%>").style = "display: none"
+            }
+
+
+
+          </script>
+        </div>
+
+        <!-- <a id="goalCard" href="/student/<%=student.id%>/goal/<%=goal.id%>">
             <div class = "goalCardName">
               <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
                   <div class="card-header"><%=goal.goalType%></div>
@@ -152,80 +158,46 @@
                  </div>
                </div>
              </div>
-           </a>   -->   
-            
-         <% }); %>
-         
-         
-          </div>
-        
-  </body>
+           </a>   -->
+
+        <% }); %>
+
+
+    </div>
+
+</body>
+
 </html>
 
 <script>
-
-    function toggle() {
-      console.log("toggle")
-      var goalsBox = document.getElementById("goalsBox");
-      console.log(goalsBox)
-      console.log(goalsBox.children)
-      var goals = goalsBox.children
-      console.log(goals)
-      for (let i = 0; i < goals.length - 1; i++) {
-
-        if (goals[i].style.display == "none") {
-          goals[i].style.display = ""
-        }
-        else {
-          goals[i].style.display = "none"
-        }
+  function toggle() {
+    var goalsBox = document.getElementById("goalsBox");
+    var goals = goalsBox.children;
+    for (let i = 0; i < goals.length; i++) {
+      if (goals[i].style.display == "none") {
+        goals[i].style.display = "";
+      }
+      else {
+        goals[i].style.display = "none";
       }
     }
+  }
 
+  function showInfo() {
+    document.getElementById('infoButton').style.display = "none";
+    document.getElementById("goalButton").style.display = "block";
+    var goalsBox = document.getElementById('goalsBox');
+    goalsBox.style.display = 'none';
+    var studentsInfoBox = document.getElementById('studentsInfoBox');
+    studentsInfoBox.style.display = 'block';
+  }
 
-    function showInfo() {
-      var infoButton = document.getElementById('infoButton');
-      if(infoButton.innerHTML == "Show Info") {
-        infoButton.innerHTML = "Show Goals";
-
-        var goalsBox = document.getElementById('goalsBox');
-        goalsBox.style.display='none';
-        var studentsInfoBox = document.getElementById('studentsInfoBox');
-        studentsInfoBox.style.display='block';
-      } else {
-        infoButton.innerHTML = "Show Info";
-        var goalsBox = document.getElementById('goalsBox');
-        goalsBox.style.display='';
-        var studentsInfoBox = document.getElementById('studentsInfoBox');
-        studentsInfoBox.style.display='none';
-      }
-
-    }
-
-    convertToYYYYMMDD("<%=student.dob%>");
-    function convertToYYYYMMDD(d) {
-      date = new Date(d);
-      year = date.getFullYear();
-    //console.log("Year: " + year);
-    month = date.getMonth()+1;
-    dt = date.getDate()+1;
-
-    if (dt < 10) {
-      dt = '0' + dt;
-    }
-    if (month < 10) {
-      month = '0' + month;
-    }
-
-    if(String(year) != "NaN") {
-      console.log("good");
-      var format = String(month) + '-'+ String(dt) +'-' + String(year);
-    } else {
-      console.log("bad");
-      var format = "";
-    }
-
-    console.log("formatted year: " + format);
-    document.getElementById('dob').innerHTML = format;
+  function showGoals() {
+    document.getElementById("goalButton").style.display = "none";
+    document.getElementById('infoButton').style.display = "block";
+    var goalsBox = document.getElementById('goalsBox');
+    goalsBox.style.display = '';
+    var studentsInfoBox = document.getElementById('studentsInfoBox');
+    studentsInfoBox.style.display = 'none';
   }
 </script>

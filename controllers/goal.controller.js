@@ -20,7 +20,7 @@ function decryption(ciphertext) {
 
 //converts the date to YYYY-MM-DD
 function convertToYYYYMMDD(d) {
-    if (d.substring(4, 5) != "-") {
+    if (d.substring(4, 5) != "-" || d.substring(11, 12) == "T") {
         date = new Date(d);
         year = date.getFullYear();
         month = date.getMonth() + 1;
@@ -204,7 +204,7 @@ exports.goal_redirect_edit = function (req, res) {
                 Goal.findById(req.params.goalid, function (err, goal) {
                     // console.log("goal pre decrypt", goal)
                     goal.name = goal.name;
-                    goal.description = dgoal.description;
+                    goal.description = goal.description;
                     goal.userid = goal.userid
                     // console.log("goal post decrypt", goal)
 

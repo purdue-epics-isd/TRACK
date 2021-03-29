@@ -14,7 +14,7 @@
         <input type="text" name="firstname" placeholder="First Name" />
         <input type="text" name="lastname" placeholder="Last Name" />
         <input type="text" name="studentemail" placeholder="Email" />
-        <input type="date" name="dob" placeholder="Date of Birth" />
+        <input type="date" name="dob" id="dob" placeholder="Date of Birth" />
         <select class="gradeYear" name ="grade">
           <option selected disabled>Grade Year</option>
           <option value="Pre-K">Pre-K</option>
@@ -45,3 +45,21 @@
     
   </body>
 </html>
+
+<script type="text/javascript">
+  var datefield = document.createElement("input")
+  datefield.setAttribute("type", "date")
+  if (datefield.type != "date") { //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+    document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+    document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+    document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
+  }
+</script>
+
+<script type="text/javascript">
+  if (datefield.type != "date") { //if browser doesn't support input type="date", initialize date picker widget:
+    jQuery(function ($) { //on document.ready
+      $('#dob').datepicker();
+    })
+  }
+</script>
