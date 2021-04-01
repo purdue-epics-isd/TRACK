@@ -46,7 +46,8 @@
       <div class="rubricLayout" name="rubricLayout" id="rubricLayout">
         <h2>RUBRIC</h2>
         <h3>Description for Not Evident</h3>
-        <textarea rows="1" cols="50" type="text" name="Rnotevident" placeholder="Description for Not Evident"></textarea>
+        <textarea rows="1" cols="50" type="text" name="Rnotevident"
+          placeholder="Description for Not Evident"></textarea>
         <h3>Description for Introduced</h3>
         <textarea rows="1" cols="50" type="text" name="Rintroduced" placeholder="Description for Introduced"></textarea>
         <h3>Description for Emerging</h3>
@@ -81,10 +82,11 @@
 </html>
 
 <script>
-  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  //sorry this is a super jank way of getting user ID but its OKAY
   document.getElementById("userID").value = localStorage.getItem("username");
 </script>
 
+<!-- These TWO scripts are used to make the date picker in Safari since it doesn't have a native one -->
 <script type="text/javascript">
   var datefield = document.createElement("input")
   datefield.setAttribute("type", "date")

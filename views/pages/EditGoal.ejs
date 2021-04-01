@@ -66,10 +66,11 @@
 </html>
 
 <script>
-    //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+    //sorry this is a super jank way of getting user ID but its OKAY
     document.getElementById("userID").value = localStorage.getItem("username");
 </script>
 
+<!-- This script makes the appropriate circle colored purple if academic or behavioral goal type -->
 <script type="text/javascript">
     var goalType = "<%=goal.goalType%>";
     var methodOfCollection = "<%=goal.methodOfCollection[0]%>";
@@ -82,6 +83,7 @@
     }
 </script>
 
+<!-- These TWO scripts are used to make the date picker in Safari since it doesn't have a native one -->
 <script type="text/javascript">
     var datefield = document.createElement("input")
     datefield.setAttribute("type", "date")

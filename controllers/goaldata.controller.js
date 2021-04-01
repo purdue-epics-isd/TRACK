@@ -48,16 +48,7 @@ exports.goaldata_create = async function (req, res) {
                 }
             });
         });
-        
-        res.redirect("/student/" + req.params.studentid);
-        
-        // if(req.params.shared == "true") {
-        //     console.log("navigating to shared student profile...");
-        //     res.redirect("/sharedWithMe/" + req.params.studentid);
-        // } else {
-        //     console.log("navigating to personal student profile...");
-        //     res.redirect("/student/" + req.params.studentid);
-        // }
+        setTimeout(() => { res.redirect("/student/" + req.params.studentid + "/goal/" + req.params.goalid); }, 1000);
     } catch(err) {
         console.log(err);
         res.render('./error');

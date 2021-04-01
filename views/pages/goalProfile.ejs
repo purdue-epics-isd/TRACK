@@ -44,7 +44,7 @@
                 var table = document.getElementById("goalTable");
                 var tableClone = table.cloneNode(true); //create clone of the table
 
-                //remove the delete column
+                //removes the Modify and Created By columns column
                 var rows = tableClone.rows;
                 for (var i = 0; i < rows[0].cells.length; i++) {
                     if (rows[0].cells[i].innerHTML == "Modify" || rows[0].cells[i].innerHTML == "Created by") {
@@ -53,8 +53,6 @@
                         }
                     }
                 }
-
-
 
                 var tableHTML = tableClone.outerHTML.replace(/ /g, '%20');
 
@@ -144,6 +142,7 @@
                                                         id="description" placeholder="Comments"></textarea>
                                                     <%} %>
 
+                                                        <!-- File Upload -->
                                                         <input type="file" id="file" class="file" name="file" onChange="updateFile()">
                                                         <input type="hidden" name="useremail" id="useremail">
                                                         <input type="hidden" name="filecontents" id="filecontents">
@@ -182,6 +181,7 @@
             </form>
         </div>
         <!-- END GOAL INPUT -->
+        <!-- GRAPH AND PROGRESS TABLE -->
         <section class="progress">
             <%if(goal.methodOfCollection.includes("score") || goal.methodOfCollection.includes("count")) { %>
                 <div class="generalBox graph">

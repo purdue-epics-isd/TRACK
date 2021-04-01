@@ -11,7 +11,7 @@
   <%- include("navbar")%>
     <section>
       <form action="/student/<%= student.id %>/student_edit/submit" method="post">
-        <!-- Goal -->
+        <!-- Student -->
         <h2>Edit <%= student.firstname %>
             <%= student.lastname %>'s Profile</h2>
 
@@ -47,8 +47,9 @@
 </html>
 
 <script>
-  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
+  //sorry this is a super jank way of getting user ID but its OKAY
   document.getElementById("userID").value = localStorage.getItem("userID");
+
   console.log(localStorage.getItem("userID"));
   var grade = parseInt("<%= student.grade %>", 10);
   console.log("grade: " + grade);
@@ -59,9 +60,10 @@
     document.getElementById("grade").selectedIndex = parseInt("<%= student.grade %>", 10) + 1;
     console.log("is number?? confused");
   }
-  document.getElementById("period").selectedIndex = "<%= student.period %>" - 1;  
+  document.getElementById("period").selectedIndex = "<%= student.period %>" - 1;
 </script>
 
+<!-- These TWO scripts are used to make the date picker in Safari since it doesn't have a native one -->
 <script type="text/javascript">
   var datefield = document.createElement("input")
   datefield.setAttribute("type", "date")

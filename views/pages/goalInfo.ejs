@@ -12,11 +12,9 @@
     <!-- NAME TAG -->
     <section>
       <div class="studentHeader">
-
         <div class="studentName">
           <%= goal.name %>
         </div>
-
         <div class="studentInfo">
           <a href="/student/<%= student.id%>/goal/<%= goal.id%>">
             <button class="studentInfoButton">
@@ -46,18 +44,28 @@
       <div class="studentInformation">
         <div class="box left">
           <h3>Goal Name</h3>
-          <p><%=goal.name%></p>
+          <p>
+            <%=goal.name%>
+          </p>
           <h3>Goal Description</h3>
-          <p><%=goal.description%></p>
+          <p>
+            <%=goal.description%>
+          </p>
         </div>
         <div class="box right">
           <h3>Dates</h3>
-          <p>Start Date: <%=goal.startDate%></p>
-          <p>End Date: <%=goal.endDate%></p>
+          <p>Start Date: <%=goal.startDate%>
+          </p>
+          <p>End Date: <%=goal.endDate%>
+          </p>
           <h3>Goal Type</h3>
-          <p><%=goal.goalType%></p>
+          <p>
+            <%=goal.goalType%>
+          </p>
           <h3>Method of Collection</h3>
-          <p><%=goal.methodOfCollection[0]%></p>
+          <p>
+            <%=goal.methodOfCollection[0]%>
+          </p>
         </div>
       </div>
     </section>
