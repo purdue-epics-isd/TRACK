@@ -4,15 +4,16 @@ const User = require('../models/user.model');
 const Teacher = require('../models/teacher.model');
 var CryptoJS = require("crypto-js");
 const mongoose = require('mongoose');
+var sha256 = require('js-sha256');
 
 async function encryption(string) {
-    let ciphertext = await CryptoJS.AES.encrypt(string, 'secret key 123', { mode: CryptoJS.mode.ECB }).toString();
+    let ciphertext = await CryptoJS.AES.encrypt(string, 'secret key 123').toString();
     return ciphertext;
 }
 
 async function decryption(ciphertext) {
     // await console.log("decryption")
-    var bytes = await CryptoJS.AES.decrypt(ciphertext, 'secret key 123', { mode: CryptoJS.mode.ECB });
+    var bytes = await CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     // await console.log("bytes:", bytes);
     var originalText = await bytes.toString(CryptoJS.enc.Utf8);
     console.log("originalText", originalText)
@@ -49,6 +50,7 @@ function convertToYYYYMMDD(d) {
 /*creates new student profile in database and ensures their is a teacher profile for them*/
 exports.student_create = async function (req, res) {
     //Converting date to YYYY-MM-DD
+    console.log("encryption", sha256(""))
     if (req.body.dob != NaN) {
         req.body.dob = convertToYYYYMMDD(req.body.dob);
     }
@@ -63,18 +65,18 @@ exports.student_create = async function (req, res) {
                 students: [],
                 shared: false,
                 sharedwith: false,
-                userid: req.body.userID
+                userid: sha256(req.body.userID)
             }
         );
         let student = new Student(
             {
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
+                firstname: await encryption(req.body.firstname),
+                lastname: await encryption(req.body.lastname),
                 grade: req.body.grade,
                 dob: req.body.dob,
-                email: req.body.studentemail,
+                email: sha256(req.body.studentemail),
                 goals: [],
-                userid: req.body.userID,
+                userid: sha256(req.body.userID),
                 shared: false
             }
         );
@@ -83,7 +85,7 @@ exports.student_create = async function (req, res) {
         // console.log("Student.exists({userID: req.body.userID})", Teaccher.exists({email: req.body.studentemail}));
 
         // new
-        Teacher.count({ userid: req.body.userID }, function (err, count) {
+        Teacher.count({ userid: sha256(req.body.userID) }, function (err, count) {
 
             if (count == 0) {
                 // console.log("teacher count", count);
@@ -98,12 +100,12 @@ exports.student_create = async function (req, res) {
 
 
         // new
-        Student.count({ email: req.body.studentemail }, function (err, count) {
+        Student.count({ email: sha256(req.body.studentemail) }, function (err, count) {
 
             if (count == 0) {
                 // this accounts for when a student is created for the first time
                 // console.log("student count", count);
-                Teacher.findOneAndUpdate({ userid: req.body.userID }, { $push: { students: student } }, function (err, teacher) {
+                Teacher.findOneAndUpdate({ userid: sha256(req.body.userID) }, { $push: { students: student } }, function (err, teacher) {
                     student.save(function (err) {
                         if (err) {
                             res.send(err);
@@ -122,12 +124,12 @@ exports.student_create = async function (req, res) {
                 // that has already been created should be appended to that teachers list of students.  In 
                 // addition to this, the teacher should be appended to the list of teachers on a student
                 // object.
-                Teacher.findOne({ userid: req.body.userID }, async function (err, result) {
+                Teacher.findOne({ userid: sha256(req.body.userID) }, async function (err, result) {
                     if (err) {
                         console.log("err", err)
                     }
                     else {
-                        Student.findOne({ email: req.body.studentemail }, async function (err1, result1) {
+                        Student.findOne({ email: sha256(req.body.studentemail) }, async function (err1, result1) {
                             if (err1) {
                                 console.log("err1", err1)
                             }
@@ -151,7 +153,7 @@ exports.student_create = async function (req, res) {
                                 // console.log("inTeachersStudArr", inTeachersStudArr)
                                 if (!inTeachersStudArr) {
                                     // if the id is not in the list of students append the id to the user
-                                    Teacher.updateOne({ userid: req.body.userID }, { $push: { students: result1 } }, function (err, docs) {
+                                    Teacher.updateOne({ userid: sha256(req.body.userID) }, { $push: { students: result1 } }, function (err, docs) {
                                         if (err) {
                                             console.log("err", err)
                                         }
@@ -159,7 +161,7 @@ exports.student_create = async function (req, res) {
                                             // console.log("docs", docs)
                                         }
                                     })
-                                    Student.updateOne({ email: req.body.studentemail }, { $push: { userid: req.body.userID } }, function (err, docs) {
+                                    Student.updateOne({ email: sha256(req.body.studentemail) }, { $push: { userid: sha256(req.body.userID) } }, function (err, docs) {
                                         if (err) {
                                             console.log("err", err)
                                         }
@@ -214,19 +216,19 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
             students: [],
             shared: false,
             sharedwith: false,
-            userid: teacherEmail
+            userid: sha256(teacherEmail)
         }
     );
 
     let student = new Student(
         {
-            firstname: studentFirstName,
-            lastname: studentLastName,
+            firstname: await encryption(studentFirstName),
+            lastname: await encryption(studentLastName),
             grade: null,
             dob: null,
-            email: studentEmail,
+            email: sha256(studentEmail),
             goals: [],
-            userid: teacherEmail,
+            userid: sha256(teacherEmail),
             shared: false
         }
     );
@@ -251,7 +253,7 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
 
 
     if (await updateUserID(studentEmail, teacherEmail) == true) {
-        Student.findOneAndUpdate({ email: studentEmail }, { $push: { userid: teacherEmail } }, async function (err, docs) {
+        Student.findOneAndUpdate({ email: sha256(studentEmail) }, { $push: { userid: sha256(teacherEmail) } }, async function (err, docs) {
             // await console.log("updateUserID == true for ", teacherEmail)
             if (err) {
                 await console.log("err", err)
@@ -264,7 +266,7 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
     }
 
 
-    await Teacher.countDocuments({ userid: teacherEmail }, async function (err, count) {
+    await Teacher.countDocuments({ userid: sha256(teacherEmail) }, async function (err, count) {
         if (count == 0) {
             // create the teacher object
             // await console.log("teacher count == 0, CREATING TEACHER")
@@ -282,9 +284,9 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
 
         if (await updateStudents(studentEmail, teacherEmail) == true) {
 
-            await Student.findOne({ email: studentEmail }, async function (err, result) {
+            await Student.findOne({ email: sha256(studentEmail) }, async function (err, result) {
                 // await console.log("STUDENT.FINDONE")
-                Teacher.findOneAndUpdate({ userid: teacherEmail }, { $push: { students: result } }, async function (err, docs) {
+                Teacher.findOneAndUpdate({ userid: sha256(teacherEmail) }, { $push: { students: result } }, async function (err, docs) {
                     // await console.log("updateStudents == true for ", teacherEmail)
                     if (err) {
                         await console.log("err", err)
@@ -306,7 +308,7 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
 
 async function updateUserID(studentEmail, teacherEmail) {
     let updateUserID = true
-    await Student.findOne({ email: studentEmail }, async function (err, result) {
+    await Student.findOne({ email: sha256(studentEmail) }, async function (err, result) {
         for (let i = 0; i < await getIDLength(result); i++) {
             // await console.log(teacherEmail, i)
             // await console.log("result.userid[i]", result.userid[i]);
@@ -332,8 +334,8 @@ async function getStudentsLength(result1) {
 
 async function updateStudents(studentEmail, teacherEmail) {
     let updateStudents = true
-    await Student.findOne({ email: studentEmail }, async function (err, result) {
-        await Teacher.findOne({ userid: teacherEmail }, async function (err, result1) {
+    await Student.findOne({ email: sha256(studentEmail) }, async function (err, result) {
+        await Teacher.findOne({ userid: sha256(teacherEmail) }, async function (err, result1) {
             for (let i = 0; i < await getStudentsLength(result1); i++) {
                 // await console.log(teacherEmail, i)
                 if (result._id == result1.students[i]) {
@@ -381,21 +383,22 @@ exports.navigate_to_studentProfile = async function (req, res) {
             // console.log("in Goal.find");
             await goal.forEach(async function (s) {
                 // await console.log("pre log statements");
-                // await console.log("name", s.name);
-                // await console.log("description", s.description);
+                await console.log("name", s.name);
+                await console.log("description", s.description);
                 // await console.log("ID", s.studentID);
                 // await console.log("post log statements");
                 // console.log("goal pre decrypt", s)
-                s.name = s.name;
-                s.description = s.description;
+                
+                s.name = await decryption(s.name);
+                s.description = await decryption(s.description);
                 s.userid = s.userid
                 // console.log("goal pre decrypt", s)
 
 
 
                 // await console.log("pre log statements");
-                // await console.log("name", s.name);
-                // await console.log("description", s.description);
+                await console.log("name", s.name);
+                await console.log("description", s.description);
                 // await console.log("ID", s.studentID);
                 // await console.log("post log statements");
                 // if (s.userid == req.params.studnetid)
@@ -410,8 +413,8 @@ exports.navigate_to_studentProfile = async function (req, res) {
                     await Goal.findById(req.params.goalid, async function (err, goal) {
                         // await console.log("\nCurrent student: " + student);
                         // console.log("student pre decrypt", student)
-                        student.firstname = student.firstname;
-                        student.lastname = student.lastname;
+                        student.firstname = await decryption(student.firstname);
+                        student.lastname = await decryption(student.lastname);
                         student.email = student.email;
                         for (let i = 0; i < student.userid.length; i++) {
                             student.userid[i] = student.userid[i]
@@ -440,6 +443,7 @@ exports.navigate_to_studentProfile = async function (req, res) {
 exports.navigate_to_classPage = async function (req, res) {
     try {
         console.log("navigate_to_class_page")
+        console.log("req.params", req.params)
 
         var students = [];
 
@@ -464,13 +468,10 @@ async function decryptStudentList() {
     let students = []
     let promises = await Student.find({}).map(async function (stud) {
         return stud.map(async function (s) {
-
-            s.firstname = s.firstname;
-            s.lastname = s.lastname;
-            s.email = s.email;
-            for (let i = 0; i < s.userid.length; i++) {
-                s.userid[i] = s.userid[i]
-            }
+            console.log(s)
+            s.firstname = await decryption(s.firstname);
+            s.lastname = await decryption(s.lastname);
+            
 
             return s
         })
@@ -478,6 +479,7 @@ async function decryptStudentList() {
     })
 
     const result = await Promise.all(promises)
+    console.log(result)
 
     return result
 }
@@ -485,6 +487,7 @@ async function decryptStudentList() {
 /*redirects to new student page*/
 exports.navigate_to_createNewStudent = function (req, res) {
     try {
+        console.log("studentid", req.params.studentid)
         User.findById(req.params.userid, function (err, user) {
             Student.findById(req.params.studentid, function (err, student) {
                 res.render('pages/createNewStudent', {
@@ -519,10 +522,10 @@ exports.student_redirect_edit = async function (req, res) {
     console.log("redirecting to edit page");
     try {
         User.findById(req.params.userid, async function (err, user) {
-            Student.findById(req.params.studentid, async function (err, student) {
+            Student.findById(sha256(req.params.studentid), async function (err, student) {
                 // console.log("student pre decrypt", student)
-                student.firstname = student.firstname;
-                student.lastname = student.lastname;
+                student.firstname = await decryption(student.firstname);
+                student.lastname = await decryption(student.lastname);
                 student.email = student.email;
                 for (let i = 0; i < student.userid.length; i++) {
                     student.userid[i] = student.userid[i]
@@ -557,8 +560,8 @@ exports.student_edit = async function (req, res) {
     Student.findByIdAndUpdate(req.params.studentid,
         {
             $set: {
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
+                firstname: await encryption(req.body.firstname),
+                lastname: await encryption(req.body.lastname),
                 grade: req.body.grade,
                 dob: req.body.dob,
                 email: req.body.studentemail

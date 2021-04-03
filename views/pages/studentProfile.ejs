@@ -72,11 +72,14 @@
           </div>
         </div>
       </a>
-
+      <script>
+        console.log("pre goal cards")
+      </script>
       <!-- CREATES EACH GOAL CARD -->
       <% goals.forEach(async function(goal) { %>
+        
         <div id="<%=goal.id%>" className="changeable">
-
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js" integrity="sha512-szJ5FSo9hEmXXe7b5AUVtn/WnL8a5VofnFeYC2i2z03uS2LhAch7ewNLbl5flsEmTTimMN0enBZg/3sQ+YOSzQ==" crossorigin="anonymous"></script>
           <script async>
             console.log("hello");
             console.log("<%=student.id%>/goal/<%=goal.id%>");

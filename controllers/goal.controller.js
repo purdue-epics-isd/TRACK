@@ -6,6 +6,7 @@ const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
+var sha256 = require('js-sha256');
 
 mongoose.set('useFindAndModify', false); // solve findAndModify() warning
 
@@ -47,7 +48,7 @@ function convertToYYYYMMDD(d) {
 }
 
 /*creates a new goal in database*/
-exports.goal_create = function (req, res) {
+exports.goal_create = async function (req, res) {
     //encrytion ends here
     var CryptoJS = require("crypto-js");
     // Encrypt
@@ -69,8 +70,8 @@ exports.goal_create = function (req, res) {
         //for name:
         let goal = new Goal(
             {
-                name: req.body.name,
-                description: req.body.description,
+                name: await encryption(req.body.name),
+                description: await encryption(req.body.description),
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
@@ -115,7 +116,7 @@ exports.navigate_to_goalProfile = async function (req, res) {
                 console.log("s.comments", s.comments);
                 console.log("s.teacherEmail", s.teacherEmail);
                 console.log("s.filename", s.filename);
-                s.comments = s.comments;
+                s.comments = await decryption(s.comments);
                 s.teacherEmail = s.teacherEmail;
                 s.filename = s.filename;
                 s.file = s.file;
@@ -139,8 +140,8 @@ exports.navigate_to_goalProfile = async function (req, res) {
                     await Goal.findById(req.params.goalid, async function (err, goal) {
                         var methodsOfCollection = goal.methodOfCollection;
                         // console.log("goal pre decrypt", goal)
-                        goal.name = goal.name;
-                        goal.description = goal.description;
+                        goal.name = await decryption(goal.name);
+                        goal.description = await decryption(goal.description);
                         goal.userid = goal.userid;
                         // console.log("goal post decrypt", goal)
                         // goal.studentID = decryption(goal.studentID);
@@ -196,15 +197,15 @@ exports.goal_delete = function (req, res) {
 };
 
 /*navigates user to EditGoal.ejs page */
-exports.goal_redirect_edit = function (req, res) {
+exports.goal_redirect_edit = async function (req, res) {
     try {
 
         User.findById(req.params.userid, function (err, user) {
             Student.findById(req.params.studentid, function (err, student) {
-                Goal.findById(req.params.goalid, function (err, goal) {
+                Goal.findById(req.params.goalid, async function (err, goal) {
                     // console.log("goal pre decrypt", goal)
-                    goal.name = goal.name;
-                    goal.description = goal.description;
+                    goal.name = await decryption(goal.name);
+                    goal.description = await decryption(goal.description);
                     goal.userid = goal.userid
                     // console.log("goal post decrypt", goal)
 
@@ -225,7 +226,7 @@ exports.goal_redirect_edit = function (req, res) {
 };
 
 /*submits and updates any edits made to goal profile*/
-exports.goal_edit = function (req, res) {
+exports.goal_edit = async function (req, res) {
     //Converting date to YYYY-MM-DD
     if (req.body.startDate != NaN) {
         req.body.startDate = convertToYYYYMMDD(req.body.startDate);
@@ -234,13 +235,15 @@ exports.goal_edit = function (req, res) {
         req.body.endDate = convertToYYYYMMDD(req.body.endDate);
     }
 
+    let newName = await encryption(req.body.name)
+    let newDescr = await encryption(req.body.description)
     // console.log("Goal id: [edit]: " + req.params.goalid);
-    Goal.findByIdAndUpdate(req.params.goalid,
+    Goal.findByIdAndUpdate(req.params.goalid, 
 
         {
             $set: {
-                name: req.body.name,
-                description: req.body.description,
+                name: newName,
+                description: newDescr,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
@@ -308,14 +311,14 @@ exports.navigate_to_createNewGoal = function (req, res) {
     }
 };
 
-exports.navigate_to_goalInfo = function (req, res) {
+exports.navigate_to_goalInfo = async function (req, res) {
     try {
         User.findById(req.params.userid, function (err, user) {
             Student.findById(req.params.studentid, function (err, student) {
-                Goal.findById(req.params.goalid, function (err, goal) {
+                Goal.findById(req.params.goalid, async function (err, goal) {
                     // console.log("goal pre decrypt", goal)
-                    goal.name = goal.name;
-                    goal.description = goal.description;
+                    goal.name = await decryption(goal.name);
+                    goal.description = await decryption(goal.description);
                     goal.userid = goal.userid
                     // console.log("goal post decrypt", goal)
 

@@ -39,40 +39,48 @@
                 </a>
             <!--Loads the Students and Creates Buttons for them-->
             <% students.forEach(function(student) { %>
-              <script>
-                console.log("<%=student%>")
-              </script>
+              
               <% let shouldBreak=false %>
                 <% student.userid.forEach(function(id) { %>
+                  <script>
+                    console.log("username", localStorage.getItem("username"))
+                    console.log("id", "<%=id%>")
+                  </script>
                   <% if (!shouldBreak) { %>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js" integrity="sha512-szJ5FSo9hEmXXe7b5AUVtn/WnL8a5VofnFeYC2i2z03uS2LhAch7ewNLbl5flsEmTTimMN0enBZg/3sQ+YOSzQ==" crossorigin="anonymous"></script>
                     <script>
-                      if (localStorage.getItem("username") === "<%=id%>") {
-                        var anchor = document.createElement("a");
-                        anchor.href = "/student/<%=student.id%>";
-                        anchor.id = "cardContainer";
-                        var card = document.createElement("div");
-                        card.className = "goalCardName";
-                        var cardText = document.createElement("div");
-                        cardText.className = "card acaedmic text-white bg-primary mb-3";
-                        Text.style = "max-width: 20rem;";
-                        var cardHeader = document.createElement("div");
-                        cardHeader.className = "cardInitial";
-                        var initial= "<%=student.firstname%>".charAt(0)+"<%=student.lastname%>".charAt(0);
-                        cardHeader.innerHTML = initial;
-                        var cardBody = document.createElement("div");
-                        var cardTitle = document.createElement("p");
-                        cardTitle.className = "cardInfo";
-                        cardTitle.innerHTML = "<%=student.firstname%> <%=student.lastname%>";
-                        cardBody.appendChild(cardTitle);
-                        cardText.appendChild(cardHeader);
-                        cardText.appendChild(cardBody);
-                        card.appendChild(cardText);
-                        anchor.appendChild(card);
-                        document.getElementById("studentBox").appendChild(anchor);
-                        document.getElementById("studentBox").style = "display: "
+                      console.log("username", localStorage.getItem("username"))
+                      console.log("sha", sha256(localStorage.getItem("username")))
+                      console.log("id", "<%=id%>")
 
 
-                      }
+                      if (sha256(localStorage.getItem("username")) === "<%=id%>") {
+                          var anchor = document.createElement("a");
+                          anchor.href = "/student/<%=student.id%>";
+                          anchor.id = "cardContainer";
+                          var card = document.createElement("div");
+                          card.className = "goalCardName";
+                          var cardText = document.createElement("div");
+                          cardText.className = "card acaedmic text-white bg-primary mb-3";
+                          Text.style = "max-width: 20rem;";
+                          var cardHeader = document.createElement("div");
+                          cardHeader.className = "cardInitial";
+                          var initial= "<%=student.firstname%>".charAt(0)+"<%=student.lastname%>".charAt(0);
+                          cardHeader.innerHTML = initial;
+                          var cardBody = document.createElement("div");
+                          var cardTitle = document.createElement("p");
+                          cardTitle.className = "cardInfo";
+                          cardTitle.innerHTML = "<%=student.firstname%> <%=student.lastname%>";
+                          cardBody.appendChild(cardTitle);
+                          cardText.appendChild(cardHeader);
+                          cardText.appendChild(cardBody);
+                          card.appendChild(cardText);
+                          anchor.appendChild(card);
+                          document.getElementById("studentBox").appendChild(anchor);
+                          document.getElementById("studentBox").style = "display: "
+
+
+                        }
                     
 
                     </script>

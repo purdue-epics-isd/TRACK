@@ -6,13 +6,13 @@ var LZUTF8 = require('lzutf8');
 
 // functions for encryption of db
 async function encryption(string) {
-    let ciphertext = await CryptoJS.AES.encrypt(string, 'secret key 123', { mode: CryptoJS.mode.ECB }).toString();
+    let ciphertext = await CryptoJS.AES.encrypt(string, 'secret key 123').toString();
     return ciphertext;
 }
 
 async function decryption(ciphertext) {
     // await console.log("decryption")
-    var bytes  = await CryptoJS.AES.decrypt(ciphertext, 'secret key 123', { mode: CryptoJS.mode.ECB });
+    var bytes  = await CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     // await console.log("bytes:", bytes);
     var originalText = await bytes.toString(CryptoJS.enc.Utf8);
     // await console.log("originalText", originalText);
@@ -23,8 +23,8 @@ async function decryption(ciphertext) {
 exports.goaldata_create = async function (req, res) {
     try {
         // console.log("req.body", req.body)
-        console.log("uncompressed", req.body.filecontents);
-        console.log("compressed", LZUTF8.compress(req.body.filecontents));
+        // console.log("uncompressed", req.body.filecontents);
+        // console.log("compressed", LZUTF8.compress(req.body.filecontents));
         let goaldata = new GoalData(
             {
                 goalID: req.params.goalid,
@@ -32,7 +32,7 @@ exports.goaldata_create = async function (req, res) {
                 count: req.body.count,
                 rubricOption: req.body.optionsRadios,
                 support: req.body.support,
-                comments: req.body.comments,
+                comments: await encryption(req.body.comments),
                 time: Date.now(),
                 teacherEmail: req.body.useremail,
                 filename: req.body.file,
