@@ -27,7 +27,6 @@
   text-transform: uppercase;
 
 }
-
 a {
   display: inherit;
   text-decoration: none;
@@ -48,6 +47,27 @@ input {
   border: 2px solid #eee;
   border-radius: 4px;
 }
+
+input, select{
+  margin-bottom: 3rem;
+  border: 2px solid #eee;
+  border-radius: 4px;
+  max-width: 100%;
+  font-size: 24px;
+  padding: 3px;
+}
+
+
+
+.searchAndSelect {
+  display: flex;
+  flex-direction: row;
+}
+
+/*#sliderTitle{
+    display: flex;
+    justify-content: center;
+}*/
 
 @media only screen and (max-width: 768px) {
   .cardContainer {
