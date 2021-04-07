@@ -29,6 +29,7 @@
 .studentName{
   display: flex;
   flex-grow: 2;
+  font-size: 20px;
 }
 
 .studentInfo{
@@ -39,6 +40,7 @@
   color: white;
   margin-left: 10px;
 }
+
 button {
   border: none;
   background-color: #989CFF;
@@ -57,10 +59,20 @@ button a {
 button a:hover{
     color: #fff !important;
 }
+
 button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+a {
+  display: inherit;
+  text-decoration: none;
+  color: #000;
+}
+a:hover {
+  color: #0070f3;
 }
 
 .box{

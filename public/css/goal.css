@@ -13,6 +13,7 @@
 .goalName{
   display: flex;
   flex-grow: 2;
+  font-size: 20px;
 }
 
 .goalInfo{
@@ -22,6 +23,11 @@
 .goalInfoButton{
   color: white;
   margin-left: 10px;
+}
+
+.occurrButton {
+  font-size: 20px;
+  color: white;
 }
 
 /*** Button ***/
@@ -71,6 +77,12 @@ a:hover {
   transition: all 0.2s ease;
 }
 
+.submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
 /*** General Box ***/
 
 .generalBox{
@@ -102,10 +114,15 @@ input {
   border-radius: 4px;
 }
 
+.file {
+  font-size: 20px;
+  padding: 5px;
+}
+
 textarea {
   font-family: inherit;
   width: auto !important;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 400;
   padding: 3px;
   margin-bottom: 0.5rem;
@@ -118,19 +135,17 @@ textarea {
 
 .progress{
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 
 .graph{
-  width: 100%;
-  margin-right: 12.5px;
+  /* margin-right: 12.5px; */
   margin-top: 25px;
 }
 
 .table{
-  width: 100%;
-  margin-left: 12.5px;
+  /* margin-left: 12.5px; */
   margin-top: 25px;
 }
 
@@ -141,7 +156,7 @@ table {
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid #cccccc;
   text-align: left;
   padding: 8px;
 }
@@ -177,4 +192,32 @@ tr:nth-child(even) {
   height: 5px;
   background-color: black;
   margin: 6px 0;
+}
+
+/* Rubric */
+
+.methodOfCollection {
+  display: flex;
+  flex-direction: column;
+  /*margin-bottom: 2rem;*/
+  justify-content: space-around;
+}
+
+.generalBox label {
+  display: flex;
+  padding: 10px;
+  margin-bottom: 0.5rem;
+  align-content: center;
+  border-radius: 25px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+}
+
+.generalBox input[type="radio"] {
+  display: none; /*Hides the button*/
+}
+
+.generalBox input[type="radio"]:checked + label {
+  background-color: #989CFF; /*Selected Color*/
 }

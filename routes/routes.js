@@ -99,9 +99,7 @@ router.get('/student/:studentid', student_controller.navigate_to_studentProfile)
 router.get('/student/:studentid/goal/:goalid', goal_controller.navigate_to_goalProfile); // navigates to a goal within a student profile
 router.get('/student/:studentid/createNewGoal', goal_controller.navigate_to_createNewGoal); //navigates to the "create new goal" page
 router.get('/createNewStudent', student_controller.navigate_to_createNewStudent); //navigates to new student page
-router.get('/sharedWithMe', student_controller.navigate_to_sharedWithMeClassPage); //navigate to class page of shared students
-router.get('/sharedWithMe/:studentid', goal_controller.navigate_to_sharedWithMeStudentProfile); //navigate to student profile of shared student
-router.get('/sharedWithMe/:studentid/:goalid', goal_controller.navigate_to_sharedWithMeGoalProfile); //navigate to goal profile of shared goal
+router.get('/student/:studentid/goal/:goalid/info', goal_controller.navigate_to_goalInfo); //navigate to goal info page
 router.get('/aboutUs', (req, res) => { //navigate to about us page
 	User.findById(req.params.userid, function(err, user) {
 		res.render('./pages/aboutUs.ejs', {
@@ -116,13 +114,6 @@ router.get('/feedback', (req, res) => { //navigate to feedback page
 		})
 	});
 });
-router.get('/settings', (req, res) => { //navigate to settings page
-	User.findById(req.params.userid, function(err, user) {
-		res.render('./pages/settings.ejs', {
-			user: user
-		})
-	});
-});
 
 router.get('/bulkadd', (req, res) => { //navigate to bulkadd page
 	User.findById(req.params.userid, function(err, user) {
@@ -132,38 +123,12 @@ router.get('/bulkadd', (req, res) => { //navigate to bulkadd page
 	});
 });
 
-
-router.get('/testing', (req, res) => { //navigate to testing page - purely used for testing and not accessible by users
-	/*
-	async function getFirstUser() {
-	    try {
-	        let users = await getUsers();
-	        return users[0].name;
-	    } catch (err) {
-	        return {
-	            name: 'default user'
-	        };
-	    }
-	}
-
-	function getUsers() {
-		res.render('./pages/testing.ejs', {
-			users: ["user1", "user2"]
-		});
-	}
-
-	getFirstUser();*/
-	var students = [];
-	Student.find({}, {}, function(err, student) {
-            student.forEach(function(s) {
-                students.push(s);
-            });
-        });
-
-	res.render('./pages/testing.ejs', {
-		students: students,
-		test: ["test1", "test2"]
-	})
+router.get('/error', (req, res) => { //navigate to error page
+	User.findById(req.params.userid, function(err, user) {
+		res.render('./pages/error.ejs', {
+			user: user
+		})
+	});
 });
 
 router.get('/logout', (req, res) => { // logs out of microsoft account and navigates back to log in menu

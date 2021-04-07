@@ -42,6 +42,12 @@ textarea {
   justify-content: space-around;
 }
 
+.goalTypeEdit {
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: space-around;
+}
+
 .methodOfCollection {
   display: flex;
   margin-bottom: 2rem;
@@ -108,4 +114,8 @@ button:hover {
 input[type="date"]{
   font-family: inherit;
   font-size: inherit;
+}
+
+.rubricLayout {
+  display: none;
 }

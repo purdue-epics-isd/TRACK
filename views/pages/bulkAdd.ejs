@@ -3,60 +3,57 @@
 
 <head>
   <title>Bulk Add</title>
-  <%- include("../partials/head.ejs")%>
-  <!--<link rel="icon" type="image/gif/png" href="img/logo.png">
-  <link rel="stylesheet" href="/main.css">
-  <script type="text/javascript" src="myScripts.js"></script>-->
-  
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/goal.css">
   <script src="./studentCreator.js" type="module"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 </head>
 
 <div class="grid-container">
 
-  <%- include("../partials/header.ejs")%>
+  <%- include("navbar.ejs")%>
 
-  <main class="main">
+    <main class="main">
 
-    <script>
+      <script>
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) {
           document.documentElement.setAttribute('data-theme', currentTheme);
           localStorage.setItem('theme', currentTheme);
         }
-    </script>   
-    <form action="/bulkadd" method="post">
-        <input type="file" name="excel" id="excel" accept=".csv" onChange="changeArr()">
+      </script>
+      <form action="/bulkadd" method="post">
+        <h2>Bulk Add</h2>
+        <input type="file" name="excel" id="excel" class="file" accept=".csv" onChange="changeArr()">
         <input type="hidden" name="arr" id="arr">
-        <input type="submit" name="submit">
-    </form>
+        <input type="submit" class="submit" name="submit">
+      </form>
 
-    <script>
-      function changeArr() {
-        var table = []
-        console.log("addStudents")
-        var file = document.getElementById("excel").files[0];
-        console.log(file)
-        var reader = new FileReader();
-        reader.onload = function(file) {
-          var content = file.target.result;
-          var rows = file.target.result.split(/[\r\n|\n]+/);
-          console.log(rows)
-          for (let i = 0; i < rows.length; i++) {
-            var splitRows = rows[i].split(',');
-            console.log(splitRows);
-            table.push(splitRows)
+      <script>
+        function changeArr() {
+          var table = []
+          console.log("addStudents")
+          var file = document.getElementById("excel").files[0];
+          console.log(file)
+          var reader = new FileReader();
+          reader.onload = function (file) {
+            var content = file.target.result;
+            var rows = file.target.result.split(/[\r\n|\n]+/);
+            console.log(rows)
+            for (let i = 0; i < rows.length; i++) {
+              var splitRows = rows[i].split(',');
+              console.log(splitRows);
+              table.push(splitRows)
+            }
+            document.getElementById("arr").value = table;
           }
-          document.getElementById("arr").value = table;
+          reader.readAsText(file);
         }
-        reader.readAsText(file);
-      }
 
-    </script>
-    
-  </main>
+      </script>
+
+    </main>
 
 </div>
-<%- include("../partials/footer.ejs")%>
-</html>
 
+</html>

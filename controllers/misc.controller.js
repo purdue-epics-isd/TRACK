@@ -26,7 +26,7 @@ exports.login = async function (req, res) {
     } catch(err) {
         console.log("exports.login");
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 }
 
@@ -40,7 +40,7 @@ exports.logout = function (req, res) {
     } catch(err) {
         console.log("exports.logout");
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 

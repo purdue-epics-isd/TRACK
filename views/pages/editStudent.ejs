@@ -1,194 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>HOME</title>
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/createStudent.css" />
-    <style>
-      @import url("https://rsms.me/inter/inter.css");
-html {
-  font-family: "Inter", sans-serif;
-}
-@supports (font-variation-settings: normal) {
-  html {
-    font-family: "Inter var", sans-serif;
-  }
-}
 
-html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
+<head>
+  <title>HOME</title>
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/createStudent.css" />
+</head>
 
-body {
-  max-width: 75rem;
-  margin: 3rem auto 3rem;
-  padding: 2rem;
-  line-height: 1.6;
-}
-
-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 3rem;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  margin-left: 15px;
-}
-
-nav a {
-  color: #000;
-  text-decoration: none;
-}
-
-nav a:hover {
-  color: #0070f3;
-}
-
-@media only screen and (max-width: 768px) {
-  body{
-    margin: 0;
-    padding: 1rem 30px;
-  }
-}
-a {
-  text-decoration: none;
-  color: #000;
-}
-a:hover {
-  color: #0070f3;
-}
-
-input {
-  margin-bottom: 0.5rem;
-  width: 100%;
-  box-sizing: border-box;
-  -webkit-box-sizing:border-box;
-  -moz-box-sizing: border-box;
-  font-size: 24px;
-  padding: 3px;
-  border: 2px solid #eee;
-  border-radius: 4px;
-}
-
-.sectionOne {
-  display: flex;
-  flex-direction: column;
-  margin: auto 6rem auto;
-}
-
-.submit {
-  border: none;
-  background-color: #989CFF;
-  width: 100%;
-  padding: 5px 0; /*Button Size */
-  font-size: 24px;
-  color: #fff;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-button a {
-  color: #fff;
-  text-decoration: none;
-}
-button a:hover{
-    color: #fff !important;
-}
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-    </style>
-  </head>
-  <body>
-    <%- include("navbar")%>
+<body>
+  <%- include("navbar")%>
     <section>
       <form action="/student/<%= student.id %>/student_edit/submit" method="post">
-        <!-- Goal -->
-        <h2>Edit <%= student.firstname %> <%= student.lastname %>'s Profile</h2>
+        <!-- Student -->
+        <h2>Edit <%= student.firstname %>
+            <%= student.lastname %>'s Profile</h2>
 
         <input type="text" name="firstname" value="<%= student.firstname %>" placeholder="First Name" />
         <input type="text" name="lastname" value="<%= student.lastname %>" placeholder="Last Name" />
         <input type="text" name="studentemail" value="<%= student.email %>" placeholder="Email" />
-        <input type="date" name="dob" id="dob" placeholder="Date of Birth" />
+        <input type="date" name="dob" id="dob" value="<%= student.dob %>" placeholder="Date of Birth" />
 
         <label for="Grade Level">Grade Level:</label>
-          <select class="form-control" name="grade" id="grade" style="width:100%">
-            <option value=""></option>
-            <option value="Pre-K">Pre-K</option>
-            <option value="Kindergarten">Kindergarten</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
+        <select class="form-control" name="grade" id="grade" style="width:100%">
+          <option value=""></option>
+          <option value="Pre-K">Pre-K</option>
+          <option value="Kindergarten">Kindergarten</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
         <button type="submit" class="submit">Submit</button>
         <input type="hidden" name="userID" id="userID">
       </form>
-    </section>    
-  </body>
+    </section>
+</body>
+
 </html>
 
 <script>
-    //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
-    document.getElementById("userID").value = localStorage.getItem("userID");
-    console.log(localStorage.getItem("userID"));
-    convertToYYYYMMDD("<%=student.dob%>");
-    var grade = parseInt("<%= student.grade %>",10);
-    console.log("grade: " + grade);
-    if(grade == NaN) {
-      document.getElementById("grade").selectedIndex = 2;
-      console.log("is not number");
-    } else {
-      document.getElementById("grade").selectedIndex = parseInt("<%= student.grade %>",10)+1;
-      console.log("is number?? confused");
-    }
-    document.getElementById("period").selectedIndex = "<%= student.period %>"-1;
-  
-    function convertToYYYYMMDD(d) {
-      date = new Date(d);
-      year = date.getFullYear();
-      //console.log("Year: " + year);
-      month = date.getMonth()+1;
-      dt = date.getDate()+1;
-  
-      if (dt < 10) {
-        dt = '0' + dt;
-      }
-      if (month < 10) {
-        month = '0' + month;
-      }
-  
-      if(year != NaN) {
-        var format = String(year)+'-' + String(month) + '-'+String(dt);
-      } else {
-        var format = "";
-      }
-      console.log("formatted year: " + format);
-      document.getElementById('dob').value = format;
-    }
-  </script>
+  //sorry this is a super jank way of getting user ID but its OKAY
+  document.getElementById("userID").value = localStorage.getItem("userID");
+
+  console.log(localStorage.getItem("userID"));
+  var grade = parseInt("<%= student.grade %>", 10);
+  console.log("grade: " + grade);
+  if (grade == NaN) {
+    document.getElementById("grade").selectedIndex = 2;
+    console.log("is not number");
+  } else {
+    document.getElementById("grade").selectedIndex = parseInt("<%= student.grade %>", 10) + 1;
+    console.log("is number?? confused");
+  }
+  document.getElementById("period").selectedIndex = "<%= student.period %>" - 1;
+</script>
+
+<!-- These TWO scripts are used to make the date picker in Safari since it doesn't have a native one -->
+<script type="text/javascript">
+  var datefield = document.createElement("input")
+  datefield.setAttribute("type", "date")
+  if (datefield.type != "date") { //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+    document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+    document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+    document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
+  }
+</script>
+
+<script type="text/javascript">
+  if (datefield.type != "date") { //if browser doesn't support input type="date", initialize date picker widget:
+    jQuery(function ($) { //on document.ready
+      $('#dob').datepicker();
+    })
+  }
+</script>
