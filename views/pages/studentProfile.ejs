@@ -10,7 +10,6 @@
 <body>
   <!-- NAV BAR -->
   <%- include("navbar")%>
-    <!-- END NAV BAR -->
     <!-- NAME TAG -->
     <section>
       <div class="studentHeader">
@@ -75,71 +74,72 @@
       <script>
         console.log("pre goal cards")
       </script>
-      <!-- CREATES EACH GOAL CARD -->
+      <!-- CREATES EVERY GOAL CARD -->
       <% goals.forEach(async function(goal) { %>
-        
         <div id="<%=goal.id%>" className="changeable">
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js" integrity="sha512-szJ5FSo9hEmXXe7b5AUVtn/WnL8a5VofnFeYC2i2z03uS2LhAch7ewNLbl5flsEmTTimMN0enBZg/3sQ+YOSzQ==" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"
+            integrity="sha512-szJ5FSo9hEmXXe7b5AUVtn/WnL8a5VofnFeYC2i2z03uS2LhAch7ewNLbl5flsEmTTimMN0enBZg/3sQ+YOSzQ=="
+            crossorigin="anonymous"></script>
           <script async>
-            console.log("hello");
-            console.log("<%=student.id%>/goal/<%=goal.id%>");
-            console.log("<%=goal.userid%>")
-
-            console.log(localStorage.getItem("username"))
-
-            if ("<%=goal.userid%>" == localStorage.getItem("username")) {
-              console.log("goal is made by user")
-              var anchor = document.createElement("a");
-              anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
-              anchor.id = "cardContainer";
-              var card = document.createElement("div");
-              card.className = "goalCardName";
-              var cardText = document.createElement("div");
-              console.log("<%=goal.goalType%>");
-              if ("<%=goal.goalType%>".localeCompare("Academic")) {
-                cardText.className = "card acaedmic text-white bg-primary mb-3";
-              }
-              else {
-                cardText.className = "card behavior text-white bg-primary mb-3";
-              }
-              cardText.style = "max-width: 20rem;";
-              var cardHeader = document.createElement("div");
-              cardHeader.innerHTML = "<%=goal.goalType%>";
-              var cardBody = document.createElement("div");
-              var cardTitle = document.createElement("h4");
-              cardTitle.className = "cardInfo";
-              cardTitle.innerHTML = "<%= goal.name %>";
-              cardBody.appendChild(cardTitle);
-              cardText.appendChild(cardHeader);
-              cardText.appendChild(cardBody);
-              card.appendChild(cardText);
-              anchor.appendChild(card);
-              document.getElementById("<%=goal.id%>").appendChild(anchor);
-              document.getElementById("<%=goal.id%>").style = "display: "
-
+            // console.log("hello");
+            // console.log("<%=student.id%>/goal/<%=goal.id%>");
+            // console.log("<%=goal.userid%>")
+            // console.log(localStorage.getItem("username"))
+            // console.log("goal is made by user")
+            var anchor = document.createElement("a");
+            anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
+            anchor.id = "cardContainer";
+            var card = document.createElement("div");
+            card.className = "goalCardName";
+            var cardText = document.createElement("div");
+            if ("<%=goal.goalType%>".localeCompare("Academic")) {
+              cardText.className = "card academic text-white bg-primary mb-3";
             }
             else {
-              console.log("goal is not made by user")
-              var anchor = document.createElement("a");
-              anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
-              anchor.id = "goalCard";
-              var card = document.createElement("div");
-              card.className = "goalCardName";
-              var cardText = document.createElement("div");
-              cardText.className = "card text-white bg-primary mb-3";
-              cardText.style = "max-width: 20rem;";
-              var cardHeader = document.createElement("div");
-              cardHeader.innerHTML = "<%=goal.goalType%>";
-              var cardBody = document.createElement("div");
-              var cardTitle = document.createElement("h4");
-              cardTitle.className = "card-title";
-              cardTitle.innerHTML = "<%= goal.name %>";
-              cardBody.appendChild(cardTitle);
-              cardText.appendChild(cardHeader);
-              cardText.appendChild(cardBody);
-              card.appendChild(cardText);
-              anchor.appendChild(card);
-              document.getElementById("<%=goal.id%>").appendChild(anchor);
+              cardText.className = "card behavior text-white bg-primary mb-3";
+            }
+            cardText.style = "max-width: 20rem;";
+            var cardGoalType = document.createElement("div");
+            cardGoalType.innerHTML = "<%=goal.goalType%>";
+            var cardMethod = document.createElement("div");
+            cardMethod.innerHTML = "<%=goal.methodOfCollection[0]%>";
+            cardMethod.innerHTML = cardMethod.innerHTML.charAt(0).toUpperCase() + cardMethod.innerHTML.slice(1);
+            var cardBody = document.createElement("div");
+            var cardTitle = document.createElement("h4");
+            cardTitle.className = "cardInfo";
+            cardTitle.innerHTML = "<%= goal.name %>";
+            cardBody.appendChild(cardTitle);
+            cardText.appendChild(cardBody);
+            cardText.appendChild(cardGoalType);
+            cardText.appendChild(cardMethod);
+            card.appendChild(cardText);
+            anchor.appendChild(card);
+            document.getElementById("<%=goal.id%>").appendChild(anchor);
+            if ("<%=goal.userid%>" == localStorage.getItem("username")) {
+              document.getElementById("<%=goal.id%>").style = "display: "
+            }
+            else {
+              // console.log("goal is not made by user")
+              // var anchor = document.createElement("a");
+              // anchor.href = "/student/<%=student.id%>/goal/<%=goal.id%>";
+              // anchor.id = "cardContainer";
+              // var card = document.createElement("div");
+              // card.className = "goalCardName";
+              // var cardText = document.createElement("div");
+              // cardText.className = "card text-white bg-primary mb-3";
+              // cardText.style = "max-width: 20rem;";
+              // var cardHeader = document.createElement("div");
+              // cardHeader.innerHTML = "<%=goal.goalType%>";
+              // var cardBody = document.createElement("div");
+              // var cardTitle = document.createElement("h4");
+              // cardTitle.className = "cardInfo";
+              // cardTitle.innerHTML = "<%= goal.name %>";
+              // cardBody.appendChild(cardTitle);
+              // cardText.appendChild(cardHeader);
+              // cardText.appendChild(cardBody);
+              // card.appendChild(cardText);
+              // anchor.appendChild(card);
+              // document.getElementById("<%=goal.id%>").appendChild(anchor);
               document.getElementById("<%=goal.id%>").style = "display: none"
             }
           </script>
@@ -153,6 +153,7 @@
 </html>
 
 <script>
+  //toggles what goals you see from the ones you made to the ones other teachers made
   function toggle() {
     var goalsBox = document.getElementById("goalsBox");
     var goals = goalsBox.children;
@@ -166,6 +167,7 @@
     }
   }
 
+  //shows the info box of the student and hides all the goals
   function showInfo() {
     document.getElementById('infoButton').style.display = "none";
     document.getElementById("goalButton").style.display = "block";
@@ -175,6 +177,7 @@
     studentsInfoBox.style.display = 'block';
   }
 
+  //shows the goals of the student and hides the info box
   function showGoals() {
     document.getElementById("goalButton").style.display = "none";
     document.getElementById('infoButton').style.display = "block";

@@ -311,6 +311,7 @@ exports.navigate_to_createNewGoal = function (req, res) {
     }
 };
 
+// redirectes page to the "goalInfo" page
 exports.navigate_to_goalInfo = async function (req, res) {
     try {
         User.findById(req.params.userid, function (err, user) {

@@ -9,6 +9,7 @@
 
 <body>
     <%- include("navbar.ejs")%>
+        <!-- This forma allows you to edit the goal's information, EXCEPT method of collection -->
         <form action="/student/<%= student.id%>/goal/edit/<%= goalid %>" method="post" class="sectionOne">
             <!-- Goal -->
             <h2>GOAL</h2>

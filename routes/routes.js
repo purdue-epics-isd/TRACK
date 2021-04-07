@@ -54,7 +54,7 @@ db.once('open', () => {
   gfs.collection('uploads');
 });
 
-//TODO: figure out the real difference between router.post and router.get
+//These routes are linked to basic functions in the website
 router.post('/student/create', student_controller.student_create); //adds new student to database
 router.post('/bulkadd', student_controller.bulk_add); // runs the bulkadd function
 router.post('/student/:studentid/goal/create', goal_controller.goal_create); //adds new goal to database

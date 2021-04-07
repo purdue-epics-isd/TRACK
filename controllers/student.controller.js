@@ -502,6 +502,7 @@ exports.navigate_to_createNewStudent = function (req, res) {
     }
 }
 
+// deletes the student from the database
 exports.student_delete = function (req, res) {
     try {
         Student.findByIdAndRemove(req.params.studentid, function (err) {
@@ -518,6 +519,7 @@ exports.student_delete = function (req, res) {
     }
 };
 
+// redirects to the edit student page
 exports.student_redirect_edit = async function (req, res) {
     console.log("redirecting to edit page");
     try {
@@ -546,6 +548,7 @@ exports.student_redirect_edit = async function (req, res) {
     }
 };
 
+// edits the student's information
 exports.student_edit = async function (req, res) {
     //Converting date to YYYY-MM-DD
     if (req.body.dob != NaN) {

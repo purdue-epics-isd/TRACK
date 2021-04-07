@@ -55,6 +55,7 @@ exports.goaldata_create = async function (req, res) {
     }
 };
 
+// deletes the goal data from the database
 exports.goaldata_delete = function (req, res) {
     try {
         GoalData.findByIdAndRemove(req.params.goaldataid, function (err) {

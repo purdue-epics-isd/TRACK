@@ -9,8 +9,9 @@
 
 <body>
   <%- include("navbar.ejs")%>
+    <!-- This form allows you to submit the goal information to create a new goal -->
     <form action="/student/<%= student.id%>/goal/create" method="post" class="sectionOne">
-      <!-- Goal -->
+      <!-- Goal Name and Description-->
       <h2>GOAL</h2>
       <input type="text" name="name" placeholder="Goal Name" />
       <textarea rows="4" cols="50" type="text" name="description" placeholder="Goal Description"></textarea>
@@ -64,6 +65,7 @@
       </div>
       </div>
 
+      <!-- This script controls whether the different rubric fields are shown -->
       <script>
         function appear() {
           document.getElementById("rubricLayout").style.display = "block";

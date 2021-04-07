@@ -10,8 +10,8 @@
 <body>
   <%- include("navbar")%>
     <section>
+      <!-- this form allows you to edit the student's information -->
       <form action="/student/<%= student.id %>/student_edit/submit" method="post">
-        <!-- Student -->
         <h2>Edit <%= student.firstname %>
             <%= student.lastname %>'s Profile</h2>
 

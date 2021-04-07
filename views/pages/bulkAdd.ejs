@@ -22,6 +22,8 @@
           localStorage.setItem('theme', currentTheme);
         }
       </script>
+
+      <!-- This form allows an ISD admin to submit and excel file to add student, teacher, and goal data in bulk -->
       <form action="/bulkadd" method="post">
         <h2>Bulk Add</h2>
         <input type="file" name="excel" id="excel" class="file" accept=".csv" onChange="changeArr()">

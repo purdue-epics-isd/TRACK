@@ -33,6 +33,7 @@
             </div>
         </section>
         <script type="text/javascript">
+            //this function controls exporting the goal data to an excel file
             function exportTableToExcel() {
                 alert("When opening the exported Excel file, you will receive the follwing alert:\n       " +
                     "\"The file format and extension of 'exportedGoalData.xls' don't match. The file could be corrupted or unsafe." +
@@ -82,16 +83,20 @@
             }
         </script>
         <!-- END GOAL NAME TAG -->
+
         <!-- GOAL INPUT -->
         <div class="generalBox">
             <form action="/student/<%= student.id %>/goal/<%= goal.id %>/goaldata/create/<%=shared%>" id="submitForm"
                 method="post" class="formBox">
 
+                <!-- If the goal is tracking OCCURRENCES -->
                 <%if(goal.methodOfCollection.includes("count")) { %>
                     <h2>Click to Add Occurrence</h2>
                     <button class="occurrButton" type="button" id="occurrencesButton"
                         onclick="addOccurrence()"></button>
                     <input type="hidden" name="count" id="inputOccurr" value="0"></input>
+
+                    <!-- this script creates and controls the button -->
                     <script type="text/javascript">
                         var numOccurrences = 0;
                         var button = document.getElementById("occurrencesButton");
@@ -106,34 +111,34 @@
                     </script>
                     <%} %>
 
+                        <!-- If the goal is tracking SCORE -->
                         <%if(goal.methodOfCollection.includes("score")) { %>
                             <h2>Score</h2>
                             <input type="number" placeholder="Score" id="score" name="score">
                             <%} %>
 
+                                <!-- If the goal is tracking RUBRIC -->
                                 <%if(goal.methodOfCollection.includes("rubric")) { %>
                                     <h2>Rubric</h2>
                                     <div class="methodOfCollection" name="methodOfCollection">
-                                        <input type="radio" id="notEvident" name="optionsRadios"
-                                            value="Not evident">
+                                        <input type="radio" id="notEvident" name="optionsRadios" value="Not evident">
                                         <label for="notEvident">Not evident: <%= goal.rubricdescription[0] %></label>
-                                        <input type="radio" id="introduced" name="optionsRadios"
-                                            value="Introduced">
+                                        <input type="radio" id="introduced" name="optionsRadios" value="Introduced">
                                         <label for="introduced">Introduced: <%= goal.rubricdescription[1] %></label>
                                         <input type="radio" id="emerging" name="optionsRadios" value="Emerging">
                                         <label for="emerging">Emerging: <%= goal.rubricdescription[2] %></label>
-                                        <input type="radio" id="developing" name="optionsRadios"
-                                            value="Developing">
+                                        <input type="radio" id="developing" name="optionsRadios" value="Developing">
                                         <label for="developing">Developing: <%= goal.rubricdescription[3] %></label>
                                         <input type="radio" id="ongoing" name="optionsRadios" value="Ongoing">
                                         <label for="ongoing">Ongoing: <%= goal.rubricdescription[4] %></label>
-                                        <input type="radio" id="demonstrated" name="optionsRadios"
-                                            value="Demonstrated">
+                                        <input type="radio" id="demonstrated" name="optionsRadios" value="Demonstrated">
                                         <label for="demonstrated">Demonstrated: <%= goal.rubricdescription[5] %></label>
                                         <input type="radio" id="applied" name="optionsRadios" value="Applied">
                                         <label for="applied">Applied: <%= goal.rubricdescription[6] %></label>
                                     </div>
                                     <%} %>
+
+                                        <!-- If the goal is tracking COMMENTS and DESCRIPTIONS -->
                                         <%if(goal.methodOfCollection.includes("comments")) { %>
                                             <%if(goal.methodOfCollection[0]=="description") { %>
                                                 <h2>Description</h2>
@@ -143,11 +148,14 @@
                                                     <%} %>
 
                                                         <!-- File Upload -->
-                                                        <input type="file" id="file" class="file" name="file" onChange="updateFile()">
+                                                        <input type="file" id="file" class="file" name="file"
+                                                            onChange="updateFile()">
                                                         <input type="hidden" name="useremail" id="useremail">
                                                         <input type="hidden" name="filecontents" id="filecontents">
                                                         <input type="hidden" name="filebool" id="filebool">
                                                         <input type="hidden" name="commentContent" id="commentContent">
+
+                                                        <!-- this script controls the file uploading process -->
                                                         <script>
                                                             var description = document.getElementById("description");
                                                             var commentContent = document.getElementById("commentContent");
@@ -181,8 +189,10 @@
             </form>
         </div>
         <!-- END GOAL INPUT -->
+
         <!-- GRAPH AND PROGRESS TABLE -->
         <section class="progress">
+            <!-- If tracking score or occurrences, display the graph -->
             <%if(goal.methodOfCollection.includes("score") || goal.methodOfCollection.includes("count")) { %>
                 <div class="generalBox graph">
                     <h1>Graph</h1>
@@ -253,157 +263,161 @@
                     </script>
                 </div>
                 <%} %>
+                    <!-- The progress table -->
                     <div class="generalBox table">
                         <h1>Progress</h1>
                         <tbody>
-                        <table id="goalTable">
-                            <tr>
-                                <%if(goal.methodOfCollection[0]=="score" ) { %>
-                                    <th>Score</th>
-                                    <%} %>
-
-                                        <%if(goal.methodOfCollection[0]=="count" || goal.methodOfCollection[1]=="count"
-                                            ) { %>
-                                            <th>Occurrences</th>
-                                            <%} %>
-
-                                                <%if(goal.methodOfCollection[0]=="rubric" ||
-                                                    goal.methodOfCollection[1]=="rubric" ||
-                                                    goal.methodOfCollection[2]=="rubric" ) { %>
-                                                    <th>Progress</th>
-                                                    <%} %>
-
-                                                        <%if(goal.methodOfCollection[0]=="comments" ||
-                                                            goal.methodOfCollection[1]=="comments" ||
-                                                            goal.methodOfCollection[2]=="comments" ||
-                                                            goal.methodOfCollection[3]=="comments" ) { %>
-                                                            <th>Comments</th>
-                                                            <%} %>
-                                                                <th>Date</th>
-                                                                <th>Created by</th>
-                                                                <th>Files</th>
-                                                                <th>Modify</th>
-                            </tr>
-                            <% goalDatas.forEach(function(goalData) { %>
+                            <table id="goalTable">
+                                <!-- the table headers -->
                                 <tr>
                                     <%if(goal.methodOfCollection[0]=="score" ) { %>
-                                        <td>
-                                            <%= goalData.score %>
-                                        </td>
+                                        <th>Score</th>
                                         <%} %>
+
                                             <%if(goal.methodOfCollection[0]=="count" ||
-                                                goal.methodOfCollection[1]=="count" ||
-                                                goal.methodOfCollection[2]=="count" ) { %>
-                                                <td>
-                                                    <%= goalData.count %>
-                                                </td>
+                                                goal.methodOfCollection[1]=="count" ) { %>
+                                                <th>Occurrences</th>
                                                 <%} %>
+
                                                     <%if(goal.methodOfCollection[0]=="rubric" ||
                                                         goal.methodOfCollection[1]=="rubric" ||
                                                         goal.methodOfCollection[2]=="rubric" ) { %>
-                                                        <td>
-                                                            <%= goalData.rubricOption %>
-                                                        </td>
+                                                        <th>Progress</th>
                                                         <%} %>
+
                                                             <%if(goal.methodOfCollection[0]=="comments" ||
                                                                 goal.methodOfCollection[1]=="comments" ||
                                                                 goal.methodOfCollection[2]=="comments" ||
                                                                 goal.methodOfCollection[3]=="comments" ) { %>
-                                                                <td>
-                                                                    <%= goalData.comments %>
-                                                                </td>
+                                                                <th>Comments</th>
                                                                 <%} %>
-                                                                    <td>
-                                                                        <%= goalData.time.getMonth()+1 %>/<%=
-                                                                                goalData.time.getDate() %>/<%=
-                                                                                    goalData.time.getFullYear() %>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%=goalData.teacherEmail%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <a name="<%=goalData._id%>" id="<%=goalData._id%>" target="_blank">
-                                                                            <%=goalData.filename%>
-                                                                        </a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="dropdown">
-                                                                            <button class="dropbtn">
-                                                                                <div class="menu"></div>
-                                                                                <div class="menu"></div>
-                                                                                <div class="menu"></div>
-                                                                            </button>
-                                                                            <div class="dropdown-content">
-                                                                                <a href="">Edit</a>
-                                                                                <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"
-                                                                                    onclick="return confirm('Please confirm to delete this data');">Delete</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                        <script>
-                                            dataURItoBlob = function(dataURI, ext) {
-                                                const byteString = window.atob(dataURI);
-                                                const arrayBuffer = new ArrayBuffer(byteString.length);
-                                                const int8Array = new Uint8Array(arrayBuffer);
-                                                for (let i = 0; i < byteString.length; i++) {
-                                                    int8Array[i] = byteString.charCodeAt(i);
-                                                }
-                                                var blob;
-                                                if (ext == 'pdf') {
-                                                    blob = new Blob([int8Array], { type: 'application/'+ext});
-                                                }
-                                                else {
-                                                    blob = new Blob([int8Array], { type: 'image/'+ext});
-                                                }
-                                                return blob;
-                                            }
-                                            console.log("should print as many times as there are goaldatas")
-                                            if ("<%=goalData.file%>" != "null") {
-                                                console.log("should print when there is a file")
-                                                // console.log("<%=goalData.file%>");
-                                                let fileDataUrl = "<%=goalData.file%>"
-                                                console.log(fileDataUrl)
-                                                // var regex = /^data:.+\/(.+);base64,(.*)$/;
-                                                // var matches = fileDataUrl.match(regex);
-                                                // var ext = matches[1];
-                                                // // console.log("ext", ext)
-                                                // var data = matches[2];
-                                                console.log("printme")
-                                                var extIndex = 0;
-                                                for (let i = 0; i < fileDataUrl.length; i++) {
-                                                    extIndex = i;
-                                                    if (fileDataUrl[i] == '/') {
-                                                        break;
-                                                    }
-                                                }
-                                                var ext = fileDataUrl.substring(extIndex + 1, extIndex + 4);
-                                                console.log("/ is at index ", extIndex)
-                                                console.log("ext", ext)
-                                                let dataIndex = 0
-                                                for (let i = 0; i < fileDataUrl.length; i++) {
-                                                    dataIndex = i;
-                                                    if (fileDataUrl[i] == ',') {
-                                                        break;
-                                                    }
-                                                }
-                                                console.log("printme2")
-                                                var data = fileDataUrl.substring(dataIndex + 1, fileDataUrl.length);
-                                                console.log(", is at index ", dataIndex)
-                                                console.log("data", data)
-                                                const blob = this.dataURItoBlob(data, ext);
-                                                console.log("blob", blob)
-                                                const url = URL.createObjectURL(blob);
-                                                console.log("url", url)
-                                                let aTag = document.getElementById("<%=goalData._id%>")
-                                                console.log("aTag", aTag)
-                                                aTag.href = url
-                                                console.log("aTag post", aTag)
-                                            }
-                                        </script>
+                                                                    <th>Date</th>
+                                                                    <th>Created by</th>
+                                                                    <th>Files</th>
+                                                                    <th>Modify</th>
                                 </tr>
-                                
-                                <% }); %>
-                            </tbody>
+                                <!-- for each goal, add a row with the appropriate data -->
+                                <% goalDatas.forEach(function(goalData) { %>
+                                    <tr>
+                                        <%if(goal.methodOfCollection[0]=="score" ) { %>
+                                            <td>
+                                                <%= goalData.score %>
+                                            </td>
+                                            <%} %>
+                                                <%if(goal.methodOfCollection[0]=="count" ||
+                                                    goal.methodOfCollection[1]=="count" ||
+                                                    goal.methodOfCollection[2]=="count" ) { %>
+                                                    <td>
+                                                        <%= goalData.count %>
+                                                    </td>
+                                                    <%} %>
+                                                        <%if(goal.methodOfCollection[0]=="rubric" ||
+                                                            goal.methodOfCollection[1]=="rubric" ||
+                                                            goal.methodOfCollection[2]=="rubric" ) { %>
+                                                            <td>
+                                                                <%= goalData.rubricOption %>
+                                                            </td>
+                                                            <%} %>
+                                                                <%if(goal.methodOfCollection[0]=="comments" ||
+                                                                    goal.methodOfCollection[1]=="comments" ||
+                                                                    goal.methodOfCollection[2]=="comments" ||
+                                                                    goal.methodOfCollection[3]=="comments" ) { %>
+                                                                    <td>
+                                                                        <%= goalData.comments %>
+                                                                    </td>
+                                                                    <%} %>
+                                                                        <td>
+                                                                            <%= goalData.time.getMonth()+1 %>/<%=
+                                                                                    goalData.time.getDate() %>/<%=
+                                                                                        goalData.time.getFullYear() %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=goalData.teacherEmail%>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a name="<%=goalData._id%>"
+                                                                                id="<%=goalData._id%>" target="_blank">
+                                                                                <%=goalData.filename%>
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="dropdown">
+                                                                                <button class="dropbtn">
+                                                                                    <div class="menu"></div>
+                                                                                    <div class="menu"></div>
+                                                                                    <div class="menu"></div>
+                                                                                </button>
+                                                                                <div class="dropdown-content">
+                                                                                    <a href="">Edit</a>
+                                                                                    <a href="/student/<%= student.id%>/goal/<%= goal.id%>/goaldata_delete/<%= goalData.id%>"
+                                                                                        onclick="return confirm('Please confirm to delete this data');">Delete</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <script>
+                                                                            dataURItoBlob = function (dataURI, ext) {
+                                                                                const byteString = window.atob(dataURI);
+                                                                                const arrayBuffer = new ArrayBuffer(byteString.length);
+                                                                                const int8Array = new Uint8Array(arrayBuffer);
+                                                                                for (let i = 0; i < byteString.length; i++) {
+                                                                                    int8Array[i] = byteString.charCodeAt(i);
+                                                                                }
+                                                                                var blob;
+                                                                                if (ext == 'pdf') {
+                                                                                    blob = new Blob([int8Array], { type: 'application/' + ext });
+                                                                                }
+                                                                                else {
+                                                                                    blob = new Blob([int8Array], { type: 'image/' + ext });
+                                                                                }
+                                                                                return blob;
+                                                                            }
+                                                                            console.log("should print as many times as there are goaldatas")
+                                                                            if ("<%=goalData.file%>" != "null") {
+                                                                                console.log("should print when there is a file")
+                                                                                // console.log("<%=goalData.file%>");
+                                                                                let fileDataUrl = "<%=goalData.file%>"
+                                                                                console.log(fileDataUrl)
+                                                                                // var regex = /^data:.+\/(.+);base64,(.*)$/;
+                                                                                // var matches = fileDataUrl.match(regex);
+                                                                                // var ext = matches[1];
+                                                                                // // console.log("ext", ext)
+                                                                                // var data = matches[2];
+                                                                                console.log("printme")
+                                                                                var extIndex = 0;
+                                                                                for (let i = 0; i < fileDataUrl.length; i++) {
+                                                                                    extIndex = i;
+                                                                                    if (fileDataUrl[i] == '/') {
+                                                                                        break;
+                                                                                    }
+                                                                                }
+                                                                                var ext = fileDataUrl.substring(extIndex + 1, extIndex + 4);
+                                                                                console.log("/ is at index ", extIndex)
+                                                                                console.log("ext", ext)
+                                                                                let dataIndex = 0
+                                                                                for (let i = 0; i < fileDataUrl.length; i++) {
+                                                                                    dataIndex = i;
+                                                                                    if (fileDataUrl[i] == ',') {
+                                                                                        break;
+                                                                                    }
+                                                                                }
+                                                                                console.log("printme2")
+                                                                                var data = fileDataUrl.substring(dataIndex + 1, fileDataUrl.length);
+                                                                                console.log(", is at index ", dataIndex)
+                                                                                console.log("data", data)
+                                                                                const blob = this.dataURItoBlob(data, ext);
+                                                                                console.log("blob", blob)
+                                                                                const url = URL.createObjectURL(blob);
+                                                                                console.log("url", url)
+                                                                                let aTag = document.getElementById("<%=goalData._id%>")
+                                                                                console.log("aTag", aTag)
+                                                                                aTag.href = url
+                                                                                console.log("aTag post", aTag)
+                                                                            }
+                                                                        </script>
+                                    </tr>
+
+                                    <% }); %>
+                        </tbody>
                         </table>
                     </div>
         </section>
