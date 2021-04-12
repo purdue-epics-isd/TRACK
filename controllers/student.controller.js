@@ -524,8 +524,9 @@ exports.student_redirect_edit = async function (req, res) {
     console.log("redirecting to edit page");
     try {
         User.findById(req.params.userid, async function (err, user) {
-            Student.findById(sha256(req.params.studentid), async function (err, student) {
-                // console.log("student pre decrypt", student)
+            Student.findById(req.params.studentid, async function (err, student) {
+                console.log("student pre decrypt", student)
+                
                 student.firstname = await decryption(student.firstname);
                 student.lastname = await decryption(student.lastname);
                 student.email = student.email;
@@ -534,7 +535,7 @@ exports.student_redirect_edit = async function (req, res) {
                 }
                 // student.userid = await decryption(student.userid);
                 // console.log("student post decrypt", student)
-                res.render('pages/editStudent', {
+                await res.render('pages/editStudent', {
                     student: student,
                     user: user
                 });
