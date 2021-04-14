@@ -67,3 +67,30 @@
     })
   }
 </script>
+
+ <!-- Third Popup: Create New Student -->
+    <div id="tutorial2" class="tutorialstart">
+      <div class="tutorialContent2">
+        <p style="text-align: center;font-size: 15px;">Fill out the relevant information for the student. When finished, click "Submit." After you are taken back to the class page, click on the new student.</p>
+      </div>
+    </div>
+
+    <script>
+      var tutorial2 = document.getElementById("tutorial2");
+
+      if (localStorage.getItem("tutorialtoggle") == "1") {
+        tutorial2.style.display = "block";
+      }
+
+      if (localStorage.getItem("tutorialtoggle") == "0") {
+        tutorial2.style.display = "none";
+      }
+
+      exit2.onclick = function() {
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+      }
+      
+
+      
+    </script>

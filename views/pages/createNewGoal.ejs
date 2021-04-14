@@ -75,7 +75,7 @@
           document.getElementById("rubricLayout").style.display = "none";
         }
       </script>
-      <button class="submit">Submit</button>
+      <button id="submit" class="submit">Submit</button>
       <input type="hidden" name="userID" id="userID">
     </form>
     </section>
@@ -107,3 +107,48 @@
     })
   }
 </script>
+
+    <script>
+      var submitbutton = document.getElementById("submit");
+
+      	submitbutton.onclick = function() {
+      		if (localStorage.getItem("tutorialtoggle") == 1) {
+      			localStorage.setItem("studentprofiletoggle", "1");
+      		}
+      	}
+      
+     </script>
+
+
+<!-- Fifth Popup: Create New Goal -->
+    <div id="tutorial2" class="tutorialstart3">
+      <div class="tutorialContent3">
+        <p style="text-align: center;font-size: 15px;">Fill out each field below to configure the new goal. Click on "Hide" to hide the tutorial box if needed.</p>
+        <span style="margin-left: 30%;font-size: 20px;" class="exit">Exit</span>
+        <span style="margin-left: 27%;font-size: 20px;" class="next">Hide</span>
+      </div>
+    </div>
+
+    <script>
+      var tutorial2 = document.getElementById("tutorial2");
+      var exit = document.getElementsByClassName("exit")[0];
+      var hide = document.getElementsByClassName("next")[0];
+
+      if (localStorage.getItem("tutorialtoggle") == "1") {
+        tutorial2.style.display = "block";
+      }
+
+      if (localStorage.getItem("tutorialtoggle") == "0") {
+        tutorial2.style.display = "none";
+      }
+
+      hide.onclick = function() {
+        tutorial2.style.display = "none";
+      }
+
+      exit.onclick = function() {
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+        tutorial2.style.display = "none";
+      }
+    </script>

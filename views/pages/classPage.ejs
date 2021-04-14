@@ -15,6 +15,9 @@
   <%- include("navbar.ejs")%>
 
     <!-- END NAV BAR -->
+
+  <button id="tutorialBtn" class="btn btn-info">Tutorial</button>    
+
     <!-- SEARCH -->
     <section>
       <!-- <h4>Search</h4> -->
@@ -154,3 +157,73 @@
 </script>
 
 </html>
+
+  <!-- Tutorial -->
+    <!-- Inital Popup -->
+    <div id="tutorial" class="tutorial">
+      <div style="text-align: center" class="tutorialContent">
+        <p style="text-align: center;font-size: 15px;">These popup boxes will guide you 
+              through the website. Click "Next" to continue.</p>
+        <span style="margin-left: 30%;font-size: 20px;" class="exit">Exit</span>
+        <span style="margin-left: 27%;font-size: 20px;" class="next">Next</span>
+      </div>
+    </div>
+    <!-- Second Popup: Add New Student -->
+    <div id="tutorial1" class="tutorial">
+      <div class="tutorialContent1">
+        <p style="text-align: center;font-size: 15px;">Click on the "+" button to create a new student.</p> 
+        <span style="margin-left: 46%;font-size: 20px;" class="exit">Exit</span>
+      </div>
+    </div>
+    <!-- Third Popup: Select Student -->
+    <div id="tutorial2" class="tutorial">
+      <div class="tutorialContent">
+        <p style="text-align: center;font-size: 28px;">Click on the student to bring up the Goals menu.</p>
+      </div>
+    </div>
+    <!-- Fourth Popup: Add Goal -->
+    <div id="tutorial4" class="tutorial">
+      <div class="tutorialContent">
+        <p style="text-align: center;font-size: 28px;">Click on "Create New Goal" to add a goal.</p>
+      </div>
+    </div>
+    <!-- Tutorial Script -->
+    <script>
+
+
+      var tutorial = document.getElementById("tutorial");
+      var tutorial1 = document.getElementById("tutorial1");
+      var tutorial2 = document.getElementById("tutorial2");
+      var tutorial3 = document.getElementById("tutorial3");
+
+      var btn = document.getElementById("tutorialBtn");
+      var btn2 = document.getElementById("newstudentBtn");
+      var exit = document.getElementsByClassName("exit")[0];
+      var next = document.getElementsByClassName("next")[0];
+      var exit1 = document.getElementsByClassName("exit")[1];
+      var previous = document.getElementsByClassName("previous")[0];
+
+      btn.onclick = function() {
+        tutorial.style.display = "block";
+        localStorage.setItem("tutorialtoggle", "1");
+      }
+      exit.onclick = function() {
+        tutorial.style.display = "none";
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+      }
+      next.onclick = function() {
+        tutorial.style.display = "none";
+        tutorial1.style.display = "block"
+      }
+      exit1.onclick = function() {
+        tutorial1.style.display = "none";
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+      }
+      previous.onclick = function() {
+        tutorial1.style.display = "none";
+        tutorial.style.display = "block";
+      }
+
+    </script>

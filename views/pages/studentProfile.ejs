@@ -187,3 +187,61 @@
     studentsInfoBox.style.display = 'none';
   }
 </script>
+
+<!-- Fourth Popup: Create New Goal -->
+    <div id="tutorial2" class="tutorialaddgoal">
+      <div class="tutorialContent4">
+        <p style="text-align: center;font-size: 15px;">Click on the "+" button to add and configure a new goal.</p>
+        <span style="margin-left: 27%;font-size: 20px;" class="exit">Exit</span>
+        <span style="margin-left: 27%;font-size: 20px;" class="next">Hide</span>
+      </div>
+    </div>
+
+    <div id="tutorial3" class="tutorialstart2">
+      <div class="tutorialclicknewgoal">
+        <p style="text-align: center;font-size: 15px;">Click on the new goal to add data.</p>
+        <span style="margin-left: 27%;font-size: 20px;" class="exit">Exit</span>
+        <span style="margin-left: 27%;font-size: 20px;" class="next">Hide</span>
+      </div>
+    </div>
+
+    <script>
+      var tutorial2 = document.getElementById("tutorial2");
+      var exit = document.getElementsByClassName("exit")[0];
+      var hide = document.getElementsByClassName("next")[0];
+      var exit2 = document.getElementsByClassName("exit")[1];
+      var hide2 = document.getElementsByClassName("next")[1];
+
+      if (localStorage.getItem("tutorialtoggle") == "1") {
+        tutorial2.style.display = "block";
+      }
+
+      if (localStorage.getItem("tutorialtoggle") == "0") {
+        tutorial2.style.display = "none";
+      }
+
+      if (localStorage.getItem("studentprofiletoggle") == "1" && localStorage.getItem("tutorialtoggle") == "1") {
+        tutorial2.style.display = "none";
+        tutorial3.style.display = "block";
+      }
+
+      hide.onclick = function() {
+        tutorial2.style.display = "none";
+      }
+
+      exit.onclick = function() {
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+        tutorial2.style.display = "none";
+      }
+
+      hide2.onclick = function() {
+        tutorial3.style.display = "none";
+      }
+
+      exit2.onclick = function() {
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+        tutorial3.style.display = "none";
+      }
+    </script>
