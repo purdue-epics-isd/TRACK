@@ -57,3 +57,60 @@ nav a:hover {
     padding: 1rem 30px;
   }
 }
+
+/* Tutorial */
+.tutorial {
+  background-color: white;
+  border-radius: 30px;
+  margin-top: 4%;
+  box-shadow: 0 0 45px -12px #989CFF;
+  display: none;
+  position: fixed;
+  top: 0%;
+  left: 30%;
+  z-index: 10;
+  width: 40%;
+  height: 25%;
+  overflow: auto;
+}
+.tutorialContent {
+
+  border-radius: 10px;
+  color: black;
+  font: sans-serif;
+  text-align: center;
+  font-size: 15px;
+}
+.exit {
+  margin-left: 27%;
+  color: black;
+  float: left;
+  font-size: 17px;
+}
+
+.exit:hover {
+  text-decoration: none;
+  cursor: pointer;
+  transform: translateY(-1.5px);
+}
+
+.next {
+  color: black;
+  margin-left: 27%;
+  float: left;
+  font-size: 17px;
+}
+.next:hover {
+  transform: translateY(-1.5px);
+  cursor: pointer;
+}
+.previous {
+  color: black;
+  margin-left: 27%;
+  float: left;
+  font-size: 20px;
+}
+.previous:hover {
+  transform: translateY(-1.5px);
+  cursor: pointer;
+}

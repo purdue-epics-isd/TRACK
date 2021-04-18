@@ -583,38 +583,6 @@ exports.student_edit = async function (req, res) {
         });
 }
 
-exports.navigate_to_sharedWithMeClassPage = async function (req, res) {
-    try {
-        var students = [];
-
-        await Student.find({}, {}, async function (err, student) {
-            student.forEach(async function (s) {
-                // console.log("student pre decrypt", s)
-                s.firstname = s.firstname;
-                s.lastname = s.lastname;
-                s.email = await decryption(s.email);
-                for (let i = 0; i < s.userid.length; i++) {
-                    s.userid[i] = s.userid[i]
-                }
-                // s.userid = await decryption(s.userid);
-                // console.log("student post decrypt", s)
-                await students.push(s);
-            });
-        });
-        //console.log("\nParameter student id: " + req.params.studentid);
-
-        await Student.findById(req.params.studentid, async function (err, student) {
-            await res.render('pages/sharedWithMeClassPage', {
-                students: students
-            });
-        });
-    } catch (err) {
-        // await console.log("exports.navigate_to_sharedWithMeClassPage");
-        await console.log(err);
-        await res.render('pages/error');
-    }
-}
-
 /*first function used when website starts up*/
 exports.run = function (req, res) {
     var logout = false;

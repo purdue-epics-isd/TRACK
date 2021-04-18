@@ -187,3 +187,63 @@
     studentsInfoBox.style.display = 'none';
   }
 </script>
+
+<!-- Fourth Popup: Create New Goal -->
+    <div id="tutorial2" class="tutorial">
+      <div class="tutorialContent">
+        <p style="font-weight: bold;" >Tutorial</p>
+        <p>Click on the "+" button to add and configure a new goal.</p>
+        <span class="exit">EXIT</span>
+        <span class="next">HIDE</span>
+      </div>
+    </div>
+
+    <div id="tutorial3" class="tutorial">
+      <div class="tutorialContent">
+        <p style="font-weight: bold;" >Tutorial</p>
+        <p>Click on the new goal to add data.</p>
+        <span class="exit">EXIT</span>
+        <span class="next">HIDE</span>
+      </div>
+    </div>
+
+    <script>
+      var tutorial2 = document.getElementById("tutorial2");
+      var exit = document.getElementsByClassName("exit")[0];
+      var hide = document.getElementsByClassName("next")[0];
+      var exit2 = document.getElementsByClassName("exit")[1];
+      var hide2 = document.getElementsByClassName("next")[1];
+
+      if (localStorage.getItem("tutorialtoggle") == "1") {
+        tutorial2.style.display = "block";
+      }
+
+      if (localStorage.getItem("tutorialtoggle") == "0") {
+        tutorial2.style.display = "none";
+      }
+
+      if (localStorage.getItem("studentprofiletoggle") == "1" && localStorage.getItem("tutorialtoggle") == "1") {
+        tutorial2.style.display = "none";
+        tutorial3.style.display = "block";
+      }
+
+      hide.onclick = function() {
+        tutorial2.style.display = "none";
+      }
+
+      exit.onclick = function() {
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+        tutorial2.style.display = "none";
+      }
+
+      hide2.onclick = function() {
+        tutorial3.style.display = "none";
+      }
+
+      exit2.onclick = function() {
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+        tutorial3.style.display = "none";
+      }
+    </script>

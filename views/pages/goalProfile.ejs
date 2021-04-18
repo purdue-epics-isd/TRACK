@@ -424,3 +424,32 @@
 </body>
 
 </html>
+
+<!-- Third Popup: Create New Student -->
+    <div id="tutorial4" class="tutorial">
+      <div class="tutorialContent">
+        <p style="font-weight: bold;" >Tutorial</p>
+        <p>Input goal data in the fields below. After clicking "Submit", the data should appear in the table below.</p>
+        <span style="margin-left: 37%" class="exit">END TUTORIAL</span>
+      </div>
+    </div>
+
+    <script>
+      var tutorial4 = document.getElementById("tutorial4");
+      var endtutorial = document.getElementsByClassName("exit")[0];
+
+      if (localStorage.getItem("tutorialtoggle") == "1") {
+        tutorial4.style.display = "block";
+      }
+
+      if (localStorage.getItem("tutorialtoggle") == "0") {
+        tutorial4.style.display = "none";
+      }
+
+      endtutorial.onclick = function() {
+      	localStorage.setItem("tutorialtoggle", "0");
+      	localStorage.setItem("studentprofiletoggle", "0");
+      	tutorial4.style.display = "none";
+      }
+
+</script>
