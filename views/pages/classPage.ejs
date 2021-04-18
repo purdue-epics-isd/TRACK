@@ -12,13 +12,41 @@
 </head>
 
 <body>
-  <%- include("navbar.ejs")%>
+  <!-- NAV BAR -->
+<nav>
+    <div>
+      <h2>TRACK ISD</h2>
+    </div>
+    <ul>
+      <li>
+        <a href="/classPage">
+          <div>HOME</div>
+        </a>
+      </li>
+      <li>
+        <a href="/aboutUs">
+          <div>ABOUT</div>
+        </a>
+      </li>
+      <li>
+        <a href="/feedback">
+          <div>FEEDBACK</div>
+        </a>
+      </li>
+      <li>    
+            <div id="tutorialBtn">TUTORIAL</div>
+        </li>
+      <li>
+          <a href="/logout">
+            <div>LOGOUT</div>
+          </a>
+        </li>
+    </ul>
+  </nav>
 
     <!-- END NAV BAR -->
 
-  <button id="tutorialBtn" >Tutorial</button>    
-
-    <!-- SEARCH -->
+  
     <section>
       <!-- <h4>Search</h4> -->
       <div class ="searchAndSelect">
@@ -26,6 +54,7 @@
         <div class="form-group ">
           <select class="custom-select" id="selectNumber" class="dropbtn"></select> <!--class period selector-->
         </div>
+         
         <!-- 
         <div class="select">
           <select name="slct" id="slct">
@@ -54,11 +83,14 @@
         </div>
       </a>
       <!--Loads the Students and Creates Buttons for them-->
+      
       <% students.forEach(function(student) { %>
 
         <% let shouldBreak=false %>
           <% student.userid.forEach(function(id) { %>
             <script>
+              console.log("grade");
+              console.log("<%=student.grade%>");
               console.log("username", localStorage.getItem("username"))
               console.log("id", "<%=id%>")
             </script>
@@ -73,11 +105,12 @@
 
 
                 if (sha256(localStorage.getItem("username")) === "<%=id%>") {
+                  var card = document.createElement("div");
+                  card.className = "goalCardName";
+                  card.id="<%=student.grade%>";
                   var anchor = document.createElement("a");
                   anchor.href = "/student/<%=student.id%>";
                   anchor.id = "cardContainer";
-                  var card = document.createElement("div");
-                  card.className = "goalCardName";
                   var cardText = document.createElement("div");
                   cardText.className = "card acaedmic text-white bg-primary mb-3";
                   Text.style = "max-width: 20rem;";
@@ -121,7 +154,7 @@
 
   //console.log(localStorage.getItem("userID"));
   // Close the dropdown if the user clicks outside of it
-
+  
   window.onclick = function (event) {
     if (!event.target.matches('.dropbtn')) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -136,7 +169,7 @@
   }
 
   var sel = document.getElementById('selectNumber');
-  var options = ["All students &nbsp;", "1st Period", "2nd Period", "3rd Period", "4th Period", "5th Period", "6th Period", "7th Period", "8th Period", "9th Period"];
+  var options = ["All students", "Pre-K", "Kindergarten", "1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11", "12"];
   for (var i = 0; i < options.length; i++) {
     var opt = document.createElement('option');
     opt.innerHTML = options[i];
@@ -150,22 +183,30 @@
     filter = input.selectedIndex;
     //filter = input.options[input.selectedIndex].text.toUpperCase();
     //console.log("filter: " + filter);
-    students = document.getElementsByClassName("studentCardName");
+    students = document.getElementsByClassName("goalCardName");
     console.log(students)
     numStudents = students.length;
+   
     console.log("numStudents: " + numStudents);
-
-    for (i = 0; i < numStudents; i++) {
-
-      period = students[i].attributes[2].nodeValue;
-      console.log("period: " + period);
-      if (period.toUpperCase().indexOf(filter) > -1 || filter == 0) {
-        students[i].parentNode.style.display = "";
-      } else {
-        students[i].parentNode.style.display = "none";
+    for (let i = 0; i < numStudents; i++) {
+      console.log("id: " + students[i].id);
+      console.log("filter: " + filter);
+      console.log("input: " + input.options[input.selectedIndex].text);
+      if (students[i].id == input.options[input.selectedIndex].text) {
+        students[i].style.display = "";
+      }
+      else {
+        students[i].style.display = "none";
       }
     }
 
+    if(input.options[input.selectedIndex].text=="All students")
+    {
+      console.log("helloooo" );
+      for (let i = 0; i < numStudents; i++) {
+        students[i].style.display = "";
+      }
+    }
   };
 
 </script>
