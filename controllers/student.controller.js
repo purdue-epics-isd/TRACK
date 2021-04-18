@@ -192,10 +192,11 @@ exports.student_create = async function (req, res) {
 
 function csvToArr(s) {
     var table = []
-    // console.log(s)
+    console.log("s", s)
     var rows = s.split(',,')
+    console.log("rows", rows)
     // console.log("rows", rows)
-    for (let i = 0; i < rows.length - 1; i++) {
+    for (let i = 1; i < rows.length - 1; i++) {
         var splitRow = rows[i].split(',');
         // console.log("splitRow", splitRow)
         table.push(splitRow)
@@ -207,9 +208,10 @@ function csvToArr(s) {
 
 async function create(teacherEmail, studentFirstName, studentLastName, studentEmail) {
     // await console.log("CREATE")
-    // await console.log("teacherEmail", teacherEmail)
-    // await console.log("studentEmail", studentEmail)
-
+    await console.log("teacherEmail", teacherEmail)
+    await console.log("studentEmail", studentEmail)
+    await console.log("hashed teacher email", sha256(teacherEmail))
+    await console.log("hashed student email", sha256(studentEmail))
 
     let teacher = new Teacher(
         {
@@ -235,12 +237,12 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
 
 
 
-    await Student.countDocuments({ email: studentEmail }, async function (err, count) {
+    await Student.countDocuments({ email: sha256(studentEmail) }, function (err, count) {
         if (count == 0) {
             // create the student object
             // await console.log("student count == 0, CREATING STUDENT")
 
-            await student.save(function (err) {
+            student.save(function (err) {
                 if (err) {
                     console.log(err);
                 }
@@ -253,13 +255,13 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
 
 
     if (await updateUserID(studentEmail, teacherEmail) == true) {
-        Student.findOneAndUpdate({ email: sha256(studentEmail) }, { $push: { userid: sha256(teacherEmail) } }, async function (err, docs) {
+        Student.findOneAndUpdate({ email: sha256(studentEmail) }, { $push: { userid: sha256(teacherEmail) } }, function (err, docs) {
             // await console.log("updateUserID == true for ", teacherEmail)
             if (err) {
-                await console.log("err", err)
+                console.log("err", err)
             }
             else {
-                // console.log("docs", docs)
+                console.log("docs", docs)
             }
             return true
         })
@@ -308,11 +310,11 @@ async function create(teacherEmail, studentFirstName, studentLastName, studentEm
 
 async function updateUserID(studentEmail, teacherEmail) {
     let updateUserID = true
-    await Student.findOne({ email: sha256(studentEmail) }, async function (err, result) {
-        for (let i = 0; i < await getIDLength(result); i++) {
-            // await console.log(teacherEmail, i)
-            // await console.log("result.userid[i]", result.userid[i]);
-            if (result.userid[i] == teacherEmail) {
+    await Student.findOne({ email: sha256(studentEmail) }, function (err, result) {
+        for (let i = 0; i < result.userid.length; i++) {
+            console.log(sha256(teacherEmail), i)
+            console.log("result.userid[i]", result.userid[i]);
+            if (result.userid[i] == sha256(teacherEmail)) {
                 // await console.log("setting updateUserID to false for ", teacherEmail, studentEmail)
                 updateUserID = false
             }
@@ -358,8 +360,8 @@ exports.bulk_add = async function (req, res) {
     var file = req.body.excel
     // await console.log(file)
     var table = await csvToArr(req.body.arr)
-    // console.log("table", table)
-    for (let i = 1; i < table.length; i++) {
+    console.log("table", table)
+    for (let i = 0; i < table.length; i++) {
         // await console.log("table[i]", table[i])
         await create(table[i][5], table[i][0], table[i][1], table[i][2])
         // await setTimeout(() => {  console.log("resting"); }, 1000);
