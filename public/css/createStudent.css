@@ -1,0 +1,67 @@
+a {
+  text-decoration: none;
+  color: #000;
+}
+a:hover {
+  color: #0070f3;
+}
+
+input {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  font-size: 24px;
+  padding: 3px;
+  border: 2px solid #eee;
+  border-radius: 4px;
+}
+
+input, select{
+  margin: 2px;
+  border: 2px solid #eee;
+  border-radius: 4px;
+  max-width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.gradeYear{
+  width: 100%;
+}
+
+input[type="date"]{
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.sectionOne {
+  display: flex;
+  flex-direction: column;
+  margin: auto 6rem auto;
+}
+
+.submit {
+  border: none;
+  background-color: #989CFF;
+  width: 100%;
+  padding: 5px 0; /*Button Size */
+  font-size: 24px;
+  color: #fff;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+button a {
+  color: #fff;
+  text-decoration: none;
+}
+button a:hover{
+    color: #fff !important;
+}
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}

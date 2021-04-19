@@ -1,406 +1,105 @@
 <!DOCTYPE html>
-	<html>
-	<head>
-		<title> Create New Goal </title>
-	  <%- include("../partials/head.ejs")%>
-	</head>
+<html>
 
-	<style>
-	/* Style the form */
-	#regForm {
-		background-color: white;
-		color: black;
-		width: 50%;
-		min-width: 300px;
-	}
-	p {
-		margin: 10px;
-	}
+<head>
+    <title>HOME</title>
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/createNewGoal.css" />
+</head>
 
-	.form-modified-control {
-	  display: block;
-	  /*align-items: center;*/
-	  /*width: 500px;*/
-	  height: calc(2.15625rem + 2px);
-	  padding: 0.375rem 0.75rem;
-	  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-	  font-size: 15px;
-	  font-weight: 400;
-	  line-height: 1.5;
-	  color: #7b8a8b;
-	  background-color: #fff;
-	  background-clip: padding-box;
-	  border: 1px solid #ced4da;
-	  border-radius: 0.25rem;
-	  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-	  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-	  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-	  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-	}
-
-	/* Style the input fields */
-	input {
-		padding: 10px;
-		width: 100%;
-		font-size: 17px;
-		font-family: Raleway;
-		border: 1px solid #aaaaaa;
-	}
-
-	textarea {
-		padding: 10px;
-		width: 100%;
-		font-size: 17px;
-		font-family: Raleway;
-		border: 1px solid #aaaaaa;
-	}
-
-	/* Mark input boxes that gets an error on validation: */
-	input.invalid {
-		background-color: #ffdddd;
-	}
-
-	/* Hide all steps by default: */
-	.tab {
-		display: none;
-	}
-
-	/* Make circles that indicate the steps of the form: */
-	.step {
-		height: 15px;
-		width: 15px;
-		margin: 0 2px;
-		background-color: #bbbbbb;
-		border: none;
-		border-radius: 50%;
-		display: inline-block;
-		opacity: 0.5;
-	}
-
-	/* Mark the active step: */
-	.step.active {
-		opacity: 1;
-	}
-
-	/* Mark the steps that are finished and valid: */
-	.step.finish {
-		background-color: #4CAF50;
-	}
-
-	.test {
-
-	}
-
-  	#topBtn {
-	    display: none;
-	    position: fixed;
-	    bottom: 20px;
-	    left: 30px;
-	    z-index: 99;
-	    font-size: 15px;
-	    border: none;
-	    outline: none;
-	    background-color: #2C3E50;
-	    color: white;
-	    cursor: pointer;
-	    padding: 15px;
-	    border-radius: 4px;
-	  }
-
-	  #topBtn:hover {
-	      background-color: #555;
-	  }
-
-</style>
-
-<script>
-//Get the button
-var mybutton = document.getElementById("topBtn");
-
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
-</script>
 <body>
-	<div class="grid-container">
+    <%- include("navbar.ejs")%>
+        <!-- This forma allows you to edit the goal's information, EXCEPT method of collection -->
+        <form action="/student/<%= student.id%>/goal/edit/<%= goalid %>" method="post" class="sectionOne">
+            <!-- Goal -->
+            <h2>GOAL</h2>
+            <input type="text" value="<%=goal.name%>" name="name" placeholder="Goal Name" />
+            <textarea rows="4" cols="50" type="text" name="description"
+                placeholder="Goal Description"><%=goal.description%></textarea>
 
-	<%- include("../partials/header.ejs")%>
+            <!-- Dates -->
+            <h2>DATES</h2>
+            <input type="date" placeholder="Start Date" id="startDate" name="startDate" value="<%=goal.startDate%>">
+            <input type="date" placeholder="End Date" id="endDate" name="endDate" value="<%=goal.endDate%>">
 
-		<main class="main">
+            <!-- Goal Type -->
+            <h2>GOAL TYPE</h2>
+            <div class="goalTypeEdit" id="goalType">
+                <input type="radio" id="Academic" name="goalType" value="Academic">
+                <label for="Academic" id="AcademicLabel">Academic</label>
+                <input type="radio" id="Behavior" name="goalType" value="Behavior">
+                <label for="Behavior" id="BehaviorLabel">Behavior</label>
+            </div>
 
-			<script>
-	        const currentTheme = localStorage.getItem('theme');
-	        if (currentTheme) {
-	          document.documentElement.setAttribute('data-theme', currentTheme);
-	          localStorage.setItem('theme', currentTheme);
-	        }
-	   		</script> 
-	   		
-				<div class =  class-header>
-			            <h3>Edit Goal</h3>
-			    </div>
-
-
-		<div class="container d-flex justify-content-center">
-		<form id="regForm" action="/student/<%= student.id%>/goal/edit/<%= goalid %>" method="post">
-
-				<!-- One "tab" for each step in the form: -->
-
-				<!---Goal Title and Descriptoin-->
-				<div>
-					<h1>Goal Creation</h1>
-					<p><input value="<%=goal.name%>"  class="form-modified-control"  type="text" name="name" id="name"></p>
-					<p><textarea class="form-modified-control" style="height: 100px" type="textarea" class="form-modified-control" name="description" id="description"><%=goal.description%></textarea></p>
-
-				</div>
-		<!-- One "tab" for each step in the form: -->
-
-				<!---Start and End Date-->
-
-				<div>
-					<h1>Dates</h1>
-					<p>Start Date:<input value="<%=goal.startDate%>" class="form-modified-control" type="date" name="startDate" id="startDate"></p>
-					<p>End Date:<input value="<%=goal.endDate%>" class="form-modified-control" type="date" name="endDate" id="endDate"></p>
-				</div>
-
-				
-				<!--Goal Type -->
-				<div>
-					<h1>Goal Type</h1>
-					
-					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio1" name="goalType" class="custom-control-input" value="STEM Goal">
-      					<label class="custom-control-label" for="customRadio1">STEM</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio2" name="goalType" class="custom-control-input" value="Language Goal">
-      					<label class="custom-control-label" for="customRadio2">Language Arts</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio3" name="goalType" class="custom-control-input" value="Health Goal" >
-      					<label class="custom-control-label" for="customRadio3">Health and Wellness</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio4" name="goalType" class="custom-control-input" value="History Goal">
-      					<label class="custom-control-label" for="customRadio4">History</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio5" name="goalType" class="custom-control-input" value="Behavioral Goal">
-      					<label class="custom-control-label" for="customRadio5">Behavior</label>
-					  </div>
-					  <div class="custom-control custom-radio">
-						<input type="radio" id="customRadio6" name="goalType" class="custom-control-input" value="Others Goal" >
-      					<label class="custom-control-label" for="customRadio6">Others</label>
-					</div>
-					<% console.log(goal.goalType) %>
-					<script>
-					var goalType = "<%=goal.goalType  %>"
-
-					if (goalType == "STEM Goal") 
-						{ 
-						document.getElementById("customRadio1").checked = true;
-						}
-						else if (goalType == "Launguage Goal") 
-						{ 
-						document.getElementById("customRadio2").checked = true;
-						}
-						else if (goalType == "Health Goal") 
-						{ 
-						document.getElementById("customRadio3").checked = true;
-						}
-						else if (goalType == "History Goal") 
-						{ 
-						document.getElementById("customRadio4").checked = true;
-						}
-						else if (goalType == "Behavioral Goal") 
-						{ 
-						document.getElementById("customRadio5").checked = true;
-						}
-						else 
-						{ 
-						document.getElementById("customRadio6").checked = true;
-						}
-					</script>
-					
-				</div>
-				<!--Goal Collection Type -->
-				<div><br>
-					<h3>Method of Collection:</h3>
-
-					<%if(goal.methodOfCollection.includes("score")) { %>
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="score" id="score" checked="" onclick="return false;"> Score <br>
-					<%} %>
-
-					<%if(goal.methodOfCollection.includes("count")) { %>
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="count" id="count" checked="" onclick="return false;"> Count of Occurrences<br>
-					<select class="form-control" name = "occurrences" style="width:100%">
-	            		<% if (goal.occurrencesType == 'Per hour') { %>
-	            			<option value="Per hour" selected="">Per hour</option>
-	            			<option value="Per class">Per class</option>
-		            		<option value="Per day">Per day</option>
-		            		<option value="Per week">Per week</option>
-	            		<%} %>
-	            		<% if (goal.occurrencesType == 'Per class') { %>
-	            			<option value="Per hour">Per hour</option>
-	            			<option value="Per class" selected="">Per class</option>
-		            		<option value="Per day">Per day</option>
-		            		<option value="Per week">Per week</option>
-	            		<%} %>
-	            		<% if (goal.occurrencesType == 'Per day') { %>
-	            			<option value="Per hour">Per hour</option>
-	            			<option value="Per class">Per class</option>
-		            		<option value="Per day" selected="">Per day</option>
-		            		<option value="Per week">Per week</option>
-	            		<%} %>
-	            		<% if (goal.occurrencesType == 'Per week') { %>
-	            			<option value="Per hour">Per hour</option>
-	            			<option value="Per class">Per class</option>
-		            		<option value="Per day">Per day</option>
-		            		<option value="Per week" selected="">Per week</option>
-	            		<%} %>
-	          		</select>
-					<%} %>
-					
-					<%if(goal.methodOfCollection.includes("rubric")) { %>
-					<input type="checkbox" style="width: auto" name="methodOfCollection" value="rubric" id="rubric" checked="" onclick="return false;"> Rubric <br>
-						<% if (goal.rubricdescription[0] == '') { %>
-						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"></textarea></p>
-						<%} %>
-						<% if (goal.rubricdescription[0] != '') { %>
-						<p>Descriptions for Not Evident: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rnotevident" id="Rnotevident"><%= goal.rubricdescription[0] %></textarea></p>
-						<%} %>
-
-						<% if (goal.rubricdescription[1] == '') { %>
-						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"></textarea></p>
-						<%} %>
-						<% if (goal.rubricdescription[1] != '') { %>
-						<p>Descriptions for Introduced:<textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rintroduced" id="Rintroduced"><%= goal.rubricdescription[1] %></textarea></p>
-						<%} %>
-
-						<% if (goal.rubricdescription[2] == '') { %>
-						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"></textarea></p>
-						<%} %>
-						<% if (goal.rubricdescription[2] != '') { %>
-						<p>Descriptions for Emerging: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Remerging" id="Remerging"><%= goal.rubricdescription[2] %></textarea></p>
-						<%} %>
-
-						<% if (goal.rubricdescription[3] == '') { %>
-						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"></textarea></p>
-						<%} %>
-						<% if (goal.rubricdescription[3] != '') { %>
-						<p>Descriptions for Developing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdeveloping" id="Rdeveloping"><%= goal.rubricdescription[3] %></textarea></p>
-						<%} %>
-
-						<% if (goal.rubricdescription[4] == '') { %>
-						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"></textarea></p>
-						<%} %>
-						<% if (goal.rubricdescription[4] != '') { %>
-						<p>Descriptions for Ongoing: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rongoing" id="Rongoing"><%= goal.rubricdescription[4] %></textarea></p>
-						<%} %>
-
-						<% if (goal.rubricdescription[5] == '') { %>
-						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"></textarea></p>
-						<%} %>
-						<% if (goal.rubricdescription[5] != '') { %>
-						<p>Descriptions for Demonstrated: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rdemonstrated" id="Rdemonstrated"><%= goal.rubricdescription[5] %></textarea></p>
-						<%} %>
-
-						<% if (goal.rubricdescription[6] == '') { %>
-						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"></textarea></p>
-						<%} %>
-						<% if (goal.rubricdescription[6] != '') { %>
-						<p>Descriptions for Applied: <textarea style="height: 60px" type="textarea" class="form-modified-control" name="Rapplied" id="Rapplied"><%= goal.rubricdescription[6] %></textarea></p>
-						<%} %>
-					<%} %>
-
-					<%if(goal.methodOfCollection.includes("comments")) { %>
-						<input type="checkbox" style="width: auto" name="methodOfCollection" value="comments" id="comments" checked="" onclick="return false;"> Descriptive Comments <br>
-					<%} %>
-
-					<%if(goal.methodOfCollection.includes("documentation")) { %>
-						<input type="checkbox" style="width: auto" name="methodOfCollection" value="documentation" id="documentation" checked="" onclick="return false;"> File/Image documentation <br>
-					<%} %>					
-				</div>
-
-				<div style="overflow:auto;">
-					<div style="float:right;">
-						<button type="submit"  class="btn btn-primary" id="nextBtn" >Submit</button>
-						<a href="javascript:history.back()" class="btn btn-info">Cancel</a>
-					</div>
-				</div>
-			</form>
-		</div>
-		</main>
-		<%- include("../partials/footer.ejs")%>
-	</div>
-	
+            <!-- If Method Of Collection is Rubric -->
+            <%if(goal.methodOfCollection.includes("rubric")) { %>
+                <div name="rubricLayout" id="rubricLayout">
+                    <h2>RUBRIC</h2>
+                    <h3>Description for Not Evident</h3>
+                    <textarea rows="1" cols="50" type="text" name="Rnotevident"
+                        placeholder="Description for Not Evident"><%= goal.rubricdescription[0] %></textarea>
+                    <h3>Description for Introduced</h3>
+                    <textarea rows="1" cols="50" type="text" name="Rintroduced"
+                        placeholder="Description for Introduced"><%= goal.rubricdescription[1] %></textarea>
+                    <h3>Description for Emerging</h3>
+                    <textarea rows="1" cols="50" type="text" name="Remerging"
+                        placeholder="Description for Emerging"><%= goal.rubricdescription[2] %></textarea>
+                    <h3>Description for Developing</h3>
+                    <textarea rows="1" cols="50" type="text" name="Rdeveloping"
+                        placeholder="Description for Developing"><%= goal.rubricdescription[3] %></textarea>
+                    <h3>Description for Ongoing</h3>
+                    <textarea rows="1" cols="50" type="text" name="Rongoing"
+                        placeholder="Description for Ongoing"><%= goal.rubricdescription[4] %></textarea>
+                    <h3>Description for Demonstrated</h3>
+                    <textarea rows="1" cols="50" type="text" name="Rdemonstrated"
+                        placeholder="Description for Demonstrated"><%= goal.rubricdescription[5] %></textarea>
+                    <h3>Description for Applied</h3>
+                    <textarea rows="1" cols="50" type="text" name="Rapplied"
+                        placeholder="Description for Applied"><%= goal.rubricdescription[6] %></textarea>
+                </div>
+                <%} %>
+                    <button class="submit">Submit</button>
+                    <input type="hidden" name="userID" id="userID">
+        </form>
+        </section>
 </body>
-	<script>
-
-	function validateForm() {
-		// This function deals with validation of the form fields
-	  	var x, y, i, valid = true;
-	  	x = document.getElementsByClassName("tab");
-	  	y = x[currentTab].getElementsByTagName("input");
-	  	// A loop that checks every input field in the current tab:
-	  	for (i = 0; i < y.length; i++) {
-	  		console.log("y[i].value: " + y[i].value);
-	    	// If a field is empty...
-		    if (y[i].value == "") {
-		      	//check to see if this is the rubric field bc it is okay to leave rubric field empty as long as the checkbox is unchecked
-		      	console.log("I am an empty field");
-		      	if ((y[i].name == "rubricField" || y[i].type == "button")) {
-		      		console.log("and a rubric field");
-		      		if (document.getElementById("rubric").checked == true) {
-						// add an "invalid" class to the field:
-						y[i].className += " invalid";
-						console.log(y[i].className);
-						// and set the current valid status to false:
-						valid = false;
-		      		}
-		  		} else if (x[currentTab].id == "preview") {
-		  			console.log("and a preview page");
-		  			//we good
-		  		} else {
-					// add an "invalid" class to the field:
-					console.log("and im being marked as invalid");
-			   		y[i].className += " invalid";
-			   		console.log(y[i].className);
-			      	// and set the current valid status to false:
-			      	valid = false;
-				}
-			}
-		}
-		// If the valid status is true, mark the step as finished and valid:
-		if (valid) {
-			document.getElementsByClassName("step")[currentTab].className += " finish";
-		}
-		console.log("I am value? " + valid);
-		return valid; // return the valid status
-	}
-
-	function fixStepIndicator(n) {
-	  // This function removes the "active" class of all steps...
-	  var i, x = document.getElementsByClassName("step");
-	  for (i = 0; i < x.length; i++) {
-	  	x[i].className = x[i].className.replace(" active", "");
-	  }
-	  //... and adds the "active" class to the current step:
-	  x[n].className += " active";
-	}
-	</script>
 
 </html>
+
+<script>
+    //sorry this is a super jank way of getting user ID but its OKAY
+    document.getElementById("userID").value = localStorage.getItem("username");
+</script>
+
+<!-- This script makes the appropriate circle colored purple if academic or behavioral goal type -->
+<script type="text/javascript">
+    var goalType = "<%=goal.goalType%>";
+    var methodOfCollection = "<%=goal.methodOfCollection[0]%>";
+
+    if (goalType == "Academic") {
+        document.getElementById("Academic").checked = true;
+    }
+    else if (goalType == "Behavior") {
+        document.getElementById("Behavior").checked = true;
+    }
+</script>
+
+<!-- These TWO scripts are used to make the date picker in Safari since it doesn't have a native one -->
+<script type="text/javascript">
+    var datefield = document.createElement("input")
+    datefield.setAttribute("type", "date")
+    if (datefield.type != "date") { //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+        document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
+    }
+</script>
+
+<script type="text/javascript">
+    if (datefield.type != "date") { //if browser doesn't support input type="date", initialize date picker widget:
+        jQuery(function ($) { //on document.ready
+            $('#startDate').datepicker();
+            $('#endDate').datepicker();
+        })
+    }
+</script>

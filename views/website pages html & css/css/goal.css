@@ -1,0 +1,208 @@
+/** Goal Header **/
+.goalHeader{
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  margin: 25px 0px;
+  padding: 0 15px;
+  border-radius: 25px;
+  background-color: white;
+  align-items: center;
+}
+
+.goalName{
+  display: flex;
+  flex-grow: 2;
+}
+
+.goalInfo{
+  display: flex;
+  flex-direction: row;
+}
+.goalInfoButton{
+  color: white;
+  margin-left: 10px;
+}
+
+/*** Button ***/
+
+button {
+  border: none;
+  background-color: #989CFF;
+  width: 100%;
+  padding: 5px 10px; /*Button Size */
+  color: #000;
+  border-radius: 25px;
+  transition: all 0.2s ease;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+button a {
+  color: #fff;
+  text-decoration: none;
+}
+button a:hover{
+    color: #fff !important;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+a {
+  display: inherit;
+  text-decoration: none;
+  color: #000;
+}
+a:hover {
+  color: #0070f3;
+}
+
+.submit {
+  border: none;
+  background-color: #989CFF;
+  width: 100%;
+  padding: 5px 0; /*Button Size */
+  font-size: 24px;
+  color: #fff;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/*** General Box ***/
+
+.generalBox{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  /*margin: 25px 0px;*/
+  padding: 40px 15px;
+  border-radius: 25px;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.formBox{
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  font-size: 24px;
+  padding: 3px;
+  border: 2px solid #eee;
+  border-radius: 4px;
+}
+
+textarea {
+  font-family: inherit;
+  width: auto !important;
+  font-size: 24px;
+  font-weight: 400;
+  padding: 3px;
+  margin-bottom: 0.5rem;
+  border: 2px solid #eee;
+  color: #000;
+  border-radius: 4px;
+}
+
+/*** Progress **/
+
+.progress{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.graph{
+  width: 100%;
+  margin-right: 12.5px;
+  margin-top: 25px;
+}
+
+.table{
+  width: 100%;
+  margin-left: 12.5px;
+  margin-top: 25px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.dropdown .dropbtn {
+  background-color: inherit;
+  font-family: inherit;
+  box-shadow: none;
+}
+
+.dropdown-content {
+  position: absolute;
+  display: none;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Menu Logo */
+.menu{
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+/* Rubric */
+
+.methodOfCollection {
+  display: flex;
+  flex-direction: column;
+  /*margin-bottom: 2rem;*/
+  justify-content: space-around;
+}
+
+.generalBox label {
+  display: flex;
+  padding: 10px;
+  margin-bottom: 0.5rem;
+  align-content: center;
+  border-radius: 25px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+}
+
+.generalBox input[type="radio"] {
+  display: none; /*Hides the button*/
+}
+
+.generalBox input[type="radio"]:checked + label {
+  background-color: #989CFF; /*Selected Color*/
+}

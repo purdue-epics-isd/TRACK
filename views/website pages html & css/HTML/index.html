@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HOME</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  </head>
+  <body>
+    <!-- NAV BAR -->
+    <nav>
+      <div>
+        <h2>TRACK ISD 2.0</h2>
+      </div>
+      <ul>
+        <li>
+          <a href="index.html">
+            <div>HOME</div>
+          </a>
+        </li>
+        <li>
+          <a href="about.html">
+            <div>ABOUT</div>
+          </a>
+        </li>
+        <li>
+          <a href="feedback.html">
+            <div>FEEDBACK</div>
+          </a>
+        </li>
+        <li>
+            <a href="logout.html">
+              <div>LOGOUT</div>
+            </a>
+          </li>
+      </ul>
+    </nav>
+    <!-- END NAV BAR -->
+    <!-- SEARCH -->
+    <section>
+      <!-- <h4>Search</h4> -->
+      <div class ="searchAndSelect">
+        <input placeholder="What student do you want?" />
+        <div class="select">
+          <select name="slct" id="slct">
+            <option value="0">All Students</option>
+            <option value="1">1st Period</option>
+            <option value="2">2nd Period</option>
+            <option value="3">3rd Period</option>
+            <option value="4">4th Period</option>
+            <option value="5">5th Period</option>
+            <option value="6">6th Period</option>
+            <option value="7">7th Period</option>
+          </select>
+        </div>
+      </div>
+    </section>
+    <!-- END SEARCH -->
+    <section>
+    <script>
+      /* https://css-tricks.com/can-get-pretty-far-making-slider-just-html-css/ */
+      /*
+      function updateSlider(slideAmount) {
+          var sliderDiv = document.getElementById("sliderAmount");
+          if(slideAmount == 1){
+            sliderDiv.innerHTML = "1st Period";
+          }else if(slideAmount == 2){
+            sliderDiv.innerHTML = "2nd Period";
+          }else if(slideAmount == 3){
+            sliderDiv.innerHTML = "3rd Period";
+          }else if(slideAmount == 4){
+            sliderDiv.innerHTML = "4th Period";
+          }else if(slideAmount == 5){
+            sliderDiv.innerHTML = "5th Period";
+          }else if(slideAmount == 6){
+            sliderDiv.innerHTML = "6th Period";
+          }else if(slideAmount == 7){
+            sliderDiv.innerHTML = "7th Period";
+          }else if(slideAmount == 0){
+            sliderDiv.innerHTML = "All Students";
+          }
+          
+      }*/
+    </script>
+    <!-- <input id="slide" type="range" min="0" max="7" oninput="updateSlider(this.value)"> -->
+  
+    <!-- <div id="sliderAmount"></div> -->
+    
+
+    </section>
+    
+    <section>
+      <div class="cardContainer">
+        <!-- CREATE CARD -->
+        <a href="createStudent.html">
+          <div class="card">  
+            <div class="cardInitial">+</div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+        <!-- SAMPLE CARD -->
+        <a href="student.html"
+          ><div class="card">
+            <div class="cardInfo">
+              <div class="cardInitial">
+                CT
+              </div>
+                <p>Conley Tjahjono</p>
+            </div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+        <!-- SAMPLE CARD -->
+        <a href="student.html"
+          ><div class="card">
+            <div class="cardInfo">
+              <div class="cardInitial">
+                CT
+              </div>
+                <p>Conley Tjahjono</p>
+            </div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+        <!-- SAMPLE CARD -->
+        <a href="student.html"
+          ><div class="card">
+            <div class="cardInfo">
+              <div class="cardInitial">
+                CT
+              </div>
+                <p>Conley Tjahjono</p>
+            </div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+        <!-- SAMPLE CARD -->
+        <a href="student.html"
+          ><div class="card">
+            <div class="cardInfo">
+              <div class="cardInitial">
+                CT
+              </div>
+                <p>Conley Tjahjono</p>
+            </div>
+          </div>
+        </a>
+        <!-- END SAMPLE CARD -->
+      </div>
+    </section>
+  </body>
+</html>

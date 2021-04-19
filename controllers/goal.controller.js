@@ -6,6 +6,7 @@ const Goal = require('../models/goal.model');
 const Student = require('../models/student.model');
 const GoalData = require('../models/goaldata.model');
 const mongoose = require('mongoose');
+var sha256 = require('js-sha256');
 
 mongoose.set('useFindAndModify', false); // solve findAndModify() warning
 
@@ -14,27 +15,63 @@ function encryption(string) {
     return ciphertext = CryptoJS.AES.encrypt(string, 'secret key 123').toString();
 }
 function decryption(ciphertext) {
-    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    var bytes = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     return originalText = bytes.toString(CryptoJS.enc.Utf8);
 }
 
+//converts the date to YYYY-MM-DD
+function convertToYYYYMMDD(d) {
+    if (d.substring(4, 5) != "-" || d.substring(11, 12) == "T") {
+        date = new Date(d);
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        dt = date.getDate();
+        if (dt < 10) {
+            dt = '0' + dt;
+        }
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        if (year != NaN) {
+            var format = String(year) + '-' + String(month) + '-' + String(dt);
+        } else {
+            var format = "";
+        }
+        return format;
+    }
+    else {
+        return d;
+    }
+
+
+}
 
 /*creates a new goal in database*/
-exports.goal_create = function (req, res) {
+exports.goal_create = async function (req, res) {
     //encrytion ends here
     var CryptoJS = require("crypto-js");
     // Encrypt
     var ciphertext = CryptoJS.AES.encrypt(req.body.name, 'secret key 123').toString();
     // Decrypt
-    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    var bytes = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
     // console.log(req.body.methodOfCollection);
+
+    //Converting date to YYYY-MM-DD
+    if (req.body.startDate != NaN) {
+        req.body.startDate = convertToYYYYMMDD(req.body.startDate);
+    }
+    if (req.body.endDate != NaN) {
+        req.body.endDate = convertToYYYYMMDD(req.body.endDate);
+    }
+
     try {
         //for name:
         let goal = new Goal(
             {
-                name: encryption(req.body.name),
-                description: encryption(req.body.description),
+                name: await encryption(req.body.name),
+                description: await encryption(req.body.description),
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
@@ -42,12 +79,12 @@ exports.goal_create = function (req, res) {
                 methodOfCollection: req.body.methodOfCollection,
                 occurrencesType: req.body.occurrences,
                 shared: false,
-                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
+                rubricdescription: [req.body.Rnotevident, req.body.Rintroduced, req.body.Remerging, req.body.Rdeveloping, req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied],
                 goaldata: [],
-                userid: encryption(req.body.userID)
+                userid: req.body.userID
             })
 
-        Student.findOneAndUpdate({_id: req.params.studentid}, {$push: {goals: goal}}, function (err, student) {
+        Student.findOneAndUpdate({ _id: req.params.studentid }, { $push: { goals: goal } }, function (err, student) {
             goal.save(function (err) {
                 if (err) {
                     res.send(err);
@@ -59,7 +96,7 @@ exports.goal_create = function (req, res) {
         });
     } catch (err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     };
 };
 
@@ -69,37 +106,43 @@ exports.navigate_to_goalProfile = async function (req, res) {
     try {
         goalDatas = [];
 
-        await GoalData.find({goalID: req.params.goalid}, {}, async function(err, goaldata) {
+        await GoalData.find({ goalID: req.params.goalid }, {}, async function (err, goaldata) {
             if (err) {
                 await res.send(err);
                 return;
             }
-            await goaldata.forEach(async function(s) {
+            await goaldata.forEach(async function (s) {
                 // console.log("goaldata pre decrypt", s)
+                console.log("s.comments", s.comments);
+                console.log("s.teacherEmail", s.teacherEmail);
+                console.log("s.filename", s.filename);
                 s.comments = await decryption(s.comments);
-                s.teacherEmail = await decryption(s.teacherEmail);
-                s.filename = await decryption(s.filename);
-                s.file = await decryption(s.file);
+                s.teacherEmail = s.teacherEmail;
+                s.filename = s.filename;
+                s.file = s.file;
+                await console.log("s.comments", s.comments);
+                await console.log("s.teacherEmail", s.teacherEmail);
+                await console.log("s.filename", s.filename);
                 // console.log("goaldata post decrypt", s)
                 await goalDatas.push(s);
                 // await console.log(s)
-                
-                
+
+
             });
         }).then(() => {
-            Student.findById(req.params.studentid, async function(err, student) {
+            Student.findById(req.params.studentid, async function (err, student) {
                 if (err) {
                     await res.send(err);
                     return;
                 }
 
-                await User.findById(req.params.userid, async function(err, user) {
-                    await Goal.findById(req.params.goalid, async function(err, goal) {
+                await User.findById(req.params.userid, async function (err, user) {
+                    await Goal.findById(req.params.goalid, async function (err, goal) {
                         var methodsOfCollection = goal.methodOfCollection;
                         // console.log("goal pre decrypt", goal)
                         goal.name = await decryption(goal.name);
                         goal.description = await decryption(goal.description);
-                        goal.userid = await decryption(goal.userid);
+                        goal.userid = goal.userid;
                         // console.log("goal post decrypt", goal)
                         // goal.studentID = decryption(goal.studentID);
                         // await console.log("method:" + goal.methodOfCollection);
@@ -107,7 +150,7 @@ exports.navigate_to_goalProfile = async function (req, res) {
 
                         // await console.log("goal:" + goal);
                         // await console.log(req.params.goalid);
-                        
+
                         await res.render('pages/goalProfile', {
                             user: user,
                             goalDatas: goalDatas,
@@ -126,11 +169,11 @@ exports.navigate_to_goalProfile = async function (req, res) {
 
 
 
-        
+
         return;
-    } catch(error) {
+    } catch (error) {
         await console.log("err:" + err);
-        await res.render('./error');
+        await res.render('pages/error');
     }
 }
 
@@ -147,58 +190,73 @@ exports.goal_delete = function (req, res) {
                 res.redirect('/student/' + req.params.studentid);
             }
         })
-    } catch(err) {
+    } catch (err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
 /*navigates user to EditGoal.ejs page */
-exports.goal_redirect_edit = function (req, res) {
+exports.goal_redirect_edit = async function (req, res) {
     try {
-        User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
-              Goal.findById(req.params.goalid, function(err, goal) {
-                  // console.log("goal pre decrypt", goal)
-                  goal.name = decryption(goal.name);
-                  goal.description =decryption(goal.description);
-                  goal.userid = decryption(goal.userid)
-                  // console.log("goal post decrypt", goal)
 
-                res.render('pages/EditGoal', {
-                    student: student,
-                    user: user,
-                    goalid: req.params.goalid,
-                    goal: goal
+        User.findById(req.params.userid, function (err, user) {
+            Student.findById(req.params.studentid, function (err, student) {
+                Goal.findById(req.params.goalid, async function (err, goal) {
+                    // console.log("goal pre decrypt", goal)
+                    goal.name = await decryption(goal.name);
+                    goal.description = await decryption(goal.description);
+                    goal.userid = goal.userid
+                    // console.log("goal post decrypt", goal)
+
+                    res.render('pages/EditGoal', {
+                        student: student,
+                        user: user,
+                        goalid: req.params.goalid,
+                        goal: goal
+                    });
                 });
             });
-          });
         });
 
-    } catch(err) {
+    } catch (err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
 /*submits and updates any edits made to goal profile*/
-exports.goal_edit = function (req, res) {
+exports.goal_edit = async function (req, res) {
+    //Converting date to YYYY-MM-DD
+    if (req.body.startDate != NaN) {
+        req.body.startDate = convertToYYYYMMDD(req.body.startDate);
+    }
+    if (req.body.endDate != NaN) {
+        req.body.endDate = convertToYYYYMMDD(req.body.endDate);
+    }
+
+    let newName = await encryption(req.body.name)
+    let newDescr = await encryption(req.body.description)
     // console.log("Goal id: [edit]: " + req.params.goalid);
-    Goal.findByIdAndUpdate(req.params.goalid,
-            { $set: { name: encryption(req.body.name),
-                description: encryption(req.body.description),
+    Goal.findByIdAndUpdate(req.params.goalid, 
+
+        {
+            $set: {
+                name: newName,
+                description: newDescr,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 goalType: req.body.goalType,
                 occurrencesType: req.body.occurrences,
-                rubricdescription: [req.body.Rnotevident,req.body.Rintroduced,req.body.Remerging,req.body.Rdeveloping,req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied]
-                } }, function (err) {
-              if (err) {
+                rubricdescription: [req.body.Rnotevident, req.body.Rintroduced, req.body.Remerging, req.body.Rdeveloping, req.body.Rongoing, req.body.Rdemonstrated, req.body.Rapplied]
+            }
+        }, function (err) {
+            if (err) {
                 console.log(err);
-              }
-              else {
+            }
+            else {
                 res.redirect('/student/' + req.params.studentid + '/goal/' + req.params.goalid);
-              }
+            }
         });
 }
 
@@ -211,12 +269,12 @@ exports.goal_share = function (req, res) {
     Student.findById(req.params.studentid, function (err, student) {
         student.shared = true;
         var alreadyShared = false;
-        for(var i=0;i<student.sharedWith.length;i++) {
-            if(student.sharedWith[i] == sharingemail) {
+        for (var i = 0; i < student.sharedWith.length; i++) {
+            if (student.sharedWith[i] == sharingemail) {
                 alreadyShared = true;
             }
         }
-        if(!alreadyShared) student.sharedWith.push(sharingemail);
+        if (!alreadyShared) student.sharedWith.push(sharingemail);
         student.save();
     });
 
@@ -224,12 +282,12 @@ exports.goal_share = function (req, res) {
     Goal.findById(req.params.goalid, function (err, goal) {
         goal.shared = true;
         var alreadyShared = false;
-        for(var i=0;i<goal.sharedWith.length;i++) {
-            if(goal.sharedWith[i] == sharingemail) {
+        for (var i = 0; i < goal.sharedWith.length; i++) {
+            if (goal.sharedWith[i] == sharingemail) {
                 alreadyShared = true;
             }
         }
-        if(!alreadyShared) goal.sharedWith.push(sharingemail);
+        if (!alreadyShared) goal.sharedWith.push(sharingemail);
         goal.save();
     });
 
@@ -239,119 +297,43 @@ exports.goal_share = function (req, res) {
 /*redirects page to the "create new goal" page*/
 exports.navigate_to_createNewGoal = function (req, res) {
     try {
-            User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
+        User.findById(req.params.userid, function (err, user) {
+            Student.findById(req.params.studentid, function (err, student) {
                 res.render('pages/createNewGoal', {
                     student: student,
                     user: user
                 });
             });
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
 };
 
-/*redirects page to the student profile page, specifically for said students that are shared with a specified user*/
-exports.navigate_to_sharedWithMeStudentProfile = function (req, res) {
+// redirectes page to the "goalInfo" page
+exports.navigate_to_goalInfo = async function (req, res) {
     try {
-        var goals = [];
+        User.findById(req.params.userid, function (err, user) {
+            Student.findById(req.params.studentid, function (err, student) {
+                Goal.findById(req.params.goalid, async function (err, goal) {
+                    // console.log("goal pre decrypt", goal)
+                    goal.name = await decryption(goal.name);
+                    goal.description = await decryption(goal.description);
+                    goal.userid = goal.userid
+                    // console.log("goal post decrypt", goal)
 
-        /*load all the goals that match the student id*/
-        //TODO: we may need to add filtering (i.e. an if statement) to make sure that the goals are actually shared goals
-        //Just because the student is shared, doesn't necessarily mean all of their goals should be shared
-        Goal.find({studentID: req.params.studentid}, {}, function(err, goal) {
-            goal.name = decryption(goal.name);
-            goal.description = decryption(goal.description);
-            goal.studentID = decryption(goal.studentID);
-            goal.forEach(function(s) { 
-                    goals.push(s);
-                    // console.log(s);
-            });
-        });
-
-        /*load the actual page*/
-        goals.name = decryption(goals.name);
-        goals.description = decryption(goals.description);
-        goals.studentID = decryption(goals.studentID);
-        User.findById(req.params.userid, function(err, user) {
-            Student.findById(req.params.studentid, function(err, student) {
-                Goal.findById(req.params.goalid, function(err, goal) {
-                    res.render('pages/sharedWithMeStudentProfile', {
-                        goals: goals,
-                        student: student, 
-                        user: user
+                    res.render('pages/goalInfo', {
+                        student: student,
+                        user: user,
+                        goalid: req.params.goalid,
+                        goal: goal
                     });
                 });
             });
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
-        res.render('./error');
+        res.render('pages/error');
     }
-}
-
-/* renders shared goal page */
-exports.navigate_to_sharedWithMeGoalProfile = function (req, res) {
-    try {
-        goalDatas = [];
-
-        /*go through database to find all of the goal data that matches this specific goal*/
-        GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-            goaldata.forEach(function(s) {
-                goalDatas.push(s);
-            });
-        });
-
-
-        Student.findById(req.params.studentid, function(err, student) {
-            User.findById(req.params.userid, function(err, user) {
-                Goal.findById(req.params.goalid, function(err, goal) {
-                    var methodsOfCollection = goal.methodOfCollection;
-                    // console.log("method:" + goal.methodOfCollection);
-                    // console.log("method as var:" + methodsOfCollection);
-                    // console.log("goal:" + goal);
-                    gfs.files.find( { metadata: req.params.goalid } ).toArray((err, files) => {
-                        goal.name = encryption(goal.name);
-                        goal.description = encryption(goal.description);
-                      if (!files || files.length === 0) {
-                        res.render('pages/sharedWithMeGoalProfile', {
-                            user: user,
-                            goalDatas: goalDatas,
-                            student: student,
-                            goal: goal,
-                            methodOfCollection: methodsOfCollection,
-                            shared: true,
-                            files: false
-                        });
-                      } else {
-                        files.map((file) => {
-                          (file.contentType === 'image/jpeg' || file.contentType === 'image/png') ? file.isImage = true : file.isImage = false;
-                        });         
-                        res.render('pages/sharedWithMeGoalProfile', {
-                            user: user,
-                            goalDatas: goalDatas,
-                            student: student,
-                            goal: goal,
-                            methodOfCollection: methodsOfCollection,
-                            shared: true,
-                            files: files
-                        });
-                      }
-                    });
-
-                });
-            });
-        });
-        //console.log("pls workmaybe");
-        return;
-    } catch(error) {
-        console.log("err:" + err);
-        res.render('./error');
-    }
-}
+};

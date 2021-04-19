@@ -23,8 +23,8 @@ async function decryption(ciphertext) {
 exports.goaldata_create = async function (req, res) {
     try {
         // console.log("req.body", req.body)
-        console.log("uncompressed", req.body.filecontents);
-        console.log("compressed", LZUTF8.compress(req.body.filecontents));
+        // console.log("uncompressed", req.body.filecontents);
+        // console.log("compressed", LZUTF8.compress(req.body.filecontents));
         let goaldata = new GoalData(
             {
                 goalID: req.params.goalid,
@@ -34,9 +34,9 @@ exports.goaldata_create = async function (req, res) {
                 support: req.body.support,
                 comments: await encryption(req.body.comments),
                 time: Date.now(),
-                teacherEmail: await encryption(req.body.useremail),
-                filename: await encryption(req.body.file),
-                file: await encryption(req.body.filecontents)
+                teacherEmail: req.body.useremail,
+                filename: req.body.file,
+                file: req.body.filecontents
             }
         );
 
@@ -48,17 +48,14 @@ exports.goaldata_create = async function (req, res) {
                 }
             });
         });
-        
-
-        console.log("navigating to goal profile...");
         setTimeout(() => { res.redirect("/student/" + req.params.studentid + "/goal/" + req.params.goalid); }, 1000);
-        
     } catch(err) {
         console.log(err);
         res.render('./error');
     }
 };
 
+// deletes the goal data from the database
 exports.goaldata_delete = function (req, res) {
     try {
         GoalData.findByIdAndRemove(req.params.goaldataid, function (err) {

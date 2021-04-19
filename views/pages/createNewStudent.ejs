@@ -2,87 +2,96 @@
 <html>
 
 <head>
-  <title>Create New Student</title>
-  <%- include("../partials/head.ejs")%>
+  <title>HOME</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/createStudent.css" />
 </head>
 
-<div class="grid-container">
-  
-  <%- include("../partials/header.ejs")%>
-
-  <main class="main">
+<body>
+  <%- include("navbar")%>
+    <section>
+      <!-- This form allows you to enter info to create a student -->
+      <form action="/student/create" method="post">
+        <h2>STUDENT</h2>
+        <input type="text" name="firstname" placeholder="First Name" />
+        <input type="text" name="lastname" placeholder="Last Name" />
+        <input type="text" name="studentemail" placeholder="Email" />
+        <input type="date" name="dob" id="dob" placeholder="Date of Birth" />
+        <select class="gradeYear" name="grade">
+          <option selected disabled>Grade Year</option>
+          <option value="Pre-K">Pre-K</option>
+          <option value="Kindergarten">Kindergarten</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+        <button class="submit">Submit</button>
+        <input type="hidden" name="userID" id="userID">
+      </form>
+    </section>
 
     <script>
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme) {
-          document.documentElement.setAttribute('data-theme', currentTheme);
-          localStorage.setItem('theme', currentTheme);
-        }
-    </script>   
+      //sorry this is a super jank way of getting user ID but its OKAY
+      document.getElementById("userID").value = localStorage.getItem("username");
+      console.log(localStorage.getItem("userID"));
+    </script>
 
-    <div class =  class-header>
-            <h3>Add New Student</h3>
-    </div>
-    <div class = "studentOverview">
-        <div class = "part">
-          <form action="/student/create" method="post">
-            Required Fields: <text style="color:red">*</text> <br>
+</body>
 
-            <label for="First Name">First Name <text style="color:red">* </text>: </label>
-            <input type="text" class="form-control" name="firstname" style="width:150%" required>
-
-            <label for="Last Name">Last Name <text style="color:red">* </text>:</label>
-            <input type="text" class="form-control" name="lastname" style="width:150%" required>
-
-            <label for="Email">Email <text style="color:red">* </text>:</label>
-            <input type="email" class="form-control" name="studentemail" style="width:150%" required>
-            
-        </div>
-        
-        <div class = "part">
-          Optional Fields:
-          <label for="Date of Birth:">Date of Birth:</label>
-          <input type="date" class="form-control" name="dob" style="width:100%">
-
-          
-
-          <label for="Grade Level">Grade Level:</label>
-          <select class="form-control" name = "grade" style="width:100%">
-            <option value=""></option>
-            <option value="Pre-K">Pre-K</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
-          <br>
-          
-          
-          <div>
-            <input type="submit" class="btn btn-primary" style="margin: auto">
-            <a href="/classPage" class="btn btn-info" style="margin: auto">Cancel</a>
-            <input type="hidden" name="userID" id="userID">
-          </div>
-          
-        </div>
-        </form>
-      </div>
-    </main>
-  </div>
-  <%- include("../partials/footer.ejs")%>
 </html>
 
-<script>
-  //sorry this is a super jank way of getting user ID but its OKAY fix later maybe?
-  document.getElementById("userID").value = localStorage.getItem("username");
-  console.log(localStorage.getItem("userID"));
+<!-- These TWO scripts are used to make the date picker in Safari since it doesn't have a native one -->
+<script type="text/javascript">
+  var datefield = document.createElement("input")
+  datefield.setAttribute("type", "date")
+  if (datefield.type != "date") { //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+    document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+    document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+    document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
+  }
 </script>
 
+<script type="text/javascript">
+  if (datefield.type != "date") { //if browser doesn't support input type="date", initialize date picker widget:
+    jQuery(function ($) { //on document.ready
+      $('#dob').datepicker();
+    })
+  }
+</script>
+
+ <!-- Third Popup: Create New Student -->
+    <div id="tutorial2" class="tutorial">
+      <div class="tutorialContent">
+        <p style="font-weight: bold;" >Tutorial</p>
+        <p>Fill out the relevant information for the student. When finished, click "Submit." After you are taken back to the class page, click on the new student.</p>
+      </div>
+    </div>
+
+    <script>
+      var tutorial2 = document.getElementById("tutorial2");
+
+      if (localStorage.getItem("tutorialtoggle") == "1") {
+        tutorial2.style.display = "block";
+      }
+
+      if (localStorage.getItem("tutorialtoggle") == "0") {
+        tutorial2.style.display = "none";
+      }
+
+      exit2.onclick = function() {
+        localStorage.setItem("tutorialtoggle", "0");
+        localStorage.setItem("studentprofiletoggle", "0");
+      }
+      
+
+      
+    </script>
