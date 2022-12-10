@@ -28,7 +28,7 @@
     "cryptojs": "^2.5.3",
     "dataurl-to-blob": "0.0.1",
     "ejs": "^2.7.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "force-ssl-heroku": "^1.0.2",
     "gridfs-stream": "^1.1.1",
